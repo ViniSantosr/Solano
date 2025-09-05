@@ -36,7 +36,7 @@
 
 
 
-<!-- TABLE OF CONTENTS -->
+<!-- TABLE OF CONTENT
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -61,12 +61,14 @@
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
-
+ -->
 
 
 <!-- ABOUT THE PROJECT -->
 ## Sobre o Projeto
+Este projeto foi desenvolvido com o objetivo de tornar a educação mais envolvente e divertida, sem perder a seriedade do conteúdo histórico. Criamos um jogo sobre a Guerra do Paraguai, um dos marcos mais importantes da história do Império Brasileiro.
 
+Nosso foco é oferecer uma experiência que una aprendizado e entretenimento, despertando o interesse dos alunos pelo tema. O jogo não apresenta vieses ideológicos, sendo uma ferramenta educativa que busca apenas transmitir conhecimento histórico de forma acessível e interativa.
 <!--
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 -->
@@ -80,60 +82,41 @@
 ### Feito com
                 
 * [![VisualStudio][VisualStudio]][VisualStudio-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* [![Allegro][Allegro]][Allegro-url]
+* [![C][C]][C-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Guia de desenvolvimento
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+### Pré-requisitos
 
-### Prerequisites
+* Tenha Visual Studio 2022 instalado.
+* No <b>Visual Studio Installer</b> Adicione a opção `Desenvolvimento para desktop com C++` (A linguagem C já vem incluída junto).
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+### Instalação
 
-### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Pegue a url do projeto [https://github.com/ViniSantosr/ProjetoPI](https://github.com/ViniSantosr/ProjetoPI)
+2. Clone o repositório
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/ViniSantosr/ProjetoPI
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-5. Change git remote url to avoid accidental pushes to base project
+3. Abra o projeto no Visual Studio 2022
+4. Rode o projeto como `Debug` (as dependências da bibliteca Allegro já serão baixadas)
+5. Mude o git remote url para evitar pushes acidentais para o projeto base
    ```sh
    git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
+   git remote -v # confirme as mudanças
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-<!-- USAGE EXAMPLES -->
+<!-- USAGE EXAMPLES 
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
@@ -141,10 +124,10 @@ Use this space to show useful examples of how a project can be used. Additional 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+-->
 
 
-
-<!-- ROADMAP -->
+<!-- ROADMAP 
 ## Roadmap
 
 - [x] Add Changelog
@@ -158,10 +141,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+-->
 
 
-
-<!-- MEMBERS -->
+<!-- MEMBERS 
 ## Members
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -182,42 +165,24 @@ Don't forget to give the project a star! Thanks again!
 </a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+-->
 
 
-
-<!-- LICENSE -->
+<!-- LICENSE 
 ## License
 
 Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+-->
 
 
+<!-- Referências -->
+## Referências
 
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+* [Allegro Wiki](https://github.com/liballeg/allegro_wiki/wiki)
+* [Allegro Vivace](https://github.com/liballeg/allegro_wiki/wiki/Allegro-Vivace)
+* [Allegro 5 reference manual](https://liballeg.org/a5docs/trunk/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -238,21 +203,9 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[VisualStudio]: https://img.shields.io/badge/Visual%20Studio-5C2D91?style=for-the-badge&logo=visual-studio&logoColor=white
+[VisualStudio]: https://custom-icon-badges.demolab.com/badge/Visual%20Studio%202022-5C2D91.svg?&logo=visualstudio&logoColor=white
 [VisualStudio-url]: https://visualstudio.microsoft.com/pt-br/
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com
+[Allegro]: https://img.shields.io/badge/Allegro%205-0a0b0e?style=flat&logo=allegro
+[Allegro-url]: https://liballeg.org/
+[C]: https://img.shields.io/badge/C-00599C?logo=c&logoColor=white
+[C-url]: https://learn.microsoft.com/pt-br/cpp/c-language/?view=msvc-170
