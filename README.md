@@ -73,6 +73,36 @@ Nosso foco é oferecer uma experiência que una aprendizado e entretenimento, de
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 -->
 
+### 📖 Tema / História
+
+A aventura começa quando um jovem descobre o diário esquecido de seu tataravô, um soldado que lutou na **Guerra do Paraguai (1864–1870)**. Ao ler suas memórias, ele revive as principais batalhas do conflito, conhecendo figuras marcantes da época e testemunhando tanto os atos de bravura quanto as tragédias que moldaram a história do Brasil.
+
+---
+
+### 🎯 Objetivo Educativo
+
+- Ensinar de forma lúdica os principais eventos da Guerra do Paraguai.
+- Contextualizar a participação do Império do Brasil e seus personagens importantes.
+- Estimular o aprendizado de História por meio da imersão em batalhas históricas.
+
+---
+
+### 🎮 Mecânica Principal
+
+- **Estilo de jogo:** Combate terrestre em 2D com câmera top-down (vista de cima).
+- **Controles:**
+  - Movimento: **WASD**
+  - Mira e disparo: **Mouse**
+- **Progressão:** 5 fases, cada uma representando uma batalha histórica.
+
+---
+
+### ⭐ Diferenciais / Estilo Visual
+
+- Estética **pixel art retrô**, atraente e acessível.
+- Cada fase traz **contexto histórico real** antes do início da batalha.
+- Combinação equilibrada de **aprendizado + ação**, unindo jogo e conteúdo educativo.
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -95,7 +125,7 @@ Nosso foco é oferecer uma experiência que una aprendizado e entretenimento, de
 ### Pré-requisitos
 
 * Tenha Visual Studio 2022 instalado.
-* No <b>Visual Studio Installer</b> Adicione a opção `Desenvolvimento para desktop com C++` (A linguagem C já vem incluída junto).
+* No <b>Visual Studio Installer</b>, adicione a opção `Desenvolvimento para desktop com C++` (A linguagem C já vem incluída junto).
 
 ### Instalação
 
