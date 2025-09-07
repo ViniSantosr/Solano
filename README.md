@@ -72,6 +72,7 @@ Nosso foco é oferecer uma experiência que una aprendizado e entretenimento, de
 <!--
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 -->
+---
 
 ### 📖 Tema / História
 
