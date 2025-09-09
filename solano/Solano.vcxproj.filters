@@ -18,7 +18,37 @@
     <ClCompile Include="src\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\funcoes.c">
+    <ClCompile Include="src\core\must_init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase2\fase2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\tela.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\inputs\teclado.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase2\mouse_fase2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\sprites\sprites_soldados.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase2\tiros_fase2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase2\inimigos_fase2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase2\soldado_fase2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase2\hud_fase2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase2\coisas_gerais_fase2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -28,9 +58,6 @@
     <None Include="assets\sounds\explode2.flac" />
     <None Include="assets\sounds\music.opus" />
     <None Include="assets\sounds\shot.flac" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="src\fases\fases.txt" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\elephant.wav">
@@ -43,7 +70,43 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\funcoes.h">
+    <ClInclude Include="include\core\must_init.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase2\fase2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\tela.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\configs\config_tela.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\inputs\teclado.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase2\mouse_fase2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\configs\sprites\config_sprites_soldados.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\sprites\sprites_soldados.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase2\tiros_fase2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase2\soldado_fase2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase2\inimigos_fase2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase2\hud_fase2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase2\coisas_gerais_fase2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
