@@ -17,7 +17,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
   -->
-  <h3 align="center"> 🏛️ IMPÉRIO ENTRE GLÓRIA E SANGUE: A GUERRA DO PARAGUAi</h3>
+  <h3 align="center"> 🏛️ SOLANO 🏛️</h3>
 
   <p align="center">
     🎮 <i>Um jogo educativo que leva o jogador às batalhas históricas do conflito, vivenciando coragem, sacrifícios e os eventos que moldaram o Brasil.</i>
@@ -69,40 +69,9 @@
 Este projeto foi desenvolvido com o objetivo de tornar a educação mais envolvente e divertida, sem perder a seriedade do conteúdo histórico. Criamos um jogo sobre a Guerra do Paraguai, um dos marcos mais importantes da história do Império Brasileiro.
 
 Nosso foco é oferecer uma experiência que una aprendizado e entretenimento, despertando o interesse dos alunos pelo tema. O jogo não apresenta vieses ideológicos, sendo uma ferramenta educativa que busca apenas transmitir conhecimento histórico de forma acessível e interativa.
-<!--
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
--->
----
 
-### 📖 Tema / História
+[![One Sheet Paper][screenshot]]()
 
-A aventura começa quando um jovem descobre o diário esquecido de seu tataravô, um soldado que lutou na **Guerra do Paraguai (1864–1870)**. Ao ler suas memórias, ele revive as principais batalhas do conflito, conhecendo figuras marcantes da época e testemunhando tanto os atos de bravura quanto as tragédias que moldaram a história do Brasil.
-
----
-
-### 🎯 Objetivo Educativo
-
-- Ensinar de forma lúdica os principais eventos da Guerra do Paraguai.
-- Contextualizar a participação do Império do Brasil e seus personagens importantes.
-- Estimular o aprendizado de História por meio da imersão em batalhas históricas.
-
----
-
-### 🎮 Mecânica Principal
-
-- **Estilo de jogo:** Combate terrestre em 2D com câmera top-down (vista de cima).
-- **Controles:**
-  - Movimento: **WASD**
-  - Mira e disparo: **Mouse**
-- **Progressão:** 5 fases, cada uma representando uma batalha histórica.
-
----
-
-### ⭐ Diferenciais / Estilo Visual
-
-- Estética **pixel art retrô**, atraente e acessível.
-- Cada fase traz **contexto histórico real** antes do início da batalha.
-- Combinação equilibrada de **aprendizado + ação**, unindo jogo e conteúdo educativo.
 
 
 
@@ -233,7 +202,7 @@ Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[screenshot]: images/one_sheet_paper.png
 [VisualStudio]: https://custom-icon-badges.demolab.com/badge/Visual%20Studio%202022-5C2D91.svg?&logo=visualstudio&logoColor=white
 [VisualStudio-url]: https://visualstudio.microsoft.com/pt-br/
 [Allegro]: https://img.shields.io/badge/Allegro%205-0a0b0e?style=flat&logo=allegro
