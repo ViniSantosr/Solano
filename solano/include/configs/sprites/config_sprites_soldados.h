@@ -1,0 +1,16 @@
+#ifndef CONFIG_SPRITES_SOLDADOS_H
+#define CONFIG_SPRITES_SOLDADOS_H
+
+#define SOLDADO_W	12
+#define SOLDADO_H	13
+
+#define SOLDADO_TIRO_W	2
+#define SOLDADO_TIRO_H	9
+
+#define INIMIGO_W	12
+#define INIMIGO_H	13
+
+#define INIMIGO_TIRO_W	2
+#define INIMIGO_TIRO_H	9
+
+#endif

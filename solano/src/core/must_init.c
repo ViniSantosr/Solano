@@ -1,3 +1,6 @@
+
+#include "core/must_init.h"
+
 #include <stdbool.h>
 #include <stdio.h>
 
