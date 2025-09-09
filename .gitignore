@@ -1,0 +1,81 @@
+# NuGet packages
+packages
+.nupkg
+
+## Diretórios de build
+[Bb]in
+[Oo]bj
+[Ll]og
+ipch
+bin
+obj
+x64
+x64Release
+x64Debug
+
+## Arquivos temporários
+.tmp
+.log
+.tlog
+.vspscc
+.vsp
+.ncb
+.sdf
+.suo
+.user
+.userosscache
+.opendb
+.VC.db
+.VC.opendb
+TemplatePI/allegro.log
+
+## Configurações locais do VS
+.vs
+.VC.db
+.VC.opendb
+
+## Compilados
+.exe
+.dll
+.lib
+.exp
+.pdb
+
+## Arquivos de build intermediários
+.ilk
+.idb
+.pch
+
+## Arquivos de crashdebug
+.dmp
+
+# ============================
+# Allegro (libscompilação)
+# ============================
+# Bibliotecas baixadascompiladas
+allegro-build
+allegro-bin
+allegro-lib
+
+# Se usar pacotes pré-compilados, ignore-os
+.a
+.so
+.dylib
+
+# ============================
+# Outros
+# ============================
+# Arquivos do sistema
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+
+# Backups
+.bak
+.old
+.orig
+.save
+
+# Cache do editor
+.swp
+.swo
