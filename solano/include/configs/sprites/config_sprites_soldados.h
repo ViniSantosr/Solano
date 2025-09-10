@@ -7,10 +7,20 @@
 #define SOLDADO_TIRO_W	2
 #define SOLDADO_TIRO_H	9
 
-#define INIMIGO_W	12
-#define INIMIGO_H	13
+#define VIDA_W 6
+#define VIDA_H 6
 
-#define INIMIGO_TIRO_W	2
-#define INIMIGO_TIRO_H	9
+const int INIMIGO_W[] = { 14, 13, 45 };
+const int INIMIGO_H[] = { 9, 10, 27 };
+
+#define INIMIGO_MENOR_W		INIMIGO_W[0]
+#define INIMIGO_MENOR_H		INIMIGO_H[0]
+#define INIMIGO_ESPADA_W	INIMIGO_W[1]
+#define INIMIGO_ESPADA_H    INIMIGO_H[1]
+#define INIMIGO_SNIPER_W	INIMIGO_W[2]
+#define INIMIGO_SNIPER_H	INIMIGO_H[2]
+
+#define INIMIGO_TIRO_W	4
+#define INIMIGO_TIRO_H	4
 
 #endif
