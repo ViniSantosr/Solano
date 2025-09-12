@@ -17,7 +17,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
   -->
-  <h3 align="center"> 🏛️ SOLANO 🏛️</h3>
+  <h3 align="center"> 🏛️ SOLANO: A GUERRA DO PARAGUAI 🏛️</h3>
 
   <p align="center">
     🎮 <i>Um jogo educativo que leva o jogador às batalhas históricas do conflito, vivenciando coragem, sacrifícios e os eventos que moldaram o Brasil.</i>
