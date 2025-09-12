@@ -7,7 +7,7 @@
 
 typedef struct SOLDADO
 {
-	int x, y;
+	float x, y;
 	int tiro_timer;
 	int vidas;
 	int respawn_timer;

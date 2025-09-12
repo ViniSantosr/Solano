@@ -10,8 +10,8 @@
 #define VIDA_W 6
 #define VIDA_H 6
 
-const int INIMIGO_W[] = { 14, 13, 45 };
-const int INIMIGO_H[] = { 9, 10, 27 };
+extern const int INIMIGO_W[];
+extern const int INIMIGO_H[];
 
 #define INIMIGO_MENOR_W		INIMIGO_W[0]
 #define INIMIGO_MENOR_H		INIMIGO_H[0]

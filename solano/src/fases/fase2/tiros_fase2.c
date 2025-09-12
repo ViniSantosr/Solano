@@ -10,6 +10,17 @@
 
 TIRO tiros[TIROS_N];
 
+#pragma region PROCESSO
+/*
+	1. tiro_init() -> Inicializar o array de tiros na memória.
+	2. disparar() -> Quando há um disparo no jogo, percorre o array procurado por um tiro que não foi usado.
+		2.1. Armazena se foi o jogador ou inimigo.
+		2.2. Se foi o jogador:
+				dirx -> indica 
+*/
+#pragma endregion
+
+
 void tiro_init()
 {
 	for (int i = 0; i < TIROS_N; i++) {
@@ -17,42 +28,35 @@ void tiro_init()
 	}
 }
 
-bool disparar(bool soldado, bool reto, float x, float y, float mira_x, float mira_y)
+bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float alvo_y, float vel)
 {
 	for (int i = 0; i < TIROS_N; i++)
 	{
 		if (tiros[i].usado)
-			continue;;
+			continue;
 
 		tiros[i].soldado = soldado; // indica de quem é o tiro
 
 		if (soldado)
 		{
-			float dirx = x - mira_x;
-			float diry = y - mira_y;
-			float dist = sqrt(dirx * dirx + diry * diry);
-
-			if (dist == 0) return;
-
-			dirx /= dist;
-			diry /= dist;
-
-			float vel = 3.0f;
-
 			tiros[i].x = x;
 			tiros[i].y = y;
-			tiros[i].dx = dirx * vel;
-			tiros[i].dy = diry * vel;
+			tiros[i].dx = 0;
+			tiros[i].dy = 0;
+
+			calcular_direcao(x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
 		}
 		else
 		{
 			tiros[i].x = x - (INIMIGO_TIRO_W / 2);
 			tiros[i].y = y - (INIMIGO_TIRO_H / 2);
 
-			if (reto) // indica que o tiro vai ser reto
+			if (reto)
 			{
-				tiros[i].dx = 0; // o tiro não desloca para o lado
-				tiros[i].dy = 2; // o tiro se desloca para cima
+				tiros[i].dx = 0; 
+				tiros[i].dy = 0; 
+
+				calcular_direcao(x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
 			}
 			else
 			{
@@ -111,7 +115,7 @@ void tiros_update()
 	}
 }
 
-bool tiros_collide(bool soldado, int x, int y, int w, int h)
+bool tiros_collide(bool soldado, float x, float y, float w, float h)
 {
 	for (int i = 0; i < TIROS_N; i++)
 	{
@@ -123,7 +127,7 @@ bool tiros_collide(bool soldado, int x, int y, int w, int h)
 		if (tiros[i].soldado == soldado)
 			continue;
 
-		int sw, sh;
+		float sw, sh;
 		if (soldado)
 		{
 			sw = INIMIGO_TIRO_W;

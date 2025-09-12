@@ -36,6 +36,7 @@ int fase2(ALLEGRO_DISPLAY* tela, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* time
 	mouse_init(tela);
 	teclado_init();
 	soldado_init();
+	inimigo_init();
 
 	mira_x = CANVAS_W / 2;
 	mira_y = (CANVAS_H / 2) - SOLDADO_H * 2;
@@ -63,6 +64,7 @@ int fase2(ALLEGRO_DISPLAY* tela, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* time
 			tiros_update();
 			soldado_update();
 			hud_update(frames);
+			inimigo_update(CANVAS_W / 2, CANVAS_H / 2);
 
 			if (tecla[ALLEGRO_KEY_ESCAPE])
 				done = true;
@@ -83,6 +85,7 @@ int fase2(ALLEGRO_DISPLAY* tela, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* time
 
 			tiros_draw();
 			soldado_draw();
+			inimigo_draw();
 			mouse_draw();
 			hud_draw();
 

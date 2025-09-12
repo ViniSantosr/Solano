@@ -6,6 +6,9 @@
 #include "configs/sprites/config_sprites_soldados.h"
 #include "core/must_init.h"
 
+const int INIMIGO_W[] = { 14, 13, 45 };
+const int INIMIGO_H[] = { 9, 10, 27 };
+
 SPRITES sprites;
 
 ALLEGRO_BITMAP* sprite_grab(int x, int y, int w, int h)

@@ -13,15 +13,19 @@ typedef enum TIPO_INIMIGO
 
 typedef struct INIMIGO
 {
-	int x, y, dx, dy;
+	float x, y, dx, dy;
 	TIPO_INIMIGO tipo;
 	int tiro_timer;
 	int piscar;
 	int vida;
-	bool usado;
+	bool ativo; // indica se o inimigo está ativo no jogo
 } INIMIGO;
 
 #define INIMIGOS_N 16
 INIMIGO inimigos[INIMIGOS_N];
+
+void inimigo_init();
+void inimigo_update(float soldado_x, float soldado_y);
+void inimigo_draw();
 
 #endif
