@@ -25,7 +25,7 @@ typedef struct INIMIGO
 INIMIGO inimigos[INIMIGOS_N];
 
 void inimigo_init();
-void inimigo_update(float soldado_x, float soldado_y);
+void inimigo_update();
 void inimigo_draw();
 
 #endif

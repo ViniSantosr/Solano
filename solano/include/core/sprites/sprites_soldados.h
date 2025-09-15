@@ -9,7 +9,7 @@ typedef struct SPRITES {
 
 	ALLEGRO_BITMAP* soldado;
 	ALLEGRO_BITMAP* soldado_tiros[2];
-	ALLEGRO_BITMAP* life;
+	ALLEGRO_BITMAP* vida;
 
 
 	ALLEGRO_BITMAP* inimigo[3];

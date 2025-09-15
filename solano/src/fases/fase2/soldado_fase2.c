@@ -74,7 +74,7 @@ void soldado_update()
 	else if (al_mouse_button_down(&mouse_state, 1))
 	{
 		float cx = soldado.x + (SOLDADO_W / 2);
-		if (disparar(true, false, cx, soldado.y, mira_x, mira_y, 5.0))
+		if (disparar(true, false, cx, soldado.y, mira_x, mira_y, 4.5))
 			soldado.tiro_timer = 10;
 	}
 }

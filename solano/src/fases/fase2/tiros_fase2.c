@@ -16,7 +16,7 @@ TIRO tiros[TIROS_N];
 	2. disparar() -> Quando há um disparo no jogo, percorre o array procurado por um tiro que não foi usado.
 		2.1. Armazena se foi o jogador ou inimigo.
 		2.2. Se foi o jogador:
-				dirx -> indica 
+				dirx -> indica
 */
 #pragma endregion
 
@@ -44,7 +44,7 @@ bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float al
 			tiros[i].dx = 0;
 			tiros[i].dy = 0;
 
-			calcular_direcao(x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
+			calcular_direcao(true, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
 		}
 		else
 		{
@@ -53,10 +53,10 @@ bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float al
 
 			if (reto)
 			{
-				tiros[i].dx = 0; 
-				tiros[i].dy = 0; 
+				tiros[i].dx = 1;
+				tiros[i].dy = 2;
 
-				calcular_direcao(x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
+				calcular_direcao(false, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
 			}
 			else
 			{
@@ -158,11 +158,10 @@ void tiros_draw()
 			continue;
 
 		int frame_tela = (tiros[i].frame / 2) % 2;
+		float angle = atan2f(tiros[i].dy, tiros[i].dx);
 
 		if (tiros[i].soldado)
 		{
-			float angle = atan2f(tiros[i].dy, tiros[i].dx);
-
 			al_draw_rotated_bitmap(sprites.soldado_tiros[frame_tela],
 				SOLDADO_TIRO_W / 2, SOLDADO_TIRO_H / 2,
 				tiros[i].x, tiros[i].y,
@@ -171,14 +170,14 @@ void tiros_draw()
 		}
 		else
 		{
-			/*
-				ALLEGRO_COLOR tint =
-					frame_tela
-					? al_map_rgb_f(1, 1, 1)
-					: al_map_rgb_f(0.5, 0.5, 0.5)
-					;
-				al_draw_tinted_bitmap(sprites.alien_shot, tint, tiros[i].x, tiros[i].y, 0);
-			*/
+
+			ALLEGRO_COLOR tint =
+				frame_tela
+				? al_map_rgb_f(1, 1, 1)
+				: al_map_rgb_f(0.5, 0.5, 0.5)
+				;
+			al_draw_tinted_bitmap(sprites.inimigo_tiro, tint, tiros[i].x, tiros[i].y, 0);			
+
 		}
 	}
 }

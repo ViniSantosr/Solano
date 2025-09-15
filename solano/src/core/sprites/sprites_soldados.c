@@ -28,7 +28,7 @@ void sprites_init()
 	sprites.soldado_tiros[0] = sprite_grab(13, 0, SOLDADO_TIRO_W, SOLDADO_TIRO_H);
 	sprites.soldado_tiros[1] = sprite_grab(16, 0, SOLDADO_TIRO_W, SOLDADO_TIRO_H);
 
-	// sprites.life = sprite_grab(0, 14, LIFE_W, LIFE_H);
+	sprites.vida = sprite_grab(0, 14, VIDA_W, VIDA_H);
 
 	sprites.inimigo[0] = sprite_grab(19, 0, INIMIGO_MENOR_W, INIMIGO_MENOR_H);
 	sprites.inimigo[1] = sprite_grab(19, 10, INIMIGO_ESPADA_W, INIMIGO_ESPADA_H);
@@ -60,9 +60,7 @@ void sprites_deinit()
 	al_destroy_bitmap(sprites.soldado_tiros[0]);
 	al_destroy_bitmap(sprites.soldado_tiros[1]);
 
-	// al_destroy_bitmap(sprites.life);
-
-
+	al_destroy_bitmap(sprites.vida);
 	
 	al_destroy_bitmap(sprites.inimigo[0]);
 	al_destroy_bitmap(sprites.inimigo[1]);

@@ -64,7 +64,7 @@ int fase2(ALLEGRO_DISPLAY* tela, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* time
 			tiros_update();
 			soldado_update();
 			hud_update(frames);
-			inimigo_update(CANVAS_W / 2, CANVAS_H / 2);
+			inimigo_update();
 
 			if (tecla[ALLEGRO_KEY_ESCAPE])
 				done = true;
