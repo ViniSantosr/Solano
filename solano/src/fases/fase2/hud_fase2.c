@@ -57,12 +57,33 @@ void hud_draw()
 		al_draw_bitmap(sprites.vida, 1 + (i * spacing), 10, 0);
 
 	if (soldado.vidas < 0)
+	{
 		al_draw_text(
 			font,
-			al_map_rgb_f(1, 1, 1),
+			al_map_rgb_f(1, 0.2, 0.2),
 			CANVAS_W / 2, CANVAS_H / 2,
 			ALLEGRO_ALIGN_CENTER,
 			"G A M E  O V E R"
+		);
+	}
+
+
+	if (score >= 10000)
+		al_draw_text(
+			font,
+			al_map_rgb_f(0.5, 1, 0.5),
+			CANVAS_W / 2, CANVAS_H / 2,
+			ALLEGRO_ALIGN_CENTER,
+			"FASE 1 CONCLUIDA!!!!"
+		);
+
+	if (frames <= 120)
+		al_draw_text(
+			font,
+			al_map_rgb_f(0, 0, 1),
+			CANVAS_W / 2, CANVAS_H / 2,
+			ALLEGRO_ALIGN_CENTER,
+			"META: 10.000 pontos"
 		);
 
 }

@@ -26,8 +26,7 @@
 #include "core/must_init.h"
 
 
-
-int fase2(ALLEGRO_DISPLAY* tela, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
+void fase2_init(ALLEGRO_DISPLAY* tela)
 {
 	sprites_init();
 	hud_init();
@@ -43,9 +42,33 @@ int fase2(ALLEGRO_DISPLAY* tela, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* time
 
 	frames = 0;
 	score = 0;
+}
 
+void fase2_gameplay_update(ALLEGRO_DISPLAY* tela)
+{
+	mouse_apply(tela);
+	tiros_update();
+	soldado_update();
+	hud_update(frames);
+	inimigo_update();
+}
+
+void fase2_gameplay_draw()
+{
+	tiros_draw();
+	soldado_draw();
+	inimigo_draw();
+	mouse_draw();
+}
+
+
+int fase2(ALLEGRO_DISPLAY* tela, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
+{
+	fase2_init(tela);
+	
 	bool done = false;
 	bool redraw = true;
+	bool finalizada = false;
 	ALLEGRO_EVENT event;
 
 	while (!done)
@@ -60,11 +83,9 @@ int fase2(ALLEGRO_DISPLAY* tela, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* time
 
 		case ALLEGRO_EVENT_TIMER:
 			// Updates
-			mouse_apply(tela);
-			tiros_update();
-			soldado_update();
-			hud_update(frames);
-			inimigo_update();
+			if (!finalizada) {
+				fase2_gameplay_update(tela);
+			}
 
 			if (tecla[ALLEGRO_KEY_ESCAPE])
 				done = true;
@@ -83,10 +104,14 @@ int fase2(ALLEGRO_DISPLAY* tela, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* time
 			tela_pre_draw();
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
-			tiros_draw();
-			soldado_draw();
-			inimigo_draw();
-			mouse_draw();
+			if (!finalizada) {
+				fase2_gameplay_draw();
+			}
+
+			if (score >= 10000) {
+				finalizada = true;
+			}
+
 			hud_draw();
 
 			tela_pos_draw();
