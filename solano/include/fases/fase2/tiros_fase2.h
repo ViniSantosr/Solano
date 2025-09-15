@@ -14,9 +14,9 @@ typedef struct TIRO {
 extern TIRO tiros[TIROS_N];
 
 void tiro_init();
-bool disparar(bool soldado, bool reto, float x, float y, float mira_x, float mira_y);
+bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float alvo_y, float vel);
 void tiros_update();
-bool tiros_collide(bool soldado, int x, int y, int w, int h);
+bool tiros_collide(bool soldado, float x, float y, float w, float h);
 void tiros_draw();
 
 #endif

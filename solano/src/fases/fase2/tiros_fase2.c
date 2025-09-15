@@ -10,6 +10,17 @@
 
 TIRO tiros[TIROS_N];
 
+#pragma region PROCESSO
+/*
+	1. tiro_init() -> Inicializar o array de tiros na memória.
+	2. disparar() -> Quando há um disparo no jogo, percorre o array procurado por um tiro que não foi usado.
+		2.1. Armazena se foi o jogador ou inimigo.
+		2.2. Se foi o jogador:
+				dirx -> indica
+*/
+#pragma endregion
+
+
 void tiro_init()
 {
 	for (int i = 0; i < TIROS_N; i++) {
@@ -17,42 +28,35 @@ void tiro_init()
 	}
 }
 
-bool disparar(bool soldado, bool reto, float x, float y, float mira_x, float mira_y)
+bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float alvo_y, float vel)
 {
 	for (int i = 0; i < TIROS_N; i++)
 	{
 		if (tiros[i].usado)
-			continue;;
+			continue;
 
 		tiros[i].soldado = soldado; // indica de quem é o tiro
 
 		if (soldado)
 		{
-			float dirx = x - mira_x;
-			float diry = y - mira_y;
-			float dist = sqrt(dirx * dirx + diry * diry);
-
-			if (dist == 0) return;
-
-			dirx /= dist;
-			diry /= dist;
-
-			float vel = 3.0f;
-
 			tiros[i].x = x;
 			tiros[i].y = y;
-			tiros[i].dx = dirx * vel;
-			tiros[i].dy = diry * vel;
+			tiros[i].dx = 0;
+			tiros[i].dy = 0;
+
+			calcular_direcao(true, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
 		}
 		else
 		{
 			tiros[i].x = x - (INIMIGO_TIRO_W / 2);
 			tiros[i].y = y - (INIMIGO_TIRO_H / 2);
 
-			if (reto) // indica que o tiro vai ser reto
+			if (reto)
 			{
-				tiros[i].dx = 0; // o tiro não desloca para o lado
-				tiros[i].dy = 2; // o tiro se desloca para cima
+				tiros[i].dx = 1;
+				tiros[i].dy = 2;
+
+				calcular_direcao(false, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
 			}
 			else
 			{
@@ -111,7 +115,7 @@ void tiros_update()
 	}
 }
 
-bool tiros_collide(bool soldado, int x, int y, int w, int h)
+bool tiros_collide(bool soldado, float x, float y, float w, float h)
 {
 	for (int i = 0; i < TIROS_N; i++)
 	{
@@ -123,7 +127,7 @@ bool tiros_collide(bool soldado, int x, int y, int w, int h)
 		if (tiros[i].soldado == soldado)
 			continue;
 
-		int sw, sh;
+		float sw, sh;
 		if (soldado)
 		{
 			sw = INIMIGO_TIRO_W;
@@ -154,11 +158,10 @@ void tiros_draw()
 			continue;
 
 		int frame_tela = (tiros[i].frame / 2) % 2;
+		float angle = atan2f(tiros[i].dy, tiros[i].dx);
 
 		if (tiros[i].soldado)
 		{
-			float angle = atan2f(tiros[i].dy, tiros[i].dx);
-
 			al_draw_rotated_bitmap(sprites.soldado_tiros[frame_tela],
 				SOLDADO_TIRO_W / 2, SOLDADO_TIRO_H / 2,
 				tiros[i].x, tiros[i].y,
@@ -167,14 +170,14 @@ void tiros_draw()
 		}
 		else
 		{
-			/*
-				ALLEGRO_COLOR tint =
-					frame_tela
-					? al_map_rgb_f(1, 1, 1)
-					: al_map_rgb_f(0.5, 0.5, 0.5)
-					;
-				al_draw_tinted_bitmap(sprites.alien_shot, tint, tiros[i].x, tiros[i].y, 0);
-			*/
+
+			ALLEGRO_COLOR tint =
+				frame_tela
+				? al_map_rgb_f(1, 1, 1)
+				: al_map_rgb_f(0.5, 0.5, 0.5)
+				;
+			al_draw_tinted_bitmap(sprites.inimigo_tiro, tint, tiros[i].x, tiros[i].y, 0);			
+
 		}
 	}
 }

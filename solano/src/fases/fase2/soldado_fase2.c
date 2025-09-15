@@ -56,8 +56,8 @@ void soldado_update()
 	{
 		if (tiros_collide(true, soldado.x, soldado.y, SOLDADO_W, SOLDADO_H))
 		{
-			int x = soldado.x + (SOLDADO_W / 2);
-			int y = soldado.y + (SOLDADO_H / 2);
+			float cx = soldado.x + (SOLDADO_W / 2);
+			float cy = soldado.y + (SOLDADO_H / 2);
 			/*fx_add(false, x, y);
 			fx_add(false, x + 4, y + 2);
 			fx_add(false, x - 2, y - 4);
@@ -73,8 +73,8 @@ void soldado_update()
 		soldado.tiro_timer--;
 	else if (al_mouse_button_down(&mouse_state, 1))
 	{
-		int x = soldado.x + (SOLDADO_W / 2);
-		if (disparar(true, false, x, soldado.y, mira_x, mira_y))
+		float cx = soldado.x + (SOLDADO_W / 2);
+		if (disparar(true, false, cx, soldado.y, mira_x, mira_y, 4.5))
 			soldado.tiro_timer = 10;
 	}
 }
@@ -89,5 +89,4 @@ void soldado_draw()
 		return;
 
 	al_draw_bitmap(sprites.soldado, soldado.x, soldado.y, 0);
-	/*al_draw_filled_rectangle(soldado.x, soldado.y, soldado.x + SOLDADO_W, soldado.y + SOLDADO_H, al_map_rgb(255, 0, 0));*/
 }
