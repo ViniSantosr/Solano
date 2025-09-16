@@ -26,6 +26,83 @@
 #include "core/must_init.h"
 
 
+void fase2_init(ALLEGRO_DISPLAY* tela);
+void fase2_gameplay_update(ALLEGRO_DISPLAY* tela);
+void fase2_gameplay_draw();
+
+int fase2(ALLEGRO_DISPLAY* tela, GameContext* ctx)
+{
+	fase2_init(tela);
+
+	bool exit_tela = false;
+	bool desenhar = true;
+	bool game_over = false;
+	ALLEGRO_EVENT event;
+
+	while (!ctx->exit_program && !exit_tela)
+	{
+		al_wait_for_event(ctx->queue, &event);
+
+		mouse_update(&event);
+		teclado_update(&event);
+
+		switch (event.type)
+		{
+
+		case ALLEGRO_EVENT_TIMER:
+			// Updates
+			if (score >= 10000) {
+				game_over = true;
+			}
+
+			if (!game_over) {
+				fase2_gameplay_update(tela);
+			}
+			
+			desenhar = true;
+			frames++;
+			break;
+
+		case ALLEGRO_EVENT_DISPLAY_CLOSE:
+			ctx->exit_program = true;
+			break;
+
+		case ALLEGRO_EVENT_KEY_DOWN:
+			if (game_over)
+			{
+				if (tecla[ALLEGRO_KEY_ENTER])
+				{
+					exit_tela = true;
+					ctx->estado_tela = TELA_MENU;
+				}
+			}
+
+			if (tecla[ALLEGRO_KEY_ESCAPE])
+			{
+				ctx->exit_program = true;
+			}
+			break;
+		}
+
+		if (desenhar && al_is_event_queue_empty(ctx->queue))
+		{
+			tela_pre_draw();
+			al_clear_to_color(al_map_rgb(0, 0, 0));
+
+			fase2_gameplay_draw();
+
+			hud_draw(ctx->font);
+
+			tela_pos_draw();
+			desenhar = false;
+		}
+	}
+
+	sprites_deinit();
+
+	return 0;
+}
+
 void fase2_init(ALLEGRO_DISPLAY* tela)
 {
 	sprites_init();
@@ -49,7 +126,7 @@ void fase2_gameplay_update(ALLEGRO_DISPLAY* tela)
 	mouse_apply(tela);
 	tiros_update();
 	soldado_update();
-	hud_update(frames);
+	hud_update();
 	inimigo_update();
 }
 
@@ -59,71 +136,4 @@ void fase2_gameplay_draw()
 	soldado_draw();
 	inimigo_draw();
 	mouse_draw();
-}
-
-
-int fase2(ALLEGRO_DISPLAY* tela, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
-{
-	fase2_init(tela);
-	
-	bool done = false;
-	bool redraw = true;
-	bool finalizada = false;
-	ALLEGRO_EVENT event;
-
-	while (!done)
-	{
-		al_wait_for_event(queue, &event);
-
-		mouse_update(&event);
-		teclado_update(&event);
-
-		switch (event.type)
-		{
-
-		case ALLEGRO_EVENT_TIMER:
-			// Updates
-			if (!finalizada) {
-				fase2_gameplay_update(tela);
-			}
-
-			if (tecla[ALLEGRO_KEY_ESCAPE])
-				done = true;
-
-			redraw = true;
-			frames++;
-			break;
-
-		case ALLEGRO_EVENT_DISPLAY_CLOSE:
-			done = true;
-			break;
-		}
-
-		if (redraw && al_is_event_queue_empty(queue))
-		{
-			tela_pre_draw();
-			al_clear_to_color(al_map_rgb(0, 0, 0));
-
-			if (!finalizada) {
-				fase2_gameplay_draw();
-			}
-
-			if (score >= 10000) {
-				finalizada = true;
-			}
-
-			hud_draw();
-
-			tela_pos_draw();
-			redraw = false;
-		}
-	}
-
-	sprites_deinit();
-	hud_deinit();
-	tela_destroy();
-	al_destroy_timer(timer);
-	al_destroy_event_queue(queue);
-
-	return 0;
 }

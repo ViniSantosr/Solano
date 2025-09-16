@@ -51,6 +51,9 @@
     <ClCompile Include="src\fases\fase2\coisas_gerais_fase2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\tela_menu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -107,6 +110,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\fases\fase2\coisas_gerais_fase2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\tela_menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\configs\globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

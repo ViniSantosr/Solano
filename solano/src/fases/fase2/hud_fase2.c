@@ -10,23 +10,15 @@
 #include "fases/fase2/soldado_fase2.h"
 #include "core/must_init.h"
 
-ALLEGRO_FONT* font;
+
 long score_display;
 
 void hud_init()
 {
-	font = al_create_builtin_font();
-	must_init(font, "font");
-
 	score_display = 0;
 }
 
-void hud_deinit()
-{
-	al_destroy_font(font);
-}
-
-void hud_update(long frames)
+void hud_update()
 {
 	if (frames % 2)
 		return;
@@ -40,7 +32,7 @@ void hud_update(long frames)
 
 }
 
-void hud_draw()
+void hud_draw(ALLEGRO_FONT* font)
 {
 
 	al_draw_textf(
@@ -81,7 +73,7 @@ void hud_draw()
 		al_draw_text(
 			font,
 			al_map_rgb_f(0, 0, 1),
-			CANVAS_W / 2, CANVAS_H / 2,
+			CANVAS_W / 2, CANVAS_H / 2.5,
 			ALLEGRO_ALIGN_CENTER,
 			"META: 10.000 pontos"
 		);

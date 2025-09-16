@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\tela_menu.c" />
     <ClCompile Include="src\fases\fase2\coisas_gerais_fase2.c" />
     <ClCompile Include="src\fases\fase2\hud_fase2.c" />
     <ClCompile Include="src\fases\fase2\inimigos_fase2.c" />
@@ -170,7 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\configs\config_tela.h" />
+    <ClInclude Include="include\configs\globals.h" />
     <ClInclude Include="include\configs\sprites\config_sprites_soldados.h" />
+    <ClInclude Include="include\core\tela_menu.h" />
     <ClInclude Include="include\fases\fase2\coisas_gerais_fase2.h" />
     <ClInclude Include="include\fases\fase2\hud_fase2.h" />
     <ClInclude Include="include\fases\fase2\inimigos_fase2.h" />
