@@ -46,12 +46,13 @@ int fase2(ALLEGRO_DISPLAY* tela, GameContext* ctx)
 		mouse_update(&event);
 		teclado_update(&event);
 
+		// Update (lógica/ movimentaçao do jogo)
 		switch (event.type)
 		{
 
 		case ALLEGRO_EVENT_TIMER:
 			// Updates
-			if (score >= 10000) {
+			if (score >= 10000 || soldado.vidas <= 0) {
 				game_over = true;
 			}
 
@@ -84,6 +85,7 @@ int fase2(ALLEGRO_DISPLAY* tela, GameContext* ctx)
 			break;
 		}
 
+		// Draw (desenhar na tela)
 		if (desenhar && al_is_event_queue_empty(ctx->queue))
 		{
 			tela_pre_draw();

@@ -48,7 +48,7 @@ void hud_draw(ALLEGRO_FONT* font)
 	for (int i = 0; i < soldado.vidas; i++)
 		al_draw_bitmap(sprites.vida, 1 + (i * spacing), 10, 0);
 
-	if (soldado.vidas < 0)
+	if (soldado.vidas <= 0)
 	{
 		al_draw_text(
 			font,
