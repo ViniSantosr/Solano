@@ -5,9 +5,9 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
 
-#include "core/tela_menu.h"
+#include "telas/tela_menu.h"
+#include "core/draw_tela.h"
 #include "core/inputs/teclado.h"
-#include "core/tela.h"
 #include "configs/config_tela.h"
 
 int tela_menu(GameContext* ctx)
@@ -35,17 +35,21 @@ int tela_menu(GameContext* ctx)
 				ctx->exit_program = true;
 			}
 
-			if (tecla[ALLEGRO_KEY_ENTER])
+			if (tecla[ALLEGRO_KEY_SPACE])
 			{
 				exit_tela = true;
 				ctx->estado_tela = FASE2;
 			}
 			break;
+		case ALLEGRO_EVENT_DISPLAY_CLOSE:
+			ctx->exit_program = true;
+			break;
 		}
+
 
 		if (desenhar && al_is_event_queue_empty(ctx->queue))
 		{
-			tela_pre_draw();
+			tela_pre_draw(ctx->canvas);
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
 			al_draw_text(
@@ -61,10 +65,18 @@ int tela_menu(GameContext* ctx)
 				al_map_rgb_f(1, 1, 1),
 				CANVAS_W / 2, CANVAS_H / 2,
 				ALLEGRO_ALIGN_CENTER,
-				"Press Enter"
+				"Press Space"
 			);
 
-			tela_pos_draw();
+			al_draw_text(
+				ctx->font,
+				al_map_rgb_f(1, 1, 1),
+				CANVAS_W / 2, CANVAS_H / 1.8,
+				ALLEGRO_ALIGN_CENTER,
+				"Esc -> Sair do jogo"
+			);
+
+			tela_pos_draw(ctx->canvas, ctx->tela);
 			desenhar = false;
 		}
 	}

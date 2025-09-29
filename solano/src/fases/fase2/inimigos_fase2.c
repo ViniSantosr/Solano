@@ -1,14 +1,13 @@
-#include "fases/fase2/inimigos_fase2.h"
-
 #include <math.h>
 #include <stdio.h>
 
+#include "fases/fase2/inimigos_fase2.h"
+
 #include "configs/sprites/config_sprites_soldados.h"
-#include "core/sprites/sprites_soldados.h"
 #include "configs/config_tela.h"
+
 #include "fases/fase2/coisas_gerais_fase2.h"
 #include "fases/fase2/tiros_fase2.h"
-#include "fases/fase2/soldado_fase2.h"
 
 INIMIGO inimigos[INIMIGOS_N];
 
@@ -20,10 +19,10 @@ void inimigo_init()
 	}
 }
 
-void inimigo_update()
+void inimigo_update(Fase2Context* f2_ctx)
 {
 	int nova_onda = 0;
-	if (frames % 120 == 0) // A cada 120 frames, será gerado uma nova onda, dá para criar niveis de ondas?
+	if (f2_ctx->frames % 120 == 0) // A cada 120 frames, será gerado uma nova onda, dá para criar niveis de ondas?
 		nova_onda = between(1, 3);
 
 	float new_x = between_f(-60, CANVAS_W + 60); // Posição aleatória dos inimigos no eixo X	
@@ -83,7 +82,7 @@ void inimigo_update()
 		}
 
 		// Atualiza a direção da qual o inimigo deve se mover
-		calcular_direcao(false, inimigos[i].x, inimigos[i].y, soldado.x, soldado.y, &inimigos[i].dx, &inimigos[i].dy, vel);
+		calcular_direcao(false, inimigos[i].x, inimigos[i].y, f2_ctx->soldado->x, f2_ctx->soldado->y, &inimigos[i].dx, &inimigos[i].dy, vel);
 
 		// Se o inimigo já estiver ativo, atualiza a posição dele
 		inimigos[i].x += inimigos[i].dx;
@@ -105,13 +104,13 @@ void inimigo_update()
 			inimigos[i].piscar = 4;
 		}
 
-		if (soldado.respawn_timer == 0 && soldado.invencivel_timer == 0)
+		if (f2_ctx->soldado->respawn_timer == 0 && f2_ctx->soldado->invencivel_timer == 0)
 		{
-			if (collide(soldado.x, soldado.y, soldado.x + SOLDADO_W, soldado.y + SOLDADO_H, inimigos[i].x, inimigos[i].y, inimigos[i].x + (INIMIGO_W[inimigos[i].tipo]), inimigos[i].y + (INIMIGO_H[inimigos[i].tipo])))
+			if (collide(f2_ctx->soldado->x, f2_ctx->soldado->y, f2_ctx->soldado->x + SOLDADO_W, f2_ctx->soldado->y + SOLDADO_H, inimigos[i].x, inimigos[i].y, inimigos[i].x + (INIMIGO_W[inimigos[i].tipo]), inimigos[i].y + (INIMIGO_H[inimigos[i].tipo])))
 			{
-				soldado.vidas--;
-				soldado.respawn_timer = 90;
-				soldado.invencivel_timer = 180;
+				f2_ctx->soldado->vidas--;
+				f2_ctx->soldado->respawn_timer = 90;
+				f2_ctx->soldado->invencivel_timer = 180;
 			}
 		}
 
@@ -126,15 +125,15 @@ void inimigo_update()
 			switch (inimigos[i].tipo)
 			{
 			case INIMIGO_MENOR:
-				score += 200;
+				f2_ctx->score += 200;
 				break;
 
 			case INIMIGO_SOLDADO:
-				score += 150;
+				f2_ctx->score += 150;
 				break;
 
 			case INIMIGO_SNIPER:
-				score += 800;
+				f2_ctx->score += 800;
 				/*fx_add(false, cx - 10, cy - 4);
 				fx_add(false, cx + 4, cy + 10);
 				fx_add(false, cx + 8, cy + 8);*/
@@ -151,18 +150,18 @@ void inimigo_update()
 			switch (inimigos[i].tipo)
 			{
 			case INIMIGO_MENOR:
-				disparar(false, false, cx, cy, soldado.x, soldado.y, 1.5);
+				disparar(false, false, cx, cy, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.5);
 				inimigos[i].tiro_timer = 150;
 				break;
 			case INIMIGO_SOLDADO:
-				disparar(false, true, cx, inimigos[i].y, soldado.x, soldado.y, 1.5);
+				disparar(false, true, cx, inimigos[i].y, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.5);
 				inimigos[i].tiro_timer = 80;
 				break;
 			case INIMIGO_SNIPER:
-				disparar(false, true, cx - 5, cy, soldado.x, soldado.y, 1.0);
-				disparar(false, true, cx + 5, cy, soldado.x, soldado.y, 1.0);
-				disparar(false, true, cx - 5, cy + 8, soldado.x, soldado.y, 1.0);
-				disparar(false, true, cx + 5, cy + 8, soldado.x, soldado.y, 1.0);
+				disparar(false, true, cx - 5, cy, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.0);
+				disparar(false, true, cx + 5, cy, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.0);
+				disparar(false, true, cx - 5, cy + 8, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.0);
+				disparar(false, true, cx + 5, cy + 8, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.0);
 				inimigos[i].tiro_timer = 200;
 				break;
 			}
@@ -170,7 +169,7 @@ void inimigo_update()
 	}
 }
 
-void inimigo_draw()
+void inimigo_draw(Fase2Context* f2_ctx)
 {
 	for (int i = 0; i < INIMIGOS_N; i++)
 	{
@@ -179,7 +178,7 @@ void inimigo_draw()
 		if (inimigos[i].piscar > 2)
 			continue;
 
-		al_draw_bitmap(sprites.inimigo[inimigos[i].tipo], inimigos[i].x, inimigos[i].y, 0);
+		al_draw_bitmap(f2_ctx->sprites->inimigo[inimigos[i].tipo], inimigos[i].x, inimigos[i].y, 0);
 	}
 }
 
