@@ -65,11 +65,11 @@ int fase2(GameContext* ctx) // Função principal da fase 2
 		mouse_update(&event);
 		teclado_update(&event);
 
+		// Update (lógica/ movimentaçao do jogo)
 		switch (event.type)
 		{
 
 		case ALLEGRO_EVENT_TIMER:
-
 			if (!jogo_em_inicio()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
 			{
 				// Se o jogador perder
@@ -142,8 +142,9 @@ int fase2(GameContext* ctx) // Função principal da fase 2
 			break;
 		}
 
+		// Draw (desenhar na tela)
+		if (desenhar && al_is_event_queue_empty(ctx->queue))
 
-		if (desenhar && al_is_event_queue_empty(ctx->queue))  // Desenhos
 		{
 			tela_pre_draw(ctx->canvas);
 			al_clear_to_color(al_map_rgb(0, 0, 0));
