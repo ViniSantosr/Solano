@@ -82,7 +82,7 @@ void inimigo_update(Fase2Context* f2_ctx)
 		}
 
 		// Atualiza a direção da qual o inimigo deve se mover
-		calcular_direcao(false, inimigos[i].x, inimigos[i].y, f2_ctx->soldado->x, f2_ctx->soldado->y, &inimigos[i].dx, &inimigos[i].dy, vel);
+		calcular_direcao(false, inimigos[i].x, inimigos[i].y, soldado.x, soldado.y, &inimigos[i].dx, &inimigos[i].dy, vel);
 
 		// Se o inimigo já estiver ativo, atualiza a posição dele
 		inimigos[i].x += inimigos[i].dx;
@@ -104,13 +104,13 @@ void inimigo_update(Fase2Context* f2_ctx)
 			inimigos[i].piscar = 4;
 		}
 
-		if (f2_ctx->soldado->respawn_timer == 0 && f2_ctx->soldado->invencivel_timer == 0)
+		if (soldado.respawn_timer == 0 && soldado.invencivel_timer == 0)
 		{
-			if (collide(f2_ctx->soldado->x, f2_ctx->soldado->y, f2_ctx->soldado->x + SOLDADO_W, f2_ctx->soldado->y + SOLDADO_H, inimigos[i].x, inimigos[i].y, inimigos[i].x + (INIMIGO_W[inimigos[i].tipo]), inimigos[i].y + (INIMIGO_H[inimigos[i].tipo])))
+			if (collide(soldado.x, soldado.y, soldado.x + SOLDADO_W, soldado.y + SOLDADO_H, inimigos[i].x, inimigos[i].y, inimigos[i].x + (INIMIGO_W[inimigos[i].tipo]), inimigos[i].y + (INIMIGO_H[inimigos[i].tipo])))
 			{
-				f2_ctx->soldado->vidas--;
-				f2_ctx->soldado->respawn_timer = 90;
-				f2_ctx->soldado->invencivel_timer = 180;
+				soldado.vidas--;
+				soldado.respawn_timer = 90;
+				soldado.invencivel_timer = 180;
 			}
 		}
 
@@ -150,18 +150,18 @@ void inimigo_update(Fase2Context* f2_ctx)
 			switch (inimigos[i].tipo)
 			{
 			case INIMIGO_MENOR:
-				disparar(false, false, cx, cy, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.5);
+				disparar(false, false, cx, cy, soldado.x, soldado.y, 1.5);
 				inimigos[i].tiro_timer = 150;
 				break;
 			case INIMIGO_SOLDADO:
-				disparar(false, true, cx, inimigos[i].y, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.5);
+				disparar(false, true, cx, inimigos[i].y, soldado.x, soldado.y, 1.5);
 				inimigos[i].tiro_timer = 80;
 				break;
 			case INIMIGO_SNIPER:
-				disparar(false, true, cx - 5, cy, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.0);
-				disparar(false, true, cx + 5, cy, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.0);
-				disparar(false, true, cx - 5, cy + 8, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.0);
-				disparar(false, true, cx + 5, cy + 8, f2_ctx->soldado->x, f2_ctx->soldado->y, 1.0);
+				disparar(false, true, cx - 5, cy, soldado.x, soldado.y, 1.0);
+				disparar(false, true, cx + 5, cy, soldado.x, soldado.y, 1.0);
+				disparar(false, true, cx - 5, cy + 8, soldado.x, soldado.y, 1.0);
+				disparar(false, true, cx + 5, cy + 8, soldado.x, soldado.y, 1.0);
 				inimigos[i].tiro_timer = 200;
 				break;
 			}
@@ -178,7 +178,7 @@ void inimigo_draw(Fase2Context* f2_ctx)
 		if (inimigos[i].piscar > 2)
 			continue;
 
-		al_draw_bitmap(f2_ctx->sprites->inimigo[inimigos[i].tipo], inimigos[i].x, inimigos[i].y, 0);
+		al_draw_bitmap(sprites.inimigo[inimigos[i].tipo], inimigos[i].x, inimigos[i].y, 0);
 	}
 }
 

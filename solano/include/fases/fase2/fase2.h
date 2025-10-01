@@ -13,12 +13,11 @@ typedef struct Fase2Context
 {
 	long frames;
 	long score;
-	SOLDADO* soldado;
-	SPRITES* sprites;
-	TIRO* tiros;
 	bool game_over;
 	bool pause;
 	bool concluido;
+	bool exit_tela;
+	int frames_iniciais;
 } Fase2Context;
 
 extern Fase2Context f2_ctx;

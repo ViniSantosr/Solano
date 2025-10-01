@@ -8,7 +8,10 @@
 typedef enum TELAS {
     TELA_MENU,
     FASE1,
-    FASE2
+    FASE2,
+    FASE3,
+    FASE4,
+    FASE5
 } TELAS;
 
 // Struct 
