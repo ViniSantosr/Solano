@@ -1,8 +1,8 @@
-
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
 
 #include "core/sprites/sprites_soldados.h"
+
 #include "configs/sprites/config_sprites_soldados.h"
 #include "core/must_init.h"
 

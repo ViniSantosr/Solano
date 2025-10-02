@@ -8,7 +8,10 @@
 typedef enum TELAS {
     TELA_MENU,
     FASE1,
-    FASE2
+    FASE2,
+    FASE3,
+    FASE4,
+    FASE5
 } TELAS;
 
 // Struct 
@@ -18,6 +21,9 @@ typedef struct {
     ALLEGRO_EVENT_QUEUE* queue;
     ALLEGRO_FONT* font;
     ALLEGRO_TIMER* timer;
+    ALLEGRO_DISPLAY* tela;		    // Monitor do jogador
+    ALLEGRO_BITMAP* canvas;		    // Quadro/Bitmap onde o jogo vai ser desenhado
+    ALLEGRO_TRANSFORM transform;	// Responsável por redimensionar a tela
 } GameContext;
 
 extern GameContext ctx;
