@@ -167,6 +167,7 @@
     <Media Include="assets\sounds\elephant.wav" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\images\background_menu.bmp" />
     <Image Include="assets\images\spritesheet.png" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +186,10 @@
     <ClInclude Include="include\core\draw_tela.h" />
     <ClInclude Include="include\fases\fase2\soldado_fase2.h" />
     <ClInclude Include="include\fases\fase2\tiros_fase2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\fonts\font_titulo_menu.ttf" />
+    <Font Include="assets\fonts\Minecraft.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
