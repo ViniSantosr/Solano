@@ -142,9 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\core\tela_menu_inicial.h" />
     <ClCompile Include="src\core\tela_menu.c" />
-    <ClCompile Include="src\core\tela_menu_inicial.c" />
     <ClCompile Include="src\fases\fase2\coisas_gerais_fase2.c" />
     <ClCompile Include="src\fases\fase2\hud_fase2.c" />
     <ClCompile Include="src\fases\fase2\inimigos_fase2.c" />
