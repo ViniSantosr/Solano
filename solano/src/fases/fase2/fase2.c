@@ -257,11 +257,11 @@ void tela_pause(ALLEGRO_FONT* font)
 		CANVAS_W / 2, CANVAS_H / 3,
 		ALLEGRO_ALIGN_CENTER,
 		"JOGO PAUSADO"
-	);
+	); 
 
 	al_draw_text(
 		font,
-		al_map_rgb_f(0, 0, 1),
+		al_map_rgb_f(1, 1, 1),
 		CANVAS_W / 2, CANVAS_H / 2,
 		ALLEGRO_ALIGN_CENTER,
 		"Space -> Retomar"
@@ -269,7 +269,7 @@ void tela_pause(ALLEGRO_FONT* font)
 
 	al_draw_text(
 		font,
-		al_map_rgb_f(0, 0, 1),
+		al_map_rgb_f(1, 1, 1),
 		CANVAS_W / 2, CANVAS_H / 1.8,
 		ALLEGRO_ALIGN_CENTER,
 		"Esc -> Volta a tela de menu"

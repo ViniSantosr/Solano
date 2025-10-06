@@ -60,6 +60,8 @@ int tela_menu(GameContext* ctx)
 
 				case ALLEGRO_KEY_ENTER: // confirma a seleção
 					if (selected == 0) {
+						exit_tela = true;
+						ctx->estado_tela = FASE2;
 						printf("New Game selecionado!\n");
 					}
 					else if (selected == 1) {
@@ -105,7 +107,7 @@ int tela_menu(GameContext* ctx)
 					al_draw_text(
 						ctx->font,
 						al_map_rgb(255, 255, 255),
-						CANVAS_W / 3.5, CANVAS_H / 1.9,
+						CANVAS_W / 3.9, CANVAS_H / 1.9,
 						ALLEGRO_ALIGN_CENTER,
 						"->Novo Jogo");
 				}
@@ -124,7 +126,7 @@ int tela_menu(GameContext* ctx)
 					al_draw_text(
 						ctx->font,
 						al_map_rgb(255, 255, 255),
-						CANVAS_W / 4.1, CANVAS_H / 1.72,
+						CANVAS_W / 4.6, CANVAS_H / 1.72,
 						ALLEGRO_ALIGN_CENTER,
 						"->Opcoes");
 				}
@@ -143,7 +145,7 @@ int tela_menu(GameContext* ctx)
 					al_draw_text(
 						ctx->font,
 						al_map_rgb_f(255, 255, 255),
-						CANVAS_W / 4.6, CANVAS_H / 1.55,
+						CANVAS_W / 5.2, CANVAS_H / 1.55,
 						ALLEGRO_ALIGN_CENTER,
 						"->Sair");
 				}
@@ -162,7 +164,7 @@ int tela_menu(GameContext* ctx)
 					al_draw_text(
 						ctx->font,
 						al_map_rgb_f(255, 255, 255),
-						CANVAS_W / 1.2, CANVAS_H / 1.15,
+						CANVAS_W / 1.24, CANVAS_H / 1.15,
 						ALLEGRO_ALIGN_CENTER,
 						"->Creditos");
 				}
