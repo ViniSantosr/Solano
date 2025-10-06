@@ -71,6 +71,9 @@
     <Image Include="assets\images\spritesheet.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\images\background_menu.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core\must_init.h">
@@ -118,5 +121,8 @@
     <ClInclude Include="include\main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\fonts\font_titulo.ttf" />
   </ItemGroup>
 </Project>

@@ -188,8 +188,7 @@
     <ClInclude Include="include\fases\fase2\tiros_fase2.h" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="assets\fonts\font_titulo_menu.ttf" />
-    <Font Include="assets\fonts\Minecraft.ttf" />
+    <Font Include="assets\fonts\font_titulo.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,6 +4,7 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_ttf.h>
 
 #include "main.h"
 #include "configs/config_tela.h"
@@ -41,6 +42,8 @@ int main()
 	al_destroy_display(ctx.tela);
 	al_destroy_timer(ctx.timer);
 	al_destroy_event_queue(ctx.queue);
+	al_destroy_font(ctx.font_titulo);
+	al_destroy_bitmap(ctx.background_menu);
 
 	return 0;
 }
@@ -51,6 +54,10 @@ void inicializar_game()
 	must_init(al_init(), "allegro");
 	must_init(al_install_keyboard(), "teclado");
 	must_init(al_install_mouse(), "mouse");
+	must_init(al_init_font_addon(), "font addon");
+	must_init(al_init_image_addon(), "image addon");
+	must_init(al_init_ttf_addon(), "ttf addon");
+
 
 	ctx.timer = al_create_timer(1.0 / 60.0);
 	must_init(ctx.timer, "timer");
@@ -61,11 +68,16 @@ void inicializar_game()
 	ctx.font = al_create_builtin_font();
 	must_init(ctx.font, "font");
 
+	ctx.font_titulo = al_load_ttf_font("assets/fonts/font_titulo.ttf", 30, 0);
+	must_init(ctx.font_titulo, "font_titulo");
+
+	ctx.background_menu = al_load_bitmap("assets/images/background_menu.bmp");
+	must_init(ctx.background_menu, "background_menu");
+
 	tela_init();
 
 	al_set_window_title(ctx.tela, "Solano: A guerra do Paraguai");
 
-	must_init(al_init_image_addon(), "image");
 	must_init(al_init_primitives_addon(), "primitives");
 
 	al_register_event_source(ctx.queue, al_get_keyboard_event_source());
