@@ -20,10 +20,12 @@ typedef struct {
     bool exit_program;
     ALLEGRO_EVENT_QUEUE* queue;
     ALLEGRO_FONT* font;
+    ALLEGRO_FONT* font_titulo;
     ALLEGRO_TIMER* timer;
     ALLEGRO_DISPLAY* tela;		    // Monitor do jogador
     ALLEGRO_BITMAP* canvas;		    // Quadro/Bitmap onde o jogo vai ser desenhado
     ALLEGRO_TRANSFORM transform;	// Responsável por redimensionar a tela
+    ALLEGRO_BITMAP* background_menu;
 } GameContext;
 
 extern GameContext ctx;

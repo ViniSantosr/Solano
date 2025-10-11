@@ -220,7 +220,7 @@ void fase2_gameplay_draw(GameContext* ctx)
 }
 
 void tela_inicial(ALLEGRO_FONT* font)
-{
+{	
 	al_draw_filled_rectangle(
 		0, 0, CANVAS_W, CANVAS_H,
 		al_map_rgb(0, 0, 0)
@@ -228,18 +228,34 @@ void tela_inicial(ALLEGRO_FONT* font)
 
 	al_draw_text(
 		font,
-		al_map_rgb_f(0, 0, 1),
-		CANVAS_W / 2, CANVAS_H / 3.5,
+		al_map_rgb_f(1, 0, 0),
+		CANVAS_W / 2, CANVAS_H / 4,
 		ALLEGRO_ALIGN_CENTER,
-		"Fase 2: Cerco de Uruguaiana (1865)"
+		"FASE 2"
 	);
 
 	al_draw_text(
 		font,
-		al_map_rgb_f(0, 0, 1),
-		CANVAS_W / 2, CANVAS_H / 2,
+		al_map_rgb_f(1.0, 0.5, 0),
+		CANVAS_W / 2, CANVAS_H / 2.5,
 		ALLEGRO_ALIGN_CENTER,
-		"META: 10.000 pontos"
+		"Cerco de Uruguaiana (1865)"
+	);
+
+	al_draw_text(
+		font,
+		al_map_rgb_f(1.0, 0.5, 0),
+		CANVAS_W / 2.8, CANVAS_H / 2,
+		ALLEGRO_ALIGN_CENTER,
+		"META:"
+	);
+
+	al_draw_text(
+		font,
+		al_map_rgb_f(1, 1, 1),
+		CANVAS_W / 1.7, CANVAS_H / 2,
+		ALLEGRO_ALIGN_CENTER,
+		"10.000 pontos"
 	);
 }
 
@@ -253,26 +269,42 @@ void tela_pause(ALLEGRO_FONT* font)
 
 	al_draw_text(
 		font,
-		al_map_rgb_f(0, 0, 1),
+		al_map_rgb_f(1, 0, 0),
 		CANVAS_W / 2, CANVAS_H / 3,
 		ALLEGRO_ALIGN_CENTER,
 		"JOGO PAUSADO"
+	); 
+
+	al_draw_text(
+		font,
+		al_map_rgb_f(1, 1, 1),
+		CANVAS_W / 3.5, CANVAS_H / 2,
+		ALLEGRO_ALIGN_CENTER,
+		"Space ->"
 	);
 
 	al_draw_text(
 		font,
-		al_map_rgb_f(0, 0, 1),
+		al_map_rgb_f(1.0, 0.5, 0),
 		CANVAS_W / 2, CANVAS_H / 2,
 		ALLEGRO_ALIGN_CENTER,
-		"Space -> Retomar"
+		"Retomar"
 	);
 
 	al_draw_text(
 		font,
-		al_map_rgb_f(0, 0, 1),
-		CANVAS_W / 2, CANVAS_H / 1.8,
+		al_map_rgb_f(1, 1, 1),
+		CANVAS_W / 3.5, CANVAS_H / 1.8,
 		ALLEGRO_ALIGN_CENTER,
-		"Esc -> Volta a tela de menu"
+		"Esc   ->"
+	);
+
+	al_draw_text(
+		font,
+		al_map_rgb_f(1.0, 0.5, 0),
+		CANVAS_W / 1.5, CANVAS_H / 1.8,
+		ALLEGRO_ALIGN_CENTER,
+		"Volta a tela de menu"
 	);
 }
 
