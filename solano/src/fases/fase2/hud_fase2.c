@@ -1,10 +1,14 @@
 
-#include "fases/fase2/hud_fase2.h"
-
+#pragma region Biblitotecas Externas
 #include <allegro5/allegro_image.h>
+#pragma endregion
 
+#pragma region Headers Game
 #include "configs/config_tela.h"
-#include "configs/sprites/config_sprites_soldados.h"
+#include "configs/sprites/soldados_dimensions.h"
+#pragma endregion
+
+#include "fases/fase2/hud_fase2.h"
 
 long score_display;
 

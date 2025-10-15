@@ -142,16 +142,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\sprites\navios_sprites.c" />
+    <ClCompile Include="src\fases\fase1\fase1.c" />
     <ClCompile Include="src\telas\tela_menu.c" />
     <ClCompile Include="src\fases\fase2\coisas_gerais_fase2.c" />
     <ClCompile Include="src\fases\fase2\hud_fase2.c" />
     <ClCompile Include="src\fases\fase2\inimigos_fase2.c" />
     <ClCompile Include="src\fases\fase2\mouse_fase2.c" />
-    <ClCompile Include="src\core\inputs\teclado.c" />
-    <ClCompile Include="src\core\sprites\sprites_soldados.c" />
+    <ClCompile Include="src\core\teclado.c" />
+    <ClCompile Include="src\core\sprites\soldados_sprites.c" />
     <ClCompile Include="src\core\draw_tela.c" />
     <ClCompile Include="src\fases\fase2\fase2.c" />
-    <ClCompile Include="src\core\must_init.c" />
     <ClCompile Include="src\fases\fase2\soldado_fase2.c" />
     <ClCompile Include="src\fases\fase2\tiros_fase2.c" />
     <ClCompile Include="src\main.c" />
@@ -168,21 +169,27 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\images\background_menu.bmp" />
-    <Image Include="assets\images\spritesheet.png" />
+    <Image Include="assets\images\fase1_background.png" />
+    <Image Include="assets\images\fase2background.png" />
+    <Image Include="assets\images\fase2_background.png" />
+    <Image Include="assets\images\spritesheets\navios_spritesheet.png" />
+    <Image Include="assets\images\spritesheets\tutorial_spritesheet.png" />
+    <Image Include="assets\images\spritesheets\soldados_spritesheet.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\configs\config_tela.h" />
+    <ClInclude Include="include\configs\sprites\navios_dimensions.h" />
+    <ClInclude Include="include\core\sprites\navios_sprites.h" />
     <ClInclude Include="include\main.h" />
-    <ClInclude Include="include\configs\sprites\config_sprites_soldados.h" />
+    <ClInclude Include="include\configs\sprites\soldados_dimensions.h" />
     <ClInclude Include="include\telas\tela_menu.h" />
     <ClInclude Include="include\fases\fase2\coisas_gerais_fase2.h" />
     <ClInclude Include="include\fases\fase2\hud_fase2.h" />
     <ClInclude Include="include\fases\fase2\inimigos_fase2.h" />
     <ClInclude Include="include\fases\fase2\mouse_fase2.h" />
-    <ClInclude Include="include\core\inputs\teclado.h" />
-    <ClInclude Include="include\core\sprites\sprites_soldados.h" />
+    <ClInclude Include="include\core\teclado.h" />
+    <ClInclude Include="include\core\sprites\soldados_sprites.h" />
     <ClInclude Include="include\fases\fase2\fase2.h" />
-    <ClInclude Include="include\core\must_init.h" />
     <ClInclude Include="include\core\draw_tela.h" />
     <ClInclude Include="include\fases\fase2\soldado_fase2.h" />
     <ClInclude Include="include\fases\fase2\tiros_fase2.h" />

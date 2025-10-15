@@ -1,12 +1,23 @@
 #include "fases/fase2/tiros_fase2.h"
 
+#pragma region Biblitotecas Externas
+
 #include <allegro5/allegro5.h>
 #include <math.h>
-#include "core/must_init.h"
-#include "configs/sprites/config_sprites_soldados.h"
+
+#pragma endregion
+
+#pragma region Headers Game
+
+#include "main.h"
+#include "configs/sprites/soldados_dimensions.h"
 #include "configs/config_tela.h"
-#include "core/sprites/sprites_soldados.h"
+#include "core/sprites/soldados_sprites.h"
 #include "fases/fase2/coisas_gerais_fase2.h"
+
+#pragma endregion
+
+
 
 TIRO tiros[TIROS_N];
 

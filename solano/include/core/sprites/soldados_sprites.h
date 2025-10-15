@@ -4,8 +4,9 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
 
-typedef struct SPRITES {
-	ALLEGRO_BITMAP* _sheet;
+typedef struct SPRITES_SOLDADOS {
+	ALLEGRO_BITMAP* _tutorial_sheet;
+	ALLEGRO_BITMAP* _soldados_sheet;	
 
 	ALLEGRO_BITMAP* soldado;
 	ALLEGRO_BITMAP* soldado_tiros[2];
@@ -20,16 +21,14 @@ typedef struct SPRITES {
 
 		ALLEGRO_BITMAP* powerup[4];
 	*/
-} SPRITES;
+} SPRITES_SOLDADOS;
 
 // Declaração externa da variável global
-extern SPRITES sprites;
+extern SPRITES_SOLDADOS sprites;
 
-ALLEGRO_BITMAP* sprite_grab(int x, int y, int w, int h);
+void sprites_soldados_init();
 
-void sprites_init();
-
-void sprites_deinit();
+void sprites_soldados_deinit();
 
 #endif
 

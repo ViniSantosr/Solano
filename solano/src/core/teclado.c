@@ -1,7 +1,9 @@
 
-#include "core/inputs/teclado.h"
+#pragma region Biblitotecas Externas
+	#include <allegro5/allegro5.h>
+#pragma endregion
 
-#include <allegro5/allegro5.h>
+#include "core/teclado.h"
 
 unsigned char tecla[ALLEGRO_KEY_MAX]; // Um array que armazena todos os tipos de tecla
 

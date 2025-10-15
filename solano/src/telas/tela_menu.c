@@ -1,3 +1,5 @@
+﻿
+#pragma region Biblitotecas Externas
 #include <stdio.h>
 #include <stdlib.h>
 #include <allegro5/allegro5.h>
@@ -7,15 +9,34 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
+#pragma endregion
 
+#pragma region Headers Game
+#include "core/draw_tela.h"
+#include "core/teclado.h"
+#include "configs/config_tela.h"
+#pragma endregion
 
 #include "telas/tela_menu.h"
-#include "core/draw_tela.h"
-#include "core/inputs/teclado.h"
-#include "configs/config_tela.h"
+
+MenuContext menu_ctx;
+
+BotoesConfig botoes_configs[BOTOES_N] = // Array que armazena todos os botões e as suas específicações
+{
+	{ "->Novo Jogo",  CANVAS_W / 3.7, CANVAS_H / 1.9 },
+	{ "->Opcoes",     CANVAS_W / 3.9, CANVAS_H / 1.75 },
+	{ "->Creditos",   CANVAS_W / 3.7, CANVAS_H / 1.6 },
+	{ "->Sair",       CANVAS_W / 4.0, CANVAS_H / 1.45 }
+};
+
+void inicializar_menu();
+void desenhar_botoes(GameContext* ctx, BotoesConfig botao, bool selecionado, int time);
+void botoes(GameContext* ctx, int selected, int time);
+void titulo(GameContext* ctx, int selected, int time);
 
 int tela_menu(GameContext* ctx)
 {
+	inicializar_menu();
 
 	bool exit_tela = false;
 	bool desenhar = false;
@@ -28,7 +49,6 @@ int tela_menu(GameContext* ctx)
 	while (!ctx->exit_program && !exit_tela)
 	{
 		al_wait_for_event(ctx->queue, &event);
-
 		teclado_update(&event);
 
 		switch (event.type)
@@ -45,36 +65,34 @@ int tela_menu(GameContext* ctx)
 
 		case ALLEGRO_EVENT_KEY_DOWN:
 			switch (event.keyboard.keycode) {
-				case ALLEGRO_KEY_DOWN:
-				case ALLEGRO_KEY_S:// seta para baixo
-					selected++;
+			case ALLEGRO_KEY_DOWN:
+			case ALLEGRO_KEY_S:// seta para baixo
+				selected++;
+				if (selected > BOTOES_N) selected = 0; // volta para o início
+				break;
 
-					if (selected > 3) selected = 0; // volta para o in�cio
+			case ALLEGRO_KEY_UP: // seta para cima
+			case ALLEGRO_KEY_W:
+				if (selected == 0) // Deixa parado no 'Novo Jogo'
 					break;
 
-				case ALLEGRO_KEY_UP: // seta para cima
-				case ALLEGRO_KEY_W:
-					selected--;
-					if (selected < 0) selected = 3; // vai para o final
-					break;
+				selected--;
+				break;
 
-				case ALLEGRO_KEY_ENTER: // confirma a sele��o
-					if (selected == 0) {
-						exit_tela = true;
-						ctx->estado_tela = FASE2;
-						printf("New Game selecionado!\n");
-					}
-					else if (selected == 1) {
-						printf("Options selecionado!\n");
-					}
-					else if (selected == 2) {
-						printf("Exit selecionado!\n");
-						ctx->exit_program= true;
-					}
-					else if (selected == 3) {
-						printf("Cr�ditos selecionado!\n");
-					}
+			case ALLEGRO_KEY_ENTER: // confirma a seleção
+
+				switch (selected)
+				{
+				case NOVO_JOGO:
+					exit_tela = true;
+					ctx->estado_tela = FASE2;
 					break;
+				case SAIR:
+					ctx->exit_program = true;
+					break;
+				}
+
+				break;
 			}
 			break;
 
@@ -94,89 +112,9 @@ int tela_menu(GameContext* ctx)
 				0, 0, CANVAS_W, CANVAS_H,
 				0);
 
-			al_draw_text(
-				ctx->font_titulo,
-				al_map_rgb(255, 255, 255),
-				CANVAS_W / 2, CANVAS_H / 3.1,
-				ALLEGRO_ALIGN_CENTER,
-				"SOLANO"
-			);
+			titulo(ctx, selected, time); // Função que desenhar os titulos
 
-			if (selected == 0) {
-				if ((time / 25) % 2 == 0) {
-					al_draw_text(
-						ctx->font,
-						al_map_rgb(255, 255, 255),
-						CANVAS_W / 3.9, CANVAS_H / 1.9,
-						ALLEGRO_ALIGN_CENTER,
-						"->Novo Jogo");
-				}
-			}
-			else {
-				al_draw_text(
-					ctx->font,
-					al_map_rgb(255, 255, 255),
-					CANVAS_W / 3.5, CANVAS_H / 1.9,
-					ALLEGRO_ALIGN_CENTER,
-					"Novo Jogo");
-			}
-
-			if (selected == 1) {
-				if ((time / 25) % 2 == 0) {
-					al_draw_text(
-						ctx->font,
-						al_map_rgb(255, 255, 255),
-						CANVAS_W / 4.6, CANVAS_H / 1.72,
-						ALLEGRO_ALIGN_CENTER,
-						"->Opcoes");
-				}
-			}
-			else {
-				al_draw_text(
-					ctx->font,
-					al_map_rgb(255, 255, 255),
-					CANVAS_W / 4.1, CANVAS_H / 1.72,
-					ALLEGRO_ALIGN_CENTER,
-					"Opcoes");
-			}
-
-			if (selected == 2) {
-				if ((time / 25) % 2 == 0) {
-					al_draw_text(
-						ctx->font,
-						al_map_rgb_f(255, 255, 255),
-						CANVAS_W / 5.2, CANVAS_H / 1.55,
-						ALLEGRO_ALIGN_CENTER,
-						"->Sair");
-				}
-			}
-			else {
-				al_draw_text(
-					ctx->font,
-					al_map_rgb_f(255, 255, 255),
-					CANVAS_W / 4.6, CANVAS_H / 1.55,
-					ALLEGRO_ALIGN_CENTER,
-					"Sair");
-			}
-
-			if (selected == 3) {
-				if ((time / 25) % 2 == 0) {
-					al_draw_text(
-						ctx->font,
-						al_map_rgb_f(255, 255, 255),
-						CANVAS_W / 1.24, CANVAS_H / 1.15,
-						ALLEGRO_ALIGN_CENTER,
-						"->Creditos");
-				}
-			}
-			else {
-				al_draw_text(
-					ctx->font,
-					al_map_rgb_f(255, 255, 255),
-					CANVAS_W / 1.2, CANVAS_H / 1.15,
-					ALLEGRO_ALIGN_CENTER,
-					"Creditos");
-			}
+			botoes(ctx, selected, time); // Função que desenha os botões
 
 			tela_pos_draw(ctx->canvas, ctx->tela);
 			desenhar = false;
@@ -184,4 +122,46 @@ int tela_menu(GameContext* ctx)
 	}
 
 	return 0;
+}
+
+void inicializar_menu()
+{
+	menu_ctx.titulo = "SOLANO";
+	menu_ctx.subtitulo = "A Guerra do Paraguai";	
+}
+
+void titulo(GameContext* ctx, int selected, int time)
+{
+	al_draw_text(ctx->font_titulo, ctx->cores.preto,
+		CANVAS_W / 2 + 2, CANVAS_H / 4 + 2, ALLEGRO_ALIGN_CENTER, menu_ctx.titulo);
+	al_draw_text(ctx->font_titulo, ctx->cores.amarelo,
+		CANVAS_W / 2, CANVAS_H / 4, ALLEGRO_ALIGN_CENTER, menu_ctx.titulo);
+
+	al_draw_text(ctx->font_subtitulo, ctx->cores.preto,
+		CANVAS_W / 2 + 2, CANVAS_H / 2.25 + 2, ALLEGRO_ALIGN_CENTER, menu_ctx.subtitulo);
+	al_draw_text(ctx->font_subtitulo, ctx->cores.verde,
+		CANVAS_W / 2, CANVAS_H / 2.25, ALLEGRO_ALIGN_CENTER, menu_ctx.subtitulo);
+}
+
+void botoes(GameContext* ctx, int selected, int time)
+{
+	for (int i = 0; i < BOTOES_N; i++)
+	{
+		desenhar_botoes(ctx, botoes_configs[i], (selected == i), time);
+	}
+}
+
+void desenhar_botoes(GameContext* ctx, BotoesConfig botao, bool selecionado, int time)
+{
+	int sombra_x = selecionado ? botao.x + 2 : botao.x + 1;
+	int sombra_y = botao.y + 1;
+	const char* texto_sem_seta = botao.texto + 2;
+	ALLEGRO_COLOR cor = selecionado ? ctx->cores.verde : ctx->cores.amarelo;
+
+	if (selecionado && ((time / 25) % 2 == 0))
+		return;
+
+	al_draw_text(ctx->font, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, selecionado ? botao.texto : texto_sem_seta);
+	al_draw_text(ctx->font, cor, botao.x, botao.y, ALLEGRO_ALIGN_CENTER, selecionado ? botao.texto : texto_sem_seta);
+
 }

@@ -1,4 +1,6 @@
-﻿// Bibliotecas do C
+﻿
+#pragma region Biblitotecas Externas
+// Bibliotecas do C
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -11,15 +13,15 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_color.h>
+#pragma endregion
 
-#include "fases/fase2/fase2.h" // Header da fase 2
-
+#pragma region Headers Game
 // Headers que não fazem parte exclusivamente da fase 2
 #include "configs/config_tela.h"
-#include "configs/sprites/config_sprites_soldados.h"
+#include "configs/sprites/soldados_dimensions.h"
 #include "core/draw_tela.h"
-#include "core/inputs/teclado.h"
-#include "core/sprites/sprites_soldados.h"
+#include "core/teclado.h"
+#include "core/sprites/soldados_sprites.h"
 
 // Headers exclusivamente da fase 2
 #include "fases/fase2/mouse_fase2.h"
@@ -27,6 +29,9 @@
 #include "fases/fase2/soldado_fase2.h"
 #include "fases/fase2/inimigos_fase2.h"
 #include "fases/fase2/hud_fase2.h"
+#pragma endregion
+
+#include "fases/fase2/fase2.h" // Header da fase 2
 
 Fase2Context f2_ctx; // Struct que representa o contexto da fase 2
 
@@ -36,7 +41,7 @@ void fase2_gameplay_update(ALLEGRO_DISPLAY* tela);		// Função de atualizar os 
 void fase2_gameplay_draw(GameContext* ctx);				// Função de desenhar os objetos na tela da fase 2
 
 // Telas de informações
-void tela_inicial(ALLEGRO_FONT* font);
+void tela_inicial(GameContext* ctx);
 void tela_pause(ALLEGRO_FONT* font);
 void tela_game_over(ALLEGRO_FONT* font);
 void tela_concluido(ALLEGRO_FONT* font);
@@ -44,7 +49,7 @@ void tela_concluido(ALLEGRO_FONT* font);
 // Funções de condições do jogo
 bool jogo_em_inicio();			// Enquanto o jogo está nos frames iniciais
 
-int fase2(GameContext* ctx) // Função principal da fase 2
+void fase2(GameContext* ctx) // Função principal da fase 2
 {
 	fase2_init(ctx->tela);
 
@@ -149,9 +154,14 @@ int fase2(GameContext* ctx) // Função principal da fase 2
 			tela_pre_draw(ctx->canvas);
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
+			al_draw_scaled_bitmap(f2_ctx.background,
+				0, 0, al_get_bitmap_width(f2_ctx.background), al_get_bitmap_height(f2_ctx.background),
+				0, 0, CANVAS_W, CANVAS_H,
+				0);
+
 			if (jogo_em_inicio()) // Enquanto o jogo está nos frames iniciais
 			{
-				tela_inicial(ctx->font);
+				tela_inicial(ctx);
 			}
 			else
 			{
@@ -178,14 +188,12 @@ int fase2(GameContext* ctx) // Função principal da fase 2
 		}
 	}
 
-	sprites_deinit();
-
-	return 0;
+	sprites_soldados_deinit();
 }
 
 void fase2_init(ALLEGRO_DISPLAY* tela)
 {
-	sprites_init();
+	sprites_soldados_init();
 	hud_init();
 
 	tiro_init();
@@ -199,6 +207,8 @@ void fase2_init(ALLEGRO_DISPLAY* tela)
 
 	f2_ctx.frames = 0;
 	f2_ctx.score = 0;
+	f2_ctx.background = al_load_bitmap("assets/images/fase2background.png");
+	must_init(f2_ctx.background, "fase 2 background");
 }
 
 void fase2_gameplay_update(ALLEGRO_DISPLAY* tela)
@@ -219,44 +229,23 @@ void fase2_gameplay_draw(GameContext* ctx)
 	hud_draw(ctx->font, &f2_ctx);
 }
 
-void tela_inicial(ALLEGRO_FONT* font)
-{	
-	al_draw_filled_rectangle(
-		0, 0, CANVAS_W, CANVAS_H,
-		al_map_rgb(0, 0, 0)
-	);
+void tela_inicial(GameContext* ctx)
+{		
+	TextosConfigs textos[3] =
+	{
+		{"FASE 2", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo},
+		{"Cerco de Uruguaiana (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo},
+		{"META:  10.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo}
+	};
 
-	al_draw_text(
-		font,
-		al_map_rgb_f(1, 0, 0),
-		CANVAS_W / 2, CANVAS_H / 4,
-		ALLEGRO_ALIGN_CENTER,
-		"FASE 2"
-	);
+	for (int i = 0; i < 3; i++) 
+	{
+		int sombra_x = textos[i].x + 2;
+		int sombra_y = textos[i].y + 1;				
 
-	al_draw_text(
-		font,
-		al_map_rgb_f(1.0, 0.5, 0),
-		CANVAS_W / 2, CANVAS_H / 2.5,
-		ALLEGRO_ALIGN_CENTER,
-		"Cerco de Uruguaiana (1865)"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1.0, 0.5, 0),
-		CANVAS_W / 2.8, CANVAS_H / 2,
-		ALLEGRO_ALIGN_CENTER,
-		"META:"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1, 1, 1),
-		CANVAS_W / 1.7, CANVAS_H / 2,
-		ALLEGRO_ALIGN_CENTER,
-		"10.000 pontos"
-	);
+		al_draw_text(ctx->font_subtitulo, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
+		al_draw_text(ctx->font_subtitulo, textos[i].cor, textos[i].x, textos[i].y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
+	}
 }
 
 void tela_pause(ALLEGRO_FONT* font)

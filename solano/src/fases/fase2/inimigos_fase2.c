@@ -1,13 +1,18 @@
-#include <math.h>
-#include <stdio.h>
 
-#include "fases/fase2/inimigos_fase2.h"
+#pragma region Biblitotecas Externas
+	#include <math.h>
+	#include <stdio.h>
+#pragma endregion
 
-#include "configs/sprites/config_sprites_soldados.h"
+#pragma region Headers Game
+#include "configs/sprites/soldados_dimensions.h"
 #include "configs/config_tela.h"
 
 #include "fases/fase2/coisas_gerais_fase2.h"
 #include "fases/fase2/tiros_fase2.h"
+#pragma endregion
+
+#include "fases/fase2/inimigos_fase2.h"
 
 INIMIGO inimigos[INIMIGOS_N];
 
