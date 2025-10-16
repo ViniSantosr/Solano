@@ -3,14 +3,14 @@ packages
 .nupkg
 
 ## Diretórios de build
-[Bb]in
+
 [Oo]bj
 [Ll]og
 ipch
-bin
-obj
+solano/build/Debug
+solano/build/Release/*.pdb
+solano/build/obj
 x64
-x64Release
 x64Debug
 
 ## Arquivos temporários
@@ -35,8 +35,6 @@ solano/allegro.log
 .VC.opendb
 
 ## Compilados
-.exe
-.dll
 .lib
 .exp
 .pdb
