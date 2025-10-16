@@ -1,5 +1,8 @@
+
+#pragma region Biblitotecas Externas
 #include <allegro5/allegro5.h>
 #include <math.h>
+#pragma endregion
 
 #include "fases/fase2/coisas_gerais_fase2.h"
 
