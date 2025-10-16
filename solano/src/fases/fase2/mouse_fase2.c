@@ -7,6 +7,7 @@
 
 #pragma region Headers Game
 #include "configs/config_tela.h"
+#include "fases/fase2/soldado_fase2.h"
 #pragma endregion
 
 #include "fases/fase2/mouse_fase2.h"
@@ -41,7 +42,11 @@ void mouse_update(ALLEGRO_EVENT* event)
 		mira_dx += event->mouse.dx;
 		mira_dy += event->mouse.dy;
 
-
+		soldado_draw(); 
+		/*
+			1. Adicionar os parametros
+			2. Desenhar o sprite do soldado conforme a posição do mouse na tela
+		*/
 
 		break;
 	}

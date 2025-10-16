@@ -55,7 +55,7 @@ bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float al
 			tiros[i].dx = 0;
 			tiros[i].dy = 0;
 
-			calcular_direcao(true, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
+			calcular_direcao_vel(true, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
 		}
 		else
 		{
@@ -67,7 +67,7 @@ bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float al
 				tiros[i].dx = 1;
 				tiros[i].dy = 2;
 
-				calcular_direcao(false, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
+				calcular_direcao_vel(false, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
 			}
 			else
 			{

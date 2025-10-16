@@ -87,7 +87,7 @@ void inimigo_update(Fase2Context* f2_ctx)
 		}
 
 		// Atualiza a direção da qual o inimigo deve se mover
-		calcular_direcao(false, inimigos[i].x, inimigos[i].y, soldado.x, soldado.y, &inimigos[i].dx, &inimigos[i].dy, vel);
+		calcular_direcao_vel(false, inimigos[i].x, inimigos[i].y, soldado.x, soldado.y, &inimigos[i].dx, &inimigos[i].dy, vel);
 
 		// Se o inimigo já estiver ativo, atualiza a posição dele
 		inimigos[i].x += inimigos[i].dx;
