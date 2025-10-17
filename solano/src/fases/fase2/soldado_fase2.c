@@ -1,4 +1,10 @@
 
+#pragma region Bibliotecas Externas
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <stdio.h>
+#pragma endregion
+
 #pragma region Headers Game
 
 #include "configs/config_tela.h"
@@ -85,7 +91,7 @@ void soldado_update()
 	}
 }
 
-void soldado_draw()
+void soldado_draw(float mira_x, float mira_y)
 {
 	if (soldado.vidas < 0)
 		return;
@@ -93,6 +99,29 @@ void soldado_draw()
 		return;
 	if (((soldado.invencivel_timer / 2) % 3) == 1)
 		return;
+
+	// Vetores que indicam a distância do soldado em relação ao mouse
+	float vx = mira_x - soldado.x; 
+	float vy = mira_y - soldado.y; 
+	double angulo = atan2(vx, vy);	
+	angulo = angulo * (180 / M_PI);
+	if (angulo < 0) angulo += 360;
+
+	printf("\nAngulo atual (Graus) = %lf\n", angulo);
+	
+	//if (angulo >= 45 && angulo < 135) {
+	//	// Baixo
+	//}
+	//else if (angulo >= 135 && angulo < 225) {
+	//	// Esquerda
+	//}
+	//else if (angulo >= 225 && angulo < 315) {
+	//	// Cima
+	//}
+	//else {
+	//	// Direita
+	//}
+
 
 	al_draw_bitmap(sprites.soldado, soldado.x, soldado.y, 0);
 }

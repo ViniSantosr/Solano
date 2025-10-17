@@ -23,12 +23,16 @@ typedef struct {
 typedef struct Fase2Context
 {
 	long frames;
+	int frames_iniciais;
+
 	long score;
+
+	// Condições da fase
 	bool game_over;
 	bool pause;
 	bool concluido;
-	bool exit_tela;
-	int frames_iniciais;
+	bool exit_tela;	
+
 	ALLEGRO_BITMAP* background;
 } Fase2Context;
 

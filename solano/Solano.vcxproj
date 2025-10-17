@@ -163,9 +163,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)assets" "$(OutDir)assets" /E /Y /I 
-
-</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -197,7 +196,6 @@
   <ItemGroup>
     <Image Include="assets\images\background_menu.bmp" />
     <Image Include="assets\images\fase1_background.png" />
-    <Image Include="assets\images\fase2background.png" />
     <Image Include="assets\images\fase2_background.png" />
     <Image Include="assets\images\spritesheets\navios_spritesheet.png" />
     <Image Include="assets\images\spritesheets\tutorial_spritesheet.png" />

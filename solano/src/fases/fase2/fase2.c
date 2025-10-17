@@ -38,7 +38,6 @@ Fase2Context f2_ctx; // Struct que representa o contexto da fase 2
 // Declaração das funções
 void fase2_init(ALLEGRO_DISPLAY* tela);					// Função de inicialização da fase 2
 void fase2_gameplay_update(ALLEGRO_DISPLAY* tela);		// Função de atualizar os objetos na tela da fase 2
-void fase2_gameplay_draw(GameContext* ctx);				// Função de desenhar os objetos na tela da fase 2
 
 // Telas de informações
 void tela_inicial(GameContext* ctx);
@@ -161,11 +160,15 @@ void fase2(GameContext* ctx) // Função principal da fase 2
 
 			if (jogo_em_inicio()) // Enquanto o jogo está nos frames iniciais
 			{
-				tela_inicial(ctx);
+				tela_inicial(ctx);				
 			}
 			else
 			{
-				fase2_gameplay_draw(ctx);
+				tiros_draw();
+				mouse_draw();
+				soldado_draw(mira_x, mira_y);
+				inimigo_draw(&f2_ctx);				
+				hud_draw(ctx->font, &f2_ctx);
 
 				if (f2_ctx.pause) // Se o jogo estiver em pausa
 				{
@@ -207,7 +210,7 @@ void fase2_init(ALLEGRO_DISPLAY* tela)
 
 	f2_ctx.frames = 0;
 	f2_ctx.score = 0;
-	f2_ctx.background = al_load_bitmap("assets/images/fase2background.png");
+	f2_ctx.background = al_load_bitmap("assets/images/fase2_background.png");
 	must_init(f2_ctx.background, "fase 2 background");
 }
 
@@ -218,15 +221,6 @@ void fase2_gameplay_update(ALLEGRO_DISPLAY* tela)
 	soldado_update();
 	hud_update(&f2_ctx);
 	inimigo_update(&f2_ctx);
-}
-
-void fase2_gameplay_draw(GameContext* ctx)
-{
-	tiros_draw();
-	soldado_draw();
-	inimigo_draw(&f2_ctx);
-	mouse_draw();
-	hud_draw(ctx->font, &f2_ctx);
 }
 
 void tela_inicial(GameContext* ctx)

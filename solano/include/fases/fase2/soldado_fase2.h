@@ -17,6 +17,6 @@ extern SOLDADO soldado;
 
 void soldado_init();
 void soldado_update();
-void soldado_draw();
+void soldado_draw(float mira_x, float mira_y);
 
 #endif

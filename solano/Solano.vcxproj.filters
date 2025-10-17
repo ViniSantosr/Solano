@@ -86,9 +86,6 @@
     <Image Include="assets\images\fase2_background.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="assets\images\fase2background.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="assets\images\spritesheets\navios_spritesheet.png">
       <Filter>Resource Files</Filter>
     </Image>

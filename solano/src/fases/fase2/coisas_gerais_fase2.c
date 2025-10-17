@@ -57,31 +57,31 @@ void calcular_direcao_vel(bool jogador, float origem_x, float origem_y, float al
 
 }
 
-void calcular_direcao(bool jogador, float origem_x, float origem_y, float alvo_x, float alvo_y, float* dx, float* dy)
-{
-	if (jogador)
-	{
-		float dirx = origem_x - alvo_x;
-		float diry = origem_y - alvo_y;
-		float dist = sqrt(dirx * dirx + diry * diry);
-
-		if (dist != 0) {
-			*dx = (dirx / dist) * vel;
-			*dy = (diry / dist) * vel;
-		}
-		else {
-			*dx = 0;
-			*dy = 0;
-		}
-	}
-	else
-	{
-		float dirx = alvo_x - origem_x; // Calcula a distância dos inimigos até o soldado no eixo X
-		float diry = alvo_y - origem_y; // Calcula a distância dos inimigos até o soldado no eixo Y
-		float dist = sqrt(dirx * dirx + diry * diry); // Calcula a distância dos inimigos até o soldado no eixo diagonal, que seria a distância real
-
-		*dx = (dirx / dist) * vel; // Calcula quanto o inimigo deve se mover no eixo X
-		*dy = (diry / dist) * vel; // Calcula quanto o inimigo deve se mover no eixo Y
-	}
-
-}
+//void calcular_direcao(bool jogador, float origem_x, float origem_y, float alvo_x, float alvo_y, float* dx, float* dy)
+//{
+//	if (jogador)
+//	{
+//		float dirx = origem_x - alvo_x;
+//		float diry = origem_y - alvo_y;
+//		float dist = sqrt(dirx * dirx + diry * diry);
+//
+//		if (dist != 0) {
+//			*dx = (dirx / dist) * vel;
+//			*dy = (diry / dist) * vel;
+//		}
+//		else {
+//			*dx = 0;
+//			*dy = 0;
+//		}
+//	}
+//	else
+//	{
+//		float dirx = alvo_x - origem_x; // Calcula a distância dos inimigos até o soldado no eixo X
+//		float diry = alvo_y - origem_y; // Calcula a distância dos inimigos até o soldado no eixo Y
+//		float dist = sqrt(dirx * dirx + diry * diry); // Calcula a distância dos inimigos até o soldado no eixo diagonal, que seria a distância real
+//
+//		*dx = (dirx / dist) * vel; // Calcula quanto o inimigo deve se mover no eixo X
+//		*dy = (diry / dist) * vel; // Calcula quanto o inimigo deve se mover no eixo Y
+//	}
+//
+//}
