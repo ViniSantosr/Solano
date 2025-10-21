@@ -1,7 +1,7 @@
 #include "fases/fase2/tiros_fase2.h"
 
 #pragma region Biblitotecas Externas
-
+#include <stdio.h>
 #include <allegro5/allegro5.h>
 #include <math.h>
 
@@ -126,8 +126,8 @@ void tiros_update()
 	}
 }
 
-bool tiros_collide(bool soldado, float x, float y, float w, float h)
-{
+bool tiros_collide(bool soldado, float x, float y, int w, int h)
+{	
 	for (int i = 0; i < TIROS_N; i++)
 	{
 		// Se o tiro não foi usado 'false'
@@ -135,7 +135,7 @@ bool tiros_collide(bool soldado, float x, float y, float w, float h)
 			continue;
 
 		// Não colidir com a própria nave
-		if (tiros[i].soldado == soldado)
+		if (tiros[i].soldado == soldado)s
 			continue;
 
 		float sw, sh;
@@ -143,6 +143,7 @@ bool tiros_collide(bool soldado, float x, float y, float w, float h)
 		{
 			sw = INIMIGO_TIRO_W;
 			sh = INIMIGO_TIRO_H;
+			printf("W1 - Collide(Tiro): %d\n", w);
 		}
 		else
 		{

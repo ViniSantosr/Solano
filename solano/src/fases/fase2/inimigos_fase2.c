@@ -111,8 +111,8 @@ void inimigo_update(Fase2Context* f2_ctx)
 
 		if (soldado.respawn_timer == 0 && soldado.invencivel_timer == 0)
 		{
-			if (collide(soldado.x, soldado.y, soldado.x + SOLDADO_W, soldado.y + SOLDADO_H, inimigos[i].x, inimigos[i].y, inimigos[i].x + (INIMIGO_W[inimigos[i].tipo]), inimigos[i].y + (INIMIGO_H[inimigos[i].tipo])))
-			{
+			if (collide(soldado.x, soldado.y, soldado.x + SOLDADO_W[soldado.sprite], soldado.y + SOLDADO_H, inimigos[i].x, inimigos[i].y, inimigos[i].x + (INIMIGO_W[inimigos[i].tipo]), inimigos[i].y + (INIMIGO_H[inimigos[i].tipo])))
+			{				
 				soldado.vidas--;
 				soldado.respawn_timer = 90;
 				soldado.invencivel_timer = 180;

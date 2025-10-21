@@ -37,7 +37,6 @@ Fase2Context f2_ctx; // Struct que representa o contexto da fase 2
 
 // Declaração das funções
 void fase2_init(ALLEGRO_DISPLAY* tela);					// Função de inicialização da fase 2
-void fase2_gameplay_update(ALLEGRO_DISPLAY* tela);		// Função de atualizar os objetos na tela da fase 2
 
 // Telas de informações
 void tela_inicial(GameContext* ctx);
@@ -88,7 +87,11 @@ void fase2(GameContext* ctx) // Função principal da fase 2
 
 				// Se o jogo não estiver em pausa ou acabado			
 				if (!f2_ctx.concluido && !f2_ctx.game_over && !f2_ctx.pause) {
-					fase2_gameplay_update(ctx->tela);
+					mouse_apply(ctx->tela);
+					tiros_update();
+					soldado_update();					
+					hud_update(&f2_ctx);					
+					inimigo_update(&f2_ctx);					
 				}
 			}
 
@@ -110,33 +113,42 @@ void fase2(GameContext* ctx) // Função principal da fase 2
 					{
 						f2_ctx.exit_tela = true;
 						ctx->estado_tela = FASE3;
-					}
-
-					if (f2_ctx.game_over) // Se o jogador perdeu
-					{
-						// Reinicia a fase
-					}
-
-					if (f2_ctx.pause) // Se o jogo estiver em pausa
-					{
-						f2_ctx.pause = false; // Retoma o jogo
-					}
+					}										
 				}
 
 
 				if (tecla[ALLEGRO_KEY_ESCAPE])
-				{
-					if (f2_ctx.pause) // Se o jogo já estiver em pausa
+				{					
+					if (f2_ctx.pause) // Se o jogo não estiver em pausa
 					{
-						f2_ctx.exit_tela = true;
-						ctx->estado_tela = TELA_MENU;
+						f2_ctx.pause = false; 
 					}
-					else // Se o jogo não estiver em pausa
+					else 
 					{
 						f2_ctx.pause = true; // Coloca o jogo em pausa
 					}
 
 					if (f2_ctx.concluido || f2_ctx.game_over)
+					{
+						f2_ctx.exit_tela = true;
+						ctx->estado_tela = TELA_MENU;
+					}
+				}
+
+				if (tecla[ALLEGRO_KEY_R]) // Reinicia a fase
+				{					
+
+					if (f2_ctx.pause || f2_ctx.game_over || f2_ctx.concluido)
+					{
+						f2_ctx.exit_tela = true;
+						ctx->estado_tela = FASE2;
+					}
+
+				}
+
+				if (tecla[ALLEGRO_KEY_Q])
+				{
+					if (f2_ctx.pause) // Se o jogo já estiver em pausa
 					{
 						f2_ctx.exit_tela = true;
 						ctx->estado_tela = TELA_MENU;
@@ -165,8 +177,8 @@ void fase2(GameContext* ctx) // Função principal da fase 2
 			else
 			{
 				tiros_draw();
-				mouse_draw();
-				soldado_draw(mira_x, mira_y);
+				mouse_draw();								
+				soldado_draw();				
 				inimigo_draw(&f2_ctx);				
 				hud_draw(ctx->font, &f2_ctx);
 
@@ -214,15 +226,6 @@ void fase2_init(ALLEGRO_DISPLAY* tela)
 	must_init(f2_ctx.background, "fase 2 background");
 }
 
-void fase2_gameplay_update(ALLEGRO_DISPLAY* tela)
-{
-	mouse_apply(tela);
-	tiros_update();
-	soldado_update();
-	hud_update(&f2_ctx);
-	inimigo_update(&f2_ctx);
-}
-
 void tela_inicial(GameContext* ctx)
 {		
 	TextosConfigs textos[3] =
@@ -261,34 +264,27 @@ void tela_pause(ALLEGRO_FONT* font)
 	al_draw_text(
 		font,
 		al_map_rgb_f(1, 1, 1),
-		CANVAS_W / 3.5, CANVAS_H / 2,
-		ALLEGRO_ALIGN_CENTER,
-		"Space ->"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1.0, 0.5, 0),
 		CANVAS_W / 2, CANVAS_H / 2,
 		ALLEGRO_ALIGN_CENTER,
-		"Retomar"
-	);
+		"Esc -> Retomar"
+	);	
 
 	al_draw_text(
 		font,
 		al_map_rgb_f(1, 1, 1),
-		CANVAS_W / 3.5, CANVAS_H / 1.8,
+		CANVAS_W / 2, CANVAS_H / 1.8,
 		ALLEGRO_ALIGN_CENTER,
-		"Esc   ->"
-	);
+		"R -> Reiniciar a fase"
+	);	
 
 	al_draw_text(
 		font,
-		al_map_rgb_f(1.0, 0.5, 0),
-		CANVAS_W / 1.5, CANVAS_H / 1.8,
+		al_map_rgb_f(1, 1, 1),
+		CANVAS_W / 2, CANVAS_H / 1.6,
 		ALLEGRO_ALIGN_CENTER,
-		"Volta a tela de menu"
+		"Q -> Volta a tela de menu"
 	);
+	
 }
 
 void tela_game_over(ALLEGRO_FONT* font)
@@ -311,7 +307,7 @@ void tela_game_over(ALLEGRO_FONT* font)
 		al_map_rgb_f(1, 0.2, 0.2),
 		CANVAS_W / 2, CANVAS_H / 2,
 		ALLEGRO_ALIGN_CENTER,
-		"Space -> Reiniciar"
+		"R -> Reiniciar a fase"
 	);
 
 	al_draw_text(
@@ -350,6 +346,14 @@ void tela_concluido(ALLEGRO_FONT* font)
 		font,
 		al_map_rgb_f(0, 1, 0),
 		CANVAS_W / 2, CANVAS_H / 1.8,
+		ALLEGRO_ALIGN_CENTER,
+		"R -> Reiniciar a fase"
+	);
+
+	al_draw_text(
+		font,
+		al_map_rgb_f(0, 1, 0),
+		CANVAS_W / 2, CANVAS_H / 1.6,
 		ALLEGRO_ALIGN_CENTER,
 		"Esc -> Volta a tela de menu"
 	);

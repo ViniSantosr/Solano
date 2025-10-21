@@ -5,12 +5,13 @@
 #pragma endregion
 
 #pragma region Headers Game
-#include "configs/sprites/soldados_dimensions.h"
-#include "configs/sprites/navios_dimensions.h"
 #include "main.h"
 #pragma endregion
 
+#include "configs/sprites/soldados_dimensions.h"
 #include "core/sprites/soldados_sprites.h"
+
+const int SOLDADO_W[] = { 34, 32, 33, 35 };
 
 const int INIMIGO_W[] = { 14, 13, 45 };
 const int INIMIGO_H[] = { 9, 10, 27 };
@@ -24,7 +25,10 @@ void sprites_soldados_init()
 	must_init(sprites._tutorial_sheet, "_tutorial_sheet");
 	must_init(sprites._soldados_sheet, "_soldados_sheet");	
 
-	sprites.soldado = sprite_grab(sprites._soldados_sheet, 0, 0, SOLDADO_W, SOLDADO_H);
+	sprites.soldado[CIMA] = sprite_grab(sprites._soldados_sheet, 36, 0, SOLDADO_W[CIMA], SOLDADO_H);
+	sprites.soldado[BAIXO] = sprite_grab(sprites._soldados_sheet, 109, 0, SOLDADO_W[BAIXO], SOLDADO_H);
+	sprites.soldado[ESQUERDA] = sprite_grab(sprites._soldados_sheet, 0, 0, SOLDADO_W[ESQUERDA], SOLDADO_H);
+	sprites.soldado[DIREITA] = sprite_grab(sprites._soldados_sheet, 72, 0, SOLDADO_W[DIREITA], SOLDADO_H);
 
 	sprites.soldado_tiros[0] = sprite_grab(sprites._tutorial_sheet, 13, 0, SOLDADO_TIRO_W, SOLDADO_TIRO_H);
 	sprites.soldado_tiros[1] = sprite_grab(sprites._tutorial_sheet, 16, 0, SOLDADO_TIRO_W, SOLDADO_TIRO_H);
@@ -56,7 +60,10 @@ void sprites_soldados_init()
 
 void sprites_soldados_deinit()
 {
-	al_destroy_bitmap(sprites.soldado);
+	al_destroy_bitmap(sprites.soldado[CIMA]);
+	al_destroy_bitmap(sprites.soldado[BAIXO]);
+	al_destroy_bitmap(sprites.soldado[ESQUERDA]);
+	al_destroy_bitmap(sprites.soldado[DIREITA]);
 
 	al_destroy_bitmap(sprites.soldado_tiros[0]);
 	al_destroy_bitmap(sprites.soldado_tiros[1]);

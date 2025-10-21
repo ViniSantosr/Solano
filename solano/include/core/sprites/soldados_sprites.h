@@ -8,7 +8,8 @@ typedef struct SPRITES_SOLDADOS {
 	ALLEGRO_BITMAP* _tutorial_sheet;
 	ALLEGRO_BITMAP* _soldados_sheet;	
 
-	ALLEGRO_BITMAP* soldado;
+	ALLEGRO_BITMAP* soldado[4];
+
 	ALLEGRO_BITMAP* soldado_tiros[2];
 	ALLEGRO_BITMAP* vida;
 
@@ -22,6 +23,13 @@ typedef struct SPRITES_SOLDADOS {
 		ALLEGRO_BITMAP* powerup[4];
 	*/
 } SPRITES_SOLDADOS;
+
+typedef enum DIR_SOLDADO {
+	CIMA,
+	BAIXO,
+	ESQUERDA,
+	DIREITA
+};
 
 // Declaração externa da variável global
 extern SPRITES_SOLDADOS sprites;

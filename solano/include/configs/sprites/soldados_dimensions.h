@@ -1,11 +1,9 @@
 #ifndef SOLDADOS_DIMENSIONS_H
 #define SOLDADOS_DIMENSIONS_H
 
-#define SOLDADO_W	36
-#define SOLDADO_H	46
+#define SOLDADO_H	43
 
-#define SOLDADO_TESTE_W 576
-#define SOLDADO_TESTE_ 636
+extern const int SOLDADO_W[];
 
 #define SOLDADO_TIRO_W	2
 #define SOLDADO_TIRO_H	9
