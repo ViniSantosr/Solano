@@ -1,11 +1,15 @@
 
-#include "fases/fase2/mouse_fase2.h"
-
+#pragma region Biblitotecas Externas
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
+#pragma endregion
 
+#pragma region Headers Game
 #include "configs/config_tela.h"
+#pragma endregion
+
+#include "fases/fase2/mouse_fase2.h"
 
 ALLEGRO_MOUSE_STATE mouse_state;
 //ALLEGRO_BITMAP* mira;
@@ -36,6 +40,8 @@ void mouse_update(ALLEGRO_EVENT* event)
 	case ALLEGRO_EVENT_MOUSE_AXES:
 		mira_dx += event->mouse.dx;
 		mira_dy += event->mouse.dy;
+
+
 
 		break;
 	}

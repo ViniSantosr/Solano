@@ -2,6 +2,7 @@
 #define INIMIGOS_FASE2_H
 
 #include <allegro5/allegro5.h>
+#include "fase2.h"
 
 typedef enum TIPO_INIMIGO
 {
@@ -25,7 +26,7 @@ typedef struct INIMIGO
 INIMIGO inimigos[INIMIGOS_N];
 
 void inimigo_init();
-void inimigo_update();
-void inimigo_draw();
+void inimigo_update(Fase2Context* f2_ctx);
+void inimigo_draw(Fase2Context* f2_ctx);
 
 #endif

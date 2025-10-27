@@ -1,14 +1,18 @@
-#include "fases/fase2/inimigos_fase2.h"
 
-#include <math.h>
-#include <stdio.h>
+#pragma region Biblitotecas Externas
+	#include <math.h>
+	#include <stdio.h>
+#pragma endregion
 
-#include "configs/sprites/config_sprites_soldados.h"
-#include "core/sprites/sprites_soldados.h"
+#pragma region Headers Game
+#include "configs/sprites/soldados_dimensions.h"
 #include "configs/config_tela.h"
+
 #include "fases/fase2/coisas_gerais_fase2.h"
 #include "fases/fase2/tiros_fase2.h"
-#include "fases/fase2/soldado_fase2.h"
+#pragma endregion
+
+#include "fases/fase2/inimigos_fase2.h"
 
 INIMIGO inimigos[INIMIGOS_N];
 
@@ -20,10 +24,10 @@ void inimigo_init()
 	}
 }
 
-void inimigo_update()
+void inimigo_update(Fase2Context* f2_ctx)
 {
 	int nova_onda = 0;
-	if (frames % 120 == 0) // A cada 120 frames, será gerado uma nova onda, dá para criar niveis de ondas?
+	if (f2_ctx->frames % 120 == 0) // A cada 120 frames, será gerado uma nova onda, dá para criar niveis de ondas?
 		nova_onda = between(1, 3);
 
 	float new_x = between_f(-60, CANVAS_W + 60); // Posição aleatória dos inimigos no eixo X	
@@ -126,15 +130,15 @@ void inimigo_update()
 			switch (inimigos[i].tipo)
 			{
 			case INIMIGO_MENOR:
-				score += 200;
+				f2_ctx->score += 200;
 				break;
 
 			case INIMIGO_SOLDADO:
-				score += 150;
+				f2_ctx->score += 150;
 				break;
 
 			case INIMIGO_SNIPER:
-				score += 800;
+				f2_ctx->score += 800;
 				/*fx_add(false, cx - 10, cy - 4);
 				fx_add(false, cx + 4, cy + 10);
 				fx_add(false, cx + 8, cy + 8);*/
@@ -170,7 +174,7 @@ void inimigo_update()
 	}
 }
 
-void inimigo_draw()
+void inimigo_draw(Fase2Context* f2_ctx)
 {
 	for (int i = 0; i < INIMIGOS_N; i++)
 	{

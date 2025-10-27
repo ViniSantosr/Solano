@@ -1,19 +1,32 @@
+
+#pragma region Biblitotecas Externas
+#include <stdbool.h>
+#include <stdio.h>
+
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_ttf.h>
+#pragma endregion
 
-#include "configs/globals.h"
-#include "core/tela.h"
-#include "core/tela_menu.h"
+#pragma region Headers Game
+#include "configs/config_tela.h"
+#include "telas/tela_menu.h"
 #include "fases/fase2/fase2.h"
-#include "core/must_init.h"
+#pragma endregion
+
+#include "main.h"
 
 GameContext ctx;
 
 void inicializar_game();
+void finalizar_game();
+void tela_init();
+void must_init(bool test, const char* description);
+ALLEGRO_BITMAP* sprite_grab(ALLEGRO_BITMAP* sheet, int x, int y, int w, int h);
 
 int main()
 {
@@ -26,19 +39,16 @@ int main()
 		case TELA_MENU:
 			tela_menu(&ctx);
 			break;
-			/*case FASE1:
-				fase1(&ctx);*/
-			break;
+		/*case FASE1:
+			fase1(&ctx);
+			break;*/
 		case FASE2:
-			fase2(tela, &ctx);
+			fase2(&ctx);
 			break;
 		}
 	}
 
-	al_destroy_font(ctx.font);
-	tela_destroy();
-	al_destroy_timer(ctx.timer);
-	al_destroy_event_queue(ctx.queue);
+	finalizar_game();
 
 	return 0;
 }
@@ -49,6 +59,10 @@ void inicializar_game()
 	must_init(al_init(), "allegro");
 	must_init(al_install_keyboard(), "teclado");
 	must_init(al_install_mouse(), "mouse");
+	must_init(al_init_font_addon(), "font addon");
+	must_init(al_init_image_addon(), "image addon");
+	must_init(al_init_ttf_addon(), "ttf addon");
+
 
 	ctx.timer = al_create_timer(1.0 / 60.0);
 	must_init(ctx.timer, "timer");
@@ -56,19 +70,27 @@ void inicializar_game()
 	ctx.queue = al_create_event_queue();
 	must_init(ctx.queue, "queue");
 
-	ctx.font = al_create_builtin_font();
-	must_init(ctx.font, "font");
-
 	tela_init();
 
-	al_set_window_title(tela, "Solano: A guerrra do Paraguai");
+	al_set_window_title(ctx.tela, "Solano: A guerra do Paraguai");
+	
+	ctx.font = al_load_ttf_font("assets/fonts/font_titulo.ttf", 10, 0);
+	must_init(ctx.font, "font");
+	
+	ctx.font_titulo = al_load_ttf_font("assets/fonts/font_titulo.ttf", 80, 0);
+	must_init(ctx.font_titulo, "font_titulo");
+	
+	ctx.font_subtitulo = al_load_ttf_font("assets/fonts/font_titulo.ttf", 20, 0);
+	must_init(ctx.font_subtitulo, "font_subtitulo");
 
-	must_init(al_init_image_addon(), "image");
+	ctx.background_menu = al_load_bitmap("assets/images/background_menu.bmp");
+	must_init(ctx.background_menu, "background_menu");
+
 	must_init(al_init_primitives_addon(), "primitives");
 
 	al_register_event_source(ctx.queue, al_get_keyboard_event_source());
 	al_register_event_source(ctx.queue, al_get_mouse_event_source());
-	al_register_event_source(ctx.queue, al_get_display_event_source(tela));
+	al_register_event_source(ctx.queue, al_get_display_event_source(ctx.tela));
 	al_register_event_source(ctx.queue, al_get_timer_event_source(ctx.timer));
 
 	al_start_timer(ctx.timer);
@@ -76,4 +98,59 @@ void inicializar_game()
 	ctx.estado_tela = TELA_MENU;
 
 	ctx.exit_program = false;
+
+	ctx.cores.preto = al_map_rgb(0, 0, 0);
+	ctx.cores.branco = al_map_rgb(255, 255, 255);
+	ctx.cores.verde = al_map_rgb(100, 200, 80);
+	ctx.cores.amarelo = al_map_rgb(255, 200, 50);
 }
+
+void finalizar_game()
+{
+	al_destroy_font(ctx.font);
+	al_destroy_bitmap(ctx.canvas);
+	al_destroy_display(ctx.tela);
+	al_destroy_timer(ctx.timer);
+	al_destroy_event_queue(ctx.queue);
+	al_destroy_font(ctx.font_titulo);
+	al_destroy_font(ctx.font_subtitulo);
+	al_destroy_bitmap(ctx.background_menu);
+}
+
+void tela_init()
+{
+	if (TELA_FULLSCREEN)
+		al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
+
+	al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
+	al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
+
+	ctx.tela = al_create_display(TELA_WINDOW_W, TELA_WINDOW_H);
+	must_init(ctx.tela, "tela");
+
+	ctx.canvas = al_create_bitmap(CANVAS_W, CANVAS_H);
+	must_init(ctx.canvas, "bitmap buffer (canvas do jogo)");
+
+
+	al_identity_transform(&ctx.transform);
+	al_scale_transform(&ctx.transform,
+		TELA_FULLSCREEN ? TELA_FULLSCREEN_SCALE_X : TELA_WINDOW_SCALE_X,
+		TELA_FULLSCREEN ? TELA_FULLSCREEN_SCALE_Y : TELA_WINDOW_SCALE_Y);
+	al_use_transform(&ctx.transform);
+}
+
+void must_init(bool test, const char* description)
+{
+	if (test) return;
+
+	fprintf(stderr, "Não pode ser inicializado: %s\n", description);
+	exit(1);
+}
+
+ALLEGRO_BITMAP* sprite_grab(ALLEGRO_BITMAP* sheet, int x, int y, int w, int h)
+{
+	ALLEGRO_BITMAP* sprite = al_create_sub_bitmap(sheet, x, y, w, h);
+	must_init(sprite, "sprite grab");
+	return sprite;
+}
+

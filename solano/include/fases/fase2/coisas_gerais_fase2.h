@@ -3,9 +3,6 @@
 
 #include <allegro5/allegro5.h>
 
-extern long frames;
-extern long score;
-
 int between(int lo, int hi);
 float between_f(float lo, float hi);
 bool collide(float ax1, float ay1, float ax2, float ay2, float bx1, float by1, float bx2, float by2);

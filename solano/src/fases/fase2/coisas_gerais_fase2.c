@@ -1,11 +1,10 @@
 
-#include "fases/fase2/coisas_gerais_fase2.h"
-
+#pragma region Biblitotecas Externas
 #include <allegro5/allegro5.h>
 #include <math.h>
+#pragma endregion
 
-long frames;
-long score;
+#include "fases/fase2/coisas_gerais_fase2.h"
 
 // Apenas uma função para gerar um número inteiro aleatório
 int between(int lo, int hi)
