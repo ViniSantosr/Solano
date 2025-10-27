@@ -26,8 +26,8 @@ int main()
 		case TELA_MENU:
 			tela_menu(&ctx);
 			break;
-		/*case FASE1:
-			fase1(&ctx);*/
+			/*case FASE1:
+				fase1(&ctx);*/
 			break;
 		case FASE2:
 			fase2(tela, &ctx);

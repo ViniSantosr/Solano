@@ -4,6 +4,9 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
 
+#define EXPLOSION_FRAMES 4
+#define SPARKS_FRAMES 3
+
 typedef struct SPRITES {
 	ALLEGRO_BITMAP* _sheet;
 
@@ -14,16 +17,18 @@ typedef struct SPRITES {
 
 	ALLEGRO_BITMAP* inimigo[3];
 	ALLEGRO_BITMAP* inimigo_tiro;
-	/*
+	
 		ALLEGRO_BITMAP* explosion[EXPLOSION_FRAMES];
 		ALLEGRO_BITMAP* sparks[SPARKS_FRAMES];
 
 		ALLEGRO_BITMAP* powerup[4];
-	*/
+	
 } SPRITES;
 
 // Declaração externa da variável global
 extern SPRITES sprites;
+
+
 
 ALLEGRO_BITMAP* sprite_grab(int x, int y, int w, int h);
 

@@ -5,11 +5,13 @@
 
 #include "configs/config_tela.h"
 #include "configs/sprites/config_sprites_soldados.h"
-#include "core/sprites/sprites_soldados.h"
+#include "core/sprites/sprites_fase2.h"
 #include "fases/fase2/coisas_gerais_fase2.h"
 #include "fases/fase2/soldado_fase2.h"
 #include "core/must_init.h"
+#include <core/sprites/sprites_soldados.h>
 
+//SPRITES sprites;
 
 long score_display;
 
