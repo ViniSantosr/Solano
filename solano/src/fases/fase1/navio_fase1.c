@@ -5,9 +5,9 @@
 #include "fases/fase1/tiros_fase1.h"               // Para shots_add e shots_collide
 #include "core/Efeitos/efeito_gerais.h"             // Para fx_add
 #include "configs/config_tela.h"          // Para BUFFER_W e BUFFER_H
-#include "core/tela.h"             // Para BUFFER_W, BUFFER_H
+#include "core/draw_tela.h"             // Para BUFFER_W, BUFFER_H
 #include "fases/fase1/navio_fase1.h"          // Se você tiver constantes como SHIP_W, SHIP_H, SHIP_SPEED, SHIP_MAX_X/Y
-#include "core/inputs/teclado.h"
+#include "core/teclado.h"
 
 SPRITES_N sprites_n;// declara o struct de sprites para ser utilizado
 

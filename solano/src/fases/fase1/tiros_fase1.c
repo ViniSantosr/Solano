@@ -4,7 +4,7 @@
 #include "core/Efeitos/efeito_gerais.h"       // Para fx_add()
 #include "fases/fase1/tiros_fase1.h"        
 //#include "efeitos.c"
-#include "core/tela.h"
+#include "core/draw_tela.h"
 #include <allegro5/allegro_audio.h>0
 #include "configs/config_tela.h"
 

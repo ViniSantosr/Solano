@@ -17,9 +17,10 @@
 
 #pragma region Headers Game
 // Headers que não fazem parte exclusivamente da fase 2
+#include "core/draw_tela.h"
 #include "configs/config_tela.h"
 #include "configs/sprites/soldados_dimensions.h"
-#include "core/draw_tela.h"
+
 #include "core/teclado.h"
 #include "core/sprites/soldados_sprites.h"
 

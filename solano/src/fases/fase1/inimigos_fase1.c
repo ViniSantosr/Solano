@@ -1,12 +1,16 @@
 #include <allegro5/allegro.h>        // Base da Allegro (tipos, funções principais)
 #include <allegro5/allegro_primitives.h> // Para desenhar bitmaps
-#include "core/tela.h"
+#include "core/draw_tela.h"
 #include "configs/config_tela.h"                    // Usa BUFFER_W e BUFFER_H
 #include "fases/fase2/coisas_gerais_fase2.h"            // Usa frames, score, must_init(), between()
 #include "core/Efeitos/efeito_gerais.h"                   // Usa fx_add()
 #include "fases/fase1/tiros_fase1.h"                   // Usa shots_add(), shots_collide()
 #include "fases/fase1/inimigos_fase1.h"                  // Define o struct ALIEN e o array aliens[]
 #include "core/sprites/sprites_fase2.h"             // Usa sprites.alien[...] para desenhar
+#include <fases/fase1/fase1.h>
+
+Fase1Context f1_ctx;
+
 
 const int ALIEN_W[] = { 14, 13, 45 };
 const int ALIEN_H[] = { 9, 10, 27 };
@@ -21,7 +25,7 @@ void aliens_init()//inicializa os aliens colocando todas posições em não usados
 void aliens_update()//função responsavel por atualizar o estado dos aliens
 {
     int new_quota = //se entendi direito ele decide quantos aliens novos vão spawnar
-        (frames % 120)
+        (f1_ctx.frames % 120)
         ? 0
         : between(2, 4)// de 2 a 4 aliens novos se spawnam a cada 120 frames
         ;
@@ -71,7 +75,7 @@ void aliens_update()//função responsavel por atualizar o estado dos aliens
         switch (aliens[i].type)//essa parte da função é responsavel por mover os aliens de acordo com o seu tipo, dando a eles uma velocidade diferente entre si
         {
         case ALIEN_TYPE_BUG:
-            if (frames % 2)
+            if (f1_ctx.frames % 2)
                 aliens[i].y++;
             if (aliens[i].volta) {
                 aliens[i].x++;
@@ -106,7 +110,7 @@ void aliens_update()//função responsavel por atualizar o estado dos aliens
             break;
 
         case ALIEN_TYPE_THICCBOI:
-            if (!(frames % 4))
+            if (!(f1_ctx.frames % 4))
                 aliens[i].y++;
 
             break;
@@ -137,15 +141,15 @@ void aliens_update()//função responsavel por atualizar o estado dos aliens
             switch (aliens[i].type)
             {
             case ALIEN_TYPE_BUG:
-                score += 200;
+                f1_ctx.score += 200;
                 break;
 
             case ALIEN_TYPE_ARROW:
-                score += 150;
+                f1_ctx.score += 150;
                 break;
 
             case ALIEN_TYPE_THICCBOI:
-                score += 800;
+                f1_ctx.score += 800;
                 fx_add(false, cx - 10, cy - 4);
                 fx_add(false, cx + 4, cy + 10);
                 fx_add(false, cx + 8, cy + 8);

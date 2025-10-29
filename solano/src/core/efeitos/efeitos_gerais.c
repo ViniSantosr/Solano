@@ -7,7 +7,7 @@
 #include "fases/fase2/coisas_gerais_fase2.h"              // must_init e funções utilitárias gerais
 #include "core/sprites/sprites_fase2.h"   
 #include "core/Efeitos/efeito_gerais.h"
-#include "core/must_init.h"
+#include "main.h"
 
 ALLEGRO_SAMPLE* sample_shot;
 ALLEGRO_SAMPLE* sample_explode[2];

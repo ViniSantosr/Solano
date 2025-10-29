@@ -169,8 +169,15 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\efeitos\efeitos_gerais.c" />
     <ClCompile Include="src\core\sprites\navios_sprites.c" />
+    <ClCompile Include="src\core\sprites\sprites_fase2.c" />
+    <ClCompile Include="src\fases\fase1\coisas_gerais_fase1.c" />
     <ClCompile Include="src\fases\fase1\fase1.c" />
+    <ClCompile Include="src\fases\fase1\hud_fase1.c" />
+    <ClCompile Include="src\fases\fase1\inimigos_fase1.c" />
+    <ClCompile Include="src\fases\fase1\navio_fase1.c" />
+    <ClCompile Include="src\fases\fase1\tiros_fase1.c" />
     <ClCompile Include="src\telas\tela_menu.c" />
     <ClCompile Include="src\fases\fase2\coisas_gerais_fase2.c" />
     <ClCompile Include="src\fases\fase2\hud_fase2.c" />
@@ -189,6 +196,8 @@
     <None Include="assets\sounds\explode2.flac" />
     <None Include="assets\sounds\music.opus" />
     <None Include="assets\sounds\shot.flac" />
+    <None Include="build\obj\Debug\Solano.tlog\CL.command.1.tlog" />
+    <None Include="build\obj\Debug\Solano.tlog\link.command.1.tlog" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -202,11 +211,22 @@
     <Image Include="assets\images\spritesheets\navios_spritesheet.png" />
     <Image Include="assets\images\spritesheets\tutorial_spritesheet.png" />
     <Image Include="assets\images\spritesheets\soldados_spritesheet.png" />
+    <Image Include="build\Release\assets\images\fase1_background.png" />
+    <Image Include="build\Release\assets\images\fase2background.png" />
+    <Image Include="build\Release\assets\images\fase2_background.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\configs\config_tela.h" />
     <ClInclude Include="include\configs\sprites\navios_dimensions.h" />
+    <ClInclude Include="include\core\Efeitos\efeito_gerais.h" />
     <ClInclude Include="include\core\sprites\navios_sprites.h" />
+    <ClInclude Include="include\core\sprites\sprites_fase2.h" />
+    <ClInclude Include="include\fases\fase1\coisas_gerais_fase1.h" />
+    <ClInclude Include="include\fases\fase1\fase1.h" />
+    <ClInclude Include="include\fases\fase1\hud_fase1.h" />
+    <ClInclude Include="include\fases\fase1\inimigos_fase1.h" />
+    <ClInclude Include="include\fases\fase1\navio_fase1.h" />
+    <ClInclude Include="include\fases\fase1\tiros_fase1.h" />
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\configs\sprites\soldados_dimensions.h" />
     <ClInclude Include="include\telas\tela_menu.h" />

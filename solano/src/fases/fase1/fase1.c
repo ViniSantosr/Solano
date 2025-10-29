@@ -12,20 +12,21 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_color.h>
 
-#include "core/tela.h"
+#include <fases/fase1/fase1.h>
+#include "core/draw_tela.h"
 #include "configs/config_tela.h"
-#include "core/inputs/teclado.h"
-//#include "fases/fase1/mouse_fase2.h"
-#include "core/sprites/sprites_soldados.h"
-#include "configs/sprites/config_sprites_soldados.h"
+#include "core/teclado.h"
+#include "main.h"
 #include "fases/fase1/tiros_fase1.h"
 #include "fases/fase1/navio_fase1.h"
 #include "fases/fase1/inimigos_fase1.h"
 #include "fases/fase1/hud_fase1.h"
 #include "fases/fase1/coisas_gerais_fase1.h"
 #include "fases/fase2/coisas_gerais_fase2.h"
-#include "core/must_init.h"
 #include "core/efeitos/efeito_gerais.h"
+
+Fase1Context f1_ctx;
+GameContext ctx;
 
 int mainwow()
 {
@@ -43,7 +44,7 @@ int mainwow()
     audio_init();
 
     must_init(al_init_image_addon(), "image");
-    sprites_init();
+    iniciar_sprites();
 
     iniciar_hud();
 
@@ -54,7 +55,7 @@ int mainwow()
     must_init(al_reserve_samples(16), "reserve samples");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
-    al_register_event_source(queue, al_get_display_event_source(tela));
+    al_register_event_source(queue, al_get_display_event_source(ctx.tela));
     al_register_event_source(queue, al_get_timer_event_source(timer));
 
     teclado_init();
@@ -63,8 +64,8 @@ int mainwow()
     ship_init();
     aliens_init();
 
-    frames = 0;
-    score = 0;
+    f1_ctx.frames = 0;
+    f1_ctx.score = 0;
 
     bool done = false;
     bool redraw = true;
@@ -90,7 +91,7 @@ int mainwow()
                 done = true;
 
             redraw = true;
-            frames++;
+            f1_ctx.frames++;
             break;
 
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -105,7 +106,7 @@ int mainwow()
 
         if (redraw && al_is_event_queue_empty(queue))
         {
-            tela_pre_draw();
+            tela_pre_draw(ctx.canvas);
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
             
@@ -116,15 +117,15 @@ int mainwow()
 
             desenhar_hud();
 
-            tela_pos_draw();
+            tela_pos_draw(ctx.canvas, ctx.tela);
             redraw = false;
         }
     }
 
-    sprites_deinit();
+    destruir_sprites();
     hud_deinit();
     audio_deinit();
-    tela_destroy();
+    //tela_destroy();
     al_destroy_timer(timer);
     al_destroy_event_queue(queue);
 

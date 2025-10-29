@@ -49,7 +49,7 @@ extern SPRITES_N sprites_n;
 
 ALLEGRO_BITMAP* cortar_sprites(int x, int y, int w, int h);
 void iniciar_sprites();
-void destruit_sprites();
+void destruir_sprites();
 
 
 

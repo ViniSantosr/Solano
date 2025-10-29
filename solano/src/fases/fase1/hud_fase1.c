@@ -1,12 +1,15 @@
-#include "core/tela.h"
+#include "core/draw_tela.h"
 #include "configs/config_tela.h"
 #include "core/sprites/sprites_fase2.h"  // para sprites.life
 #include "fases/fase1/hud_fase1.h"      // declarações de font e score_display
 #include "fases/fase2/coisas_gerais_fase2.h"     // para must_init()
 #include "fases/fase1/navio_fase1.h" 
-#include "core/must_init.h"
+#include "main.h"
+#include <fases/fase1/fase1.h>
 
+Fase1Context f1_ctx;
 long score_display;
+
 
 void iniciar_hud()//inicia o hud 
 {
@@ -23,13 +26,13 @@ void hud_deinit()//destroi o hud após a utilização
 
 void atualizar_hud()//faz o update continuo do hud
 {
-    if (frames % 2)//faz o update uma vez a cada frames % 2
+    if (f1_ctx.frames % 2)//faz o update uma vez a cada frames % 2
         return;
 
     for (long i = 5; i > 0; i--)
     {
         long diff = 1 << i;//não entendi legal não, preciso perguntar depois
-        if (score_display <= (score - diff))
+        if (score_display <= (f1_ctx.score - diff))
             score_display += diff;
     }
 }
