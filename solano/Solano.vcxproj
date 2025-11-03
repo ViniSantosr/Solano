@@ -170,6 +170,7 @@
   <ItemGroup>
     <ClCompile Include="src\core\sprites\navios_sprites.c" />
     <ClCompile Include="src\fases\fase1\fase1.c" />
+    <ClCompile Include="src\telas\telas_gameplay.c" />
     <ClCompile Include="src\telas\tela_menu.c" />
     <ClCompile Include="src\fases\fase2\coisas_gerais_fase2.c" />
     <ClCompile Include="src\fases\fase2\hud_fase2.c" />
@@ -207,6 +208,7 @@
     <ClInclude Include="include\core\sprites\navios_sprites.h" />
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\configs\sprites\soldados_dimensions.h" />
+    <ClInclude Include="include\telas\telas_gameplay.h" />
     <ClInclude Include="include\telas\tela_menu.h" />
     <ClInclude Include="include\fases\fase2\coisas_gerais_fase2.h" />
     <ClInclude Include="include\fases\fase2\hud_fase2.h" />
@@ -221,6 +223,9 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\fonts\font_titulo.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\fases\fase5\fase5.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

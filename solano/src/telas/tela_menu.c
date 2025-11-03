@@ -1,4 +1,4 @@
-﻿
+
 #pragma region Biblitotecas Externas
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,10 +23,10 @@ MenuContext menu_ctx;
 
 BotoesConfig botoes_configs[BOTOES_N] = // Array que armazena todos os botões e as suas específicações
 {
-	{ "->Novo Jogo",  CANVAS_W / 3.7, CANVAS_H / 1.9 },
-	{ "->Opcoes",     CANVAS_W / 3.9, CANVAS_H / 1.75 },
-	{ "->Creditos",   CANVAS_W / 3.7, CANVAS_H / 1.6 },
-	{ "->Sair",       CANVAS_W / 4.0, CANVAS_H / 1.45 }
+	{ "->Novo Jogo",  CANVAS_W / 3.375, CANVAS_H / 1.9 },
+	{ "->Opções",     CANVAS_W / 3.5, CANVAS_H / 1.745 },
+	{ "->Créditos",   CANVAS_W / 3.4, CANVAS_H / 1.62 },
+	{ "->Sair",       CANVAS_W / 3.7, CANVAS_H / 1.45 }
 };
 
 void inicializar_menu();
@@ -68,7 +68,7 @@ int tela_menu(GameContext* ctx)
 			case ALLEGRO_KEY_DOWN:
 			case ALLEGRO_KEY_S:// seta para baixo
 				selected++;
-				if (selected > BOTOES_N) selected = 0; // volta para o início
+				if (selected >= BOTOES_N) selected = 0; // volta para o início
 				break;
 
 			case ALLEGRO_KEY_UP: // seta para cima
@@ -101,7 +101,6 @@ int tela_menu(GameContext* ctx)
 			break;
 		}
 
-
 		if (desenhar && al_is_event_queue_empty(ctx->queue))
 		{
 			tela_pre_draw(ctx->canvas);
@@ -132,15 +131,15 @@ void inicializar_menu()
 
 void titulo(GameContext* ctx, int selected, int time)
 {
-	al_draw_text(ctx->font_titulo, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 4 + 2, ALLEGRO_ALIGN_CENTER, menu_ctx.titulo);
-	al_draw_text(ctx->font_titulo, ctx->cores.amarelo,
-		CANVAS_W / 2, CANVAS_H / 4, ALLEGRO_ALIGN_CENTER, menu_ctx.titulo);
+	al_draw_text(ctx->fonts.font_titulo, ctx->cores.preto,
+		CANVAS_W / 2 + 2, CANVAS_H / 7 + 2, ALLEGRO_ALIGN_CENTER, menu_ctx.titulo);
+	al_draw_text(ctx->fonts.font_titulo, ctx->cores.amarelo,
+		CANVAS_W / 2, CANVAS_H / 7, ALLEGRO_ALIGN_CENTER, menu_ctx.titulo);
 
-	al_draw_text(ctx->font_subtitulo, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 2.25 + 2, ALLEGRO_ALIGN_CENTER, menu_ctx.subtitulo);
-	al_draw_text(ctx->font_subtitulo, ctx->cores.verde,
-		CANVAS_W / 2, CANVAS_H / 2.25, ALLEGRO_ALIGN_CENTER, menu_ctx.subtitulo);
+	al_draw_text(ctx->fonts.font_subtitulo, ctx->cores.preto,
+		CANVAS_W / 2 + 2, CANVAS_H / 2.45 + 2, ALLEGRO_ALIGN_CENTER, menu_ctx.subtitulo);
+	al_draw_text(ctx->fonts.font_subtitulo, ctx->cores.verde,
+		CANVAS_W / 2, CANVAS_H / 2.45, ALLEGRO_ALIGN_CENTER, menu_ctx.subtitulo);
 }
 
 void botoes(GameContext* ctx, int selected, int time)
@@ -153,15 +152,15 @@ void botoes(GameContext* ctx, int selected, int time)
 
 void desenhar_botoes(GameContext* ctx, BotoesConfig botao, bool selecionado, int time)
 {
-	int sombra_x = selecionado ? botao.x + 2 : botao.x + 1;
-	int sombra_y = botao.y + 1;
+	int sombra_x = selecionado ? botao.x + 3 : botao.x + 2;
+	int sombra_y = botao.y + 3;
 	const char* texto_sem_seta = botao.texto + 2;
 	ALLEGRO_COLOR cor = selecionado ? ctx->cores.verde : ctx->cores.amarelo;
 
 	if (selecionado && ((time / 25) % 2 == 0))
 		return;
 
-	al_draw_text(ctx->font, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, selecionado ? botao.texto : texto_sem_seta);
-	al_draw_text(ctx->font, cor, botao.x, botao.y, ALLEGRO_ALIGN_CENTER, selecionado ? botao.texto : texto_sem_seta);
+	al_draw_text(ctx->fonts.font, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, selecionado ? botao.texto : texto_sem_seta);
+	al_draw_text(ctx->fonts.font, cor, botao.x, botao.y, ALLEGRO_ALIGN_CENTER, selecionado ? botao.texto : texto_sem_seta);
 
 }

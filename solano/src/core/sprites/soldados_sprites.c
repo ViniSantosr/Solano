@@ -13,8 +13,7 @@
 
 const int SOLDADO_W[] = { 34, 32, 33, 35 };
 
-const int INIMIGO_W[] = { 14, 13, 45 };
-const int INIMIGO_H[] = { 9, 10, 27 };
+const int INIMIGO_W[] = { 34, 32, 33, 35 };
 
 SPRITES_SOLDADOS sprites;
 
@@ -25,19 +24,25 @@ void sprites_soldados_init()
 	must_init(sprites._tutorial_sheet, "_tutorial_sheet");
 	must_init(sprites._soldados_sheet, "_soldados_sheet");	
 
-	sprites.soldado[CIMA] = sprite_grab(sprites._soldados_sheet, 36, 0, SOLDADO_W[CIMA], SOLDADO_H);
-	sprites.soldado[BAIXO] = sprite_grab(sprites._soldados_sheet, 109, 0, SOLDADO_W[BAIXO], SOLDADO_H);
-	sprites.soldado[ESQUERDA] = sprite_grab(sprites._soldados_sheet, 0, 0, SOLDADO_W[ESQUERDA], SOLDADO_H);
-	sprites.soldado[DIREITA] = sprite_grab(sprites._soldados_sheet, 72, 0, SOLDADO_W[DIREITA], SOLDADO_H);
+	sprites.soldado[CIMA] = sprite_grab(sprites._soldados_sheet, 36, 45, INIMIGO_W[CIMA], INIMIGO_H);
+	sprites.soldado[BAIXO] = sprite_grab(sprites._soldados_sheet, 109, 45, INIMIGO_W[BAIXO], INIMIGO_H);
+	sprites.soldado[ESQUERDA] = sprite_grab(sprites._soldados_sheet, 0, 45, INIMIGO_W[ESQUERDA], INIMIGO_H);
+	sprites.soldado[DIREITA] = sprite_grab(sprites._soldados_sheet, 72, 45, INIMIGO_W[DIREITA], INIMIGO_H);	
 
-	sprites.soldado_tiros[0] = sprite_grab(sprites._tutorial_sheet, 13, 0, SOLDADO_TIRO_W, SOLDADO_TIRO_H);
-	sprites.soldado_tiros[1] = sprite_grab(sprites._tutorial_sheet, 16, 0, SOLDADO_TIRO_W, SOLDADO_TIRO_H);
+	sprites.soldado_tiros[0] = sprite_grab(sprites._soldados_sheet, 147, 19, SOLDADO_TIRO_W, 13);
+	sprites.soldado_tiros[1] = sprite_grab(sprites._soldados_sheet, 154, 19, SOLDADO_TIRO_W, 15);
+	sprites.soldado_tiros[2] = sprite_grab(sprites._soldados_sheet, 160, 19, SOLDADO_TIRO_W, SOLDADO_TIRO_H);
 
-	sprites.vida = sprite_grab(sprites._tutorial_sheet, 0, 14, VIDA_W, VIDA_H);
+	sprites.vida = sprite_grab(sprites._soldados_sheet, 148, 0, VIDA_W, VIDA_H);
 
-	sprites.inimigo[0] = sprite_grab(sprites._tutorial_sheet, 19, 0, INIMIGO_MENOR_W, INIMIGO_MENOR_H);
-	sprites.inimigo[1] = sprite_grab(sprites._tutorial_sheet, 19, 10, INIMIGO_ESPADA_W, INIMIGO_ESPADA_H);
-	sprites.inimigo[2] = sprite_grab(sprites._tutorial_sheet, 0, 21, INIMIGO_SNIPER_W, INIMIGO_SNIPER_H);
+	sprites.inimigo[CIMA] = sprite_grab(sprites._soldados_sheet, 36, 0, SOLDADO_W[CIMA], SOLDADO_H);
+	sprites.inimigo[BAIXO] = sprite_grab(sprites._soldados_sheet, 109, 0, SOLDADO_W[BAIXO], SOLDADO_H);
+	sprites.inimigo[ESQUERDA] = sprite_grab(sprites._soldados_sheet, 0, 0, SOLDADO_W[ESQUERDA], SOLDADO_H);
+	sprites.inimigo[DIREITA] = sprite_grab(sprites._soldados_sheet, 72, 0, SOLDADO_W[DIREITA], SOLDADO_H);
+
+	sprites.inimigo_tiros[0] = sprite_grab(sprites._soldados_sheet, 147, 36, INIMIGO_TIRO_W, 13);
+	sprites.inimigo_tiros[1] = sprite_grab(sprites._soldados_sheet, 154, 36, INIMIGO_TIRO_W, 15);
+	sprites.inimigo_tiros[2] = sprite_grab(sprites._soldados_sheet, 160, 36, INIMIGO_TIRO_W, SOLDADO_TIRO_H);
 
 	sprites.inimigo_tiro = sprite_grab(sprites._tutorial_sheet, 13, 10, INIMIGO_TIRO_W, INIMIGO_TIRO_H);
 

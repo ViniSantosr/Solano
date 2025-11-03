@@ -1,4 +1,3 @@
-#include "fases/fase2/tiros_fase2.h"
 
 #pragma region Biblitotecas Externas
 #include <stdio.h>
@@ -17,7 +16,7 @@
 
 #pragma endregion
 
-
+#include "fases/fase2/tiros_fase2.h"
 
 TIRO tiros[TIROS_N];
 
@@ -55,7 +54,7 @@ bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float al
 			tiros[i].dx = 0;
 			tiros[i].dy = 0;
 
-			calcular_direcao_vel(true, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
+			calcular_direcao_vel(x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
 		}
 		else
 		{
@@ -67,7 +66,7 @@ bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float al
 				tiros[i].dx = 1;
 				tiros[i].dy = 2;
 
-				calcular_direcao_vel(false, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
+				calcular_direcao_vel(alvo_x, alvo_y, x, y, &tiros[i].dx, &tiros[i].dy, vel);
 			}
 			else
 			{
@@ -127,7 +126,7 @@ void tiros_update()
 }
 
 bool tiros_collide(bool soldado, float x, float y, int w, int h)
-{	
+{
 	for (int i = 0; i < TIROS_N; i++)
 	{
 		// Se o tiro não foi usado 'false'
@@ -135,7 +134,7 @@ bool tiros_collide(bool soldado, float x, float y, int w, int h)
 			continue;
 
 		// Não colidir com a própria nave
-		if (tiros[i].soldado == soldado)s
+		if (tiros[i].soldado == soldado)
 			continue;
 
 		float sw, sh;
@@ -143,7 +142,6 @@ bool tiros_collide(bool soldado, float x, float y, int w, int h)
 		{
 			sw = INIMIGO_TIRO_W;
 			sh = INIMIGO_TIRO_H;
-			printf("W1 - Collide(Tiro): %d\n", w);
 		}
 		else
 		{
@@ -169,26 +167,25 @@ void tiros_draw()
 		if (!tiros[i].usado)
 			continue;
 
-		int frame_tela = (tiros[i].frame / 2) % 2;
+		int frame_tiro = (tiros[i].frame / 2) % 3;		
 		float angle = atan2f(tiros[i].dy, tiros[i].dx);
 
 		if (tiros[i].soldado)
 		{
-			al_draw_rotated_bitmap(sprites.soldado_tiros[frame_tela],
+			al_draw_rotated_bitmap(sprites.soldado_tiros[frame_tiro],
 				SOLDADO_TIRO_W / 2, SOLDADO_TIRO_H / 2,
 				tiros[i].x, tiros[i].y,
-				angle + ALLEGRO_PI / 2,
+				angle - ALLEGRO_PI / 2,
 				0);
 		}
 		else
 		{
 
-			ALLEGRO_COLOR tint =
-				frame_tela
-				? al_map_rgb_f(1, 1, 1)
-				: al_map_rgb_f(0.5, 0.5, 0.5)
-				;
-			al_draw_tinted_bitmap(sprites.inimigo_tiro, tint, tiros[i].x, tiros[i].y, 0);			
+			al_draw_rotated_bitmap(sprites.inimigo_tiros[frame_tiro],
+				INIMIGO_TIRO_W / 2, INIMIGO_TIRO_H / 2,
+				tiros[i].x, tiros[i].y,
+				angle + ALLEGRO_PI / 2,
+				0);
 
 		}
 	}

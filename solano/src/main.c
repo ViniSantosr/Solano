@@ -2,6 +2,7 @@
 #pragma region Biblitotecas Externas
 #include <stdbool.h>
 #include <stdio.h>
+#include <locale.h>
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
@@ -10,6 +11,7 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_ttf.h>
+
 #pragma endregion
 
 #pragma region Headers Game
@@ -34,6 +36,10 @@ int main()
 
 	while (!ctx.exit_program)
 	{
+		if (ctx.timer > 2147483) { // evita overflow do contador
+			al_set_timer_count(ctx.timer, 0);
+		}
+
 		switch (ctx.estado_tela)
 		{
 		case TELA_MENU:
@@ -54,8 +60,10 @@ int main()
 }
 
 void inicializar_game()
-
 {
+	setlocale(LC_ALL, "pt_BR.UTF-8");  // Linux
+	setlocale(LC_ALL, "Portuguese_Brazil.1252");  // Windows
+	
 	must_init(al_init(), "allegro");
 	must_init(al_install_keyboard(), "teclado");
 	must_init(al_install_mouse(), "mouse");
@@ -74,14 +82,20 @@ void inicializar_game()
 
 	al_set_window_title(ctx.tela, "Solano: A guerra do Paraguai");
 	
-	ctx.font = al_load_ttf_font("assets/fonts/font_titulo.ttf", 10, 0);
-	must_init(ctx.font, "font");
+	ctx.fonts.font = al_load_ttf_font("assets/fonts/upheavtt.ttf", 15, 0);
+	must_init(ctx.fonts.font, "font");
+
+	ctx.fonts.font_size2 = al_load_ttf_font("assets/fonts/upheavtt.ttf", 25, 0);
+	must_init(ctx.fonts.font, "font_size2");	
+
+	ctx.fonts.font_fases = al_load_ttf_font("assets/fonts/Cinzel-ExtraBold.ttf", 30, 0);
+	must_init(ctx.fonts.font, "font_size2");	
 	
-	ctx.font_titulo = al_load_ttf_font("assets/fonts/font_titulo.ttf", 80, 0);
-	must_init(ctx.font_titulo, "font_titulo");
-	
-	ctx.font_subtitulo = al_load_ttf_font("assets/fonts/font_titulo.ttf", 20, 0);
-	must_init(ctx.font_subtitulo, "font_subtitulo");
+	ctx.fonts.font_subtitulo = al_load_ttf_font("assets/fonts/Cinzel-ExtraBold.ttf", 30, 0);
+	must_init(ctx.fonts.font_subtitulo, "font_subtitulo");
+
+	ctx.fonts.font_titulo = al_load_ttf_font("assets/fonts/CinzelDecorative-Black.ttf", 100, 0);
+	must_init(ctx.fonts.font_titulo, "font_titulo");
 
 	ctx.background_menu = al_load_bitmap("assets/images/background_menu.bmp");
 	must_init(ctx.background_menu, "background_menu");
@@ -103,17 +117,18 @@ void inicializar_game()
 	ctx.cores.branco = al_map_rgb(255, 255, 255);
 	ctx.cores.verde = al_map_rgb(100, 200, 80);
 	ctx.cores.amarelo = al_map_rgb(255, 200, 50);
+	ctx.cores.vermelho = al_map_rgb_f(1, 0.2, 0.2);
 }
 
 void finalizar_game()
 {
-	al_destroy_font(ctx.font);
+	al_destroy_font(ctx.fonts.font);
 	al_destroy_bitmap(ctx.canvas);
 	al_destroy_display(ctx.tela);
 	al_destroy_timer(ctx.timer);
 	al_destroy_event_queue(ctx.queue);
-	al_destroy_font(ctx.font_titulo);
-	al_destroy_font(ctx.font_subtitulo);
+	al_destroy_font(ctx.fonts.font_titulo);
+	al_destroy_font(ctx.fonts.font_subtitulo);
 	al_destroy_bitmap(ctx.background_menu);
 }
 

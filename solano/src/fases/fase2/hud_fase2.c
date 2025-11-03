@@ -6,6 +6,9 @@
 #pragma region Headers Game
 #include "configs/config_tela.h"
 #include "configs/sprites/soldados_dimensions.h"
+#include "core/sprites/soldados_sprites.h"
+#include "fases/fase2/soldado_fase2.h"
+#include "fases/fase2/fase2.h"
 #pragma endregion
 
 #include "fases/fase2/hud_fase2.h"
@@ -17,7 +20,7 @@ void hud_init()
 	score_display = 0;
 }
 
-void hud_update(Fase2Context* f2_ctx)
+void hud_update(GameContext* ctx, Fase2Context* f2_ctx)
 {
 	if (f2_ctx->frames % 2)
 		return;
@@ -31,12 +34,21 @@ void hud_update(Fase2Context* f2_ctx)
 
 }
 
-void hud_draw(ALLEGRO_FONT* font, Fase2Context* f2_ctx)
+void hud_draw(GameContext* ctx, Fase2Context* f2_ctx)
 {
 
 	al_draw_textf(
-		font,
-		al_map_rgb_f(1, 1, 1),
+		ctx->fonts.font_size2,
+		ctx->cores.preto,
+		1+2, 1+2,
+		0,
+		"%06ld",
+		score_display
+	);
+
+	al_draw_textf(
+		ctx->fonts.font_size2,
+		ctx->cores.verde,
 		1, 1,
 		0,
 		"%06ld",
@@ -45,5 +57,9 @@ void hud_draw(ALLEGRO_FONT* font, Fase2Context* f2_ctx)
 
 	int spacing = VIDA_W + 1;
 	for (int i = 0; i < soldado.vidas; i++)
-		al_draw_bitmap(sprites.vida, 1 + (i * spacing), 10, 0);	
+	{		
+		al_draw_tinted_bitmap(sprites.vida, ctx->cores.preto, (1 + (i * spacing)) + 1, 24 + 1, 0);
+		al_draw_tinted_bitmap(sprites.vida, ctx->cores.branco, 1 + (i * spacing), 24, 0);
+	}
+
 }

@@ -57,6 +57,9 @@
     <ClCompile Include="src\core\sprites\navios_sprites.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\telas\telas_gameplay.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -139,8 +142,14 @@
     <ClInclude Include="include\core\sprites\navios_sprites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\telas\telas_gameplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\fonts\font_titulo.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\fases\fase5\fase5.txt" />
   </ItemGroup>
 </Project>

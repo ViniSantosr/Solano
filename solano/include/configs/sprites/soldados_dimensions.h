@@ -5,23 +5,17 @@
 
 extern const int SOLDADO_W[];
 
-#define SOLDADO_TIRO_W	2
-#define SOLDADO_TIRO_H	9
-
-#define VIDA_W 6
-#define VIDA_H 6
+#define INIMIGO_H 43
 
 extern const int INIMIGO_W[];
-extern const int INIMIGO_H[];
 
-#define INIMIGO_MENOR_W		INIMIGO_W[0]
-#define INIMIGO_MENOR_H		INIMIGO_H[0]
-#define INIMIGO_ESPADA_W	INIMIGO_W[1]
-#define INIMIGO_ESPADA_H    INIMIGO_H[1]
-#define INIMIGO_SNIPER_W	INIMIGO_W[2]
-#define INIMIGO_SNIPER_H	INIMIGO_H[2]
+#define SOLDADO_TIRO_W	5
+#define SOLDADO_TIRO_H	9
 
-#define INIMIGO_TIRO_W	4
-#define INIMIGO_TIRO_H	4
+#define VIDA_W 13
+#define VIDA_H 12
+
+#define INIMIGO_TIRO_W	5
+#define INIMIGO_TIRO_H	9
 
 #endif

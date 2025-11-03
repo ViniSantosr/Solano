@@ -1,12 +1,13 @@
 
 #pragma region Bibliotecas Externas
-#define _USE_MATH_DEFINES
 #include <math.h>
 #include <stdio.h>
 #include <allegro5/allegro_primitives.h>
 #pragma endregion
 
 #pragma region Headers Game
+
+#include "fases/fase2/coisas_gerais_fase2.h"
 
 #include "configs/config_tela.h"
 #include "configs/sprites/soldados_dimensions.h"
@@ -27,8 +28,8 @@ SOLDADO soldado;
 void soldado_init()
 {
 	soldado.sprite = CIMA;		
-	soldado.x = (CANVAS_W / 2) - (SOLDADO_W[CIMA] / 2);
-	soldado.y = (CANVAS_H / 2) - (SOLDADO_H / 2);
+	soldado.x = round_float((CANVAS_W / 2) - (SOLDADO_W[CIMA] / 2), 1);
+	soldado.y = round_float((CANVAS_H / 2) - (SOLDADO_H / 2), 1);
 	soldado.max_y = (CANVAS_W - SOLDADO_H);
 	soldado.tiro_timer = 0;
 	soldado.vidas = 3;
@@ -38,7 +39,6 @@ void soldado_init()
 
 void soldado_update()
 {
-
 	if (soldado.vidas < 0)
 		return;
 
@@ -48,30 +48,10 @@ void soldado_update()
 		return;
 	}
 
-	// Vetores que indicam a distância do soldado em relação ao mouse
-	float vx = mira_x - soldado.x;
-	float vy = mira_y - soldado.y;
-
-	double angulo = atan2(vy, vx);
-	angulo = angulo * (180 / M_PI);
-
-	if (angulo < 0) angulo += 360;
-
-	if (angulo >= 45 && angulo < 135) {
-		soldado.sprite = BAIXO;
-	}
-	else if (angulo >= 135 && angulo < 225) {
-		soldado.sprite = ESQUERDA;
-	}
-	else if (angulo >= 225 && angulo < 315) {
-		soldado.sprite = CIMA;
-	}
-	else {
-		soldado.sprite = DIREITA;
-	}	
-	
-	soldado.max_x = (CANVAS_W - SOLDADO_W[soldado.sprite]);
-	soldado.w = soldado.x + SOLDADO_W[soldado.sprite];
+	// Vai calcular qual é o sprite
+	calcular_sprite(soldado.x, soldado.y, mira_x, mira_y, &soldado.sprite);
+		
+	soldado.w = soldado.x + SOLDADO_W[3];
 
 	if (tecla[ALLEGRO_KEY_A])
 		soldado.x -= SOLDADO_SPEED;
@@ -87,6 +67,9 @@ void soldado_update()
 	if (soldado.y < 0)
 		soldado.y = 0;
 
+	// Limite do soldado na tela
+	soldado.max_x = (CANVAS_W - SOLDADO_W[3]);
+
 	if (soldado.x > soldado.max_x)
 		soldado.x = soldado.max_x;
 	if (soldado.y > soldado.max_y)
@@ -97,11 +80,10 @@ void soldado_update()
 		soldado.invencivel_timer--;
 	}		
 	else
-	{
-		printf("W0 - Collide(Tiro): %d\n", SOLDADO_W[soldado.sprite]);
-		if (tiros_collide(true, soldado.x, soldado.y, SOLDADO_W[soldado.sprite], SOLDADO_H))
+	{	
+		if (tiros_collide(true, soldado.x, soldado.y, SOLDADO_W[3], SOLDADO_H))
 		{
-			float cx = soldado.x + (SOLDADO_W[soldado.sprite] / 2);
+			float cx = soldado.x + (SOLDADO_W[3] / 2);
 			float cy = soldado.y + (SOLDADO_H / 2);
 			/*fx_add(false, x, y);
 			fx_add(false, x + 4, y + 2);
@@ -118,9 +100,31 @@ void soldado_update()
 		soldado.tiro_timer--;
 	else if (al_mouse_button_down(&mouse_state, 1))
 	{
-		float cx = soldado.x + (SOLDADO_W[soldado.sprite] / 2);
-		if (disparar(true, false, cx, soldado.y, mira_x, mira_y, 4.5))
-			soldado.tiro_timer = 10;
+		float cx = 0.0f;
+		float cy = 0.0f;
+
+		switch (soldado.sprite)
+		{
+		case CIMA:
+			cx = soldado.x + 3.5;
+			cy = soldado.y + 9;
+			break;
+		case BAIXO:
+			cx = (soldado.x + SOLDADO_W[3]) - 9;
+			cy = soldado.y + SOLDADO_H;
+			break;
+		case DIREITA:
+			cx = soldado.x + SOLDADO_W[3] + 2;
+			cy = soldado.y + (SOLDADO_H / 1.6);
+			break;
+		case ESQUERDA:
+			cx = soldado.x;
+			cy = soldado.y + (SOLDADO_H / 1.6);
+			break;
+		}
+
+		if (disparar(true, false, cx, cy, mira_x, mira_y, 4.5))
+			soldado.tiro_timer = 15;
 	}
 }
 
@@ -131,10 +135,7 @@ void soldado_draw()
 	if (soldado.respawn_timer)
 		return;
 	if (((soldado.invencivel_timer / 2) % 3) == 1)
-		return;	
-
-	
-	al_draw_filled_rectangle(soldado.x, soldado.y, soldado.x + 5, soldado.y + 5, al_map_rgb(255, 0, 0));
+		return;		
 
 	al_draw_bitmap(sprites.soldado[soldado.sprite], soldado.x, soldado.y, 0);
 }

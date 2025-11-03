@@ -5,17 +5,16 @@
 #include "fase2.h"
 
 typedef enum TIPO_INIMIGO
-{
-	INIMIGO_MENOR = 0,
+{	
 	INIMIGO_SOLDADO,
-	INIMIGO_SNIPER,
-	INIMIGO_TIPO_N
+	SOLANO	
 } TIPO_INIMIGO;
 
 typedef struct INIMIGO
 {
 	float x, y, dx, dy;
-	TIPO_INIMIGO tipo;
+	int sprite;
+	int tipo;
 	int tiro_timer;
 	int piscar;
 	int vida;
