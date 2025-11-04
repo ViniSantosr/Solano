@@ -15,6 +15,9 @@ extern const int INIMIGO_W[];
 #define VIDA_W 13
 #define VIDA_H 12
 
+#define MIRA_W 19
+#define MIRA_H 19
+
 #define INIMIGO_TIRO_W	5
 #define INIMIGO_TIRO_H	9
 

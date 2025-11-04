@@ -1,5 +1,6 @@
 
 #pragma region Biblitotecas Externas
+#include <stdio.h>
 #include <allegro5/allegro_image.h>
 #pragma endregion
 
@@ -20,23 +21,22 @@ void hud_init()
 	score_display = 0;
 }
 
-void hud_update(GameContext* ctx, Fase2Context* f2_ctx)
-{
-	if (f2_ctx->frames % 2)
+void hud_update(GameContext* ctx, long* frames, long* score)
+{	
+	if (*frames % 2)
 		return;
 
 	for (long i = 5; i > 0; i--)
 	{
 		long diff = 1 << i;
-		if (score_display <= (f2_ctx->score - diff))
+		if (score_display <= (*score - diff))
 			score_display += diff;
 	}
 
 }
 
-void hud_draw(GameContext* ctx, Fase2Context* f2_ctx)
+void hud_draw(GameContext* ctx)
 {
-
 	al_draw_textf(
 		ctx->fonts.font_size2,
 		ctx->cores.preto,

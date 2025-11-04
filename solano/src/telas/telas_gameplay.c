@@ -23,7 +23,6 @@
 
 void tela_inicial(GameContext* ctx, TextosConfigs* textos, int quant)
 {
-
 	for (int i = 0; i < quant; i++)
 	{
 		int sombra_x = textos[i].x + 2;

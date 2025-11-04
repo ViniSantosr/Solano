@@ -23,10 +23,10 @@ typedef enum {
 
 typedef struct {	
 	const char* titulo;
-	const char* subtitulo;		
+	const char* subtitulo;			
 } MenuContext;
 
-int tela_menu(GameContext* ctx);
+void tela_menu(GameContext* ctx);
 
 #endif // !TELA_MENU_H
 

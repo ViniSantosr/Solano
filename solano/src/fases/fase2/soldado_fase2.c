@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
 #pragma endregion
 
 #pragma region Headers Game
@@ -14,7 +15,7 @@
 
 #include "core/sprites/soldados_sprites.h"
 #include "core/teclado.h"
-	
+
 #include "fases/fase2/mouse_fase2.h"
 #include "fases/fase2/tiros_fase2.h"
 
@@ -22,12 +23,11 @@
 
 #include "fases/fase2/soldado_fase2.h"
 
-
 SOLDADO soldado;
 
 void soldado_init()
 {
-	soldado.sprite = CIMA;		
+	soldado.sprite = CIMA;
 	soldado.x = round_float((CANVAS_W / 2) - (SOLDADO_W[CIMA] / 2), 1);
 	soldado.y = round_float((CANVAS_H / 2) - (SOLDADO_H / 2), 1);
 	soldado.max_y = (CANVAS_W - SOLDADO_H);
@@ -50,7 +50,7 @@ void soldado_update()
 
 	// Vai calcular qual é o sprite
 	calcular_sprite(soldado.x, soldado.y, mira_x, mira_y, &soldado.sprite);
-		
+
 	soldado.w = soldado.x + SOLDADO_W[3];
 
 	if (tecla[ALLEGRO_KEY_A])
@@ -78,9 +78,9 @@ void soldado_update()
 	if (soldado.invencivel_timer)
 	{
 		soldado.invencivel_timer--;
-	}		
+	}
 	else
-	{	
+	{
 		if (tiros_collide(true, soldado.x, soldado.y, SOLDADO_W[3], SOLDADO_H))
 		{
 			float cx = soldado.x + (SOLDADO_W[3] / 2);
@@ -124,7 +124,10 @@ void soldado_update()
 		}
 
 		if (disparar(true, false, cx, cy, mira_x, mira_y, 4.5))
+		{			
 			soldado.tiro_timer = 15;
+		}
+
 	}
 }
 
@@ -135,7 +138,7 @@ void soldado_draw()
 	if (soldado.respawn_timer)
 		return;
 	if (((soldado.invencivel_timer / 2) % 3) == 1)
-		return;		
+		return;
 
 	al_draw_bitmap(sprites.soldado[soldado.sprite], soldado.x, soldado.y, 0);
 }

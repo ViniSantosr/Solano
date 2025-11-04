@@ -1,8 +1,8 @@
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_audio.h>
+
 #ifndef GLOBALS_H
 #define GLOBALS_H
-
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_font.h>
 
 typedef struct {
     ALLEGRO_COLOR verde;
@@ -20,6 +20,12 @@ typedef struct {
     ALLEGRO_FONT* font_subtitulo;
 } FONTS;
 
+typedef struct {
+    ALLEGRO_MIXER* mixer;
+    ALLEGRO_SAMPLE* gun_shot;
+    ALLEGRO_AUDIO_STREAM* music;
+} SONS;
+
 // Enum de telas
 typedef enum {
     TELA_MENU,
@@ -27,28 +33,28 @@ typedef enum {
     FASE2,
     FASE3,
     FASE4,
-    FASE5
+    FASE5,
+    INTRO_FASE
 } TELAS;
 
 // Struct 
-typedef struct GameContext {    
+typedef struct {    
     bool exit_program;
     ALLEGRO_EVENT_QUEUE* queue;    
     ALLEGRO_TIMER* timer;
     ALLEGRO_DISPLAY* tela;		    // Monitor do jogador
     ALLEGRO_BITMAP* canvas;		    // Quadro/Bitmap onde o jogo vai ser desenhado
     ALLEGRO_TRANSFORM transform;	// Responsável por redimensionar a tela
-    ALLEGRO_BITMAP* background_menu;
+    ALLEGRO_BITMAP* background;
 
     TELAS estado_tela;
+    int fase_intro;
     CORES cores;
     FONTS fonts;
+    SONS sons;
 } GameContext;
 
 extern GameContext ctx;
-
-void must_init(bool test, const char* description);
-ALLEGRO_BITMAP* sprite_grab(ALLEGRO_BITMAP* sheet, int x, int y, int w, int h);
 
 #endif // !GLOBALS_H
 

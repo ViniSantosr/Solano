@@ -39,7 +39,16 @@ void tiro_init()
 }
 
 bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float alvo_y, float vel)
-{
+{	
+	al_play_sample(
+		ctx.sons.gun_shot,
+		soldado ? 0.3 : 0.1,
+		0,
+		soldado? 1.5 : 2,
+		ALLEGRO_PLAYMODE_ONCE,
+		NULL
+	);
+
 	for (int i = 0; i < TIROS_N; i++)
 	{
 		if (tiros[i].usado)
@@ -70,8 +79,8 @@ bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float al
 			}
 			else
 			{
-				tiros[i].dx = between(-2, 2);
-				tiros[i].dy = between(-2, 2);
+				tiros[i].dx = between(1, 2);
+				tiros[i].dy = between(1, 2);
 			}
 
 			// Se o tiro não tiver velocidade, não executa

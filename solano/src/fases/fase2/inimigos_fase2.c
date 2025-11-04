@@ -2,6 +2,8 @@
 #pragma region Biblitotecas Externas
 #include <math.h>
 #include <stdio.h>
+
+#include <allegro5/allegro5.h>
 #pragma endregion
 
 #pragma region Headers Game
@@ -18,6 +20,17 @@
 
 INIMIGO inimigos[INIMIGOS_N];
 
+
+int nova_onda = 0;
+
+float new_x = 0.0f;
+float new_y = 0.0f;
+
+float vel = 0.7f; // velocidade do inimigo
+
+float cx = 0.0f;
+float cy = 0.0f;
+
 void inimigo_init()
 {
 	for (int i = 0; i < INIMIGOS_N; i++)
@@ -26,16 +39,15 @@ void inimigo_init()
 	}
 }
 
-void inimigo_update(Fase2Context* f2_ctx)
+void inimigo_update(long* frames, long* score)
 {
-	int nova_onda = 0;
-	if (f2_ctx->frames % 120 == 0) // A cada 120 frames, será gerado uma nova onda, dá para criar niveis de ondas?
+
+	if (*frames % 120 == 0) // A cada 120 frames, será gerado uma nova onda, dá para criar niveis de ondas?
 		nova_onda = between(1, 3);
 
-	float new_x = round_float(between_f(-60, CANVAS_W + 60), 1); // Posição aleatória dos inimigos no eixo X	
-	float new_y = round_float(between_f(-40, -60), 1);
+	new_x = round_float(between_f(-60, CANVAS_W + 60), 1); // Posição aleatória dos inimigos no eixo X	
+	new_y = round_float(between_f(-40, -60), 1);
 
-	float vel = 0.7f; // velocidade do inimigo
 
 	for (int i = 0; i < INIMIGOS_N; i++)
 	{
@@ -64,6 +76,7 @@ void inimigo_update(Fase2Context* f2_ctx)
 			continue;
 		}
 
+		// Muda a direção do sprite
 		calcular_sprite(inimigos[i].x, inimigos[i].y, soldado.x, soldado.y, &inimigos[i].sprite);
 
 		// Atualiza a direção da qual o inimigo deve se mover		
@@ -94,13 +107,31 @@ void inimigo_update(Fase2Context* f2_ctx)
 			}
 		}
 
-		float cx = round_float(inimigos[i].x + (INIMIGO_W[3] / 2), 1); // Posição central do inimigo no X
-		float cy = round_float(inimigos[i].y + (INIMIGO_H / 2), 1); // Posição central do inimigo no Y
+
+		switch (inimigos[i].sprite)
+		{
+		case CIMA:
+			cx = inimigos[i].x + 3.5;
+			cy = inimigos[i].y + 9;
+			break;
+		case BAIXO:
+			cx = (inimigos[i].x + INIMIGO_W[3]) - 6;
+			cy = (inimigos[i].y + INIMIGO_H) + 6;
+			break;
+		case DIREITA:
+			cx = inimigos[i].x + INIMIGO_W[3] + 4;
+			cy = inimigos[i].y + (INIMIGO_H / 1.2);
+			break;
+		case ESQUERDA:
+			cx = inimigos[i].x;
+			cy = inimigos[i].y + (INIMIGO_H / 1.2);
+			break;
+		}
 
 		// Se o inimigo morreu
 		if (inimigos[i].vida <= 0)
 		{
-			f2_ctx->score += 150;
+			*score += 150;
 
 			/*fx_add(false, cx - 10, cy - 4);
 			fx_add(false, cx + 4, cy + 10);
@@ -114,13 +145,13 @@ void inimigo_update(Fase2Context* f2_ctx)
 		inimigos[i].tiro_timer--;
 		if (inimigos[i].tiro_timer <= 0)
 		{
-			disparar(false, between(0, 2), cx, inimigos[i].y, soldado.x, soldado.y, 1.9);
+			disparar(false, between(0, 2), cx, cy, soldado.x, soldado.y, 1.9);
 			inimigos[i].tiro_timer = 80;
 		}
 	}
 }
 
-void inimigo_draw(Fase2Context* f2_ctx)
+void inimigo_draw()
 {
 	for (int i = 0; i < INIMIGOS_N; i++)
 	{

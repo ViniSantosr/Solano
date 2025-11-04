@@ -60,18 +60,19 @@
     <ClCompile Include="src\telas\telas_gameplay.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\telas\intro_fase.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\funcoes_auxiliares.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="assets\sounds\explode1.flac" />
     <None Include="assets\sounds\explode2.flac" />
-    <None Include="assets\sounds\music.opus" />
-    <None Include="assets\sounds\shot.flac" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="assets\sounds\elephant.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
+    <None Include="assets\sounds\menu_trilha.ogg" />
+    <None Include="assets\sounds\fase_battle_trilha.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\images\spritesheets\tutorial_spritesheet.png">
@@ -83,10 +84,10 @@
     <Image Include="assets\images\spritesheets\soldados_spritesheet.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="assets\images\fase1_background.png">
+    <Image Include="assets\images\rio_background.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="assets\images\fase2_background.png">
+    <Image Include="assets\images\campo_background.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\images\spritesheets\navios_spritesheet.png">
@@ -145,11 +146,27 @@
     <ClInclude Include="include\telas\telas_gameplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\telas\intro_fase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\funcoes_auxiliares.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\fonts\font_titulo.ttf" />
+    <Font Include="assets\fonts\CinzelDecorative-Black.ttf" />
+    <Font Include="assets\fonts\CinzelDecorative-Bold.ttf" />
+    <Font Include="assets\fonts\Cinzel-ExtraBold.ttf" />
+    <Font Include="assets\fonts\upheavtt.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\fases\fase5\fase5.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\sounds\gun_shot.mp3" />
+    <Media Include="assets\sounds\intro_fase_trilha.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

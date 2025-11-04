@@ -18,6 +18,8 @@
 #include "configs/config_tela.h"
 #include "telas/tela_menu.h"
 #include "fases/fase2/fase2.h"
+#include "telas/intro_fase.h"
+#include "core/funcoes_auxiliares.h"
 #pragma endregion
 
 #include "main.h"
@@ -27,8 +29,6 @@ GameContext ctx;
 void inicializar_game();
 void finalizar_game();
 void tela_init();
-void must_init(bool test, const char* description);
-ALLEGRO_BITMAP* sprite_grab(ALLEGRO_BITMAP* sheet, int x, int y, int w, int h);
 
 int main()
 {
@@ -36,14 +36,13 @@ int main()
 
 	while (!ctx.exit_program)
 	{
-		if (ctx.timer > 2147483) { // evita overflow do contador
-			al_set_timer_count(ctx.timer, 0);
-		}
-
 		switch (ctx.estado_tela)
 		{
 		case TELA_MENU:
 			tela_menu(&ctx);
+			break;
+		case INTRO_FASE:
+			intro_fase(&ctx, ctx.fase_intro);
 			break;
 		/*case FASE1:
 			fase1(&ctx);
@@ -70,6 +69,9 @@ void inicializar_game()
 	must_init(al_init_font_addon(), "font addon");
 	must_init(al_init_image_addon(), "image addon");
 	must_init(al_init_ttf_addon(), "ttf addon");
+	must_init(al_install_audio(), "audio");
+	must_init(al_init_acodec_addon(), "audio codecs");
+	must_init(al_reserve_samples(16), "reserve samples");
 
 
 	ctx.timer = al_create_timer(1.0 / 60.0);
@@ -80,7 +82,7 @@ void inicializar_game()
 
 	tela_init();
 
-	al_set_window_title(ctx.tela, "Solano: A guerra do Paraguai");
+	al_set_window_title(ctx.tela, "Solano: A guerra do Paraguai");	
 	
 	ctx.fonts.font = al_load_ttf_font("assets/fonts/upheavtt.ttf", 15, 0);
 	must_init(ctx.fonts.font, "font");
@@ -97,8 +99,18 @@ void inicializar_game()
 	ctx.fonts.font_titulo = al_load_ttf_font("assets/fonts/CinzelDecorative-Black.ttf", 100, 0);
 	must_init(ctx.fonts.font_titulo, "font_titulo");
 
-	ctx.background_menu = al_load_bitmap("assets/images/background_menu.bmp");
-	must_init(ctx.background_menu, "background_menu");
+	ctx.background = al_load_bitmap("assets/images/background_menu.bmp");
+	must_init(ctx.background, "background_menu");
+
+	ctx.sons.mixer = al_get_default_mixer();
+	must_init(ctx.sons.mixer, "mixer");
+	al_set_mixer_gain(ctx.sons.mixer, 0.4f); // tente 0.7 ou até 0.5
+
+	ctx.sons.music = al_load_audio_stream("assets/sounds/menu_trilha.ogg", 4, 2048);
+	must_init(ctx.sons.music, "music");
+
+	ctx.sons.gun_shot = al_load_sample("assets/sounds/gun_shot.mp3");
+	must_init(ctx.sons.gun_shot, "gun_shot");	
 
 	must_init(al_init_primitives_addon(), "primitives");
 
@@ -129,7 +141,10 @@ void finalizar_game()
 	al_destroy_event_queue(ctx.queue);
 	al_destroy_font(ctx.fonts.font_titulo);
 	al_destroy_font(ctx.fonts.font_subtitulo);
-	al_destroy_bitmap(ctx.background_menu);
+	al_destroy_bitmap(ctx.background);
+	al_destroy_sample(ctx.sons.gun_shot);
+	al_destroy_audio_stream(ctx.sons.music);
+	al_uninstall_audio();
 }
 
 void tela_init()
@@ -154,18 +169,5 @@ void tela_init()
 	al_use_transform(&ctx.transform);
 }
 
-void must_init(bool test, const char* description)
-{
-	if (test) return;
 
-	fprintf(stderr, "Não pode ser inicializado: %s\n", description);
-	exit(1);
-}
-
-ALLEGRO_BITMAP* sprite_grab(ALLEGRO_BITMAP* sheet, int x, int y, int w, int h)
-{
-	ALLEGRO_BITMAP* sprite = al_create_sub_bitmap(sheet, x, y, w, h);
-	must_init(sprite, "sprite grab");
-	return sprite;
-}
 

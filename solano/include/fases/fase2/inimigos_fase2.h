@@ -25,7 +25,7 @@ typedef struct INIMIGO
 INIMIGO inimigos[INIMIGOS_N];
 
 void inimigo_init();
-void inimigo_update(Fase2Context* f2_ctx);
-void inimigo_draw(Fase2Context* f2_ctx);
+void inimigo_update(long* frames, long* score);
+void inimigo_draw();
 
 #endif

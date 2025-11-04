@@ -7,6 +7,7 @@
 #pragma region Headers Game
 #include "configs/sprites/navios_dimensions.h"
 #include "main.h"
+#include "core/funcoes_auxiliares.h"
 #pragma endregion
 
 #include "core/sprites/navios_sprites.h"

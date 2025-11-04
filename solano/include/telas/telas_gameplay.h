@@ -15,7 +15,6 @@ typedef enum {
 	TELA_CONCLUIDO
 } TELAS_FASE;
 
-void tela_inicial(GameContext* ctx, TextosConfigs* textos, int quant);
 void tela_pause(GameContext* ctx);
 void tela_game_over(GameContext* ctx);
 void tela_concluido(GameContext* ctx);

@@ -6,6 +6,7 @@
 
 #pragma region Headers Game
 #include "main.h"
+#include "core/funcoes_auxiliares.h"
 #pragma endregion
 
 #include "configs/sprites/soldados_dimensions.h"
@@ -34,6 +35,7 @@ void sprites_soldados_init()
 	sprites.soldado_tiros[2] = sprite_grab(sprites._soldados_sheet, 160, 19, SOLDADO_TIRO_W, SOLDADO_TIRO_H);
 
 	sprites.vida = sprite_grab(sprites._soldados_sheet, 148, 0, VIDA_W, VIDA_H);
+	sprites.mira = sprite_grab(sprites._soldados_sheet, 168, 56, MIRA_W, MIRA_H);
 
 	sprites.inimigo[CIMA] = sprite_grab(sprites._soldados_sheet, 36, 0, SOLDADO_W[CIMA], SOLDADO_H);
 	sprites.inimigo[BAIXO] = sprite_grab(sprites._soldados_sheet, 109, 0, SOLDADO_W[BAIXO], SOLDADO_H);
@@ -74,6 +76,7 @@ void sprites_soldados_deinit()
 	al_destroy_bitmap(sprites.soldado_tiros[1]);
 
 	al_destroy_bitmap(sprites.vida);
+	al_destroy_bitmap(sprites.mira);
 	
 	al_destroy_bitmap(sprites.inimigo[0]);
 	al_destroy_bitmap(sprites.inimigo[1]);
