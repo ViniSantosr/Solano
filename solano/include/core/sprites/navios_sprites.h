@@ -12,7 +12,7 @@ typedef struct SPRITES_NAVIOS {
 } SPRITES_NAVIOS;
 
 // Declaração externa da variável global
-extern SPRITES_NAVIOS sprites;
+extern SPRITES_NAVIOS sprites_navios;
 
 void sprites_navios_init();
 

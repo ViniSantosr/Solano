@@ -1,9 +1,10 @@
-
-#include "fases/fase1/fase1.h"
-
+﻿#pragma region Biblitotecas Externas
+//Bibliotecas de C
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
+//Bibliotecas do Allegro
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
@@ -11,22 +12,41 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_color.h>
+#pragma endregion
 
-#include <fases/fase1/fase1.h>
+#pragma region Headers Game
+//Headers que não fazem parte exclusivamente da fase 1
 #include "core/draw_tela.h"
 #include "configs/config_tela.h"
 #include "core/teclado.h"
 #include "main.h"
+#include "core/efeitos/efeito_gerais.h"
+#include "fases/fase2/fase2.h."
+
+//Headers exclusivamente da fase 1
+#include <fases/fase1/fase1.h>
 #include "fases/fase1/tiros_fase1.h"
 #include "fases/fase1/navio_fase1.h"
 #include "fases/fase1/inimigos_fase1.h"
 #include "fases/fase1/hud_fase1.h"
 #include "fases/fase1/coisas_gerais_fase1.h"
 #include "fases/fase2/coisas_gerais_fase2.h"
-#include "core/efeitos/efeito_gerais.h"
+#include "fases/fase1/fase1.h"
+#pragma endregion
 
+//Declaração das funções de Game Context que serão utilizadas na Fase 1
 Fase1Context f1_ctx;
 GameContext ctx;
+
+void fase1_init(ALLEGRO_DISPLAY* tela);					//Função de inicialização da fase 1
+void fase1_gameplay_update(ALLEGRO_DISPLAY* tela);		//Função de atualizar os objetos na tela da fase 1
+void fase1_gameplay_draw(GameContext* ctx);				//Função de desenhar os objetos na tela da fase 1
+void tela_inicial_f1(GameContext* ctx);
+void tela_pause_f1(ALLEGRO_FONT* font);
+void tela_game_over_f1(ALLEGRO_FONT* font);
+void tela_concluido_f1(ALLEGRO_FONT* font);
+
+bool jogo_em_inicio_f1();			//Enquanto o jogo está nos frames iniciais
 
 int mainwow()
 {
@@ -84,7 +104,7 @@ int mainwow()
             shots_update();
   
             ship_update();
-            aliens_update();
+            navios_update();
             atualizar_hud();
 
             if (tecla[ALLEGRO_KEY_ESCAPE])
@@ -110,7 +130,7 @@ int mainwow()
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
             
-            aliens_draw();
+            navios_draw();
             shots_draw();
             fx_draw();
             ship_draw();
@@ -130,4 +150,173 @@ int mainwow()
     al_destroy_event_queue(queue);
 
     return 0;
+}
+
+void fase1_init(ALLEGRO_DISPLAY* tela)
+{
+    sprites_navios_init();
+    iniciar_sprites();
+    iniciar_hud();
+
+    shots_init();
+    teclado_init();
+    ship_init();
+    aliens_init();
+    f1_ctx.frames = 0;
+    f1_ctx.score = 0;
+	f1_ctx.background = al_load_bitmap("assets/images/fase1_background.png");
+	must_init(f1_ctx.background, "fase 1 background");
+}
+
+void fase1_gameplay_update(ALLEGRO_DISPLAY* tela)
+{
+    shots_update();
+    ship_update();
+    atualizar_hud();
+    navios_update();
+}
+
+void fase1_gameplay_draw(GameContext* ctx)
+{
+    shots_draw();
+    ship_draw();
+    navios_draw();
+    desenhar_hud();
+}
+
+void tela_inicial_f1(GameContext* ctx)
+{
+    TextosConfigs textos[3] =
+    {
+        {"FASE 1", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo},
+        {"Guerra dos navios (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo},
+        {"META:  Derrubar alguns navios (?)", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo}
+    };
+
+    for (int i = 0; i < 3; i++)
+    {
+        int sombra_x = textos[i].x + 2;
+        int sombra_y = textos[i].y + 1;
+
+        al_draw_text(ctx->font_subtitulo, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
+        al_draw_text(ctx->font_subtitulo, textos[i].cor, textos[i].x, textos[i].y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
+    }
+}
+
+void tela_pause_f1(ALLEGRO_FONT* font)
+{
+    // Desenha um retângulo preto semi-transparente sobre a tela
+    al_draw_filled_rectangle(
+        0, 0, CANVAS_W, CANVAS_H,
+        al_map_rgba(0, 0, 0, 150) // RGBA → A = transparência (0 = invisível, 255 = opaco)
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(1, 0, 0),
+        CANVAS_W / 2, CANVAS_H / 3,
+        ALLEGRO_ALIGN_CENTER,
+        "JOGO PAUSADO"
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(1, 1, 1),
+        CANVAS_W / 3.5, CANVAS_H / 2,
+        ALLEGRO_ALIGN_CENTER,
+        "Space ->"
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(1.0, 0.5, 0),
+        CANVAS_W / 2, CANVAS_H / 2,
+        ALLEGRO_ALIGN_CENTER,
+        "Retomar"
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(1, 1, 1),
+        CANVAS_W / 3.5, CANVAS_H / 1.8,
+        ALLEGRO_ALIGN_CENTER,
+        "Esc   ->"
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(1.0, 0.5, 0),
+        CANVAS_W / 1.5, CANVAS_H / 1.8,
+        ALLEGRO_ALIGN_CENTER,
+        "Volta a tela de menu"
+    );
+}
+
+void tela_game_over_f1(ALLEGRO_FONT* font)
+{
+    al_draw_filled_rectangle(
+        0, 0, CANVAS_W, CANVAS_H,
+        al_map_rgb(0, 0, 0)
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(1, 0.2, 0.2),
+        CANVAS_W / 2, CANVAS_H / 3,
+        ALLEGRO_ALIGN_CENTER,
+        "G A M E  O V E R"
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(1, 0.2, 0.2),
+        CANVAS_W / 2, CANVAS_H / 2,
+        ALLEGRO_ALIGN_CENTER,
+        "Space -> Reiniciar"
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(1, 0.2, 0.2),
+        CANVAS_W / 2, CANVAS_H / 1.8,
+        ALLEGRO_ALIGN_CENTER,
+        "Esc -> Volta a tela de menu"
+    );
+}
+
+void tela_concluido_f1(ALLEGRO_FONT* font)
+{
+    al_draw_filled_rectangle(
+        0, 0, CANVAS_W, CANVAS_H,
+        al_map_rgb(0, 0, 0)
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(0, 1, 0),
+        CANVAS_W / 2, CANVAS_H / 3,
+        ALLEGRO_ALIGN_CENTER,
+        "FASE 2 CONCLUIDA!!!!"
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(0, 1, 0),
+        CANVAS_W / 2, CANVAS_H / 2,
+        ALLEGRO_ALIGN_CENTER,
+        "Space -> Ir para a fase 3"
+    );
+
+    al_draw_text(
+        font,
+        al_map_rgb_f(0, 1, 0),
+        CANVAS_W / 2, CANVAS_H / 1.8,
+        ALLEGRO_ALIGN_CENTER,
+        "Esc -> Volta a tela de menu"
+    );
+}
+
+bool jogo_em_inicio_f1()
+{
+    return f2_ctx.frames < f2_ctx.frames_iniciais;
 }

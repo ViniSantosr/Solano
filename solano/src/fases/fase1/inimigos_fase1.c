@@ -22,7 +22,7 @@ void aliens_init()//inicializa os aliens colocando todas posições em não usados
         aliens[i].used = false;
 }
 
-void aliens_update()//função responsavel por atualizar o estado dos aliens
+void navios_update()//função responsavel por atualizar o estado dos aliens
 {
     int new_quota = //se entendi direito ele decide quantos aliens novos vão spawnar
         (f1_ctx.frames % 120)
@@ -185,7 +185,7 @@ void aliens_update()//função responsavel por atualizar o estado dos aliens
     }
 }//fim dessa função, possivelmente a maior de todo o codigo!
 
-void aliens_draw()// essa função desenha os aliens na tela
+void navios_draw()// essa função desenha os aliens na tela
 {
     for (int i = 0; i < ALIENS_N; i++)
     {

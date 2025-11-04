@@ -26,8 +26,8 @@ typedef struct ALIEN //elementos do alien
 } ALIEN;
 
 void aliens_init();
-void aliens_update();
-void aliens_draw();
+void navios_update();
+void navios_draw();
 
 #define ALIENS_N 16//define a quantidade máxima de aliens na tela
 ALIEN aliens[ALIENS_N];
