@@ -24,7 +24,6 @@
 #include "fases/fase2/fase2.h."
 
 //Headers exclusivamente da fase 1
-#include <fases/fase1/fase1.h>
 #include "fases/fase1/tiros_fase1.h"
 #include "fases/fase1/navio_fase1.h"
 #include "fases/fase1/inimigos_fase1.h"
@@ -48,7 +47,7 @@ void tela_concluido_f1(ALLEGRO_FONT* font);
 
 bool jogo_em_inicio_f1();			//Enquanto o jogo está nos frames iniciais
 
-int mainwow()
+void FASE1()
 {
     must_init(al_init(), "allegro");
     must_init(al_install_keyboard(), "keyboard");
@@ -59,7 +58,7 @@ int mainwow()
     ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
     must_init(queue, "queue");
 
-    tela_init();
+    //tela_init();
 
     audio_init();
 
@@ -149,7 +148,7 @@ int mainwow()
     al_destroy_timer(timer);
     al_destroy_event_queue(queue);
 
-    return 0;
+    return;
 }
 
 void fase1_init(ALLEGRO_DISPLAY* tela)

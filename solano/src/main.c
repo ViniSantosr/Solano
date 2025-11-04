@@ -16,6 +16,7 @@
 #include "configs/config_tela.h"
 #include "telas/tela_menu.h"
 #include "fases/fase2/fase2.h"
+#include "fases/fase1/fase1.c"
 #pragma endregion
 
 #include "main.h"
@@ -39,9 +40,9 @@ int main()
 		case TELA_MENU:
 			tela_menu(&ctx);
 			break;
-		/*case FASE1:
+		case FASE1:
 			fase1(&ctx);
-			break;*/
+			break;
 		case FASE2:
 			fase2(&ctx);
 			break;
