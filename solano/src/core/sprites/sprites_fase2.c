@@ -15,7 +15,7 @@ ALLEGRO_BITMAP* cortar_sprites(int x, int y, int w, int h)// aqui temos o sprite
 
 void iniciar_sprites()//aqui temos a função que inicializa todos os sprites
 {
-    sprites_n._sheet = al_load_bitmap("assets/images/spritesheet.png");
+    sprites_n._sheet = al_load_bitmap("assets/images/spritesheets/tutorial_spritesheet.png");
     must_init(sprites_n._sheet, "spritesheet");
 
     sprites_n.ship = cortar_sprites(0, 0, SHIP_W, SHIP_H);

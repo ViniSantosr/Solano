@@ -28,5 +28,7 @@ typedef struct Fase1Context
 extern Fase1Context f1_ctx;
 void fase1();
 
+
+
 #endif // !FASE1_H
 

@@ -18,12 +18,12 @@ void audio_init()//essa função inicializa o sistema de audio os carregando na me
     al_init_acodec_addon();//essa função basicamente inicializa os formatos de audio que o allegro utiliza
     al_reserve_samples(128);//reserva 128 slots de audio para serem guardados e futuramente utilizados
 
-    sample_shot = al_load_sample("assets/sounds/audio_shot.flac");//como o padrão para tudo que inicializamos no allegro, aqui teremos o ponteiro recebendo o arquivo de som
+    sample_shot = al_load_sample("assets/sounds/shot.flac");//como o padrão para tudo que inicializamos no allegro, aqui teremos o ponteiro recebendo o arquivo de som
     must_init(sample_shot, "shot sample");//aqui tentamos inicializar o som, conforme tudo no allegro, como isso é extremamente simples e recorrente vou me poupar de explicar isso nas próximas vezes.
 
-    sample_explode[0] = al_load_sample("assets/sounds/audio_explode1.flac");
+    sample_explode[0] = al_load_sample("assets/sounds/explode1.flac");
     must_init(sample_explode[0], "explode[0] sample");
-    sample_explode[1] = al_load_sample("assets/sounds/audio_explode2.flac");
+    sample_explode[1] = al_load_sample("assets/sounds/explode2.flac");
     must_init(sample_explode[1], "explode[1] sample");
 }
 

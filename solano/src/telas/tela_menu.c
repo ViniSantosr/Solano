@@ -15,6 +15,7 @@
 #include "core/draw_tela.h"
 #include "core/teclado.h"
 #include "configs/config_tela.h"
+#include "fases/fase1/fase1.h"
 #pragma endregion
 
 #include "telas/tela_menu.h"
@@ -85,7 +86,7 @@ int tela_menu(GameContext* ctx)
 				{
 				case NOVO_JOGO:
 					exit_tela = true;
-					ctx->estado_tela = FASE2;
+					ctx->estado_tela = FASE1;
 					break;
 				case SAIR:
 					ctx->exit_program = true;

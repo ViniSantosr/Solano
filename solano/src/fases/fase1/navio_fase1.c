@@ -23,8 +23,6 @@ void ship_init()//inicialização da nave, aqui definimos a posição inicial, o num
 
 void ship_update()// essa função será a responsavel por atualizar a posição da nave, vida e tiros constantemente
 {
-    if (ship.lives < 0)//morreu acaba a função
-        return;
 
     if (ship.respawn_timer)//se estiver no tempo de respawn, diminui o tempo de respawn
     {

@@ -90,9 +90,16 @@
     <None Include="assets\sounds\shot.flac" />
     <None Include="build\obj\Debug\Solano.tlog\CL.command.1.tlog" />
     <None Include="build\obj\Debug\Solano.tlog\link.command.1.tlog" />
+    <None Include="build\Release\assets\sounds\shot.flac" />
+    <None Include="build\Release\assets\sounds\music.opus" />
+    <None Include="build\Release\assets\sounds\explode2.flac" />
+    <None Include="build\Release\assets\sounds\explode1.flac" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\elephant.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="build\Release\assets\sounds\elephant.wav">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>
@@ -125,6 +132,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="build\Release\assets\images\fase2_background.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\spritesheets\tutorial_spritesheet.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

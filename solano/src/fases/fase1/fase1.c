@@ -47,7 +47,7 @@ void tela_concluido_f1(ALLEGRO_FONT* font);
 
 bool jogo_em_inicio_f1();			//Enquanto o jogo está nos frames iniciais
 
-void FASE1()
+void fase1()
 {
     must_init(al_init(), "allegro");
     must_init(al_install_keyboard(), "keyboard");
@@ -92,13 +92,17 @@ void FASE1()
 
     al_start_timer(timer);
 
-    while (1)
+    while (!ctx.exit_program && !f1_ctx.exit_tela)
     {
-        al_wait_for_event(queue, &event);
+        al_wait_for_event(ctx.queue, &event);
 
         switch (event.type)
         {
         case ALLEGRO_EVENT_TIMER:
+
+            if (ship.lives < 0){
+                f1_ctx.game_over = true;
+            }
             fx_update();
             shots_update();
   

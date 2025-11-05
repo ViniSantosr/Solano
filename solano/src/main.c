@@ -16,7 +16,7 @@
 #include "configs/config_tela.h"
 #include "telas/tela_menu.h"
 #include "fases/fase2/fase2.h"
-#include "fases/fase1/fase1.c"
+#include "fases/fase1/fase1.h"
 #pragma endregion
 
 #include "main.h"
