@@ -10,8 +10,7 @@
 
 #include "fases/fase2/coisas_gerais_fase2.h"
 
-#include "configs/config_tela.h"
-#include "configs/sprites/soldados_dimensions.h"
+#include "core/tela_utils.h"
 
 #include "core/sprites/soldados_sprites.h"
 #include "core/teclado.h"

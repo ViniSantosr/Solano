@@ -6,10 +6,9 @@
 #pragma endregion
 
 #pragma region Headers Game
-#include "configs/config_tela.h"
 #include "fases/fase2/soldado_fase2.h"
 #include "core/sprites/soldados_sprites.h"
-#include "configs/sprites/soldados_dimensions.h"
+#include "core/tela_utils.h"
 #pragma endregion
 
 #include "fases/fase2/mouse_fase2.h"

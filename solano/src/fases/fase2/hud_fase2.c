@@ -5,11 +5,10 @@
 #pragma endregion
 
 #pragma region Headers Game
-#include "configs/config_tela.h"
-#include "configs/sprites/soldados_dimensions.h"
 #include "core/sprites/soldados_sprites.h"
 #include "fases/fase2/soldado_fase2.h"
 #include "fases/fase2/fase2.h"
+#include "main.h"
 #pragma endregion
 
 #include "fases/fase2/hud_fase2.h"
@@ -38,7 +37,7 @@ void hud_update(GameContext* ctx, long* frames, long* score)
 void hud_draw(GameContext* ctx)
 {
 	al_draw_textf(
-		ctx->fonts.font_size2,
+		ctx->fonts.font_medium,
 		ctx->cores.preto,
 		1+2, 1+2,
 		0,
@@ -47,7 +46,7 @@ void hud_draw(GameContext* ctx)
 	);
 
 	al_draw_textf(
-		ctx->fonts.font_size2,
+		ctx->fonts.font_medium,
 		ctx->cores.verde,
 		1, 1,
 		0,

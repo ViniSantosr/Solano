@@ -32,14 +32,14 @@
 #include "main.h"
 #pragma endregion
 
-#include "fases/fase2/fase2.h"
+#include "fases/fase4/fase4.h"
 
 // Declaração das funções
-void fase2_init(GameContext* ctx); // Função de inicialização da fase 2
+void fase4_init(GameContext* ctx); // Função de inicialização da fase 2
 
-void fase2(GameContext* ctx)
+void fase4(GameContext* ctx)
 {
-	fase2_init(ctx);
+	fase4_init(ctx);
 
 	long frames = 0;
 	long score = 0;	
@@ -71,7 +71,7 @@ void fase2(GameContext* ctx)
 			}
 
 			// Se o jogador vencer
-			if (score >= 1000) {
+			if (score >= 15050) {
 				concluido = true;
 			}
 
@@ -124,7 +124,7 @@ void fase2(GameContext* ctx)
 					}
 					break;
 				}
-			}			
+			}
 			else if (pause)
 			{
 				switch (event.keyboard.keycode)
@@ -144,7 +144,7 @@ void fase2(GameContext* ctx)
 					break;
 				}
 			}
-			else 
+			else
 			{
 				switch (event.keyboard.keycode)
 				{
@@ -182,7 +182,7 @@ void fase2(GameContext* ctx)
 					exit_tela = true;
 					ctx->estado_tela = FASE2;
 				}
-			}			
+			}
 
 
 			break;
@@ -199,20 +199,20 @@ void fase2(GameContext* ctx)
 				0, 0, CANVAS_W, CANVAS_H,
 				0);
 			
-			hud_draw(ctx);			
+			hud_draw(ctx);
 
+			
 			if (concluido) // Se a fase foi concluída
 			{
 				tela_concluido(ctx);
 			}
-			else
+			else 
 			{
 				tiros_draw();
 				soldado_draw();
 				inimigo_draw();
 				mouse_draw();
 			}
-
 
 			if (pause) // Se o jogo estiver em pausa
 			{
@@ -237,7 +237,7 @@ void fase2(GameContext* ctx)
 	sprites_soldados_deinit();
 }
 
-void fase2_init(GameContext* ctx)
+void fase4_init(GameContext* ctx)
 {
 	sprites_soldados_init();
 	hud_init();

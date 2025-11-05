@@ -11,8 +11,7 @@
 #pragma endregion
 
 #pragma region Headers Game
-#include "core/draw_tela.h"
-#include "configs/config_tela.h"
+#include "core/tela_utils.h"
 #include "fases/fase2/fase2.h" // Header da fase 2
 #include "core/funcoes_auxiliares.h"
 #include "core/teclado.h"
@@ -69,11 +68,11 @@ void intro_fase(GameContext* ctx, int fase_selected)
 		{
 		case ALLEGRO_EVENT_TIMER:
 
-			/*if (frames > texto_inicial)
+			if (frames > texto_inicial)
 			{
 				ctx->estado_tela = fase_selected;
 				exit_tela = true;
-			}*/
+			}
 
 			frames++;
 			desenhar = true;
@@ -114,8 +113,8 @@ void intro_fase(GameContext* ctx, int fase_selected)
 							int sombra_x = textos[fase][i].x + 2;
 							int sombra_y = textos[fase][i].y + 1;
 
-							al_draw_text(ctx->fonts.font_fases, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[fase][i].texto);
-							al_draw_text(ctx->fonts.font_fases, textos[fase][i].cor, textos[fase][i].x, textos[fase][i].y, ALLEGRO_ALIGN_CENTER, textos[fase][i].texto);
+							al_draw_text(ctx->fonts.font_big, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[fase][i].texto);
+							al_draw_text(ctx->fonts.font_big, textos[fase][i].cor, textos[fase][i].x, textos[fase][i].y, ALLEGRO_ALIGN_CENTER, textos[fase][i].texto);
 						}
 					}
 				}
@@ -131,8 +130,8 @@ void intro_fase(GameContext* ctx, int fase_selected)
 
 			if ((frames / 25) % 2 == 0)
 			{
-				al_draw_text(ctx->fonts.font, ctx->cores.preto, pular_x + 2, pular_y + 2, ALLEGRO_ALIGN_CENTER, "Pressione ESPAÇO para pular");
-				al_draw_text(ctx->fonts.font, ctx->cores.verde, pular_x, pular_y, ALLEGRO_ALIGN_CENTER, "Pressione ESPAÇO para pular");
+				al_draw_text(ctx->fonts.font_small, ctx->cores.preto, pular_x + 2, pular_y + 2, ALLEGRO_ALIGN_CENTER, "Pressione ESPAÇO para pular");
+				al_draw_text(ctx->fonts.font_small, ctx->cores.verde, pular_x, pular_y, ALLEGRO_ALIGN_CENTER, "Pressione ESPAÇO para pular");
 			}
 
 			tela_pos_draw(ctx->canvas, ctx->tela);
@@ -152,4 +151,8 @@ void inicializar_intro(GameContext* ctx)
 	textos[_FASE2][0] = (TextosConfigs){ "FASE 2", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
 	textos[_FASE2][1] = (TextosConfigs){ "Cerco de Uruguaiana (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
 	textos[_FASE2][2] = (TextosConfigs){ "META:  10.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+
+	textos[_FASE4][0] = (TextosConfigs){ "FASE 4", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
+	textos[_FASE4][1] = (TextosConfigs){ "Tomada de Assunção (1869)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
+	textos[_FASE4][2] = (TextosConfigs){ "META:  15.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
 }

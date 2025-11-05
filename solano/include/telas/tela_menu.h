@@ -1,11 +1,7 @@
 #ifndef TELA_MENU_H
 #define TELA_MENU_H
 
-#pragma region Headers Game
-
 #include "main.h"
-
-#pragma endregion
 
 typedef struct {
 	const char* texto;
@@ -15,6 +11,7 @@ typedef struct {
 
 typedef enum {
 	NOVO_JOGO,
+	CONTINUAR,
 	OPCOES,
 	CREDITOS,
 	SAIR,

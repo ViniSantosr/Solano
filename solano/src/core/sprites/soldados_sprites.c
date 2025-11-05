@@ -9,7 +9,6 @@
 #include "core/funcoes_auxiliares.h"
 #pragma endregion
 
-#include "configs/sprites/soldados_dimensions.h"
 #include "core/sprites/soldados_sprites.h"
 
 const int SOLDADO_W[] = { 34, 32, 33, 35 };
@@ -35,7 +34,7 @@ void sprites_soldados_init()
 	sprites.soldado_tiros[2] = sprite_grab(sprites._soldados_sheet, 160, 19, SOLDADO_TIRO_W, SOLDADO_TIRO_H);
 
 	sprites.vida = sprite_grab(sprites._soldados_sheet, 148, 0, VIDA_W, VIDA_H);
-	sprites.mira = sprite_grab(sprites._soldados_sheet, 168, 56, MIRA_W, MIRA_H);
+	sprites.mira = sprite_grab(sprites._soldados_sheet, 162, 50, MIRA_W, MIRA_H);
 
 	sprites.inimigo[CIMA] = sprite_grab(sprites._soldados_sheet, 36, 0, SOLDADO_W[CIMA], SOLDADO_H);
 	sprites.inimigo[BAIXO] = sprite_grab(sprites._soldados_sheet, 109, 0, SOLDADO_W[BAIXO], SOLDADO_H);

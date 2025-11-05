@@ -15,12 +15,15 @@
 #pragma endregion
 
 #pragma region Headers Game
-#include "configs/config_tela.h"
 #include "telas/tela_menu.h"
 #include "fases/fase2/fase2.h"
+#include "fases/fase4/fase4.h"
 #include "telas/intro_fase.h"
 #include "core/funcoes_auxiliares.h"
+#include "core/sprites/sprites_util.h"
+#include "core/tela_utils.h"
 #pragma endregion
+
 
 #include "main.h"
 
@@ -42,13 +45,16 @@ int main()
 			tela_menu(&ctx);
 			break;
 		case INTRO_FASE:
-			intro_fase(&ctx, ctx.fase_intro);
+			intro_fase(&ctx, ctx.proxima_fase);
 			break;
 		/*case FASE1:
 			fase1(&ctx);
 			break;*/
 		case FASE2:
 			fase2(&ctx);
+			break;
+		case FASE4:
+			fase4(&ctx);
 			break;
 		}
 	}
@@ -84,14 +90,14 @@ void inicializar_game()
 
 	al_set_window_title(ctx.tela, "Solano: A guerra do Paraguai");	
 	
-	ctx.fonts.font = al_load_ttf_font("assets/fonts/upheavtt.ttf", 15, 0);
-	must_init(ctx.fonts.font, "font");
+	ctx.fonts.font_small = al_load_ttf_font("assets/fonts/upheavtt.ttf", 15, 0);
+	must_init(ctx.fonts.font_small, "font");
 
-	ctx.fonts.font_size2 = al_load_ttf_font("assets/fonts/upheavtt.ttf", 25, 0);
-	must_init(ctx.fonts.font, "font_size2");	
+	ctx.fonts.font_medium = al_load_ttf_font("assets/fonts/upheavtt.ttf", 25, 0);
+	must_init(ctx.fonts.font_medium, "font_size2");
 
-	ctx.fonts.font_fases = al_load_ttf_font("assets/fonts/Cinzel-ExtraBold.ttf", 30, 0);
-	must_init(ctx.fonts.font, "font_size2");	
+	ctx.fonts.font_big = al_load_ttf_font("assets/fonts/Cinzel-ExtraBold.ttf", 30, 0);
+	must_init(ctx.fonts.font_big, "font_size2");
 	
 	ctx.fonts.font_subtitulo = al_load_ttf_font("assets/fonts/Cinzel-ExtraBold.ttf", 30, 0);
 	must_init(ctx.fonts.font_subtitulo, "font_subtitulo");
@@ -102,9 +108,13 @@ void inicializar_game()
 	ctx.background = al_load_bitmap("assets/images/background_menu.bmp");
 	must_init(ctx.background, "background_menu");
 
+	ctx.sons.volume_general = 0.7f;
+	ctx.sons.volume_music = 0.7f;
+	ctx.sons.volume_effects = 0.7f;
+
 	ctx.sons.mixer = al_get_default_mixer();
 	must_init(ctx.sons.mixer, "mixer");
-	al_set_mixer_gain(ctx.sons.mixer, 0.4f); // tente 0.7 ou até 0.5
+	al_set_mixer_gain(ctx.sons.mixer, ctx.sons.volume_general); // tente 0.7 ou até 0.5
 
 	ctx.sons.music = al_load_audio_stream("assets/sounds/menu_trilha.ogg", 4, 2048);
 	must_init(ctx.sons.music, "music");
@@ -113,6 +123,8 @@ void inicializar_game()
 	must_init(ctx.sons.gun_shot, "gun_shot");	
 
 	must_init(al_init_primitives_addon(), "primitives");
+
+	sprites_util_init();
 
 	al_register_event_source(ctx.queue, al_get_keyboard_event_source());
 	al_register_event_source(ctx.queue, al_get_mouse_event_source());
@@ -124,27 +136,37 @@ void inicializar_game()
 	ctx.estado_tela = TELA_MENU;
 
 	ctx.exit_program = false;
+	ctx.play_music = true;
+	ctx.pause = false;
+	ctx.options = false;
+
+	al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
 
 	ctx.cores.preto = al_map_rgb(0, 0, 0);
+	ctx.cores.cinza_opaco = al_map_rgba(0, 0, 0, 90);
 	ctx.cores.branco = al_map_rgb(255, 255, 255);
 	ctx.cores.verde = al_map_rgb(100, 200, 80);
+	ctx.cores.verde_opaco = al_map_rgba_f(0.39, 0.78, 0.31, 0.5);
 	ctx.cores.amarelo = al_map_rgb(255, 200, 50);
 	ctx.cores.vermelho = al_map_rgb_f(1, 0.2, 0.2);
 }
 
 void finalizar_game()
 {
-	al_destroy_font(ctx.fonts.font);
+	al_destroy_font(ctx.fonts.font_small);
+	al_destroy_font(ctx.fonts.font_medium);
+	al_destroy_font(ctx.fonts.font_big);
+	al_destroy_font(ctx.fonts.font_titulo);
+	al_destroy_font(ctx.fonts.font_subtitulo);
 	al_destroy_bitmap(ctx.canvas);
 	al_destroy_display(ctx.tela);
 	al_destroy_timer(ctx.timer);
-	al_destroy_event_queue(ctx.queue);
-	al_destroy_font(ctx.fonts.font_titulo);
-	al_destroy_font(ctx.fonts.font_subtitulo);
+	al_destroy_event_queue(ctx.queue);	
 	al_destroy_bitmap(ctx.background);
 	al_destroy_sample(ctx.sons.gun_shot);
 	al_destroy_audio_stream(ctx.sons.music);
 	al_uninstall_audio();
+	sprites_util_deinit();
 }
 
 void tela_init()

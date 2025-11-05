@@ -1,6 +1,33 @@
 #ifndef SPRITES_SOLDADOS_H
 #define SPRITES_SOLDADOS_H
 
+#include <allegro5/allegro5.h>
+#include <allegro5/allegro_image.h>
+
+#pragma region Dimensions
+
+#define SOLDADO_H	43
+
+extern const int SOLDADO_W[];
+
+#define INIMIGO_H 43
+
+extern const int INIMIGO_W[];
+
+#define SOLDADO_TIRO_W	5
+#define SOLDADO_TIRO_H	9
+
+#define VIDA_W 13
+#define VIDA_H 12
+
+#define MIRA_W 24
+#define MIRA_H 24
+
+#define INIMIGO_TIRO_W	5
+#define INIMIGO_TIRO_H	9
+
+#pragma endregion
+
 typedef struct SPRITES_SOLDADOS {
 	ALLEGRO_BITMAP* _tutorial_sheet;
 	ALLEGRO_BITMAP* _soldados_sheet;	

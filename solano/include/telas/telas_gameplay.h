@@ -1,6 +1,8 @@
 #ifndef TELA_GAMEPLAY_H
 #define TELA_GAMEPLAY_H
 
+#include "main.h"
+
 typedef struct {
 	const char* texto;
 	float x;
@@ -18,5 +20,6 @@ typedef enum {
 void tela_pause(GameContext* ctx);
 void tela_game_over(GameContext* ctx);
 void tela_concluido(GameContext* ctx);
+void tela_opcoes(GameContext* ctx);
 
 #endif

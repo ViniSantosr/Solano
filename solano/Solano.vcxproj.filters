@@ -21,7 +21,7 @@
     <ClCompile Include="src\fases\fase2\fase2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\draw_tela.c">
+    <ClCompile Include="src\core\tela_utils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\core\teclado.c">
@@ -66,6 +66,12 @@
     <ClCompile Include="src\core\funcoes_auxiliares.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\sprites\sprites_util.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase4\fase4.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -93,24 +99,21 @@
     <Image Include="assets\images\spritesheets\navios_spritesheet.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\images\spritesheets\spritesheet_util.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\fases\fase2\fase2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\core\draw_tela.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\configs\config_tela.h">
+    <ClInclude Include="include\core\tela_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\core\teclado.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\fases\fase2\mouse_fase2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\configs\sprites\soldados_dimensions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\core\sprites\soldados_sprites.h">
@@ -137,9 +140,6 @@
     <ClInclude Include="include\main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\configs\sprites\navios_dimensions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\core\sprites\navios_sprites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -150,6 +150,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\core\funcoes_auxiliares.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\sprites\sprites_util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase4\fase4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,21 +1,28 @@
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_audio.h>
+#ifndef MAIN_H
+#define MAIN_H
 
-#ifndef GLOBALS_H
-#define GLOBALS_H
+#include <allegro5/allegro5.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_ttf.h>
 
 typedef struct {
     ALLEGRO_COLOR verde;
+    ALLEGRO_COLOR verde_opaco;
     ALLEGRO_COLOR amarelo;
     ALLEGRO_COLOR branco;
     ALLEGRO_COLOR preto;
+    ALLEGRO_COLOR cinza_opaco;
     ALLEGRO_COLOR vermelho;
 } CORES;
 
 typedef struct {
-    ALLEGRO_FONT* font;
-    ALLEGRO_FONT* font_size2;
-    ALLEGRO_FONT* font_fases;
+    ALLEGRO_FONT* font_small;
+    ALLEGRO_FONT* font_medium;
+    ALLEGRO_FONT* font_big;
     ALLEGRO_FONT* font_titulo;
     ALLEGRO_FONT* font_subtitulo;
 } FONTS;
@@ -24,7 +31,11 @@ typedef struct {
     ALLEGRO_MIXER* mixer;
     ALLEGRO_SAMPLE* gun_shot;
     ALLEGRO_AUDIO_STREAM* music;
+    float volume_general;
+    float volume_music;
+    float volume_effects;
 } SONS;
+
 
 // Enum de telas
 typedef enum {
@@ -35,20 +46,23 @@ typedef enum {
     FASE4,
     FASE5,
     INTRO_FASE
-} TELAS;
+} TELAS_PRINCIPAIS;
 
 // Struct 
-typedef struct {    
+typedef struct GameContext {
     bool exit_program;
-    ALLEGRO_EVENT_QUEUE* queue;    
+    bool play_music;
+    bool pause;
+    bool options;
+    ALLEGRO_EVENT_QUEUE* queue;
     ALLEGRO_TIMER* timer;
     ALLEGRO_DISPLAY* tela;		    // Monitor do jogador
     ALLEGRO_BITMAP* canvas;		    // Quadro/Bitmap onde o jogo vai ser desenhado
     ALLEGRO_TRANSFORM transform;	// Responsável por redimensionar a tela
     ALLEGRO_BITMAP* background;
 
-    TELAS estado_tela;
-    int fase_intro;
+    TELAS_PRINCIPAIS estado_tela;
+    int proxima_fase;
     CORES cores;
     FONTS fonts;
     SONS sons;
@@ -56,5 +70,5 @@ typedef struct {
 
 extern GameContext ctx;
 
-#endif // !GLOBALS_H
+#endif 
 

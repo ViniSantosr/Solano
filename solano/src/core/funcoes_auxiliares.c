@@ -2,7 +2,6 @@
 #pragma region Biblitotecas Externas
 #include <stdbool.h>
 #include <stdio.h>
-#include <locale.h>
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
@@ -16,6 +15,7 @@
 
 #pragma region Headers Game
 #include "main.h"
+#include "core/sprites/sprites_util.h"
 #pragma endregion
 
 #include "core/funcoes_auxiliares.h"
@@ -44,17 +44,18 @@ ALLEGRO_AUDIO_STREAM* switch_music(GameContext* ctx, ALLEGRO_AUDIO_STREAM* old_s
 	if (!new_stream) {
 		fprintf(stderr, "Erro: não foi possível carregar '%s'\n", path);
 		return NULL;
-	}
+	}	
 
 	// 3) configure e anexe
 	al_set_audio_stream_playmode(new_stream, ALLEGRO_PLAYMODE_LOOP);
+	al_set_audio_stream_gain(ctx->sons.music, 0.0f);
 	if (!al_attach_audio_stream_to_mixer(new_stream, ctx->sons.mixer)) {
 		fprintf(stderr, "Aviso: falha ao anexar stream ao mixer (verifique se o áudio está inicializado)\n");
 		// ainda assim retornamos o stream para escolha do chamador
 	}
 
 	// 4) comece a tocar
-	al_set_audio_stream_playing(new_stream, true);
+	al_set_audio_stream_playing(new_stream, ctx->play_music);
 	return new_stream;
 }
 
@@ -72,7 +73,7 @@ ALLEGRO_BITMAP* switch_background(GameContext* ctx, ALLEGRO_BITMAP* old_backgrou
 		fprintf(stderr, "Erro: não foi possível carregar '%s'\n", path);
 		return NULL;
 	}
-	
+
 	return new_background;
 }
 
@@ -81,4 +82,16 @@ ALLEGRO_BITMAP* sprite_grab(ALLEGRO_BITMAP* sheet, int x, int y, int w, int h)
 	ALLEGRO_BITMAP* sprite = al_create_sub_bitmap(sheet, x, y, w, h);
 	must_init(sprite, "sprite grab");
 	return sprite;
+}
+
+void load_mute_bitmap(GameContext* ctx, float x, float y)
+{
+	if (!ctx->play_music)
+	{
+		al_draw_bitmap(sprites_util.mute, x, y, 0);
+	}
+	else
+	{
+		al_draw_bitmap(sprites_util.desmute, x, y, 0);
+	}
 }
