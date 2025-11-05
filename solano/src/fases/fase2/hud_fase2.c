@@ -57,8 +57,8 @@ void hud_draw(GameContext* ctx)
 	int spacing = VIDA_W + 1;
 	for (int i = 0; i < soldado.vidas; i++)
 	{		
-		al_draw_tinted_bitmap(sprites.vida, ctx->cores.preto, (1 + (i * spacing)) + 1, 24 + 1, 0);
-		al_draw_tinted_bitmap(sprites.vida, ctx->cores.branco, 1 + (i * spacing), 24, 0);
+		al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.preto, (1 + (i * spacing)) + 1, 24 + 1, 0);
+		al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.branco, 1 + (i * spacing), 24, 0);
 	}
 
 }

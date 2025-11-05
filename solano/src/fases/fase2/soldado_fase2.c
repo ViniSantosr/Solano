@@ -139,5 +139,5 @@ void soldado_draw()
 	if (((soldado.invencivel_timer / 2) % 3) == 1)
 		return;
 
-	al_draw_bitmap(sprites.soldado[soldado.sprite], soldado.x, soldado.y, 0);
+	al_draw_bitmap(sprites_soldado.soldado[soldado.sprite], soldado.x, soldado.y, 0);
 }

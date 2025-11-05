@@ -57,7 +57,7 @@ typedef enum {
 } DIR_SOLDADO;
 
 // Declaração externa da variável global
-extern SPRITES_SOLDADOS sprites;
+extern SPRITES_SOLDADOS sprites_soldado;
 
 void sprites_soldados_init();
 

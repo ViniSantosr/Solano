@@ -17,6 +17,7 @@
 #include "core/funcoes_auxiliares.h"
 #include "core/tela_utils.h"
 #include "core/sprites/sprites_util.h"
+#include "core/sprites/soldados_sprites.h"
 #pragma endregion
 
 #include "telas/telas_gameplay.h"
@@ -68,9 +69,14 @@ void tela_pause(GameContext* ctx)
 		CANVAS_W / 2, CANVAS_H / 1.65, ALLEGRO_ALIGN_CENTER, "E -> Opções");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 1.52 + 2, ALLEGRO_ALIGN_CENTER, "Q -> Tela de Menu");
+		CANVAS_W / 2 + 2, CANVAS_H / 1.52 + 2, ALLEGRO_ALIGN_CENTER, "T -> Tutorial");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.amarelo,
-		CANVAS_W / 2, CANVAS_H / 1.52, ALLEGRO_ALIGN_CENTER, "Q -> Tela de Menu");
+		CANVAS_W / 2, CANVAS_H / 1.52, ALLEGRO_ALIGN_CENTER, "T -> Tutorial");
+
+	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
+		CANVAS_W / 2 + 2, CANVAS_H / 1.4 + 2, ALLEGRO_ALIGN_CENTER, "Q -> Tela de Menu");
+	al_draw_text(ctx->fonts.font_small, ctx->cores.amarelo,
+		CANVAS_W / 2, CANVAS_H / 1.4, ALLEGRO_ALIGN_CENTER, "Q -> Tela de Menu");
 
 }
 
@@ -163,4 +169,41 @@ void tela_opcoes(GameContext* ctx)
 		tela_opcoes_x + (tela_opcoes_w * 0.1) + 2, (tela_opcoes_h - 20) + 2, ALLEGRO_ALIGN_CENTER, "Esc -> Voltar");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.verde,
 		tela_opcoes_x + (tela_opcoes_w * 0.1), tela_opcoes_h - 20, ALLEGRO_ALIGN_CENTER, "Esc -> Voltar");
+}
+
+void tela_tutorial_combate_campo(GameContext* ctx)
+{
+
+	al_draw_scaled_bitmap(ctx->background,
+		0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
+		0, 0, CANVAS_W, CANVAS_H,
+		0);
+
+	al_draw_text(ctx->fonts.font_big, ctx->cores.preto, (CANVAS_W / 2) + 2, (CANVAS_H / 6) + 2, ALLEGRO_ALIGN_CENTER, "Mecânica: Combate no campo");
+	al_draw_text(ctx->fonts.font_big, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 6, ALLEGRO_ALIGN_CENTER, "Mecânica: Combate no campo");
+
+
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2) + 2, (CANVAS_H / 3.5) + 2, ALLEGRO_ALIGN_CENTER, "Movimentação:");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 3.5, ALLEGRO_ALIGN_CENTER, "Movimentação:");
+
+
+	al_draw_bitmap(sprites_soldado.soldado[BAIXO], (CANVAS_W / 2) - (SOLDADO_W[BAIXO] / 2), (CANVAS_H / 2) - (SOLDADO_H / 2), 0);
+
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, (CANVAS_H / 2 - 50) + 2, ALLEGRO_ALIGN_CENTER, "W");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 2 - 50, ALLEGRO_ALIGN_CENTER, "W");
+
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2 - 40) + 2, CANVAS_H / 2 + 2, ALLEGRO_ALIGN_CENTER, "A");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2 - 40, CANVAS_H / 2, ALLEGRO_ALIGN_CENTER, "A");
+
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, (CANVAS_H / 2 + 30) + 2, ALLEGRO_ALIGN_CENTER, "S");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, (CANVAS_H / 2 + 30), ALLEGRO_ALIGN_CENTER, "S");
+
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2 + 40), CANVAS_H / 2 + 2, ALLEGRO_ALIGN_CENTER, "D");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, (CANVAS_W / 2 + 40), CANVAS_H / 2, ALLEGRO_ALIGN_CENTER, "D");
+
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, CANVAS_H / 1.5 + 2, ALLEGRO_ALIGN_CENTER, "mira: mover com o mouse");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 1.5, ALLEGRO_ALIGN_CENTER, "mira: mover com o mouse");
+
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, CANVAS_H / 1.39  + 2, ALLEGRO_ALIGN_CENTER, "atirar: Botão direito do mouse");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 1.39, ALLEGRO_ALIGN_CENTER, "atirar: Botão direito do mouse");
 }

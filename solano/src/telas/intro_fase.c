@@ -12,14 +12,15 @@
 
 #pragma region Headers Game
 #include "core/tela_utils.h"
-#include "fases/fase2/fase2.h" // Header da fase 2
 #include "core/funcoes_auxiliares.h"
 #include "core/teclado.h"
+#include "core/sprites/soldados_sprites.h"
+#include "telas/telas_gameplay.h"
 #pragma endregion
 
 #include "telas/intro_fase.h"
 
-TextosConfigs textos[_FASES_N][3];
+TextosConfigsIntro textos[_FASES_N][3];
 
 void inicializar_intro(GameContext* ctx);
 
@@ -53,7 +54,8 @@ void intro_fase(GameContext* ctx, int fase_selected)
 	bool desenhar = false;
 
 	int frames = 0;         // contador de tempo (para piscar)
-	int texto_inicial = 360;
+	int texto_inicial = 480;
+	int tutorial = 240;
 	float pular_x = CANVAS_W - 150;
 	float pular_y = CANVAS_H - 25;
 
@@ -100,32 +102,36 @@ void intro_fase(GameContext* ctx, int fase_selected)
 			al_draw_scaled_bitmap(ctx->background,
 				0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 				0, 0, CANVAS_W, CANVAS_H,
-				0);
+				0);		
 
-			if (frames < texto_inicial)
+			if (frames < tutorial)
 			{
-				for (int fase = 0; fase < _FASES_N; fase++)
+				if (fase_selected == _FASE2)
 				{
-					if (fase == fase_selected)
-					{
-						for (int i = 0; i < 3; i++)
-						{
-							int sombra_x = textos[fase][i].x + 2;
-							int sombra_y = textos[fase][i].y + 1;
-
-							al_draw_text(ctx->fonts.font_big, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[fase][i].texto);
-							al_draw_text(ctx->fonts.font_big, textos[fase][i].cor, textos[fase][i].x, textos[fase][i].y, ALLEGRO_ALIGN_CENTER, textos[fase][i].texto);
-						}
-					}
+					tela_tutorial_combate_campo(ctx);
 				}
-
 			}
 			else
 			{
-				if (fase_selected == _FASE1)
+				if (frames < texto_inicial)
 				{
-					//Tutorial
+					for (int fase = 0; fase < _FASES_N; fase++)
+					{
+						if (fase == fase_selected)
+						{
+							for (int i = 0; i < 3; i++)
+							{
+								int sombra_x = textos[fase][i].x + 2;
+								int sombra_y = textos[fase][i].y + 1;
+
+								al_draw_text(ctx->fonts.font_big, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[fase][i].texto);
+								al_draw_text(ctx->fonts.font_big, textos[fase][i].cor, textos[fase][i].x, textos[fase][i].y, ALLEGRO_ALIGN_CENTER, textos[fase][i].texto);
+							}
+						}
+					}
+
 				}
+
 			}
 
 			if ((frames / 25) % 2 == 0)
@@ -142,17 +148,17 @@ void intro_fase(GameContext* ctx, int fase_selected)
 
 void inicializar_intro(GameContext* ctx)
 {
-	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/intro_fase_trilha.wav");	
+	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/intro_fase_trilha.wav");
 	if (!ctx->sons.music) {
 		ctx->estado_tela = TELA_MENU;
 		return;
 	}
 
-	textos[_FASE2][0] = (TextosConfigs){ "FASE 2", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
-	textos[_FASE2][1] = (TextosConfigs){ "Cerco de Uruguaiana (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
-	textos[_FASE2][2] = (TextosConfigs){ "META:  10.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+	textos[_FASE2][0] = (TextosConfigsIntro){ "FASE 2", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
+	textos[_FASE2][1] = (TextosConfigsIntro){ "Cerco de Uruguaiana (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
+	textos[_FASE2][2] = (TextosConfigsIntro){ "META:  10.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
 
-	textos[_FASE4][0] = (TextosConfigs){ "FASE 4", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
-	textos[_FASE4][1] = (TextosConfigs){ "Tomada de Assunção (1869)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
-	textos[_FASE4][2] = (TextosConfigs){ "META:  15.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+	textos[_FASE4][0] = (TextosConfigsIntro){ "FASE 4", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
+	textos[_FASE4][1] = (TextosConfigsIntro){ "Tomada de Assunção (1869)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
+	textos[_FASE4][2] = (TextosConfigsIntro){ "META:  15.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
 }

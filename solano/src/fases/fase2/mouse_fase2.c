@@ -64,7 +64,7 @@ void mouse_apply(ALLEGRO_DISPLAY* tela)
 
 void mouse_draw()
 {
-	al_draw_bitmap(sprites.mira, mira_x - (MIRA_W / 2), mira_y - (MIRA_H / 2), 0);
+	al_draw_bitmap(sprites_soldado.mira, mira_x - (MIRA_W / 2), mira_y - (MIRA_H / 2), 0);
 	/*al_draw_line(mira_x - 5, mira_y, mira_x + 5, mira_y, al_map_rgb(255, 0, 0), 2);
 	al_draw_line(mira_x, mira_y - 5, mira_x, mira_y + 5, al_map_rgb(255, 0, 0), 2);*/
 }

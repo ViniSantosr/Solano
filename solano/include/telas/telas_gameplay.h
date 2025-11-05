@@ -18,6 +18,7 @@ typedef enum {
 } TELAS_FASE;
 
 void tela_pause(GameContext* ctx);
+void tela_tutorial_combate_campo(GameContext* ctx);
 void tela_game_over(GameContext* ctx);
 void tela_concluido(GameContext* ctx);
 void tela_opcoes(GameContext* ctx);

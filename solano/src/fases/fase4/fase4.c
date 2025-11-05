@@ -232,14 +232,11 @@ void fase4(GameContext* ctx)
 			tela_pos_draw(ctx->canvas, ctx->tela);
 			desenhar = false;
 		}
-	}
-
-	sprites_soldados_deinit();
+	}	
 }
 
 void fase4_init(GameContext* ctx)
-{
-	sprites_soldados_init();
+{	
 	hud_init();
 
 	tiro_init();

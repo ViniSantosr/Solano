@@ -22,8 +22,8 @@
 #include "core/funcoes_auxiliares.h"
 #include "core/sprites/sprites_util.h"
 #include "core/tela_utils.h"
+#include "core/sprites/soldados_sprites.h"
 #pragma endregion
-
 
 #include "main.h"
 
@@ -124,6 +124,7 @@ void inicializar_game()
 
 	must_init(al_init_primitives_addon(), "primitives");
 
+	sprites_soldados_init();
 	sprites_util_init();
 
 	al_register_event_source(ctx.queue, al_get_keyboard_event_source());
@@ -167,6 +168,7 @@ void finalizar_game()
 	al_destroy_audio_stream(ctx.sons.music);
 	al_uninstall_audio();
 	sprites_util_deinit();
+	sprites_soldados_deinit();
 }
 
 void tela_init()

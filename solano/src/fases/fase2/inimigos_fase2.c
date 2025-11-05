@@ -158,7 +158,7 @@ void inimigo_draw()
 		if (inimigos[i].piscar > 2)
 			continue;
 
-		al_draw_bitmap(sprites.inimigo[inimigos[i].sprite], inimigos[i].x, inimigos[i].y, 0);
+		al_draw_bitmap(sprites_soldado.inimigo[inimigos[i].sprite], inimigos[i].x, inimigos[i].y, 0);
 	}
 }
 

@@ -47,6 +47,7 @@ void fase2(GameContext* ctx)
 	// Condições da fase
 	bool game_over = false;
 	bool pause = false;
+	bool tutorial = false;
 	bool concluido = false;
 	bool exit_tela = false;
 	bool desenhar = false;
@@ -71,7 +72,7 @@ void fase2(GameContext* ctx)
 			}
 
 			// Se o jogador vencer
-			if (score >= 1000) {
+			if (score >= 10050) {
 				concluido = true;
 			}
 
@@ -106,7 +107,7 @@ void fase2(GameContext* ctx)
 				case ALLEGRO_KEY_ESCAPE:
 					ctx->options = false;
 					pause = true;
-					break;
+					break;				
 
 				case ALLEGRO_KEY_DOWN:
 					if (ctx->sons.volume_general > 0.01)
@@ -124,7 +125,15 @@ void fase2(GameContext* ctx)
 					}
 					break;
 				}
-			}			
+			}		
+			else if (tutorial)
+			{
+				if (tecla[ALLEGRO_KEY_ESCAPE])
+				{
+					tutorial = false;
+					pause = true;
+				}
+			}
 			else if (pause)
 			{
 				switch (event.keyboard.keycode)
@@ -141,6 +150,10 @@ void fase2(GameContext* ctx)
 					break;
 				case ALLEGRO_KEY_E:
 					ctx->options = true;
+					break;
+
+				case ALLEGRO_KEY_T:					
+					tutorial = true;					
 					break;
 				}
 			}
@@ -211,8 +224,7 @@ void fase2(GameContext* ctx)
 				soldado_draw();
 				inimigo_draw();
 				mouse_draw();
-			}
-
+			}			
 
 			if (pause) // Se o jogo estiver em pausa
 			{
@@ -229,17 +241,20 @@ void fase2(GameContext* ctx)
 				tela_opcoes(ctx);
 			}
 
+			if (tutorial)
+			{
+				tela_tutorial_combate_campo(ctx);
+			}
+
 			tela_pos_draw(ctx->canvas, ctx->tela);
 			desenhar = false;
 		}
 	}
-
-	sprites_soldados_deinit();
 }
 
 void fase2_init(GameContext* ctx)
 {
-	sprites_soldados_init();
+	
 	hud_init();
 
 	tiro_init();

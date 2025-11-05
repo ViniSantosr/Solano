@@ -7,7 +7,7 @@ typedef struct {
 	float x;
 	float y;
 	ALLEGRO_COLOR cor;
-} TextosConfigs;
+} TextosConfigsIntro;
 
 typedef enum {
 	_FASE1 = 1,

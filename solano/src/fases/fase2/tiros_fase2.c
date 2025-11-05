@@ -179,7 +179,7 @@ void tiros_draw()
 
 		if (tiros[i].soldado)
 		{
-			al_draw_rotated_bitmap(sprites.soldado_tiros[frame_tiro],
+			al_draw_rotated_bitmap(sprites_soldado.soldado_tiros[frame_tiro],
 				SOLDADO_TIRO_W / 2, SOLDADO_TIRO_H / 2,
 				tiros[i].x, tiros[i].y,
 				angle - ALLEGRO_PI / 2,
@@ -188,7 +188,7 @@ void tiros_draw()
 		else
 		{
 
-			al_draw_rotated_bitmap(sprites.inimigo_tiros[frame_tiro],
+			al_draw_rotated_bitmap(sprites_soldado.inimigo_tiros[frame_tiro],
 				INIMIGO_TIRO_W / 2, INIMIGO_TIRO_H / 2,
 				tiros[i].x, tiros[i].y,
 				angle + ALLEGRO_PI / 2,
