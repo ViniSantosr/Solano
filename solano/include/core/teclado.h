@@ -1,8 +1,6 @@
 #ifndef TECLADO_H
 #define TECLADO_H
 
-#include <allegro5/allegro5.h>
-
 #define TECLA_REGISTRADA		1
 #define TECLA_PRESSIONADA		2
 

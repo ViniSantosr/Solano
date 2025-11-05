@@ -3,7 +3,7 @@
 #include <allegro5/allegro_color.h>
 #include <allegro5/allegro_image.h>
 
-#include "core/draw_tela.h"
+#include "core/tela_utils.h"
 
 void tela_pre_draw(ALLEGRO_BITMAP* canvas)
 {

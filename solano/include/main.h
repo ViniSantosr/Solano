@@ -1,15 +1,41 @@
-#ifndef GLOBALS_H
-#define GLOBALS_H
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_ttf.h>
 
-typedef struct CORES {
+typedef struct {
     ALLEGRO_COLOR verde;
+    ALLEGRO_COLOR verde_opaco;
     ALLEGRO_COLOR amarelo;
     ALLEGRO_COLOR branco;
     ALLEGRO_COLOR preto;
+    ALLEGRO_COLOR cinza_opaco;
+    ALLEGRO_COLOR vermelho;
 } CORES;
+
+typedef struct {
+    ALLEGRO_FONT* font_small;
+    ALLEGRO_FONT* font_medium;
+    ALLEGRO_FONT* font_big;
+    ALLEGRO_FONT* font_titulo;
+    ALLEGRO_FONT* font_subtitulo;
+} FONTS;
+
+typedef struct {
+    ALLEGRO_MIXER* mixer;
+    ALLEGRO_SAMPLE* gun_shot;
+    ALLEGRO_AUDIO_STREAM* music;
+    float volume_general;
+    float volume_music;
+    float volume_effects;
+} SONS;
+
 
 // Enum de telas
 typedef enum {
@@ -18,29 +44,31 @@ typedef enum {
     FASE2,
     FASE3,
     FASE4,
-    FASE5
-} TELAS;
+    FASE5,
+    INTRO_FASE
+} TELAS_PRINCIPAIS;
 
 // Struct 
 typedef struct GameContext {
-    TELAS estado_tela;
     bool exit_program;
+    bool play_music;
+    bool pause;
+    bool options;
     ALLEGRO_EVENT_QUEUE* queue;
-    ALLEGRO_FONT* font;
-    ALLEGRO_FONT* font_titulo;
-    ALLEGRO_FONT* font_subtitulo;
     ALLEGRO_TIMER* timer;
     ALLEGRO_DISPLAY* tela;		    // Monitor do jogador
     ALLEGRO_BITMAP* canvas;		    // Quadro/Bitmap onde o jogo vai ser desenhado
     ALLEGRO_TRANSFORM transform;	// Responsável por redimensionar a tela
-    ALLEGRO_BITMAP* background_menu;
+    ALLEGRO_BITMAP* background;
+
+    TELAS_PRINCIPAIS estado_tela;
+    int proxima_fase;
     CORES cores;
+    FONTS fonts;
+    SONS sons;
 } GameContext;
 
 extern GameContext ctx;
 
-void must_init(bool test, const char* description);
-ALLEGRO_BITMAP* sprite_grab(ALLEGRO_BITMAP* sheet, int x, int y, int w, int h);
-
-#endif // !GLOBALS_H
+#endif 
 

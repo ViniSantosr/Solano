@@ -1,9 +1,6 @@
 #ifndef MOUSE_FASE2_H
 #define MOUSE_FASE2_H
 
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_image.h>
-
 extern ALLEGRO_MOUSE_STATE mouse_state;
 // extern ALLEGRO_BITMAP* mira;
 

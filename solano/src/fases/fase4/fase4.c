@@ -32,14 +32,14 @@
 #include "main.h"
 #pragma endregion
 
-#include "fases/fase2/fase2.h"
+#include "fases/fase4/fase4.h"
 
 // Declaração das funções
-void fase2_init(GameContext* ctx); // Função de inicialização da fase 2
+void fase4_init(GameContext* ctx); // Função de inicialização da fase 2
 
-void fase2(GameContext* ctx)
+void fase4(GameContext* ctx)
 {
-	fase2_init(ctx);
+	fase4_init(ctx);
 
 	long frames = 0;
 	long score = 0;	
@@ -47,7 +47,6 @@ void fase2(GameContext* ctx)
 	// Condições da fase
 	bool game_over = false;
 	bool pause = false;
-	bool tutorial = false;
 	bool concluido = false;
 	bool exit_tela = false;
 	bool desenhar = false;
@@ -72,7 +71,7 @@ void fase2(GameContext* ctx)
 			}
 
 			// Se o jogador vencer
-			if (score >= 10050) {
+			if (score >= 15050) {
 				concluido = true;
 			}
 
@@ -107,7 +106,7 @@ void fase2(GameContext* ctx)
 				case ALLEGRO_KEY_ESCAPE:
 					ctx->options = false;
 					pause = true;
-					break;				
+					break;
 
 				case ALLEGRO_KEY_DOWN:
 					if (ctx->sons.volume_general > 0.01)
@@ -124,14 +123,6 @@ void fase2(GameContext* ctx)
 						al_set_mixer_gain(ctx->sons.mixer, ctx->sons.volume_general);
 					}
 					break;
-				}
-			}		
-			else if (tutorial)
-			{
-				if (tecla[ALLEGRO_KEY_ESCAPE])
-				{
-					tutorial = false;
-					pause = true;
 				}
 			}
 			else if (pause)
@@ -151,13 +142,9 @@ void fase2(GameContext* ctx)
 				case ALLEGRO_KEY_E:
 					ctx->options = true;
 					break;
-
-				case ALLEGRO_KEY_T:					
-					tutorial = true;					
-					break;
 				}
 			}
-			else 
+			else
 			{
 				switch (event.keyboard.keycode)
 				{
@@ -195,7 +182,7 @@ void fase2(GameContext* ctx)
 					exit_tela = true;
 					ctx->estado_tela = FASE2;
 				}
-			}			
+			}
 
 
 			break;
@@ -212,19 +199,20 @@ void fase2(GameContext* ctx)
 				0, 0, CANVAS_W, CANVAS_H,
 				0);
 			
-			hud_draw(ctx);			
+			hud_draw(ctx);
 
+			
 			if (concluido) // Se a fase foi concluída
 			{
 				tela_concluido(ctx);
 			}
-			else
+			else 
 			{
 				tiros_draw();
 				soldado_draw();
 				inimigo_draw();
 				mouse_draw();
-			}			
+			}
 
 			if (pause) // Se o jogo estiver em pausa
 			{
@@ -241,20 +229,14 @@ void fase2(GameContext* ctx)
 				tela_opcoes(ctx);
 			}
 
-			if (tutorial)
-			{
-				tela_tutorial_combate_campo(ctx);
-			}
-
 			tela_pos_draw(ctx->canvas, ctx->tela);
 			desenhar = false;
 		}
-	}
+	}	
 }
 
-void fase2_init(GameContext* ctx)
-{
-	
+void fase4_init(GameContext* ctx)
+{	
 	hud_init();
 
 	tiro_init();
