@@ -21,7 +21,7 @@
 #include "core/teclado.h"
 #include "main.h"
 #include "core/efeitos/efeito_gerais.h"
-#include "fases/fase2/fase2.h."
+#include "fases/fase2/fase2.h"
 
 //Headers exclusivamente da fase 1
 #include "fases/fase1/tiros_fase1.h"
@@ -35,7 +35,7 @@
 
 //Declaração das funções de Game Context que serão utilizadas na Fase 1
 Fase1Context f1_ctx;
-GameContext ctx;
+//GameContext ctx;
 
 void fase1_init(ALLEGRO_DISPLAY* tela);					//Função de inicialização da fase 1
 void fase1_gameplay_update(ALLEGRO_DISPLAY* tela);		//Função de atualizar os objetos na tela da fase 1
@@ -47,41 +47,55 @@ void tela_concluido_f1(ALLEGRO_FONT* font);
 
 bool jogo_em_inicio_f1();			//Enquanto o jogo está nos frames iniciais
 
-void fase1()
+void fase1(GameContext* ctx)
 {
-    must_init(al_init(), "allegro");
-    must_init(al_install_keyboard(), "keyboard");
+	fase1_init(ctx->tela);
+    // Variáveis de controle da fase
+    f1_ctx.game_over = false;
+    f1_ctx.pause = false;
+    f1_ctx.concluido = false;
+    f1_ctx.exit_tela = false;
+    f1_ctx.frames_iniciais = 240; // Número de frames iniciais para mostrar o objetivo da fase
+    bool desenhar = false;
+
+
+
+
+
+
+    //must_init(al_init(), "allegro");
+    //must_init(al_install_keyboard(), "keyboard");
 
     ALLEGRO_TIMER* timer = al_create_timer(1.0 / 60.0);
     must_init(timer, "timer");
 
-    ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
-    must_init(queue, "queue");
+    //ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
+    //must_init(queue, "queue");
 
-    //tela_init();
+    ////tela_init();
 
-    audio_init();
+    //audio_init();
 
-    must_init(al_init_image_addon(), "image");
-    iniciar_sprites();
+    //must_init(al_init_image_addon(), "image");
+    //iniciar_sprites();
 
-    iniciar_hud();
+    //iniciar_hud();
 
-    must_init(al_init_primitives_addon(), "primitives");
+    //must_init(al_init_primitives_addon(), "primitives");
 
-    must_init(al_install_audio(), "audio");
-    must_init(al_init_acodec_addon(), "audio codecs");
-    must_init(al_reserve_samples(16), "reserve samples");
+    //must_init(al_install_audio(), "audio");
+    //must_init(al_init_acodec_addon(), "audio codecs");
+    //must_init(al_reserve_samples(16), "reserve samples");
 
-    al_register_event_source(queue, al_get_keyboard_event_source());
-    al_register_event_source(queue, al_get_display_event_source(ctx.tela));
-    al_register_event_source(queue, al_get_timer_event_source(timer));
+    //al_register_event_source(queue, al_get_keyboard_event_source());
+    //al_register_event_source(queue, al_get_display_event_source(ctx->tela));
+    //al_register_event_source(queue, al_get_timer_event_source(timer));
 
-    teclado_init();
-    fx_init();
+    //teclado_init();
+    //fx_init();
     shots_init();
-    ship_init();
-    aliens_init();
+    //ship_init();
+    //aliens_init();
 
     f1_ctx.frames = 0;
     f1_ctx.score = 0;
@@ -92,9 +106,19 @@ void fase1()
 
     al_start_timer(timer);
 
-    while (!ctx.exit_program && !f1_ctx.exit_tela)
+    while (!ctx->exit_program && !f1_ctx.exit_tela)
     {
-        al_wait_for_event(ctx.queue, &event);
+        al_wait_for_event(ctx->queue, &event);
+
+        switch (event.type) {
+        case ALLEGRO_EVENT_TIMER: printf("EVENT: TIMER\n"); break;
+        case ALLEGRO_EVENT_DISPLAY_CLOSE: printf("EVENT: DISPLAY_CLOSE\n"); break;
+        case ALLEGRO_EVENT_KEY_DOWN: printf("EVENT: KEY_DOWN\n"); break;
+        case ALLEGRO_EVENT_MOUSE_AXES: printf("EVENT: MOUSE_AXES\n"); break;
+        default: printf("EVENT: %d\n", event.type); break;
+        }
+        fflush(stdout);
+
 
         switch (event.type)
         {
@@ -103,6 +127,14 @@ void fase1()
             if (ship.lives < 0){
                 f1_ctx.game_over = true;
             }
+
+            // Se o jogo não estiver em pausa ou acabado			
+            if (!f1_ctx.concluido && !f1_ctx.game_over && !f1_ctx.pause) {
+                fase1_gameplay_update(ctx->tela);
+            }
+
+            desenhar = true;
+
             fx_update();
             shots_update();
   
@@ -118,42 +150,107 @@ void fase1()
             break;
 
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
-            done = true;
+            ctx->exit_program = true;
+            break;
+        
+
+		case ALLEGRO_EVENT_KEY_DOWN:
+            if (!jogo_em_inicio_f1()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
+            {
+                if (tecla[ALLEGRO_KEY_SPACE])
+                {
+                    if (f1_ctx.concluido) // A fase foi concluída 
+                    {
+                        f1_ctx.exit_tela = true;
+                        ctx->estado_tela = FASE2;
+                    }
+
+                    if (f1_ctx.game_over) // Se o jogador perdeu
+                    {
+                        // Reinicia a fase
+                    }
+
+                    if (f1_ctx.pause) // Se o jogo estiver em pausa
+                    {
+                        f1_ctx.pause = false; // Retoma o jogo
+                    }
+                }
+
+
+                if (tecla[ALLEGRO_KEY_ESCAPE])
+                {
+                    if (f1_ctx.pause) // Se o jogo já estiver em pausa
+                    {
+                        f1_ctx.exit_tela = true;
+                        ctx->estado_tela = TELA_MENU;
+                    }
+                    else // Se o jogo não estiver em pausa
+                    {
+                        f1_ctx.pause = true; // Coloca o jogo em pausa
+                    }
+
+                    if (f1_ctx.concluido || f1_ctx.game_over)
+                    {
+                        f1_ctx.exit_tela = true;
+                        ctx->estado_tela = TELA_MENU;
+                    }
+                }
+            }
             break;
         }
 
-        if (done)
-            break;
 
-        teclado_update(&event);
 
-        if (redraw && al_is_event_queue_empty(queue))
+
+        // Draw (desenhar na tela)
+        if (desenhar && al_is_event_queue_empty(ctx->queue))
+
         {
-            tela_pre_draw(ctx.canvas);
+            tela_pre_draw(ctx->canvas);
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
-            
-            navios_draw();
-            shots_draw();
-            fx_draw();
-            ship_draw();
+            al_draw_scaled_bitmap(f1_ctx.background,
+                0, 0, al_get_bitmap_width(f1_ctx.background), al_get_bitmap_height(f1_ctx.background),
+                0, 0, CANVAS_W, CANVAS_H,
+                0);
 
-            desenhar_hud();
+            if (jogo_em_inicio_f1()) // Enquanto o jogo está nos frames iniciais
+            {
+                tela_inicial_f1(ctx);
+            }
+            else
+            {
+                fase1_gameplay_draw(ctx);
 
-            tela_pos_draw(ctx.canvas, ctx.tela);
-            redraw = false;
+                if (f1_ctx.pause) // Se o jogo estiver em pausa
+                {
+                    tela_pause_f1(ctx->font);
+                }
+
+                if (f1_ctx.concluido) // Se a fase foi concluída
+                {
+                    tela_concluido_f1(ctx->font);
+                }
+
+                if (f1_ctx.game_over) // Se o jogador perdeu
+                {
+                    tela_game_over_f1(ctx->font);
+                }
+            }
+
+            tela_pos_draw(ctx->canvas, ctx->tela);
+            desenhar = false;
         }
     }
-
-    destruir_sprites();
-    hud_deinit();
-    audio_deinit();
-    //tela_destroy();
-    al_destroy_timer(timer);
-    al_destroy_event_queue(queue);
-
-    return;
+    //destruir_sprites();
+    //hud_deinit();
+    //audio_deinit();
+    ////tela_destroy();
+    //al_destroy_timer(timer);
+    //al_destroy_event_queue(queue);
 }
+
+
 
 void fase1_init(ALLEGRO_DISPLAY* tela)
 {
@@ -173,6 +270,7 @@ void fase1_init(ALLEGRO_DISPLAY* tela)
 
 void fase1_gameplay_update(ALLEGRO_DISPLAY* tela)
 {
+	//teclado_update(&event);
     shots_update();
     ship_update();
     atualizar_hud();
@@ -321,5 +419,6 @@ void tela_concluido_f1(ALLEGRO_FONT* font)
 
 bool jogo_em_inicio_f1()
 {
-    return f2_ctx.frames < f2_ctx.frames_iniciais;
+    return f1_ctx.frames < f1_ctx.frames_iniciais;
 }
+

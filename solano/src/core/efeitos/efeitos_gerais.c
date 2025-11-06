@@ -44,8 +44,8 @@ void fx_init()// inicializa o array de efeitos colocando todas as suas posições 
 
 void fx_add(bool spark, int x, int y)// essa função é a necessaria por colocar o efeito na tela
 {
-    if (!spark)//se for uma explosão ele tocará o som de explosão
-        al_play_sample(sample_explode[between(0, 2)], 0.75, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
+    //if (!spark)//se for uma explosão ele tocará o som de explosão
+    //    al_play_sample(sample_explode[between(0, 2)], 0.75, 0, 1, ALLEGRO_PLAYMODE_ONCE, NULL);
 
     for (int i = 0; i < FX_N; i++)
     {

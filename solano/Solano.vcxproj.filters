@@ -81,6 +81,9 @@
     <ClCompile Include="src\core\efeitos\efeitos_gerais.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\fases\fase1\backup.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

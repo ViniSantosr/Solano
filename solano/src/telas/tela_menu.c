@@ -50,6 +50,16 @@ int tela_menu(GameContext* ctx)
 	while (!ctx->exit_program && !exit_tela)
 	{
 		al_wait_for_event(ctx->queue, &event);
+
+		// DEBUG: mostrar tipo de evento
+		printf("evento recebido: %d\n", event.type);
+		fflush(stdout);
+
+		if (event.type == ALLEGRO_EVENT_TIMER) {
+			printf(">> TIMER recebido (frame %d)\n", f1_ctx.frames);
+			fflush(stdout);
+		}
+
 		teclado_update(&event);
 
 		switch (event.type)

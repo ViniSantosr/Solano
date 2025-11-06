@@ -16,14 +16,14 @@ void shots_init()// inicializa os tiros e coloca todas suas posições como ainda 
 
 bool shots_add(bool ship, bool straight, int x, int y)//essa função adiciona o tiro na tela
 {
-    al_play_sample(
-        sample_shot,
-        0.3,
-        0,
-        ship ? 1.0 : between_f(1.5, 1.6),
-        ALLEGRO_PLAYMODE_ONCE,
-        NULL
-    );//a primeira coisa que a função faz é tocar o som do tiro, mudando ligeiramente se for do Alien ou da Nave
+    //al_play_sample(
+    //    sample_shot,
+    //    0.3,
+    //    0,
+    //    ship ? 1.0 : between_f(1.5, 1.6),
+    //    ALLEGRO_PLAYMODE_ONCE,
+    //    NULL
+    //);//a primeira coisa que a função faz é tocar o som do tiro, mudando ligeiramente se for do Alien ou da Nave
 
     for (int i = 0; i < SHOTS_N; i++)
     {
