@@ -189,7 +189,7 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 	sprites_navios_deinit();//sprites_soldados_deinit();
 }
 
-void fase1_init_f1(ALLEGRO_DISPLAY* tela)
+void fase1_init(ALLEGRO_DISPLAY* tela)
 {
 	sprites_navios_init();
 	iniciar_sprites();
@@ -205,7 +205,7 @@ void fase1_init_f1(ALLEGRO_DISPLAY* tela)
     must_init(f1_ctx.background, "fase 1 background");
 }
 
-void fase1_gameplay_update_f1(ALLEGRO_DISPLAY* tela)
+void fase1_gameplay_update(ALLEGRO_DISPLAY* tela)
 {
 	//mouse_apply(tela);
 	shots_update();
@@ -214,7 +214,7 @@ void fase1_gameplay_update_f1(ALLEGRO_DISPLAY* tela)
 	navios_update(); //navios_update(&f1_ctx);
 }
 
-void fase1_gameplay_draw_f1(GameContext* ctx)
+void fase1_gameplay_draw(GameContext* ctx)
 {
 	shots_draw();
 	ship_draw();
