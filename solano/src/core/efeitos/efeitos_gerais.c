@@ -95,7 +95,7 @@ void fx_draw()//essa função é responsavel por desenhas o efeito na tela
         int x = fx[i].x - (al_get_bitmap_width(bmp) / 2);//centraliza o efeito na posição X e abaixo na posição Y
         int y = fx[i].y - (al_get_bitmap_height(bmp) / 2);
         al_draw_bitmap(bmp, x, y, 0);//desenha o bitmap na tela
-        if(aliens->life[i] <= 0)
+        //if(aliens->life[i] <= 0)
             al_draw_text(ctx.font_subtitulo, ctx.cores.preto, fx[i].x, fx[i].y, ALLEGRO_ALIGN_CENTER, "TEXT EXEMPLE TEST");
 
     }
