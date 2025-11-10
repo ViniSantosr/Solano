@@ -93,13 +93,16 @@
     <Image Include="assets\images\rio_background.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="assets\images\campo_background.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="assets\images\spritesheets\navios_spritesheet.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\images\spritesheets\spritesheet_util.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\fase3_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\fase2_fundo.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -197,8 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\images\background_menu.bmp" />
+    <Image Include="assets\images\fase2_fundo.png" />
+    <Image Include="assets\images\fase3_fundo.png" />
     <Image Include="assets\images\rio_background.png" />
-    <Image Include="assets\images\campo_background.png" />
     <Image Include="assets\images\spritesheets\navios_spritesheet.png" />
     <Image Include="assets\images\spritesheets\spritesheet_util.png" />
     <Image Include="assets\images\spritesheets\tutorial_spritesheet.png" />

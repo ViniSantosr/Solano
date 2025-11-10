@@ -210,9 +210,7 @@ void fase2(GameContext* ctx)
 			al_draw_scaled_bitmap(ctx->background,
 				0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 				0, 0, CANVAS_W, CANVAS_H,
-				0);
-			
-			hud_draw(ctx);			
+				0);								
 
 			if (concluido) // Se a fase foi concluída
 			{
@@ -246,6 +244,8 @@ void fase2(GameContext* ctx)
 				tela_tutorial_combate_campo(ctx);
 			}
 
+			hud_draw(ctx);
+
 			tela_pos_draw(ctx->canvas, ctx->tela);
 			desenhar = false;
 		}
@@ -266,7 +266,7 @@ void fase2_init(GameContext* ctx)
 	mira_x = CANVAS_W / 2;
 	mira_y = (CANVAS_H / 2) - SOLDADO_H * 2;
 
-	ctx->background = switch_background(ctx, ctx->background, "assets/images/campo_background.png");
+	ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
 	if (!ctx->background) {
 		ctx->estado_tela = TELA_MENU;
 		return;

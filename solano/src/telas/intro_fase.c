@@ -31,8 +31,15 @@ void intro_fase(GameContext* ctx, int fase_selected)
 	switch (fase_selected)
 	{
 	case _FASE1:
-	case _FASE3:
 		ctx->background = switch_background(ctx, ctx->background, "assets/images/rio_background.png");
+		if (!ctx->background) {
+			ctx->estado_tela = TELA_MENU;
+			return;
+		}
+		break;
+
+	case _FASE3:
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase3_fundo.png");
 		if (!ctx->background) {
 			ctx->estado_tela = TELA_MENU;
 			return;
@@ -42,7 +49,7 @@ void intro_fase(GameContext* ctx, int fase_selected)
 	case _FASE2:
 	case _FASE4:
 	case _FASE5:
-		ctx->background = switch_background(ctx, ctx->background, "assets/images/campo_background.png");
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
 		if (!ctx->background) {
 			ctx->estado_tela = TELA_MENU;
 			return;
