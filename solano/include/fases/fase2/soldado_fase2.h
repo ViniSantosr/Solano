@@ -6,8 +6,8 @@
 typedef struct SOLDADO
 {
 	float x, y;
-	int max_x, max_y;
-	int w;
+	int max_x, max_y;	
+	long frame;
 	int sprite;
 	int tiro_timer;
 	int vidas;

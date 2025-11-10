@@ -246,7 +246,7 @@ void fase4_init(GameContext* ctx)
 	inimigo_init();
 
 	mira_x = CANVAS_W / 2;
-	mira_y = (CANVAS_H / 2) - SOLDADO_H * 2;
+	mira_y = (CANVAS_H / 2) - SOLDADOS_H * 2;
 
 	ctx->background = switch_background(ctx, ctx->background, "assets/images/campo_background.png");
 	if (!ctx->background) {

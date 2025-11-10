@@ -51,6 +51,7 @@ void fase2(GameContext* ctx)
 	bool concluido = false;
 	bool exit_tela = false;
 	bool desenhar = false;
+	
 
 	ALLEGRO_EVENT event;
 	while (!ctx->exit_program && !exit_tela)  // Lógica do jogo
@@ -264,7 +265,7 @@ void fase2_init(GameContext* ctx)
 	inimigo_init();
 
 	mira_x = CANVAS_W / 2;
-	mira_y = (CANVAS_H / 2) - SOLDADO_H * 2;
+	mira_y = (CANVAS_H / 2) - SOLDADOS_H * 2;
 
 	ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
 	if (!ctx->background) {
