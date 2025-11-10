@@ -194,8 +194,8 @@ void fase1_init(ALLEGRO_DISPLAY* tela)
 	sprites_navios_init();
 	iniciar_sprites();
 	iniciar_hud();
-
-   shots_init();
+	fx_init();
+    shots_init();
     teclado_init();
     ship_init();
     aliens_init();
@@ -212,6 +212,7 @@ void fase1_gameplay_update(ALLEGRO_DISPLAY* tela)
 	ship_update();
 	atualizar_hud(); //atualizar_hud(&f1_ctx);
 	navios_update(); //navios_update(&f1_ctx);
+	fx_update();
 }
 
 void fase1_gameplay_draw(GameContext* ctx)
@@ -220,6 +221,7 @@ void fase1_gameplay_draw(GameContext* ctx)
 	ship_draw();
 	navios_draw(&f1_ctx); //navios_draw(&f1_ctx);
 	desenhar_hud(); //desenhar_hud(ctx->font, &f1_ctx);
+	fx_draw();
 }
 
 void tela_inicial_f1(GameContext* ctx)
