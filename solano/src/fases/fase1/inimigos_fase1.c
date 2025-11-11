@@ -194,6 +194,8 @@ void navios_draw()// essa função desenha os aliens na tela
         if (aliens[i].blink > 2)//se estiver piscando por dano, pula o desenho do alien
             continue;
 
+        
+
         al_draw_bitmap(sprites_n.alien[aliens[i].type], aliens[i].x, aliens[i].y, 0);//se passar pelas duas verificações então ele desenha o alien na tela
     }
 }

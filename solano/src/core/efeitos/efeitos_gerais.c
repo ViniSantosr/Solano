@@ -6,6 +6,7 @@
 #include <stdbool.h>                    // tipo bool
 #include "fases/fase2/coisas_gerais_fase2.h"              // must_init e funções utilitárias gerais
 #include "core/sprites/sprites_fase2.h"   
+#include "fases/fase1/fase1.h" 
 #include "core/Efeitos/efeito_gerais.h"
 #include "main.h"
 #include "fases/fase1/inimigos_fase1.h"
@@ -95,11 +96,25 @@ void fx_draw()//essa função é responsavel por desenhas o efeito na tela
         int x = fx[i].x - (al_get_bitmap_width(bmp) / 2);//centraliza o efeito na posição X e abaixo na posição Y
         int y = fx[i].y - (al_get_bitmap_height(bmp) / 2);
         al_draw_bitmap(bmp, x, y, 0);//desenha o bitmap na tela
-        //if(aliens->life[i] <= 0)
-            al_draw_text(ctx.font_subtitulo, ctx.cores.preto, fx[i].x, fx[i].y, ALLEGRO_ALIGN_CENTER, "TEXT EXEMPLE TEST");
+        /*if(aliens->life[i] <= 0)
+            al_draw_text(ctx.font_subtitulo, ctx.cores.preto, fx[i].x, fx[i].y, ALLEGRO_ALIGN_CENTER, "TEXT EXEMPLE TEST");*/
 
     }
 
-
-
+    for (int i = 0; i < ALIENS_N; i++)
+    {
+        if (aliens[i].life <= 0 && aliens[i].y > 1) {
+             if (f1_ctx.frames % 3) {
+                 if (aliens[i].type == 0) {
+                        al_draw_text(ctx.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "200");
+                 }
+                 if (aliens[i].type == 1) {
+                     al_draw_text(ctx.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "150");
+                 }
+                 if (aliens[i].type == 2) {
+                     al_draw_text(ctx.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "800");
+                 }
+             }
+         }   
+    }
 }

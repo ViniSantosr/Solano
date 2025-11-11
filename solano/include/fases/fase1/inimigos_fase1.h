@@ -20,7 +20,8 @@ typedef struct ALIEN //elementos do alien
     int shot_timer;
     int blink;//pisca pisca após danos
     int life;
-    //int movimento;
+    //double morte;
+   
     bool volta;
     bool used;
 } ALIEN;
