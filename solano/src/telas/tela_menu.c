@@ -125,7 +125,7 @@ void tela_menu(GameContext* ctx)
 					switch (selected)
 					{
 					case NOVO_JOGO:
-						ctx->proxima_fase = 2;
+						ctx->proxima_fase = 3;
 						ctx->estado_tela = INTRO_FASE;
 						exit_tela = true;
 						break;
@@ -187,7 +187,7 @@ void inicializar_menu(GameContext* ctx)
 	menu_ctx.titulo = "SOLANO";
 	menu_ctx.subtitulo = "A Guerra do Paraguai";
 
-	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/menu_trilha.ogg");
+	switch_music(ctx, ctx->sons.music, "assets/sounds/menu_trilha.ogg");
 	ctx->background = switch_background(ctx, ctx->background, "assets/images/background_menu.bmp");
 }
 

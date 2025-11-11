@@ -35,11 +35,15 @@
 #include "fases/fase2/fase2.h"
 
 // Declaração das funções
-void fase2_init(GameContext* ctx); // Função de inicialização da fase 2
+bool fase2_init(GameContext* ctx); // Função de inicialização da fase 2
 
 void fase2(GameContext* ctx)
 {
-	fase2_init(ctx);
+	if (!fase2_init(ctx))
+	{
+		ctx->estado_tela = TELA_MENU;
+		return;
+	}
 
 	long frames = 0;
 	long score = 0;	
@@ -145,10 +149,12 @@ void fase2(GameContext* ctx)
 						pause = false;
 					}
 					break;
+
 				case ALLEGRO_KEY_Q:
 					exit_tela = true;
 					ctx->estado_tela = TELA_MENU;
 					break;
+
 				case ALLEGRO_KEY_E:
 					ctx->options = true;
 					break;
@@ -183,7 +189,7 @@ void fase2(GameContext* ctx)
 				if (tecla[ALLEGRO_KEY_SPACE])
 				{
 					exit_tela = true;
-					ctx->proxima_fase = 4;
+					ctx->proxima_fase += 1;
 					ctx->estado_tela = INTRO_FASE;
 				}
 			}
@@ -225,6 +231,8 @@ void fase2(GameContext* ctx)
 				mouse_draw();
 			}			
 
+			hud_draw(ctx);
+
 			if (pause) // Se o jogo estiver em pausa
 			{
 				tela_pause(ctx);
@@ -243,9 +251,7 @@ void fase2(GameContext* ctx)
 			if (tutorial)
 			{
 				tela_tutorial_combate_campo(ctx);
-			}
-
-			hud_draw(ctx);
+			}			
 
 			tela_pos_draw(ctx->canvas, ctx->tela);
 			desenhar = false;
@@ -253,9 +259,8 @@ void fase2(GameContext* ctx)
 	}
 }
 
-void fase2_init(GameContext* ctx)
+bool fase2_init(GameContext* ctx)
 {
-	
 	hud_init();
 
 	tiro_init();
@@ -268,14 +273,12 @@ void fase2_init(GameContext* ctx)
 	mira_y = (CANVAS_H / 2) - SOLDADOS_H * 2;
 
 	ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
-	if (!ctx->background) {
-		ctx->estado_tela = TELA_MENU;
-		return;
-	}
+	if (!ctx->background)
+		return false;
 
-	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/fase_battle_trilha.ogg");
-	if (!ctx->sons.music) {
-		ctx->estado_tela = TELA_MENU;
-		return;
-	}
+
+	switch_music(ctx, ctx->sons.music, "assets/sounds/fase_battle_trilha.ogg");	
+
+	return true;
 }
+

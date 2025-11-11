@@ -17,6 +17,7 @@
 #pragma region Headers Game
 #include "telas/tela_menu.h"
 #include "fases/fase2/fase2.h"
+#include "fases/fase3/fase3.h"
 #include "fases/fase4/fase4.h"
 #include "telas/intro_fase.h"
 #include "core/funcoes_auxiliares.h"
@@ -52,6 +53,9 @@ int main()
 			break;*/
 		case FASE2:
 			fase2(&ctx);
+			break;
+		case FASE3:
+			fase3(&ctx);
 			break;
 		case FASE4:
 			fase4(&ctx);

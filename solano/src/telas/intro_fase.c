@@ -24,9 +24,16 @@ TextosConfigsIntro textos[_FASES_N][3];
 
 void inicializar_intro(GameContext* ctx);
 
+bool has_tutorial;
+
+float pular_x = CANVAS_W - 150;
+float pular_y = CANVAS_H - 25;
+
 void intro_fase(GameContext* ctx, int fase_selected)
 {
 	inicializar_intro(ctx);
+
+	bool has_tutorial = false;
 
 	switch (fase_selected)
 	{
@@ -38,15 +45,24 @@ void intro_fase(GameContext* ctx, int fase_selected)
 		}
 		break;
 
-	case _FASE3:
-		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase3_fundo.png");
+	case _FASE2:
+		has_tutorial = true;
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
 		if (!ctx->background) {
 			ctx->estado_tela = TELA_MENU;
 			return;
 		}
 		break;
 
-	case _FASE2:
+	case _FASE3:
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase3_fundo.png");
+		if (!ctx->background) {
+			must_init(ctx->background, "fase3_fundo");
+			ctx->estado_tela = TELA_MENU;
+			return;
+		}
+		break;
+
 	case _FASE4:
 	case _FASE5:
 		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
@@ -60,11 +76,9 @@ void intro_fase(GameContext* ctx, int fase_selected)
 	bool exit_tela = false;
 	bool desenhar = false;
 
-	int frames = 0;         // contador de tempo (para piscar)
-	int texto_inicial = 480;
-	int tutorial = 240;
-	float pular_x = CANVAS_W - 150;
-	float pular_y = CANVAS_H - 25;
+	int frames = 0; // contador de tempo (para piscar)
+	int texto_inicial = has_tutorial ? 480 : 240;
+	int tutorial = has_tutorial ? 240 : 0;
 
 	ALLEGRO_EVENT event;
 
@@ -109,13 +123,38 @@ void intro_fase(GameContext* ctx, int fase_selected)
 			al_draw_scaled_bitmap(ctx->background,
 				0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 				0, 0, CANVAS_W, CANVAS_H,
-				0);		
+				0);
 
-			if (frames < tutorial)
+			if (has_tutorial)
 			{
-				if (fase_selected == _FASE2)
+				if (frames < tutorial)
 				{
-					tela_tutorial_combate_campo(ctx);
+					if (fase_selected == _FASE2)
+					{
+						tela_tutorial_combate_campo(ctx);
+					}
+				}
+				else
+				{
+					if (frames < texto_inicial)
+					{
+						for (int fase = 0; fase < _FASES_N; fase++)
+						{
+							if (fase == fase_selected)
+							{
+								for (int i = 0; i < 3; i++)
+								{
+									int sombra_x = textos[fase][i].x + 2;
+									int sombra_y = textos[fase][i].y + 1;
+
+									al_draw_text(ctx->fonts.font_big, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[fase][i].texto);
+									al_draw_text(ctx->fonts.font_big, textos[fase][i].cor, textos[fase][i].x, textos[fase][i].y, ALLEGRO_ALIGN_CENTER, textos[fase][i].texto);
+								}
+							}
+						}
+
+					}
+
 				}
 			}
 			else
@@ -138,8 +177,9 @@ void intro_fase(GameContext* ctx, int fase_selected)
 					}
 
 				}
-
 			}
+
+
 
 			if ((frames / 25) % 2 == 0)
 			{
@@ -155,15 +195,16 @@ void intro_fase(GameContext* ctx, int fase_selected)
 
 void inicializar_intro(GameContext* ctx)
 {
-	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/intro_fase_trilha.wav");
-	if (!ctx->sons.music) {
-		ctx->estado_tela = TELA_MENU;
-		return;
-	}
+	switch_music(ctx, ctx->sons.music, "assets/sounds/intro_fase_trilha.wav");
+	
 
 	textos[_FASE2][0] = (TextosConfigsIntro){ "FASE 2", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
 	textos[_FASE2][1] = (TextosConfigsIntro){ "Cerco de Uruguaiana (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
 	textos[_FASE2][2] = (TextosConfigsIntro){ "META:  10.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+
+	textos[_FASE3][0] = (TextosConfigsIntro){ "FASE 3", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
+	textos[_FASE3][1] = (TextosConfigsIntro){ "Batalha de Tuiuti (1866)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
+	textos[_FASE3][2] = (TextosConfigsIntro){ "META:  Sobreviva por 1 minuto", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
 
 	textos[_FASE4][0] = (TextosConfigsIntro){ "FASE 4", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
 	textos[_FASE4][1] = (TextosConfigsIntro){ "Tomada de Assunção (1869)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };

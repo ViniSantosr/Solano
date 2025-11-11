@@ -72,6 +72,12 @@
     <ClCompile Include="src\fases\fase4\fase4.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\fases\fase3\fase3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase3\hud_fase3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -103,6 +109,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\images\fase2_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\fase1_fundo.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -159,6 +168,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\fases\fase4\fase4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase3\fase3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase3\hud_fase3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
