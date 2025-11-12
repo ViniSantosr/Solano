@@ -16,12 +16,13 @@
 
 #pragma region Headers Game
 //Headers que não fazem parte exclusivamente da fase 1
-#include "core/draw_tela.h"
+//#include "core/draw_tela.h"
 #include "configs/config_tela.h"
 #include "core/teclado.h"
 #include "main.h"
 #include "core/efeitos/efeito_gerais.h"
 #include "fases/fase2/fase2.h"
+#include "core/tela_utils.h"
 
 //Headers exclusivamente da fase 1
 #include "fases/fase1/tiros_fase1.h"
