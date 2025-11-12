@@ -20,16 +20,16 @@ void iniciar_sprites()//aqui temos a função que inicializa todos os sprites
 
     sprites_n.ship = cortar_sprites(672, 544, SHIP_W, SHIP_H);
 
-    sprites_n.ship_shot[0] = cortar_sprites(13, 0, SHIP_SHOT_W, SHIP_SHOT_H);//apesar de já ter sido explicado anteriormente, aqui temos a função sprite_grab sendo usada para recortar o sprite
+    sprites_n.ship_shot[0] = cortar_sprites(588, 544, SHIP_SHOT_W, SHIP_SHOT_H);//apesar de já ter sido explicado anteriormente, aqui temos a função sprite_grab sendo usada para recortar o sprite
     sprites_n.ship_shot[1] = cortar_sprites(16, 0, SHIP_SHOT_W, SHIP_SHOT_H);//e atribuindo ao struct na posição referente ao sprite recortado, bem simples de entender mas importante se recordar sempre!!
 
     sprites_n.life = cortar_sprites(0, 14, LIFE_W, LIFE_H);
 
-    sprites_n.alien[0] = cortar_sprites(19, 0, ALIEN_BUG_W, ALIEN_BUG_H);
-    sprites_n.alien[1] = cortar_sprites(19, 10, ALIEN_ARROW_W, ALIEN_ARROW_H);
-    sprites_n.alien[2] = cortar_sprites(0, 21, ALIEN_THICCBOI_W, ALIEN_THICCBOI_H);
+    sprites_n.alien[0] = cortar_sprites(62, 174, ALIEN_BUG_W, ALIEN_BUG_H);
+    sprites_n.alien[1] = cortar_sprites(75, 355, ALIEN_ARROW_W, ALIEN_ARROW_H);
+    sprites_n.alien[2] = cortar_sprites(259, 136, ALIEN_THICCBOI_W, ALIEN_THICCBOI_H);
 
-    sprites_n.alien_shot = cortar_sprites(13, 10, ALIEN_SHOT_W, ALIEN_SHOT_H);
+    sprites_n.alien_shot = cortar_sprites(281, 261, ALIEN_SHOT_W, ALIEN_SHOT_H);
 
     sprites_n.explosion[0] = cortar_sprites(33, 10, 9, 9);
     sprites_n.explosion[1] = cortar_sprites(43, 9, 11, 11);

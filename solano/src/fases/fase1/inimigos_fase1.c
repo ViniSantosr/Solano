@@ -12,8 +12,8 @@
 Fase1Context f1_ctx;
 
 
-const int ALIEN_W[] = { 14, 13, 45 };
-const int ALIEN_H[] = { 9, 10, 27 };
+const int ALIEN_W[] = { 32, 48, 54 };
+const int ALIEN_H[] = { 47, 83, 132 };
 
 
 void aliens_init()//inicializa os aliens colocando todas posições em não usados

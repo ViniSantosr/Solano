@@ -7,10 +7,10 @@
 #define SHIP_H 128// por isso, definimos constantes de altura e largura de cada objeto do spritesheet, esse será um padrão para todos que tiverem um _H e _W
 
 #define SHIP_SHOT_W 2
-#define SHIP_SHOT_H 9
+#define SHIP_SHOT_H 3
 
-#define LIFE_W 6
-#define LIFE_H 6
+#define LIFE_W 2
+#define LIFE_H 3
 
 extern const int ALIEN_W[];// neste caso, como temos 3 categorias diferentes de Aliens, definimos um array que guarda a altura e largura de cada um dentro do spritesheet
 extern const int ALIEN_H[];
@@ -23,7 +23,7 @@ extern const int ALIEN_H[];
 #define ALIEN_THICCBOI_H ALIEN_H[2]
 
 #define ALIEN_SHOT_W 4
-#define ALIEN_SHOT_H 4
+#define ALIEN_SHOT_H 6
 
 #define FRAMES_EXPLOSAO 4
 #define FRAMES_RAIO    3
