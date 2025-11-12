@@ -37,10 +37,9 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
         {
             if (new_quota > 0)//se o alien ainda não estiver em uso e houver espaço para novos aliens
             {
-                new_x += between(40, 80);//define nova posição dos aliens
+                new_x += between(300, 380);//define nova posição dos aliens
                 if (new_x > (CANVAS_W - 60))
                     new_x -= (CANVAS_W - 60);
-
 
 
                 aliens[i].x = new_x;
@@ -57,13 +56,13 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
                 switch (aliens[i].type)//preenche a vida do alien dependendo do tipo de alien escolhido
                 {
                 case ALIEN_TYPE_BUG:
-                    aliens[i].life = 4;
+                    aliens[i].life = 6;
                     break;
                 case ALIEN_TYPE_ARROW:
-                    aliens[i].life = 2;
+                    aliens[i].life = 4;
                     break;
                 case ALIEN_TYPE_THICCBOI:
-                    aliens[i].life = 12;
+                    aliens[i].life = 24;
                     break;
                 }
 
@@ -110,8 +109,24 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
             break;
 
         case ALIEN_TYPE_THICCBOI:
-            if (!(f1_ctx.frames % 4))
+            if (!(f1_ctx.frames % 5))
                 aliens[i].y++;
+
+            if (!(f1_ctx.frames % 8))
+            {
+                if (aliens[i].volta) {
+                    aliens[i].x++;
+                    aliens[i].movimento++;
+                    if (aliens[i].movimento > 23)
+                        aliens[i].volta = false;
+                }
+                else {
+                    aliens[i].x--;
+                    aliens[i].movimento--;
+                    if (aliens[i].movimento < -23)
+                        aliens[i].volta = true;
+                }
+            }
 
             break;
         }
@@ -178,7 +193,7 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
                 shots_add(false, true, cx + 5, cy);
                 shots_add(false, true, cx - 5, cy + 8);
                 shots_add(false, true, cx + 5, cy + 8);
-                aliens[i].shot_timer = 200;
+                aliens[i].shot_timer = 125;
                 break;
             }
         }
