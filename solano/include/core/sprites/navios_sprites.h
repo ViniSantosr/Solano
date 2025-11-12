@@ -1,8 +1,12 @@
 #ifndef NAVIOS_SOLDADOS_H
 #define NAVIOS_SOLDADOS_H
 
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_image.h>
+#pragma region Dimensions
+
+#define NAVIO_W	46
+#define NAVIO_H	128
+
+#pragma endregion
 
 typedef struct SPRITES_NAVIOS {	
 	ALLEGRO_BITMAP* _navios_sheet;

@@ -6,7 +6,9 @@
 #pragma endregion
 
 #pragma region Headers Game
-#include "configs/config_tela.h"
+#include "fases/fase2/soldado_fase2.h"
+#include "core/sprites/soldados_sprites.h"
+#include "core/tela_utils.h"
 #pragma endregion
 
 #include "fases/fase2/mouse_fase2.h"
@@ -23,12 +25,7 @@ float mira_dy;
 void mouse_init(ALLEGRO_DISPLAY* tela)
 {
 	al_grab_mouse(tela);
-	al_hide_mouse_cursor(tela);
-
-	/*
-	mira = al_load_bitmap("src/allegro_example/data/cursor.tga");
-	must_init(mira, "mira");
-	*/
+	al_hide_mouse_cursor(tela);	
 }
 
 void mouse_update(ALLEGRO_EVENT* event)
@@ -39,9 +36,7 @@ void mouse_update(ALLEGRO_EVENT* event)
 	{
 	case ALLEGRO_EVENT_MOUSE_AXES:
 		mira_dx += event->mouse.dx;
-		mira_dy += event->mouse.dy;
-
-
+		mira_dy += event->mouse.dy;		
 
 		break;
 	}
@@ -69,8 +64,8 @@ void mouse_apply(ALLEGRO_DISPLAY* tela)
 
 void mouse_draw()
 {
-	//al_draw_bitmap(mira, mouse_state.x, mouse_state.y, 0);
-	al_draw_line(mira_x - 5, mira_y, mira_x + 5, mira_y, al_map_rgb(255, 0, 0), 2);
-	al_draw_line(mira_x, mira_y - 5, mira_x, mira_y + 5, al_map_rgb(255, 0, 0), 2);
+	al_draw_bitmap(sprites_soldado.mira, mira_x - (MIRA_W / 2), mira_y - (MIRA_H / 2), 0);
+	/*al_draw_line(mira_x - 5, mira_y, mira_x + 5, mira_y, al_map_rgb(255, 0, 0), 2);
+	al_draw_line(mira_x, mira_y - 5, mira_x, mira_y + 5, al_map_rgb(255, 0, 0), 2);*/
 }
 

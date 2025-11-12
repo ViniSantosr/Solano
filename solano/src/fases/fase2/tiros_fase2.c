@@ -1,7 +1,6 @@
-#include "fases/fase2/tiros_fase2.h"
 
 #pragma region Biblitotecas Externas
-
+#include <stdio.h>
 #include <allegro5/allegro5.h>
 #include <math.h>
 
@@ -10,14 +9,12 @@
 #pragma region Headers Game
 
 #include "main.h"
-#include "configs/sprites/soldados_dimensions.h"
-#include "configs/config_tela.h"
 #include "core/sprites/soldados_sprites.h"
 #include "fases/fase2/coisas_gerais_fase2.h"
-
+#include "core/tela_utils.h"
 #pragma endregion
 
-
+#include "fases/fase2/tiros_fase2.h"
 
 TIRO tiros[TIROS_N];
 
@@ -40,7 +37,16 @@ void tiro_init()
 }
 
 bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float alvo_y, float vel)
-{
+{	
+	al_play_sample(
+		ctx.sons.gun_shot,
+		soldado ? 0.3 : 0.1,
+		0,
+		soldado? 1.5 : 2,
+		ALLEGRO_PLAYMODE_ONCE,
+		NULL
+	);
+
 	for (int i = 0; i < TIROS_N; i++)
 	{
 		if (tiros[i].usado)
@@ -55,7 +61,7 @@ bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float al
 			tiros[i].dx = 0;
 			tiros[i].dy = 0;
 
-			calcular_direcao(true, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
+			calcular_direcao_vel(x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
 		}
 		else
 		{
@@ -67,12 +73,12 @@ bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float al
 				tiros[i].dx = 1;
 				tiros[i].dy = 2;
 
-				calcular_direcao(false, x, y, alvo_x, alvo_y, &tiros[i].dx, &tiros[i].dy, vel);
+				calcular_direcao_vel(alvo_x, alvo_y, x, y, &tiros[i].dx, &tiros[i].dy, vel);
 			}
 			else
 			{
-				tiros[i].dx = between(-2, 2);
-				tiros[i].dy = between(-2, 2);
+				tiros[i].dx = between(1, 2);
+				tiros[i].dy = between(1, 2);
 			}
 
 			// Se o tiro não tiver velocidade, não executa
@@ -126,7 +132,7 @@ void tiros_update()
 	}
 }
 
-bool tiros_collide(bool soldado, float x, float y, float w, float h)
+bool tiros_collide(bool soldado, float x, float y, int w, int h)
 {
 	for (int i = 0; i < TIROS_N; i++)
 	{
@@ -168,26 +174,25 @@ void tiros_draw()
 		if (!tiros[i].usado)
 			continue;
 
-		int frame_tela = (tiros[i].frame / 2) % 2;
+		int frame_tiro = (tiros[i].frame / 2) % 3;		
 		float angle = atan2f(tiros[i].dy, tiros[i].dx);
 
 		if (tiros[i].soldado)
 		{
-			al_draw_rotated_bitmap(sprites.soldado_tiros[frame_tela],
+			al_draw_rotated_bitmap(sprites_soldado.soldado_tiros[frame_tiro],
 				SOLDADO_TIRO_W / 2, SOLDADO_TIRO_H / 2,
 				tiros[i].x, tiros[i].y,
-				angle + ALLEGRO_PI / 2,
+				angle - ALLEGRO_PI / 2,
 				0);
 		}
 		else
 		{
 
-			ALLEGRO_COLOR tint =
-				frame_tela
-				? al_map_rgb_f(1, 1, 1)
-				: al_map_rgb_f(0.5, 0.5, 0.5)
-				;
-			al_draw_tinted_bitmap(sprites.inimigo_tiro, tint, tiros[i].x, tiros[i].y, 0);			
+			al_draw_rotated_bitmap(sprites_soldado.inimigo_tiros[frame_tiro],
+				INIMIGO_TIRO_W / 2, INIMIGO_TIRO_H / 2,
+				tiros[i].x, tiros[i].y,
+				angle + ALLEGRO_PI / 2,
+				0);
 
 		}
 	}
