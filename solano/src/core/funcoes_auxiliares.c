@@ -28,33 +28,35 @@ void must_init(bool test, const char* description)
 	exit(1);
 }
 
-void switch_music(GameContext* ctx, ALLEGRO_AUDIO_STREAM* stream, const char* path)
+ALLEGRO_AUDIO_STREAM* switch_music(GameContext* ctx, ALLEGRO_AUDIO_STREAM* old_stream, const char* path)
 {
 	// 1) pare e destrua o stream antigo, se houver
-	if (stream) {
-		al_set_audio_stream_playing(stream, false);    // pausa
-		al_detach_audio_stream(stream);                // desanexa do mixer
-		al_drain_audio_stream(stream);                 // espera encher/esvaziar buffers
-		al_destroy_audio_stream(stream);               // destrói
-		stream = NULL;
+	if (old_stream) {
+		al_set_audio_stream_playing(old_stream, false);    // pausa
+		al_detach_audio_stream(old_stream);                // desanexa do mixer
+		al_drain_audio_stream(old_stream);                 // espera encher/esvaziar buffers
+		al_destroy_audio_stream(old_stream);               // destrói
+		old_stream = NULL;
 	}
 
 	// 2) carregue o novo stream
-	stream = al_load_audio_stream(path, 4, 2048);
-	if (!stream) {
-		fprintf(stderr, "Erro: não foi possível carregar '%s'\n", path);		
-	}	
+	ALLEGRO_AUDIO_STREAM* new_stream = al_load_audio_stream(path, 4, 2048);
+	if (!new_stream) {
+		fprintf(stderr, "Erro: não foi possível carregar '%s'\n", path);
+		return NULL;
+	}
 
 	// 3) configure e anexe
-	al_set_audio_stream_playmode(stream, ALLEGRO_PLAYMODE_LOOP);
-	al_set_audio_stream_gain(stream, 0.1f);
-	if (!al_attach_audio_stream_to_mixer(stream, ctx->sons.mixer)) {
+	al_set_audio_stream_playmode(new_stream, ALLEGRO_PLAYMODE_LOOP);
+	al_set_audio_stream_gain(ctx->sons.music, 0.0f);
+	if (!al_attach_audio_stream_to_mixer(new_stream, ctx->sons.mixer)) {
 		fprintf(stderr, "Aviso: falha ao anexar stream ao mixer (verifique se o áudio está inicializado)\n");
 		// ainda assim retornamos o stream para escolha do chamador
 	}
 
 	// 4) comece a tocar
-	al_set_audio_stream_playing(stream, ctx->play_music);	
+	al_set_audio_stream_playing(new_stream, ctx->play_music);
+	return new_stream;
 }
 
 ALLEGRO_BITMAP* switch_background(GameContext* ctx, ALLEGRO_BITMAP* old_background, const char* path)

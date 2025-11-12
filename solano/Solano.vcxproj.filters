@@ -192,5 +192,6 @@
     <Media Include="assets\sounds\intro_fase_trilha.wav">
       <Filter>Resource Files</Filter>
     </Media>
+    <Media Include="assets\sounds\fase_background.mp3" />
   </ItemGroup>
 </Project>

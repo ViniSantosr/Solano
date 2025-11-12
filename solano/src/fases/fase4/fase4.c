@@ -277,7 +277,7 @@ bool fase4_init(GameContext* ctx)
 		return false;
 	
 
-	switch_music(ctx, ctx->sons.music, "assets/sounds/fase_battle_trilha.ogg");
+	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/fase_battle_trilha.ogg");
 		
 	return true;
 }

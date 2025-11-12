@@ -241,6 +241,7 @@
     <Text Include="src\fases\fase5\fase5.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="assets\sounds\fase_background.mp3" />
     <Media Include="assets\sounds\gun_shot.mp3" />
     <Media Include="assets\sounds\intro_fase_trilha.wav" />
   </ItemGroup>

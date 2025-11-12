@@ -194,8 +194,8 @@ void intro_fase(GameContext* ctx, int fase_selected)
 }
 
 void inicializar_intro(GameContext* ctx)
-{
-	switch_music(ctx, ctx->sons.music, "assets/sounds/intro_fase_trilha.wav");
+{	
+	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/intro_fase_trilha.wav");
 	
 
 	textos[_FASE2][0] = (TextosConfigsIntro){ "FASE 2", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
