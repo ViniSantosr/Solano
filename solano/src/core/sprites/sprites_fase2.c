@@ -18,7 +18,7 @@ void iniciar_sprites()//aqui temos a função que inicializa todos os sprites
     sprites_n._sheet = al_load_bitmap("assets/images/spritesheets/navios_spritesheet.png");
     must_init(sprites_n._sheet, "spritesheet");
 
-    sprites_n.ship = cortar_sprites(672, 544, SHIP_W, SHIP_H);
+    sprites_n.ship = cortar_sprites(670, 410, SHIP_W, SHIP_H);
 
     sprites_n.ship_shot[0] = cortar_sprites(588, 544, SHIP_SHOT_W, SHIP_SHOT_H);//apesar de já ter sido explicado anteriormente, aqui temos a função sprite_grab sendo usada para recortar o sprite
     sprites_n.ship_shot[1] = cortar_sprites(16, 0, SHIP_SHOT_W, SHIP_SHOT_H);//e atribuindo ao struct na posição referente ao sprite recortado, bem simples de entender mas importante se recordar sempre!!
@@ -29,7 +29,7 @@ void iniciar_sprites()//aqui temos a função que inicializa todos os sprites
     sprites_n.alien[1] = cortar_sprites(75, 355, ALIEN_ARROW_W, ALIEN_ARROW_H);
     sprites_n.alien[2] = cortar_sprites(259, 136, ALIEN_THICCBOI_W, ALIEN_THICCBOI_H);
 
-    sprites_n.alien_shot = cortar_sprites(281, 261, ALIEN_SHOT_W, ALIEN_SHOT_H);
+    sprites_n.alien_shot = cortar_sprites(441, 367, ALIEN_SHOT_W, ALIEN_SHOT_H);
 
     sprites_n.explosion[0] = cortar_sprites(33, 10, 9, 9);
     sprites_n.explosion[1] = cortar_sprites(43, 9, 11, 11);

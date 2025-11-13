@@ -12,7 +12,7 @@
 #define TELA_WINDOW_W	((int)(CANVAS_W * TELA_WINDOW_SCALE_X))		// Largura do monitor do soldado
 #define TELA_WINDOW_H	((int)(CANVAS_H * TELA_WINDOW_SCALE_Y))		// Altura do monitor do soldado
 
-#define TELA_FULLSCREEN		0		// Indica se a tela é fullscreen
+#define TELA_FULLSCREEN		1		// Indica se a tela é fullscreen
 #define TELA_FULLSCREEN_SCALE_X ((float)al_get_display_width(ctx.tela)) / CANVAS_W		// (Tela Cheia) Ajusta a largura do 'canvas' para o monitor
 #define TELA_FULLSCREEN_SCALE_Y ((float)al_get_display_height(ctx.tela)) / CANVAS_H		// (Tela Cheia) Ajusta a largura do 'canvas' para o monitor
 

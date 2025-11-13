@@ -27,7 +27,7 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
     int new_quota = //se entendi direito ele decide quantos aliens novos vão spawnar
         (f1_ctx.frames % 120)
         ? 0
-        : between(2, 4)// de 2 a 4 aliens novos se spawnam a cada 120 frames
+        : between(1, 2)// de 2 a 4 aliens novos se spawnam a cada 120 frames
         ;
     int new_x = between(10, CANVAS_W - 50);//não sei
 
