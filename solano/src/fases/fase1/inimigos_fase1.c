@@ -1,7 +1,6 @@
 #include <allegro5/allegro.h>        // Base da Allegro (tipos, funções principais)
 #include <allegro5/allegro_primitives.h> // Para desenhar bitmaps
-#include "core/draw_tela.h"
-#include "configs/config_tela.h"                    // Usa BUFFER_W e BUFFER_H
+#include "core/tela_utils.h"                 // Usa BUFFER_W e BUFFER_H
 #include "fases/fase2/coisas_gerais_fase2.h"            // Usa frames, score, must_init(), between()
 #include "core/Efeitos/efeito_gerais.h"                   // Usa fx_add()
 #include "fases/fase1/tiros_fase1.h"                   // Usa shots_add(), shots_collide()

@@ -17,12 +17,13 @@
 #pragma region Headers Game
 //Headers que não fazem parte exclusivamente da fase 1
 //#include "core/draw_tela.h"
-#include "configs/config_tela.h"
+//#include "configs/config_tela.h"
 #include "core/teclado.h"
 #include "main.h"
 #include "core/efeitos/efeito_gerais.h"
 #include "fases/fase2/fase2.h"
 #include "core/tela_utils.h"
+#include "telas/intro_fase.h"
 
 //Headers exclusivamente da fase 1
 #include "fases/fase1/tiros_fase1.h"
@@ -36,6 +37,7 @@
 
 //Declaração das funções de Game Context que serão utilizadas na Fase 1
 Fase1Context f1_ctx;
+FONTS fonts;
 //GameContext ctx;
 
 void fase1_init(ALLEGRO_DISPLAY* tela);					//Função de inicialização da fase 1
@@ -66,7 +68,7 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 	{
 		al_wait_for_event(ctx->queue, &event);
 
-		mouse_update(&event);
+		//mouse_update(&event);
 		teclado_update(&event);
 
 		// Update (lógica/ movimentaçao do jogo)
@@ -74,7 +76,7 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 		{
 
 		case ALLEGRO_EVENT_TIMER:
-			if (!jogo_em_inicio()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
+			if (!jogo_em_inicio_f1()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
 			{
 				// Se o jogador perder
 				if (ship.lives <= 0) {
@@ -102,7 +104,7 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 			break;
 
 		case ALLEGRO_EVENT_KEY_DOWN:
-			if (!jogo_em_inicio()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
+			if (!jogo_em_inicio_f1()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
 			{
 				if (tecla[ALLEGRO_KEY_SPACE])
 				{
@@ -158,7 +160,7 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 				0, 0, CANVAS_W, CANVAS_H,
 				0);
 
-			if (jogo_em_inicio()) // Enquanto o jogo está nos frames iniciais
+			if (jogo_em_inicio_f1()) // Enquanto o jogo está nos frames iniciais
 			{
 				tela_inicial(ctx);
 			}
@@ -168,17 +170,17 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 
 				if (f1_ctx.pause) // Se o jogo estiver em pausa
 				{
-					tela_pause(ctx->font);
+					tela_pause(fonts.font_small);
 				}
 
 				if (f1_ctx.concluido) // Se a fase foi concluída
 				{
-					tela_concluido(ctx->font);
+					tela_concluido(fonts.font_small);
 				}
 
 				if (f1_ctx.game_over) // Se o jogador perdeu
 				{
-					tela_game_over(ctx->font);
+					tela_game_over(fonts.font_small);
 				}
 			}
 
@@ -227,7 +229,7 @@ void fase1_gameplay_draw(GameContext* ctx)
 
 void tela_inicial_f1(GameContext* ctx)
 {
-	TextosConfigs textos[3] =
+	TextosConfigsIntro textos[3] =
 	{
 		{"FASE 1", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo},
 		{"Piratas do Uruguai (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo},
@@ -239,8 +241,8 @@ void tela_inicial_f1(GameContext* ctx)
 		int sombra_x = textos[i].x + 2;
 		int sombra_y = textos[i].y + 1;
 
-		al_draw_text(ctx->font_subtitulo, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
-		al_draw_text(ctx->font_subtitulo, textos[i].cor, textos[i].x, textos[i].y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
+		al_draw_text(fonts.font_subtitulo, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
+		al_draw_text(fonts.font_subtitulo, textos[i].cor, textos[i].x, textos[i].y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
 	}
 }
 

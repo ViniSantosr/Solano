@@ -1,5 +1,4 @@
-#include "core/draw_tela.h"
-#include "configs/config_tela.h"
+#include "core/tela_utils.h"
 #include "core/sprites/sprites_fase2.h"  // para sprites.life
 #include "fases/fase1/hud_fase1.h"      // declarações de font e score_display
 #include "fases/fase2/coisas_gerais_fase2.h"     // para must_init()
