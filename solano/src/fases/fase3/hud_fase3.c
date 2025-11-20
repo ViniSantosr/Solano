@@ -11,21 +11,21 @@
 #include "main.h"
 #pragma endregion
 
-#include "fases/fase2/hud_fase2.h"
+#include "fases/fase3/hud_fase3.h"
 
 long score_display;
 
-void hud_init()
+void hud_init3()
 {
 	score_display = 0;
 }
 
-void hud_update(GameContext* ctx, long* frames, long* score)
+void hud_update3(GameContext* ctx, long* frames, long* score)
 {	
 	if (*frames % 2)
 		return;
 
-	for (long i = 5; i > 0; i--)
+	for (long i = 2; i > 0; i--)
 	{
 		long diff = 1 << i;
 		if (score_display <= (*score - diff))
@@ -34,25 +34,10 @@ void hud_update(GameContext* ctx, long* frames, long* score)
 
 }
 
-void hud_draw(GameContext* ctx)
+void hud_draw3(GameContext* ctx, int seg, int min)
 {
-	al_draw_textf(
-		ctx->fonts.font_medium,
-		ctx->cores.preto,
-		1+2, 1+2,
-		0,
-		"%06ld",
-		score_display
-	);
-
-	al_draw_textf(
-		ctx->fonts.font_medium,
-		ctx->cores.verde,
-		1, 1,
-		0,
-		"%06ld",
-		score_display
-	);
+	al_draw_textf(ctx->fonts.font_medium, ctx->cores.preto, 1 + 2 / 2, 1 + 2, 0, "%02d:%02d",  seg, min);
+	al_draw_textf(ctx->fonts.font_medium, ctx->cores.verde, 1, 1, 0, "%02d:%02d", seg, min);
 
 	int spacing = VIDA_W + 1;
 	for (int i = 0; i < soldado.vidas; i++)

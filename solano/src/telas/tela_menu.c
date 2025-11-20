@@ -188,7 +188,7 @@ void inicializar_menu(GameContext* ctx)
 	menu_ctx.subtitulo = "A Guerra do Paraguai";
 
 	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/menu_trilha.ogg");
-	ctx->background = switch_background(ctx, ctx->background, "assets/images/background_menu.bmp");
+	/*ctx->background = switch_background(ctx, ctx->background, "assets/images/background_menu.bmp");*/
 }
 
 void titulo(GameContext* ctx)

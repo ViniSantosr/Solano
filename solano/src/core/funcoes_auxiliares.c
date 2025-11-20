@@ -44,7 +44,7 @@ ALLEGRO_AUDIO_STREAM* switch_music(GameContext* ctx, ALLEGRO_AUDIO_STREAM* old_s
 	if (!new_stream) {
 		fprintf(stderr, "Erro: não foi possível carregar '%s'\n", path);
 		return NULL;
-	}	
+	}
 
 	// 3) configure e anexe
 	al_set_audio_stream_playmode(new_stream, ALLEGRO_PLAYMODE_LOOP);

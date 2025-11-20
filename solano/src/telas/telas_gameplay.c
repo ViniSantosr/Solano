@@ -187,7 +187,7 @@ void tela_tutorial_combate_campo(GameContext* ctx)
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 3.5, ALLEGRO_ALIGN_CENTER, "Movimentação:");
 
 
-	al_draw_bitmap(sprites_soldado.soldado[BAIXO], (CANVAS_W / 2) - (SOLDADO_W[BAIXO] / 2), (CANVAS_H / 2) - (SOLDADO_H / 2), 0);
+	al_draw_bitmap(sprites_soldado.soldado[BAIXO][0], (CANVAS_W / 2) - (SOLDADOS_W / 2), (CANVAS_H / 2) - (SOLDADOS_H / 2), 0);
 
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, (CANVAS_H / 2 - 50) + 2, ALLEGRO_ALIGN_CENTER, "W");
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 2 - 50, ALLEGRO_ALIGN_CENTER, "W");

@@ -15,6 +15,7 @@ typedef struct INIMIGO
 	float x, y, dx, dy;
 	int sprite;
 	int tipo;
+	long frame;
 	int tiro_timer;
 	int piscar;
 	int vida;

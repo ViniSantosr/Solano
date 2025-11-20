@@ -172,6 +172,8 @@
     <ClCompile Include="src\core\sprites\navios_sprites.c" />
     <ClCompile Include="src\core\sprites\sprites_util.c" />
     <ClCompile Include="src\fases\fase1\fase1.c" />
+    <ClCompile Include="src\fases\fase3\fase3.c" />
+    <ClCompile Include="src\fases\fase3\hud_fase3.c" />
     <ClCompile Include="src\fases\fase4\fase4.c" />
     <ClCompile Include="src\telas\intro_fase.c" />
     <ClCompile Include="src\telas\telas_gameplay.c" />
@@ -197,8 +199,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\images\background_menu.bmp" />
+    <Image Include="assets\images\fase1_fundo.png" />
+    <Image Include="assets\images\fase2_fundo.png" />
+    <Image Include="assets\images\fase3_fundo.png" />
     <Image Include="assets\images\rio_background.png" />
-    <Image Include="assets\images\campo_background.png" />
     <Image Include="assets\images\spritesheets\navios_spritesheet.png" />
     <Image Include="assets\images\spritesheets\spritesheet_util.png" />
     <Image Include="assets\images\spritesheets\tutorial_spritesheet.png" />
@@ -208,6 +212,8 @@
     <ClInclude Include="include\core\funcoes_auxiliares.h" />
     <ClInclude Include="include\core\sprites\navios_sprites.h" />
     <ClInclude Include="include\core\sprites\sprites_util.h" />
+    <ClInclude Include="include\fases\fase3\fase3.h" />
+    <ClInclude Include="include\fases\fase3\hud_fase3.h" />
     <ClInclude Include="include\fases\fase4\fase4.h" />
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\telas\intro_fase.h" />
@@ -235,6 +241,7 @@
     <Text Include="src\fases\fase5\fase5.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="assets\sounds\fase_background.mp3" />
     <Media Include="assets\sounds\gun_shot.mp3" />
     <Media Include="assets\sounds\intro_fase_trilha.wav" />
   </ItemGroup>

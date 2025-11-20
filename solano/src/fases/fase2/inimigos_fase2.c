@@ -29,6 +29,9 @@ float vel = 0.7f; // velocidade do inimigo
 float cx = 0.0f;
 float cy = 0.0f;
 
+bool movimentou_inimigo;
+int frame_movimento;
+
 void inimigo_init()
 {
 	for (int i = 0; i < INIMIGOS_N; i++)
@@ -40,8 +43,8 @@ void inimigo_init()
 void inimigo_update(long* frames, long* score)
 {
 
-	if (*frames % 120 == 0) // A cada 120 frames, será gerado uma nova onda, dá para criar niveis de ondas?
-		nova_onda = between(1, 3);
+	if (*frames % 240 == 0) // A cada 120 frames, será gerado uma nova onda, dá para criar niveis de ondas?
+		nova_onda = between(1, 0);
 
 	new_x = round_float(between_f(-60, CANVAS_W + 60), 1); // Posição aleatória dos inimigos no eixo X	
 	new_y = round_float(between_f(-40, -60), 1);
@@ -79,8 +82,15 @@ void inimigo_update(long* frames, long* score)
 
 		// Atualiza a direção da qual o inimigo deve se mover		
 		calcular_direcao_vel(inimigos[i].x, inimigos[i].y, soldado.x, soldado.y, &inimigos[i].dx, &inimigos[i].dy, vel);
-		inimigos[i].x -= inimigos[i].dx;
-		inimigos[i].y -= inimigos[i].dy;
+
+		if (inimigos[i].dx || inimigos[i].dy)
+		{
+			inimigos[i].x -= inimigos[i].dx;
+			inimigos[i].y -= inimigos[i].dy;
+			movimentou_inimigo = true;
+			inimigos[i].frame++;
+		}
+
 
 
 		// Se o piscar > 0, então diminui 
@@ -97,7 +107,7 @@ void inimigo_update(long* frames, long* score)
 		// Se o soldado estiver inativo, ele não pode causar dano a ele
 		if (soldado.respawn_timer == 0 && soldado.invencivel_timer == 0)
 		{
-			if (collide(soldado.x, soldado.y, soldado.x + SOLDADO_W[soldado.sprite], soldado.y + SOLDADO_H, inimigos[i].x, inimigos[i].y, inimigos[i].x + INIMIGO_W[3], inimigos[i].y + INIMIGO_H))
+			if (collide(soldado.x, soldado.y, soldado.x + SOLDADOS_W, soldado.y + SOLDADOS_H, inimigos[i].x, inimigos[i].y, inimigos[i].x + INIMIGO_W[3], inimigos[i].y + INIMIGO_H))
 			{
 				soldado.vidas--;
 				soldado.respawn_timer = 90;
@@ -156,9 +166,14 @@ void inimigo_draw()
 		if (!inimigos[i].ativo) // Se o inimigo não estiver ativo
 			continue;
 		if (inimigos[i].piscar > 2)
-			continue;
+			continue;		
 
-		al_draw_bitmap(sprites_soldado.inimigo[inimigos[i].sprite], inimigos[i].x, inimigos[i].y, 0);
+
+		frame_movimento = (inimigos[i].frame / 2) % 2;
+		al_draw_bitmap(sprites_soldado.inimigo[inimigos[i].sprite][frame_movimento], inimigos[i].x, inimigos[i].y, 0);
+
+
+
 	}
 }
 

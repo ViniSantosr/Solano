@@ -17,6 +17,7 @@
 #pragma region Headers Game
 #include "telas/tela_menu.h"
 #include "fases/fase2/fase2.h"
+#include "fases/fase3/fase3.h"
 #include "fases/fase4/fase4.h"
 #include "telas/intro_fase.h"
 #include "core/funcoes_auxiliares.h"
@@ -42,6 +43,7 @@ int main()
 		switch (ctx.estado_tela)
 		{
 		case TELA_MENU:
+			ctx.background = switch_background(&ctx, ctx.background, "assets/images/background_menu.bmp");
 			tela_menu(&ctx);
 			break;
 		case INTRO_FASE:
@@ -52,6 +54,9 @@ int main()
 			break;*/
 		case FASE2:
 			fase2(&ctx);
+			break;
+		case FASE3:
+			fase3(&ctx);
 			break;
 		case FASE4:
 			fase4(&ctx);
@@ -116,7 +121,9 @@ void inicializar_game()
 	must_init(ctx.sons.mixer, "mixer");
 	al_set_mixer_gain(ctx.sons.mixer, ctx.sons.volume_general); // tente 0.7 ou até 0.5
 
-	ctx.sons.music = al_load_audio_stream("assets/sounds/menu_trilha.ogg", 4, 2048);
+	ctx.play_music = true;
+
+	ctx.sons.music = al_load_audio_stream("assets/sounds/menu_trilha.ogg", 4, 2048);	
 	must_init(ctx.sons.music, "music");
 
 	ctx.sons.gun_shot = al_load_sample("assets/sounds/gun_shot.mp3");
@@ -137,7 +144,7 @@ void inicializar_game()
 	ctx.estado_tela = TELA_MENU;
 
 	ctx.exit_program = false;
-	ctx.play_music = true;
+	
 	ctx.pause = false;
 	ctx.options = false;
 
