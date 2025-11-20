@@ -48,7 +48,7 @@ ALLEGRO_AUDIO_STREAM* switch_music(GameContext* ctx, ALLEGRO_AUDIO_STREAM* old_s
 
 	// 3) configure e anexe
 	al_set_audio_stream_playmode(new_stream, ALLEGRO_PLAYMODE_LOOP);
-	al_set_audio_stream_gain(ctx->sons.music, 0.0f);
+	al_set_audio_stream_gain(new_stream, 1.0f);
 	if (!al_attach_audio_stream_to_mixer(new_stream, ctx->sons.mixer)) {
 		fprintf(stderr, "Aviso: falha ao anexar stream ao mixer (verifique se o áudio está inicializado)\n");
 		// ainda assim retornamos o stream para escolha do chamador

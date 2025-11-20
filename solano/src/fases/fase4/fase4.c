@@ -76,7 +76,7 @@ void fase4(GameContext* ctx)
 			}
 
 			// Se o jogador vencer
-			if (score >= 15050) {
+			if (score >= 10050) {
 				concluido = true;
 			}
 
@@ -86,7 +86,7 @@ void fase4(GameContext* ctx)
 				tiros_update();
 				soldado_update();
 				hud_update(ctx, &frames, &score);
-				inimigo_update(&frames, &score);
+				inimigo_update(ctx, &frames, &score);
 			}
 
 			desenhar = true;

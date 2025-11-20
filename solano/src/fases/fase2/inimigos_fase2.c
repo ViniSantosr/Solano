@@ -12,6 +12,7 @@
 #include "core/sprites/soldados_sprites.h"
 #include "fases/fase2/soldado_fase2.h"
 #include "core/tela_utils.h"
+#include "main.h"
 #pragma endregion
 
 #include "fases/fase2/inimigos_fase2.h"
@@ -40,11 +41,27 @@ void inimigo_init()
 	}
 }
 
-void inimigo_update(long* frames, long* score)
+void inimigo_update(GameContext* ctx, long* frames, long* score)
 {
 
-	if (*frames % 240 == 0) // A cada 120 frames, será gerado uma nova onda, dá para criar niveis de ondas?
-		nova_onda = between(1, 0);
+	/*if (*frames % 240 == 0)*/ // A cada 120 frames, será gerado uma nova onda, dá para criar niveis de ondas?
+		switch (ctx->estado_tela)
+		{	
+		case FASE5:
+		case FASE3:
+			if (*frames % 160 == 0)
+				nova_onda = between(1, 3);
+			break;
+		case FASE2:
+			if (*frames % 240 == 0)
+				nova_onda = between(1, 0);
+			break;
+		case FASE4:
+			if (*frames % 160 == 0)
+				nova_onda = between(2, 4);		
+			break;
+		}
+		
 
 	new_x = round_float(between_f(-60, CANVAS_W + 60), 1); // Posição aleatória dos inimigos no eixo X	
 	new_y = round_float(between_f(-40, -60), 1);

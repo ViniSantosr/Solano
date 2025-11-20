@@ -89,7 +89,7 @@ void fase3(GameContext* ctx)
 				tiros_update();
 				soldado_update();
 				//hud_update(ctx, &frames, &score);
-				inimigo_update(&frames, &score);
+				inimigo_update(ctx, &frames, &score);
 
 				mili++;
 

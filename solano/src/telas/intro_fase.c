@@ -200,7 +200,7 @@ void inicializar_intro(GameContext* ctx)
 
 	textos[_FASE2][0] = (TextosConfigsIntro){ "FASE 2", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
 	textos[_FASE2][1] = (TextosConfigsIntro){ "Cerco de Uruguaiana (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
-	textos[_FASE2][2] = (TextosConfigsIntro){ "META:  10.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+	textos[_FASE2][2] = (TextosConfigsIntro){ "META:  5.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
 
 	textos[_FASE3][0] = (TextosConfigsIntro){ "FASE 3", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
 	textos[_FASE3][1] = (TextosConfigsIntro){ "Batalha de Tuiuti (1866)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
@@ -208,5 +208,5 @@ void inicializar_intro(GameContext* ctx)
 
 	textos[_FASE4][0] = (TextosConfigsIntro){ "FASE 4", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
 	textos[_FASE4][1] = (TextosConfigsIntro){ "Tomada de Assunção (1869)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
-	textos[_FASE4][2] = (TextosConfigsIntro){ "META:  15.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+	textos[_FASE4][2] = (TextosConfigsIntro){ "META:  10.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
 }
