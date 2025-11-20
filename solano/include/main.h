@@ -30,6 +30,7 @@ typedef struct {
 typedef struct {
     ALLEGRO_MIXER* mixer;
     ALLEGRO_SAMPLE* gun_shot;
+    ALLEGRO_SAMPLE* text_bip;
     ALLEGRO_AUDIO_STREAM* music;
     float volume_general;
     float volume_music;
@@ -45,7 +46,8 @@ typedef enum {
     FASE3,
     FASE4,
     FASE5,
-    INTRO_FASE
+    INTRO_FASE,
+    CUTSCENE
 } TELAS_PRINCIPAIS;
 
 // Struct 

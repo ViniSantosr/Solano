@@ -16,6 +16,7 @@
 
 #pragma region Headers Game
 #include "telas/tela_menu.h"
+#include "telas/cutscenes.h"
 #include "fases/fase2/fase2.h"
 #include "fases/fase3/fase3.h"
 #include "fases/fase4/fase4.h"
@@ -45,6 +46,9 @@ int main()
 		case TELA_MENU:
 			ctx.background = switch_background(&ctx, ctx.background, "assets/images/background_menu.bmp");
 			tela_menu(&ctx);
+			break;
+		case CUTSCENE:
+			cutscene(&ctx, ctx.proxima_fase);
 			break;
 		case INTRO_FASE:
 			intro_fase(&ctx, ctx.proxima_fase);
@@ -128,6 +132,9 @@ void inicializar_game()
 
 	ctx.sons.gun_shot = al_load_sample("assets/sounds/gun_shot.mp3");
 	must_init(ctx.sons.gun_shot, "gun_shot");	
+
+	ctx.sons.text_bip = al_load_sample("assets/sounds/text_bip.wav");
+	must_init(ctx.sons.text_bip, "text_bip");
 
 	must_init(al_init_primitives_addon(), "primitives");
 

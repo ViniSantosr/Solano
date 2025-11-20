@@ -125,8 +125,8 @@ void tela_menu(GameContext* ctx)
 					switch (selected)
 					{
 					case NOVO_JOGO:
-						ctx->proxima_fase = 3;
-						ctx->estado_tela = INTRO_FASE;
+						ctx->proxima_fase = 2;
+						ctx->estado_tela = CUTSCENE;
 						exit_tela = true;
 						break;
 					case CONTINUAR:

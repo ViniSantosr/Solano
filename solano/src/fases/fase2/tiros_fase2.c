@@ -40,9 +40,9 @@ bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float al
 {	
 	al_play_sample(
 		ctx.sons.gun_shot,
-		soldado ? 0.3 : 0.1,
+		soldado ? 0.3 : 0.2,
 		0,
-		soldado? 1.5 : 2,
+		soldado? 1.5 : 1.7,
 		ALLEGRO_PLAYMODE_ONCE,
 		NULL
 	);

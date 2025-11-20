@@ -29,13 +29,13 @@ bool has_tutorial;
 float pular_x = CANVAS_W - 150;
 float pular_y = CANVAS_H - 25;
 
-void intro_fase(GameContext* ctx, int fase_selected)
+void intro_fase(GameContext* ctx, int fase_atual)
 {
 	inicializar_intro(ctx);
 
 	bool has_tutorial = false;
 
-	switch (fase_selected)
+	switch (fase_atual)
 	{
 	case _FASE1:
 		ctx->background = switch_background(ctx, ctx->background, "assets/images/rio_background.png");
@@ -93,7 +93,7 @@ void intro_fase(GameContext* ctx, int fase_selected)
 
 			if (frames > texto_inicial)
 			{
-				ctx->estado_tela = fase_selected;
+				ctx->estado_tela = fase_atual;
 				exit_tela = true;
 			}
 
@@ -105,7 +105,7 @@ void intro_fase(GameContext* ctx, int fase_selected)
 			switch (event.keyboard.keycode)
 			{
 			case ALLEGRO_KEY_SPACE:
-				ctx->estado_tela = fase_selected;
+				ctx->estado_tela = fase_atual;
 				exit_tela = true;
 				break;
 
@@ -129,7 +129,7 @@ void intro_fase(GameContext* ctx, int fase_selected)
 			{
 				if (frames < tutorial)
 				{
-					if (fase_selected == _FASE2)
+					if (fase_atual == _FASE2)
 					{
 						tela_tutorial_combate_campo(ctx);
 					}
@@ -140,7 +140,7 @@ void intro_fase(GameContext* ctx, int fase_selected)
 					{
 						for (int fase = 0; fase < _FASES_N; fase++)
 						{
-							if (fase == fase_selected)
+							if (fase == fase_atual)
 							{
 								for (int i = 0; i < 3; i++)
 								{
@@ -163,7 +163,7 @@ void intro_fase(GameContext* ctx, int fase_selected)
 				{
 					for (int fase = 0; fase < _FASES_N; fase++)
 					{
-						if (fase == fase_selected)
+						if (fase == fase_atual)
 						{
 							for (int i = 0; i < 3; i++)
 							{

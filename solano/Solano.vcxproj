@@ -175,6 +175,7 @@
     <ClCompile Include="src\fases\fase3\fase3.c" />
     <ClCompile Include="src\fases\fase3\hud_fase3.c" />
     <ClCompile Include="src\fases\fase4\fase4.c" />
+    <ClCompile Include="src\telas\cutscenes.c" />
     <ClCompile Include="src\telas\intro_fase.c" />
     <ClCompile Include="src\telas\telas_gameplay.c" />
     <ClCompile Include="src\telas\tela_menu.c" />
@@ -216,6 +217,7 @@
     <ClInclude Include="include\fases\fase3\hud_fase3.h" />
     <ClInclude Include="include\fases\fase4\fase4.h" />
     <ClInclude Include="include\main.h" />
+    <ClInclude Include="include\telas\cutscenes.h" />
     <ClInclude Include="include\telas\intro_fase.h" />
     <ClInclude Include="include\telas\telas_gameplay.h" />
     <ClInclude Include="include\telas\tela_menu.h" />
@@ -244,6 +246,7 @@
     <Media Include="assets\sounds\fase_background.mp3" />
     <Media Include="assets\sounds\gun_shot.mp3" />
     <Media Include="assets\sounds\intro_fase_trilha.wav" />
+    <Media Include="assets\sounds\text_bip.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
