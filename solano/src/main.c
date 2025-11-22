@@ -54,7 +54,9 @@ int main()
 			intro_fase(&ctx, ctx.proxima_fase);
 			break;
 		case FASE1:
-			ctx.proxima_fase++;			
+			ctx.proxima_fase++;	
+			ctx.cena_atual++;
+			ctx.estado_tela = CUTSCENE;
 			/*fase1(&ctx);*/
 			break;
 		case FASE2:
@@ -125,17 +127,41 @@ void inicializar_game()
 	ctx.sons.mixer = al_get_default_mixer();
 	must_init(ctx.sons.mixer, "mixer");
 	al_set_mixer_gain(ctx.sons.mixer, ctx.sons.volume_general); // tente 0.7 ou até 0.5
+	al_set_mixer_quality(ctx.sons.mixer, ALLEGRO_MIXER_QUALITY_LINEAR);
 
 	ctx.play_music = true;
 
 	ctx.sons.music = al_load_audio_stream("assets/sounds/menu_trilha.ogg", 4, 2048);	
 	must_init(ctx.sons.music, "music");
 
-	ctx.sons.gun_shot = al_load_sample("assets/sounds/gun_shot.mp3");
-	must_init(ctx.sons.gun_shot, "gun_shot");	
+	// Gun
+	ALLEGRO_SAMPLE* sample = al_load_sample("assets/sounds/gun_shot.mp3");
+	must_init(sample, "gun_shot.mp3");
 
+	ctx.sons.gun_shot = al_create_sample_instance(sample);
+	must_init(ctx.sons.gun_shot, "gun_shot");
 
-	ALLEGRO_SAMPLE* sample = al_load_sample("assets/sounds/text_bip.wav");
+	al_attach_sample_instance_to_mixer(ctx.sons.gun_shot, ctx.sons.mixer);
+	al_set_sample_instance_gain(ctx.sons.gun_shot, 0.1);     // volume
+	al_set_sample_instance_speed(ctx.sons.gun_shot, 1.0);    // pitch
+	al_set_sample_instance_pan(ctx.sons.gun_shot, 0.0);      // centro
+	al_set_sample_instance_playmode(ctx.sons.gun_shot, ALLEGRO_PLAYMODE_ONCE);
+
+	// Voice
+	sample = al_load_sample("assets/sounds/voice.wav");
+	must_init(sample, "voice.wav");
+
+	ctx.sons.voice = al_create_sample_instance(sample);
+	must_init(ctx.sons.voice, "voice");
+
+	al_attach_sample_instance_to_mixer(ctx.sons.voice, ctx.sons.mixer);
+	al_set_sample_instance_gain(ctx.sons.voice, 0.1);     // volume
+	al_set_sample_instance_speed(ctx.sons.voice, 1.0);    // pitch
+	al_set_sample_instance_pan(ctx.sons.voice, 0.0);      // centro
+	al_set_sample_instance_playmode(ctx.sons.voice, ALLEGRO_PLAYMODE_ONCE);
+
+	// Text
+	sample = al_load_sample("assets/sounds/text_bip.wav");
 	must_init(sample, "text_bip.wav");
 
 	ctx.sons.text_bip = al_create_sample_instance(sample);
@@ -143,9 +169,36 @@ void inicializar_game()
 
 	al_attach_sample_instance_to_mixer(ctx.sons.text_bip, ctx.sons.mixer);
 	al_set_sample_instance_gain(ctx.sons.text_bip, 0.1);     // volume
-	al_set_sample_instance_speed(ctx.sons.text_bip, 0.9);    // pitch
+	al_set_sample_instance_speed(ctx.sons.text_bip, 0.7);    // pitch
 	al_set_sample_instance_pan(ctx.sons.text_bip, 0.0);      // centro
 	al_set_sample_instance_playmode(ctx.sons.text_bip, ALLEGRO_PLAYMODE_ONCE);
+
+	// Typing
+	sample = al_load_sample("assets/sounds/typing.flac");
+	must_init(sample, "typing.flac");
+
+	ctx.sons.typing = al_create_sample_instance(sample);
+	must_init(ctx.sons.typing, "typing");
+
+	al_attach_sample_instance_to_mixer(ctx.sons.typing, ctx.sons.mixer);
+	al_set_sample_instance_gain(ctx.sons.typing, 1.0);     // volume
+	al_set_sample_instance_speed(ctx.sons.typing, 1.0);    // pitch
+	al_set_sample_instance_pan(ctx.sons.typing, 0.0);      // centro
+	al_set_sample_instance_playmode(ctx.sons.typing, ALLEGRO_PLAYMODE_ONCE);
+
+	// Click
+	sample = al_load_sample("assets/sounds/click.wav");
+	must_init(sample, "click.wav");
+
+	ctx.sons.click = al_create_sample_instance(sample);
+	must_init(ctx.sons.click, "click");
+
+	al_attach_sample_instance_to_mixer(ctx.sons.click, ctx.sons.mixer);
+	al_set_sample_instance_gain(ctx.sons.click, 0.5);     // volume
+	al_set_sample_instance_speed(ctx.sons.click, 1.0);    // pitch
+	al_set_sample_instance_pan(ctx.sons.click, 0.0);      // centro
+	al_set_sample_instance_playmode(ctx.sons.click, ALLEGRO_PLAYMODE_ONCE);
+
 
 	must_init(al_init_primitives_addon(), "primitives");
 
@@ -170,6 +223,7 @@ void inicializar_game()
 
 	ctx.cores.preto = al_map_rgb(0, 0, 0);
 	ctx.cores.cinza_opaco = al_map_rgba(0, 0, 0, 90);
+	ctx.cores.cinza_medium = al_map_rgb(120, 120, 120);
 	ctx.cores.branco = al_map_rgb(255, 255, 255);
 	ctx.cores.verde = al_map_rgb(100, 200, 80);
 	ctx.cores.verde_opaco = al_map_rgba_f(0.39, 0.78, 0.31, 0.5);
@@ -192,7 +246,11 @@ void finalizar_game()
 	al_destroy_timer(ctx.timer);
 	al_destroy_event_queue(ctx.queue);	
 	al_destroy_bitmap(ctx.background);
-	al_destroy_sample(ctx.sons.gun_shot);
+	al_destroy_sample_instance(ctx.sons.gun_shot);
+	al_destroy_sample_instance(ctx.sons.voice);
+	al_destroy_sample_instance(ctx.sons.text_bip);
+	al_destroy_sample_instance(ctx.sons.typing);
+	al_destroy_sample_instance(ctx.sons.click);
 	al_destroy_audio_stream(ctx.sons.music);
 	al_uninstall_audio();
 	sprites_util_deinit();

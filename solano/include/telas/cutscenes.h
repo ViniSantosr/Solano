@@ -21,7 +21,7 @@ typedef struct {
 
 
 typedef enum {
-    CENA_INICIAL,
+    CENA_INICIAL = 0,
     CENA_LIVRO,
 
     PRE_FASE1,
@@ -34,10 +34,7 @@ typedef enum {
     POS_FASE3,
 
     PRE_FASE4,
-    POS_FASE4,
-
-    PRE_FASE5,
-    POS_FASE5
+    POS_FASE4,    
 } CENAS;
 
 void cutscene(GameContext* ctx, int fase_atual);

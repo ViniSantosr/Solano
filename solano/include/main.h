@@ -16,6 +16,7 @@ typedef struct {
     ALLEGRO_COLOR branco;
     ALLEGRO_COLOR preto;
     ALLEGRO_COLOR cinza_opaco;
+    ALLEGRO_COLOR cinza_medium;
     ALLEGRO_COLOR vermelho;
     ALLEGRO_COLOR azul;
     ALLEGRO_COLOR azul_claro;
@@ -32,8 +33,11 @@ typedef struct {
 
 typedef struct {
     ALLEGRO_MIXER* mixer;
-    ALLEGRO_SAMPLE* gun_shot;
-    ALLEGRO_SAMPLE* text_bip;
+    ALLEGRO_SAMPLE_INSTANCE* gun_shot;
+    ALLEGRO_SAMPLE_INSTANCE* voice;
+    ALLEGRO_SAMPLE_INSTANCE* text_bip;
+    ALLEGRO_SAMPLE_INSTANCE* typing;
+    ALLEGRO_SAMPLE_INSTANCE* click;
     ALLEGRO_AUDIO_STREAM* music;
     float volume_general;
     float volume_music;
@@ -47,8 +51,7 @@ typedef enum {
     FASE1,
     FASE2,
     FASE3,
-    FASE4,
-    FASE5,
+    FASE4,   
     INTRO_FASE,
     CUTSCENE
 } TELAS_PRINCIPAIS;

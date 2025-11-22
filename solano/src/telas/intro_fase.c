@@ -38,9 +38,9 @@ void intro_fase(GameContext* ctx, int fase_atual)
 	switch (fase_atual)
 	{
 	case _FASE1:
-		ctx->background = switch_background(ctx, ctx->background, "assets/images/rio_background.png");
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase1_fundo.png");
 		if (!ctx->background) {
-			ctx->estado_tela = TELA_MENU;
+			ctx->estado_tela = TELA_MENU;			
 			return;
 		}
 		break;
@@ -63,8 +63,7 @@ void intro_fase(GameContext* ctx, int fase_atual)
 		}
 		break;
 
-	case _FASE4:
-	case _FASE5:
+	case _FASE4:	
 		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
 		if (!ctx->background) {
 			ctx->estado_tela = TELA_MENU;
@@ -198,15 +197,19 @@ void inicializar_intro(GameContext* ctx)
 	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/intro_fase_trilha.wav");
 	
 
+	textos[_FASE1][0] = (TextosConfigsIntro){ "FASE 1", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.azul_escuro };
+	textos[_FASE1][1] = (TextosConfigsIntro){ "Batalha Naval do Riachuelo (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.azul_escuro };
+	textos[_FASE1][2] = (TextosConfigsIntro){ "OBJETIVO:  2.500 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.azul_escuro };
+
 	textos[_FASE2][0] = (TextosConfigsIntro){ "FASE 2", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
 	textos[_FASE2][1] = (TextosConfigsIntro){ "Cerco de Uruguaiana (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
-	textos[_FASE2][2] = (TextosConfigsIntro){ "META:  5.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+	textos[_FASE2][2] = (TextosConfigsIntro){ "OBJETIVO:  2.500 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
 
 	textos[_FASE3][0] = (TextosConfigsIntro){ "FASE 3", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
 	textos[_FASE3][1] = (TextosConfigsIntro){ "Batalha de Tuiuti (1866)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
-	textos[_FASE3][2] = (TextosConfigsIntro){ "META:  Sobreviva por 1 minuto", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+	textos[_FASE3][2] = (TextosConfigsIntro){ "OBJETIVO:  Sobreviva por 1 minuto", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
 
 	textos[_FASE4][0] = (TextosConfigsIntro){ "FASE 4", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
 	textos[_FASE4][1] = (TextosConfigsIntro){ "Tomada de Assunção (1869)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
-	textos[_FASE4][2] = (TextosConfigsIntro){ "META:  10.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+	textos[_FASE4][2] = (TextosConfigsIntro){ "OBJETIVO:  Derrote o Solano Lopéz", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
 }

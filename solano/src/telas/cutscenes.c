@@ -16,12 +16,14 @@
 #include "core/teclado.h"
 #include "core/sprites/soldados_sprites.h"
 #include "telas/telas_gameplay.h"
+#include "fases/fase2/coisas_gerais_fase2.h"
 #pragma endregion
 
+#include <stdio.h>
 #include "telas/cutscenes.h"
 
 void quebra_linhas(char* texto, char caracter);
-void draw_text(GameContext* ctx, char* buffer, PERSONAGEM personagem, int max_linha);
+void draw_text(GameContext* ctx, char* buffer, int max_linha, float x, float y);
 
 
 #pragma region TEXTOS
@@ -30,11 +32,11 @@ void draw_text(GameContext* ctx, char* buffer, PERSONAGEM personagem, int max_li
 
 DIALOGO inicial[] =
 {
-	{"Caramba, minha avó precisava limpar esse porão um pouco", LEITOR},
+	{"Caramba, minha avó precisava limpar esse porão um pouco.", LEITOR},
 	{"pfff!", LEITOR },
 	{"Que susto, o que é isso?", LEITOR },
 	{"Caramba, parece ser um livro antigo.", LEITOR},
-	{"SOLANO: Uma biografia sobre Rogerinho, um herói da Guerra do Paraguai.", LEITOR},
+	{"SOLANO: Um diário sobre a Guerra do Paraguai, por Rogerinho", LEITOR},
 	{"Ué, Rogerinho, esse não é o nome do meu bisavô?", LEITOR },
 	{"Acho que vou ler.", LEITOR }
 };
@@ -42,8 +44,8 @@ DIALOGO inicial[] =
 DIALOGO livro[] =
 {
 	{"Narrador: Caro leitor, vou te contar o que está acontecendo agora, antes da guerra começar. O Paraguai quer crescer e precisa de uma saída para o mar, porque sem isso eles ficam isolados.", NARRADOR},
-	{"Leitor: Por que eles não querem ficar isolados?", LEITOR},
-	{"Narrador: Porque sem um porto para o comércio eles não conseguem vender seus produtos nem comprar o que precisam. Ficam presos sem sair dali, dependendo dos outros.", NARRADOR},
+	{"Por que eles não querem ficar isolados?", LEITOR},
+	{"Sem um porto para o comércio eles não conseguem vender seus produtos nem comprar o que precisam. Ficam presos sem sair dali, dependendo dos outros.", NARRADOR},
 	{"Além disso, o Brasil e a Argentina estão preocupados com os rios que cortam a região. Eles querem proteger esses rios para usar no transporte e comércio.", NARRADOR},
 	{"No Uruguai, há uma briga entre dois grupos políticos. O Brasil apoia os colorados, e o Paraguai e a Argentina apoiam os blancos. Isso está causando muita confusão e tensionando ainda mais a situação.", NARRADOR},
 	{"O Paraguai até prendeu um navio brasileiro no rio Paraguai, e isso deixou tudo mais difícil. Todos estão se preparando para a possível guerra, mas ninguém sabe como vai acabar.", NARRADOR}
@@ -53,93 +55,109 @@ DIALOGO livro[] =
 
 #pragma region FASE1
 
-const char* pre_fase1[] =
+DIALOGO pre_fase1[] =
 {
-	"Capitão: Atenção! O Paraguai quer dominar o rio Riachuelo para cortar nossa ligação com os aliados.",
-	"Rogerinho: Por que o rio é tão importante?",
-	"Capitão: Porque ele é a principal estrada para transportar soldados e suprimentos entre Brasil, Argentina e Uruguai.",
-	"Rogerinho: O que pode acontecer se perdermos o controle do rio?",
-	"Capitão: Misericórdia! Sem o rio, ficamos isolados e não recebemos reforços nem comida.",
-	"Rogerinho: Qual o objetivo do Paraguai?",
-	"Capitão: Eles querem impedir que a Tríplice Aliança se ajude e, assim, tentar vencer a guerra.",
-	"Rogerinho: O que precisamos fazer agora?",
-	"Capitão: Defender o rio, impedir que eles bloqueiem o caminho e garantir a passagem dos nossos aliados.",
-	"Rogerinho: E se vencermos essa batalha?",
-	"Capitão: Se vencermos, mostramos força, mantemos nossos aliados unidos e enfraquecemos o Paraguai.",
-	"Rogerinho: E qual é o destino do Paraguai se perderem?",
-	"Capitão: Eles ficam isolados e perdem poder para continuar a guerra.",
-	"Rogerinho: Estamos prontos, então?",
-	"Capitão: Sim! Agora é a nossa hora. Que o Riachuelo veja nossa coragem. Que essa luta traga esperança!"
+	{"Capitão: Atenção! O Paraguai quer dominar o rio Riachuelo para cortar nossa ligação com os aliados.", CAPITAO},
+	{"Rogerinho: Por que o rio é tão importante?", PRINCIPAL},
+	{"Porque ele é a principal estrada para transportar soldados e suprimentos entre Brasil, Argentina e Uruguai.", CAPITAO},
+	{"O que pode acontecer se perdermos o controle do rio?", PRINCIPAL},
+	{"Misericórdia! Sem o rio, ficamos isolados e não recebemos reforços nem comida.", CAPITAO},
+	{"Qual o objetivo do Paraguai?", PRINCIPAL},
+	{"Eles querem impedir que a Tríplice Aliança se ajude e, assim, tentar vencer a guerra.", CAPITAO},
+	{"O que precisamos fazer agora?", PRINCIPAL},
+	{"Defender o rio, impedir que eles bloqueiem o caminho e garantir a passagem dos nossos aliados.", CAPITAO},
+	{"E se vencermos essa batalha?", PRINCIPAL},
+	{"Se vencermos, mostramos força, mantemos nossos aliados unidos e enfraquecemos o Paraguai.", CAPITAO},
+	{"E qual é o destino do Paraguai se perderem?", PRINCIPAL},
+	{"Eles ficam isolados e perdem poder para continuar a guerra.", CAPITAO},
+	{"Estamos prontos, então?", PRINCIPAL},
+	{"Sim! Agora é a nossa hora. Que o Riachuelo veja nossa coragem. Que essa luta traga esperança!", CAPITAO}
 };
 
-const char* pos_fase1[] =
+DIALOGO pos_fase1[] =
 {
-	"Outro diálogo...",
-	"Segunda linha..."
+	{"A Marinha paraguaia está destruída!", CAPITAO},
+	{"Controlamos os rios! Agora, temos vantagem para seguir avançando!", PRINCIPAL},
+	{"Conseguimos!!!", PRINCIPAL}
 };
 
 #pragma endregion
 
 #pragma region FASE2
 
-const char* pre_fase2[] =
+DIALOGO pre_fase2[] =
 {
-	"Outro diálogo...",
-	"Segunda linha..."
+	{"Em Uruguaiana, 1865, o Cerco começou: paraguaios cercados pelos aliados.", NARRADOR},
+	{"Por que será que eles atacaram o Brasil?", LEITOR},
+	{"Eles queriam avançar no sul para vencer a guerra.", NARRADOR},
+	{"Como estava a situação deles agora?", LEITOR},
+	{"Eles estavam cercados há semanas, com fome e cansaço.", NARRADOR},
+	{"Caramba, eles vão lutar de qualquer jeito?", LEITOR},
+	{"A tensão aumenta, a luta podia começar a qualquer momento.", NARRADOR}
 };
 
-const char* pos_fase2[] =
+DIALOGO pos_fase2[] =
 {
-	"Outro diálogo...",
-	"Segunda linha..."
+	{"A resistência terminou. Eles estão se rendendo!", CAPITAO},
+	{"Finalmente! Conseguimos cercar e fazer eles desistirem!", PRINCIPAL},
+	{"Essa rendição é uma vitória importante para a gente. Foi a fome e as doenças que os enfraqueceram.", CAPITAO},
+	{"Muitos deles estão fracos e descalços. Mas agora a guerra avança a nosso favor.", CAPITAO},
+	{"Conseguimos!!!", PRINCIPAL}
 };
 
 #pragma endregion
 
 #pragma region FASE3
 
-const char* pre_fase3[] =
+DIALOGO pre_fase3[] =
 {
-	"Outro diálogo...",
-	"Segunda linha..."
+	{"Estamos numa região de pântanos, lama e vegetação densa, chamada Tuiuti, às margens de um lago.", NARRADOR},
+	{"Por que o Paraguai quer lutar aqui?", LEITOR},
+	{"Porque controlar esse lugar impede nosso avanço pela estrada que leva à fortaleza inimiga, em Humaitá.", NARRADOR},
+	{"E como estão os nossos soldados?", LEITOR},
+	{"Eles estão apertados, cansados, enfrentam o calor intenso e a falta de água limpa, mas firmes na defesa.", NARRADOR},
+	{"E o inimigo?", LEITOR},
+	{"Eles estão bem posicionados numa fortificação com muitos canhões e soldados preparados para atacar.", NARRADOR},
+	{"Qual o plano deles?", LEITOR},
+	{"Atacar de vários lados com a cavalaria para tentar romper nossa linha.", NARRADOR},
+	{"E a gente?", LEITOR},
+	{"Construímos fossos sob camuflagem e preparamos a artilharia para barrar qualquer investida.", NARRADOR},
+	{"O terreno ajuda ou atrapalha?", LEITOR},
+	{"O terreno é traiçoeiro, com muita lama e plantas que escondem o inimigo, dificultando o movimento.", NARRADOR},
+	{"Estamos prontos pra esse desafio?", LEITOR},
+	{"Estamos prontos! Cada soldado precisa mostrar coragem, porque esta batalha vai determinar muito do que vem pelo caminho.", NARRADOR},
+	{"Então é hora de fazer história!", LEITOR},
 };
 
-const char* pos_fase3[] =
+DIALOGO pos_fase3[] =
 {
-	"Outro diálogo...",
-	"Segunda linha..."
+	{"Apesar do grande ataque paraguaio, seguramos a linha!", CAPITAO},
+	{"Foi a maior batalha até agora, e resistimos firmes!", PRINCIPAL},
+	{"Conseguimos!!!", PRINCIPAL}
 };
 
 #pragma endregion
 
 #pragma region FASE4
 
-const char* pre_fase4[] =
+DIALOGO pre_fase4[] =
 {
-	"Outro diálogo...",
-	"Segunda linha..."
+	{"Estamos quase na capital deles, Assunção. A gente vai entrar e tomar essa cidade!", CAPITAO},
+	{"É a hora decisiva, precisamos estar preparados para tudo.", CAPITAO},
+	{"Essa vitória será importante para a guerra. Se tomarmos Assunção, enfraquecemos o Paraguai.", CAPITAO},
+	{"Mas eles ainda vão resistir muito, né?", PRINCIPAL},
+	{"É, vão lutar com tudo que têm, não será fácil. Precisamos manter a calma e trabalhar juntos.", PRINCIPAL},
+	{"Então vamos mostrar nossa força e não deixar eles pararem a gente!", PRINCIPAL},
+	{"Vamos lá!", PRINCIPAL}
 };
 
-const char* pos_fase4[] =
+DIALOGO pos_fase4[] =
 {
-	"Outro diálogo...",
-	"Segunda linha..."
-};
-
-#pragma endregion
-
-#pragma region FASE5
-
-const char* pre_fase5[] =
-{
-	"Outro diálogo...",
-	"Segunda linha..."
-};
-
-const char* pos_fase5[] =
-{
-	"Outro diálogo...",
-	"Segunda linha..."
+	{"Conseguimos! Entramos na capital do Paraguai, Assunção!", CAPITAO},
+	{"Depois de tanta luta, tomamos o controle da cidade principal deles.", PRINCIPAL},
+	{"Essa vitória é um golpe forte para o Paraguai, mas a guerra ainda não acabou.", CAPITAO},
+	{"Temos que ficar firmes, porque eles ainda tentam resistir em outros lugares.", CAPITAO},
+	{"Conseguimos!!!", PRINCIPAL}
 };
 
 #pragma endregion
@@ -151,6 +169,18 @@ CENA_DIALOGO cenas[] =
 {
 	{ inicial, sizeof(inicial) / sizeof(inicial[0]), 500 },
 	{ livro, sizeof(livro) / sizeof(livro[0]), 600 },
+
+	{ pre_fase1, sizeof(pre_fase1) / sizeof(pre_fase1[0]), 600 },
+	{ pos_fase1, sizeof(pos_fase1) / sizeof(pos_fase1[0]), 600 },
+
+	{ pre_fase2, sizeof(pre_fase2) / sizeof(pre_fase2[0]), 600 },
+	{ pos_fase2, sizeof(pos_fase2) / sizeof(pos_fase2[0]), 600 },
+
+	{ pre_fase3, sizeof(pre_fase3) / sizeof(pre_fase3[0]), 600 },
+	{ pos_fase3, sizeof(pos_fase3) / sizeof(pos_fase3[0]), 600 },
+
+	{ pre_fase4, sizeof(pre_fase4) / sizeof(pre_fase4[0]), 600 },
+	{ pos_fase4, sizeof(pos_fase4) / sizeof(pos_fase4[0]), 600 },
 };
 
 ALLEGRO_COLOR cor_texto;
@@ -182,6 +212,30 @@ void cutscene(GameContext* ctx, int cena)
 	float pular_x = CANVAS_W - 150;
 	float pular_y = CANVAS_H - 25;
 
+	switch (cena_atual)
+	{	
+	case PRE_FASE1:
+	case POS_FASE1:	 
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase1_fundo.png");
+		must_init(ctx->background, "background - pre/pos_fase1");
+		break;
+	case PRE_FASE2:
+	case POS_FASE2:
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
+		must_init(ctx->background, "background - pre/pos_fase2");		
+		break;
+	case PRE_FASE3:
+	case POS_FASE3:
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase3_fundo.png");
+		must_init(ctx->background, "background - pre/pos_fase3");
+		break;
+	case PRE_FASE4:
+	case POS_FASE4:
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
+		must_init(ctx->background, "background - pre/pos_fase4");		
+		break;		
+	}
+
 	ALLEGRO_EVENT event;
 
 	while (!ctx->exit_program && !exit_tela)
@@ -205,15 +259,14 @@ void cutscene(GameContext* ctx, int cena)
 					// Verifica se todas as letras já apareceram
 					if (letras_visiveis < tam) {
 						letras_visiveis++;
-						play_bip = true;						
+						play_bip = true;
+						personagem_atual = cenas[cena_atual].dialogos[linha_atual].personagem;
 					}
 					else {
 						linha_completa = true;
 					}
 				}
-			}
-
-			personagem_atual = cenas[cena_atual].dialogos[linha_atual].personagem;
+			}			
 
 			frames++;
 			desenhar = true;
@@ -244,48 +297,27 @@ void cutscene(GameContext* ctx, int cena)
 
 						switch (cena_atual)
 						{
-						case PRE_FASE1:
-							ctx->cena_atual++;
-							ctx->estado_tela = FASE1;
-							exit_tela = true;
-							break;
-						case PRE_FASE2:
-							ctx->cena_atual++;
-							ctx->estado_tela = FASE2;
-							exit_tela = true;
-							break;
-						case PRE_FASE3:
-							ctx->cena_atual++;
-							ctx->estado_tela = FASE3;
-							exit_tela = true;
-							break;
-						case PRE_FASE4:
-							ctx->cena_atual++;
-							ctx->estado_tela = FASE4;
-							exit_tela = true;
-							break;
-						case PRE_FASE5:
-							ctx->cena_atual++;
-							ctx->estado_tela = FASE5;
+						case PRE_FASE1:							
+						case PRE_FASE2:						
+						case PRE_FASE3:							
+						case PRE_FASE4:									
+							ctx->estado_tela = INTRO_FASE;
 							exit_tela = true;
 							break;
 
-						case POS_FASE5:
+						case POS_FASE4:
 							ctx->estado_tela = TELA_MENU;
+							ctx->proxima_fase = 1;
+							ctx->cena_atual = 0;
 							exit_tela = true;
 							break;
 
-						default:
+						default:							
 							ctx->cena_atual++;
 							ctx->estado_tela = CUTSCENE;
 							exit_tela = true;
 							break;
-						}
-						// acabou o diálogo
-						/*ctx->proxima_fase = fase_atual;
-						ctx->estado_tela = INTRO_FASE;
-						exit_tela = true;
-						break;*/
+						}						
 					}
 				}
 				break;
@@ -301,6 +333,11 @@ void cutscene(GameContext* ctx, int cena)
 			tela_pre_draw(ctx->canvas);
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
+			al_draw_scaled_bitmap(ctx->background,
+				0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
+				0, 0, CANVAS_W, CANVAS_H,
+				0);
+
 			strncpy_s(buffer, sizeof(buffer), cenas[cena_atual].dialogos[linha_atual].texto, letras_visiveis);
 			buffer[letras_visiveis] = '\0';
 
@@ -308,44 +345,102 @@ void cutscene(GameContext* ctx, int cena)
 			{
 			case PRINCIPAL:
 				cor_texto = ctx->cores.verde;
-				personagem_gain = 0.2f;
+
+				if (play_bip)
+				{
+					al_play_sample_instance(ctx->sons.text_bip);
+					play_bip = false;
+				}
+
 				break;
 			case LEITOR:
-				cor_texto = ctx->cores.azul;
-				personagem_gain = 0.2f;
+				cor_texto = ctx->cores.vermelho;
+
+				if (play_bip)
+				{
+					al_play_sample_instance(ctx->sons.text_bip);					
+					play_bip = false;
+				}										
+
 				break;
 			case NARRADOR:
 				cor_texto = ctx->cores.branco;
-				personagem_gain = 0.5f;
+
+				if (play_bip)
+				{
+					al_set_sample_instance_speed(ctx->sons.typing, between_f(1.0, 1.5));
+					al_set_sample_instance_gain(ctx->sons.typing, between_f(1.0, 1.3));
+					al_play_sample_instance(ctx->sons.typing);
+					play_bip = false;
+				}
+
 				break;
 			case CAPITAO:
-				cor_texto = ctx->cores.amarelo;
-				personagem_gain = 0.5f;
+				cor_texto = ctx->cores.amarelo;				
+
+				if (play_bip)
+				{
+					al_set_sample_instance_speed(ctx->sons.voice, between_f(0.7, 1.6));
+					al_play_sample_instance(ctx->sons.voice);
+					play_bip = false;
+				}
+
 				break;
 			}
 
-			if (play_bip)
-			{
-				al_play_sample_instance(ctx->sons.text_bip);
-				play_bip = false;
-			}
 
 			switch (cena_atual) {
 			case CENA_INICIAL:
-				draw_text(ctx, buffer, personagem_atual, max_linha);
+				al_draw_filled_rectangle(
+					0, 0, CANVAS_W, CANVAS_H,
+					ctx->cores.preto
+				);
+				draw_text(ctx, buffer, max_linha, 50, 50);
 				break;
+
 			case CENA_LIVRO:
 				al_draw_filled_rectangle(
 					0, 0, CANVAS_W, CANVAS_H,
-					ctx->cores.verde_opaco
+					al_map_rgb(200, 180, 140)
 				);
-				draw_text(ctx, buffer, personagem_atual, max_linha);
+				// Colocar fundo do livro
+				draw_text(ctx, buffer, max_linha, 50, 50);
+				break;		
+
+			case PRE_FASE1:
+			case POS_FASE1:
+				al_draw_scaled_bitmap(ctx->background,
+					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
+					0, 0, CANVAS_W, CANVAS_H,
+					0);
+				draw_text(ctx, buffer, max_linha, 100, CANVAS_H / 2 - 100);
+				// Colocar apenas o navio Brasileiro e deixar o texto emcima.
+				break;	
+
+			case POS_FASE2:
+			case POS_FASE3:
+			case PRE_FASE4:
+			case POS_FASE4:
+				al_draw_scaled_bitmap(ctx->background,
+					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
+					0, 0, CANVAS_W, CANVAS_H,
+					0);
+				draw_text(ctx, buffer, max_linha, (CANVAS_W / 2) - 200, (CANVAS_H / 2) - 50 );
+				al_draw_bitmap(sprites_soldado.soldado[CIMA][0], (CANVAS_W / 2) - (SOLDADOS_W / 2), (CANVAS_H / 2) + 20, 0);
+				break;
+
+			default:
+				al_draw_scaled_bitmap(ctx->background,
+					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
+					0, 0, CANVAS_W, CANVAS_H,
+					0);
+				draw_text(ctx, buffer, max_linha, 100, CANVAS_H / 2 - 100);						
 				break;
 			}
 
 			if ((frames / 45) % 2 == 0)
 			{
-				al_draw_text(ctx->fonts.font_small, ctx->cores.preto, pular_x + 2, pular_y + 2, ALLEGRO_ALIGN_CENTER, "Pressione ESPAÇO para avançar");
+				al_draw_text(ctx->fonts.font_small, ctx->cores.preto, pular_x + 1, pular_y + 1, ALLEGRO_ALIGN_CENTER, "Pressione ESPAÇO para avançar");
 				al_draw_text(ctx->fonts.font_small, ctx->cores.verde, pular_x, pular_y, ALLEGRO_ALIGN_CENTER, "Pressione ESPAÇO para avançar");
 			}
 
@@ -359,28 +454,28 @@ void cutscene(GameContext* ctx, int cena)
 
 void quebra_linhas(char* texto, char caracter)
 {
-	int len = (int)strlen(texto);	
+	int len = (int)strlen(texto);
 
 	for (int i = 0; i < len; i++)
 	{
 		// Se for espaço, marca como ponto de quebra possível
 		if (texto[i] == caracter)
-		{			
+		{
 			texto[i + 1] = '\n';  // substitui espaço por quebra			
 		}
 	}
 }
 
-void draw_text(GameContext* ctx, char* buffer, PERSONAGEM personagem, int max_linha)
-{	
+void draw_text(GameContext* ctx, char* buffer, int max_linha, float x, float y)
+{
 
 	quebra_linhas(buffer, '.');
 
 	al_draw_multiline_text(
 		ctx->fonts.font_small,
 		ctx->cores.preto,
-		50 + 2,
-		50 + 2,
+		x + 1,
+		y + 1,
 		max_linha,    // mesma largura do wrap
 		al_get_font_line_height(ctx->fonts.font_small),
 		0,
@@ -390,8 +485,8 @@ void draw_text(GameContext* ctx, char* buffer, PERSONAGEM personagem, int max_li
 	al_draw_multiline_text(
 		ctx->fonts.font_small,
 		cor_texto,
-		50,
-		50,
+		x,
+		y,
 		max_linha,    // mesma largura do wrap
 		al_get_font_line_height(ctx->fonts.font_small),
 		0,

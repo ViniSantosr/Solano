@@ -37,15 +37,10 @@ void tiro_init()
 }
 
 bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float alvo_y, float vel)
-{	
-	al_play_sample(
-		ctx.sons.gun_shot,
-		soldado ? 0.3 : 0.2,
-		0,
-		soldado? 1.5 : 1.7,
-		ALLEGRO_PLAYMODE_ONCE,
-		NULL
-	);
+{		
+	al_set_sample_instance_speed(ctx.sons.gun_shot, soldado ? 1.5 : 0.5);
+	al_set_sample_instance_gain(ctx.sons.gun_shot, soldado ? 1.0 : 1.0);
+	al_play_sample_instance(ctx.sons.gun_shot);
 
 	for (int i = 0; i < TIROS_N; i++)
 	{

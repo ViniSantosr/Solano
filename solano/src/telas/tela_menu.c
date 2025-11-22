@@ -77,6 +77,7 @@ void tela_menu(GameContext* ctx)
 				switch (event.keyboard.keycode)
 				{
 				case ALLEGRO_KEY_M:
+					al_play_sample_instance(ctx->sons.click);
 					ctx->play_music = ctx->play_music ? false : true;
 					al_set_audio_stream_playing(ctx->sons.music, ctx->play_music);
 					break;
@@ -85,7 +86,8 @@ void tela_menu(GameContext* ctx)
 					ctx->options = false;
 					break;
 
-				case ALLEGRO_KEY_DOWN:					
+				case ALLEGRO_KEY_DOWN:	
+					al_play_sample_instance(ctx->sons.click);
 					if (ctx->sons.volume_general > 0.01)
 					{
 						ctx->sons.volume_general -= 0.01f;
@@ -93,7 +95,8 @@ void tela_menu(GameContext* ctx)
 					}
 					break;
 
-				case ALLEGRO_KEY_UP:					
+				case ALLEGRO_KEY_UP:	
+					al_play_sample_instance(ctx->sons.click);
 					if (ctx->sons.volume_general < 0.99)
 					{
 						ctx->sons.volume_general += 0.01f;
@@ -108,12 +111,14 @@ void tela_menu(GameContext* ctx)
 				{
 				case ALLEGRO_KEY_DOWN:
 				case ALLEGRO_KEY_S:// seta para baixo
+					al_play_sample_instance(ctx->sons.click);
 					selected++;
 					if (selected >= BOTOES_N) selected = 0; // volta para o início
 					break;
 
 				case ALLEGRO_KEY_UP: // seta para cima
 				case ALLEGRO_KEY_W:
+					al_play_sample_instance(ctx->sons.click);
 					if (selected == 0) // Deixa parado no 'Novo Jogo'
 						break;
 
@@ -125,8 +130,8 @@ void tela_menu(GameContext* ctx)
 					switch (selected)
 					{
 					case NOVO_JOGO:
-						ctx->proxima_fase = 1;
-						ctx->cena_atual = 0;
+						ctx->proxima_fase = 4;
+						ctx->cena_atual = 7;
 						ctx->estado_tela = CUTSCENE;
 						exit_tela = true;
 						break;
@@ -134,7 +139,8 @@ void tela_menu(GameContext* ctx)
 						if (continuar_enable)
 						{
 							ctx->proxima_fase = ctx->proxima_fase;
-							ctx->estado_tela = INTRO_FASE;
+							ctx->cena_atual = ctx->cena_atual;
+							ctx->estado_tela = CUTSCENE;
 							exit_tela = true;
 						}
 						break;
