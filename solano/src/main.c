@@ -48,14 +48,15 @@ int main()
 			tela_menu(&ctx);
 			break;
 		case CUTSCENE:
-			cutscene(&ctx, ctx.proxima_fase);
+			cutscene(&ctx, ctx.cena_atual);
 			break;
 		case INTRO_FASE:
 			intro_fase(&ctx, ctx.proxima_fase);
 			break;
-		/*case FASE1:
-			fase1(&ctx);
-			break;*/
+		case FASE1:
+			ctx.proxima_fase++;			
+			/*fase1(&ctx);*/
+			break;
 		case FASE2:
 			fase2(&ctx);
 			break;
@@ -117,7 +118,7 @@ void inicializar_game()
 	ctx.background = al_load_bitmap("assets/images/background_menu.bmp");
 	must_init(ctx.background, "background_menu");
 
-	ctx.sons.volume_general = 0.7f;
+	ctx.sons.volume_general = 1.0f;
 	ctx.sons.volume_music = 0.7f;
 	ctx.sons.volume_effects = 0.7f;
 
@@ -133,8 +134,18 @@ void inicializar_game()
 	ctx.sons.gun_shot = al_load_sample("assets/sounds/gun_shot.mp3");
 	must_init(ctx.sons.gun_shot, "gun_shot");	
 
-	ctx.sons.text_bip = al_load_sample("assets/sounds/text_bip.wav");
+
+	ALLEGRO_SAMPLE* sample = al_load_sample("assets/sounds/text_bip.wav");
+	must_init(sample, "text_bip.wav");
+
+	ctx.sons.text_bip = al_create_sample_instance(sample);
 	must_init(ctx.sons.text_bip, "text_bip");
+
+	al_attach_sample_instance_to_mixer(ctx.sons.text_bip, ctx.sons.mixer);
+	al_set_sample_instance_gain(ctx.sons.text_bip, 0.1);     // volume
+	al_set_sample_instance_speed(ctx.sons.text_bip, 0.9);    // pitch
+	al_set_sample_instance_pan(ctx.sons.text_bip, 0.0);      // centro
+	al_set_sample_instance_playmode(ctx.sons.text_bip, ALLEGRO_PLAYMODE_ONCE);
 
 	must_init(al_init_primitives_addon(), "primitives");
 
@@ -164,6 +175,9 @@ void inicializar_game()
 	ctx.cores.verde_opaco = al_map_rgba_f(0.39, 0.78, 0.31, 0.5);
 	ctx.cores.amarelo = al_map_rgb(255, 200, 50);
 	ctx.cores.vermelho = al_map_rgb_f(1, 0.2, 0.2);
+	ctx.cores.azul = al_map_rgb(0, 0, 255);
+	ctx.cores.azul_claro = al_map_rgb(80, 80, 255);
+	ctx.cores.azul_escuro = al_map_rgb(20, 20, 160);
 }
 
 void finalizar_game()

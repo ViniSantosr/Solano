@@ -17,6 +17,9 @@ typedef struct {
     ALLEGRO_COLOR preto;
     ALLEGRO_COLOR cinza_opaco;
     ALLEGRO_COLOR vermelho;
+    ALLEGRO_COLOR azul;
+    ALLEGRO_COLOR azul_claro;
+    ALLEGRO_COLOR azul_escuro;
 } CORES;
 
 typedef struct {
@@ -65,6 +68,7 @@ typedef struct GameContext {
 
     TELAS_PRINCIPAIS estado_tela;
     int proxima_fase;
+    int cena_atual;
     CORES cores;
     FONTS fonts;
     SONS sons;
