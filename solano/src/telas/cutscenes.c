@@ -36,7 +36,7 @@ DIALOGO inicial[] =
 	{"pfff!", LEITOR },
 	{"Que susto, o que é isso?", LEITOR },
 	{"Caramba, parece ser um livro antigo.", LEITOR},
-	{"SOLANO: Um diário sobre a Guerra do Paraguai, por Rogerinho", LEITOR},
+	{"SOLANO: Um diário sobre a Guerra do Paraguai, por Rogerinho.", LEITOR},
 	{"Ué, Rogerinho, esse não é o nome do meu bisavô?", LEITOR },
 	{"Acho que vou ler.", LEITOR }
 };
@@ -252,7 +252,7 @@ void cutscene(GameContext* ctx, int cena)
 			if (!linha_completa) {  // Verifica se a linha foi completada
 				frame_counter++; // Aumenta o frame
 
-				if (frame_counter >= frames_por_letra) { // Se frames chegar a 3 frames					
+				if (frame_counter > frames_por_letra) { // Se frames chegar a 3 frames					
 					frame_counter = 0; // Zera o frames
 
 					// Pega a próxima linha
@@ -340,8 +340,11 @@ void cutscene(GameContext* ctx, int cena)
 				0, 0, CANVAS_W, CANVAS_H,
 				0);
 
-			strncpy_s(buffer, sizeof(buffer), cenas[cena_atual].dialogos[linha_atual].texto, letras_visiveis);
-			buffer[letras_visiveis] = '\0';
+			int max = sizeof(buffer) - 1;
+			int n = (letras_visiveis < max) ? letras_visiveis : max;			
+
+			strncpy_s(buffer, sizeof(buffer), cenas[cena_atual].dialogos[linha_atual].texto, n);
+			buffer[n] = '\0';
 
 			switch (personagem_atual)
 			{
@@ -457,8 +460,10 @@ void cutscene(GameContext* ctx, int cena)
 void quebra_linhas(char* texto, char caracter)
 {
 	int len = (int)strlen(texto);
+	
 
-	for (int i = 0; i < len; i++)
+
+	for (int i = 0; i < len - 1; i++)
 	{
 		// Se for espaço, marca como ponto de quebra possível
 		if (texto[i] == caracter)
