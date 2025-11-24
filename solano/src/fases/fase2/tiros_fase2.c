@@ -37,12 +37,12 @@ void tiro_init()
 }
 
 bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float alvo_y, float vel)
-{	
+{		
 	al_play_sample(
 		ctx.sons.gun_shot,
 		soldado ? 0.3 : 0.1,
 		0,
-		soldado? 1.5 : 2,
+		soldado ? 1.5 : 2,
 		ALLEGRO_PLAYMODE_ONCE,
 		NULL
 	);
@@ -113,7 +113,7 @@ void tiros_update()
 				continue;
 			}
 		}
-		else // alien
+		else // inimigo
 		{
 			tiros[i].x += tiros[i].dx;
 			tiros[i].y += tiros[i].dy;

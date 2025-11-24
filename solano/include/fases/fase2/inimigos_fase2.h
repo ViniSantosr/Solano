@@ -6,8 +6,7 @@
 
 typedef enum TIPO_INIMIGO
 {	
-	INIMIGO_SOLDADO,
-	SOLANO	
+	INIMIGO_SOLDADO	
 } TIPO_INIMIGO;
 
 typedef struct INIMIGO

@@ -131,6 +131,7 @@ void fase3(GameContext* ctx)
 					break;
 
 				case ALLEGRO_KEY_DOWN:
+					al_play_sample_instance(ctx->sons.click);
 					if (ctx->sons.volume_general > 0.01)
 					{
 						ctx->sons.volume_general -= 0.01f;
@@ -139,6 +140,7 @@ void fase3(GameContext* ctx)
 					break;
 
 				case ALLEGRO_KEY_UP:
+					al_play_sample_instance(ctx->sons.click);
 					if (ctx->sons.volume_general < 0.99)
 					{
 						ctx->sons.volume_general += 0.01f;
@@ -205,8 +207,9 @@ void fase3(GameContext* ctx)
 				if (tecla[ALLEGRO_KEY_SPACE])
 				{
 					exit_tela = true;
-					ctx->proxima_fase = 4;
-					ctx->estado_tela = INTRO_FASE;
+					ctx->proxima_fase++;
+					ctx->cena_atual++;
+					ctx->estado_tela = CUTSCENE;
 				}
 			}
 
@@ -216,7 +219,7 @@ void fase3(GameContext* ctx)
 				if (tecla[ALLEGRO_KEY_R])
 				{
 					exit_tela = true;
-					ctx->estado_tela = FASE2;
+					ctx->estado_tela = FASE3;
 				}
 			}
 

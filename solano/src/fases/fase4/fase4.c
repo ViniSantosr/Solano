@@ -30,6 +30,7 @@
 #include "fases/fase2/hud_fase2.h"
 #include "core/funcoes_auxiliares.h"
 #include "main.h"
+#include "fases/fase4/solano.h"
 #pragma endregion
 
 #include "fases/fase4/fase4.h"
@@ -73,19 +74,14 @@ void fase4(GameContext* ctx)
 			// Se o jogador perder
 			if (soldado.vidas <= 0) {
 				game_over = true;
-			}
-
-			// Se o jogador vencer
-			if (score >= 10050) {
-				concluido = true;
-			}
+			}			
 
 			// Se o jogo não estiver em pausa ou acabado			
 			if (!concluido && !game_over && !pause) {
 				mouse_apply(ctx->tela);
 				tiros_update();
 				soldado_update();
-				hud_update(ctx, &frames, &score);
+				solano_update(&concluido);				
 				inimigo_update(ctx, &frames, &score);
 			}
 
@@ -114,6 +110,7 @@ void fase4(GameContext* ctx)
 					break;
 
 				case ALLEGRO_KEY_DOWN:
+					al_play_sample_instance(ctx->sons.click);
 					if (ctx->sons.volume_general > 0.01)
 					{
 						ctx->sons.volume_general -= 0.01f;
@@ -122,6 +119,7 @@ void fase4(GameContext* ctx)
 					break;
 
 				case ALLEGRO_KEY_UP:
+					al_play_sample_instance(ctx->sons.click);
 					if (ctx->sons.volume_general < 0.99)
 					{
 						ctx->sons.volume_general += 0.01f;
@@ -188,8 +186,9 @@ void fase4(GameContext* ctx)
 				if (tecla[ALLEGRO_KEY_SPACE])
 				{
 					exit_tela = true;
-					ctx->proxima_fase = 4;
-					ctx->estado_tela = INTRO_FASE;
+					ctx->proxima_fase++;
+					ctx->cena_atual++;
+					ctx->estado_tela = CUTSCENE;
 				}
 			}
 
@@ -199,7 +198,7 @@ void fase4(GameContext* ctx)
 				if (tecla[ALLEGRO_KEY_R])
 				{
 					exit_tela = true;
-					ctx->estado_tela = FASE2;
+					ctx->estado_tela = FASE4;
 				}
 			}
 
@@ -226,9 +225,10 @@ void fase4(GameContext* ctx)
 			else 
 			{
 				tiros_draw();
-				soldado_draw();
+				soldado_draw();				
 				inimigo_draw();
-				mouse_draw();
+				solano_draw(ctx);
+				mouse_draw();				
 			}
 
 			if (pause) // Se o jogo estiver em pausa
@@ -261,18 +261,17 @@ void fase4(GameContext* ctx)
 
 bool fase4_init(GameContext* ctx)
 {	
-	hud_init();
-
 	tiro_init();
 	mouse_init(ctx->tela);
 	teclado_init();
 	soldado_init();
+	solano_init();
 	inimigo_init();
 
 	mira_x = CANVAS_W / 2;
 	mira_y = (CANVAS_H / 2) - SOLDADOS_H * 2;
 
-	ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
+	ctx->background = switch_background(ctx, ctx->background, "assets/images/fase4_fundo.png");
 	if (!ctx->background)
 		return false;
 	

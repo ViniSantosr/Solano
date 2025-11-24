@@ -40,6 +40,9 @@ typedef struct SPRITES_SOLDADOS {
 
 	ALLEGRO_BITMAP* inimigo[4][2]; // [direção][frame]
 	ALLEGRO_BITMAP* inimigo_tiros[3];
+
+	ALLEGRO_BITMAP* solano[4][2]; // [direção][frame]
+	ALLEGRO_BITMAP* vida_boss;
 	
 	/*
 		ALLEGRO_BITMAP* explosion[EXPLOSION_FRAMES];

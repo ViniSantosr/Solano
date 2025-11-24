@@ -77,7 +77,7 @@ void fase2(GameContext* ctx)
 			}
 
 			// Se o jogador vencer
-			if (score >= 5050) {
+			if (score >= 2550) {
 				concluido = true;
 			}
 
@@ -115,6 +115,7 @@ void fase2(GameContext* ctx)
 					break;				
 
 				case ALLEGRO_KEY_DOWN:
+					al_play_sample_instance(ctx->sons.click);
 					if (ctx->sons.volume_general > 0.01)
 					{
 						ctx->sons.volume_general -= 0.01f;
@@ -123,6 +124,7 @@ void fase2(GameContext* ctx)
 					break;
 
 				case ALLEGRO_KEY_UP:
+					al_play_sample_instance(ctx->sons.click);
 					if (ctx->sons.volume_general < 0.99)
 					{
 						ctx->sons.volume_general += 0.01f;
@@ -187,10 +189,11 @@ void fase2(GameContext* ctx)
 			if (concluido) // A fase foi concluída 
 			{
 				if (tecla[ALLEGRO_KEY_SPACE])
-				{
+				{					
+					ctx->proxima_fase++;
+					ctx->cena_atual++;
+					ctx->estado_tela = CUTSCENE;
 					exit_tela = true;
-					ctx->proxima_fase += 1;
-					ctx->estado_tela = INTRO_FASE;
 				}
 			}
 
@@ -277,7 +280,7 @@ bool fase2_init(GameContext* ctx)
 		return false;
 
 
-	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/fase_battle_trilha.ogg");
+	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/fase_battle_trilha.ogg");	
 
 	return true;
 }

@@ -21,7 +21,7 @@ void hud_init()
 }
 
 void hud_update(GameContext* ctx, long* frames, long* score)
-{	
+{
 	if (*frames % 2)
 		return;
 
@@ -36,28 +36,42 @@ void hud_update(GameContext* ctx, long* frames, long* score)
 
 void hud_draw(GameContext* ctx)
 {
-	al_draw_textf(
-		ctx->fonts.font_medium,
-		ctx->cores.preto,
-		1+2, 1+2,
-		0,
-		"%06ld",
-		score_display
-	);
 
-	al_draw_textf(
-		ctx->fonts.font_medium,
-		ctx->cores.verde,
-		1, 1,
-		0,
-		"%06ld",
-		score_display
-	);
-
-	int spacing = VIDA_W + 1;
-	for (int i = 0; i < soldado.vidas; i++)
-	{		
-		al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.preto, (1 + (i * spacing)) + 1, 24 + 1, 0);
-		al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.branco, 1 + (i * spacing), 24, 0);
+	if (ctx->estado_tela == FASE4)
+	{
+		int spacing = VIDA_W + 1;
+		for (int i = 0; i < soldado.vidas; i++)
+		{
+			al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.preto, (1 + (i * spacing)) + 1, 10 + 1, 0);
+			al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.branco, 1 + (i * spacing), 10, 0);
+		}
 	}
+	else
+	{
+		al_draw_textf(
+			ctx->fonts.font_medium,
+			ctx->cores.preto,
+			1 + 2, 1 + 2,
+			0,
+			"%06ld",
+			score_display
+		);
+
+		al_draw_textf(
+			ctx->fonts.font_medium,
+			ctx->cores.verde,
+			1, 1,
+			0,
+			"%06ld",
+			score_display
+		);
+
+		int spacing = VIDA_W + 1;
+		for (int i = 0; i < soldado.vidas; i++)
+		{
+			al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.preto, (1 + (i * spacing)) + 1, 24 + 1, 0);
+			al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.branco, 1 + (i * spacing), 24, 0);
+		}
+	}
+
 }

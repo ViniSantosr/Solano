@@ -175,6 +175,8 @@
     <ClCompile Include="src\fases\fase3\fase3.c" />
     <ClCompile Include="src\fases\fase3\hud_fase3.c" />
     <ClCompile Include="src\fases\fase4\fase4.c" />
+    <ClCompile Include="src\fases\fase4\solano.c" />
+    <ClCompile Include="src\telas\cutscenes.c" />
     <ClCompile Include="src\telas\intro_fase.c" />
     <ClCompile Include="src\telas\telas_gameplay.c" />
     <ClCompile Include="src\telas\tela_menu.c" />
@@ -195,6 +197,10 @@
     <None Include="assets\sounds\explode2.flac" />
     <None Include="assets\sounds\fase_battle_trilha.ogg" />
     <None Include="assets\sounds\menu_trilha.ogg" />
+    <None Include="build\Release\assets\sounds\explode1.flac" />
+    <None Include="build\Release\assets\sounds\explode2.flac" />
+    <None Include="build\Release\assets\sounds\fase_battle_trilha.ogg" />
+    <None Include="build\Release\assets\sounds\menu_trilha.ogg" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -202,11 +208,22 @@
     <Image Include="assets\images\fase1_fundo.png" />
     <Image Include="assets\images\fase2_fundo.png" />
     <Image Include="assets\images\fase3_fundo.png" />
+    <Image Include="assets\images\fase4_fundo.png" />
     <Image Include="assets\images\rio_background.png" />
     <Image Include="assets\images\spritesheets\navios_spritesheet.png" />
     <Image Include="assets\images\spritesheets\spritesheet_util.png" />
     <Image Include="assets\images\spritesheets\tutorial_spritesheet.png" />
     <Image Include="assets\images\spritesheets\soldados_spritesheet.png" />
+    <Image Include="build\Release\assets\images\background_menu.bmp" />
+    <Image Include="build\Release\assets\images\fase1_fundo.png" />
+    <Image Include="build\Release\assets\images\fase2_fundo.png" />
+    <Image Include="build\Release\assets\images\fase3_fundo.png" />
+    <Image Include="build\Release\assets\images\fase4_fundo.png" />
+    <Image Include="build\Release\assets\images\rio_background.png" />
+    <Image Include="build\Release\assets\images\spritesheets\navios_spritesheet.png" />
+    <Image Include="build\Release\assets\images\spritesheets\soldados_spritesheet.png" />
+    <Image Include="build\Release\assets\images\spritesheets\spritesheet_util.png" />
+    <Image Include="build\Release\assets\images\spritesheets\tutorial_spritesheet.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core\funcoes_auxiliares.h" />
@@ -215,7 +232,9 @@
     <ClInclude Include="include\fases\fase3\fase3.h" />
     <ClInclude Include="include\fases\fase3\hud_fase3.h" />
     <ClInclude Include="include\fases\fase4\fase4.h" />
+    <ClInclude Include="include\fases\fase4\solano.h" />
     <ClInclude Include="include\main.h" />
+    <ClInclude Include="include\telas\cutscenes.h" />
     <ClInclude Include="include\telas\intro_fase.h" />
     <ClInclude Include="include\telas\telas_gameplay.h" />
     <ClInclude Include="include\telas\tela_menu.h" />
@@ -236,14 +255,20 @@
     <Font Include="assets\fonts\CinzelDecorative-Bold.ttf" />
     <Font Include="assets\fonts\font_titulo.ttf" />
     <Font Include="assets\fonts\upheavtt.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="src\fases\fase5\fase5.txt" />
+    <Font Include="build\Release\assets\fonts\Cinzel-ExtraBold.ttf" />
+    <Font Include="build\Release\assets\fonts\CinzelDecorative-Black.ttf" />
+    <Font Include="build\Release\assets\fonts\CinzelDecorative-Bold.ttf" />
+    <Font Include="build\Release\assets\fonts\upheavtt.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\fase_background.mp3" />
     <Media Include="assets\sounds\gun_shot.mp3" />
     <Media Include="assets\sounds\intro_fase_trilha.wav" />
+    <Media Include="assets\sounds\text_bip.wav" />
+    <Media Include="build\Release\assets\sounds\fase_background.mp3" />
+    <Media Include="build\Release\assets\sounds\gun_shot.mp3" />
+    <Media Include="build\Release\assets\sounds\intro_fase_trilha.wav" />
+    <Media Include="build\Release\assets\sounds\text_bip.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
