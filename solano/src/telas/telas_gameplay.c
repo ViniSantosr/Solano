@@ -12,7 +12,7 @@
 #include <allegro5/allegro_color.h>
 #pragma endregion
 
-#pragma region H
+#pragma region Headers
 #include "fases/fase2/fase2.h" // Header da fase 2
 #include "core/funcoes_auxiliares.h"
 #include "core/tela_utils.h"
@@ -49,32 +49,32 @@ void tela_pause(GameContext* ctx)
 	);
 
 	al_draw_text(ctx->fonts.font_subtitulo, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 3 + 2, ALLEGRO_ALIGN_CENTER, "JOGO PAUSADO");
+		CANVAS_W / 2 + 2, CANVAS_H / 3 + 1.5, ALLEGRO_ALIGN_CENTER, "JOGO PAUSADO");
 	al_draw_text(ctx->fonts.font_subtitulo, ctx->cores.amarelo,
 		CANVAS_W / 2, CANVAS_H / 3, ALLEGRO_ALIGN_CENTER, "JOGO PAUSADO");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 2 + 2, ALLEGRO_ALIGN_CENTER, "Esc -> Retomar");
+		CANVAS_W / 2 + 2, CANVAS_H / 2 + 1.5, ALLEGRO_ALIGN_CENTER, "Esc -> Retomar");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.amarelo,
 		CANVAS_W / 2, CANVAS_H / 2, ALLEGRO_ALIGN_CENTER, "Esc -> Retomar");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 1.8 + 2, ALLEGRO_ALIGN_CENTER, "R -> Reiniciar");
+		CANVAS_W / 2 + 2, CANVAS_H / 1.8 + 1.5, ALLEGRO_ALIGN_CENTER, "R -> Reiniciar");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.amarelo,
 		CANVAS_W / 2, CANVAS_H / 1.8, ALLEGRO_ALIGN_CENTER, "R -> Reiniciar");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 1.65 + 2, ALLEGRO_ALIGN_CENTER, "E -> Opções");
+		CANVAS_W / 2 + 2, CANVAS_H / 1.65 + 1.5, ALLEGRO_ALIGN_CENTER, "E -> Opções");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.amarelo,
 		CANVAS_W / 2, CANVAS_H / 1.65, ALLEGRO_ALIGN_CENTER, "E -> Opções");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 1.52 + 2, ALLEGRO_ALIGN_CENTER, "T -> Tutorial");
+		CANVAS_W / 2 + 2, CANVAS_H / 1.52 + 1.5, ALLEGRO_ALIGN_CENTER, "T -> Tutorial");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.amarelo,
 		CANVAS_W / 2, CANVAS_H / 1.52, ALLEGRO_ALIGN_CENTER, "T -> Tutorial");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 1.4 + 2, ALLEGRO_ALIGN_CENTER, "Q -> Tela de Menu");
+		CANVAS_W / 2 + 2, CANVAS_H / 1.4 + 1.5, ALLEGRO_ALIGN_CENTER, "Q -> Tela de Menu");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.amarelo,
 		CANVAS_W / 2, CANVAS_H / 1.4, ALLEGRO_ALIGN_CENTER, "Q -> Tela de Menu");
 
@@ -88,17 +88,17 @@ void tela_game_over(GameContext* ctx)
 	);
 
 	al_draw_text(ctx->fonts.font_subtitulo, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 3 + 2, ALLEGRO_ALIGN_CENTER, "VOCÊ FOI ABATIDO!");
+		CANVAS_W / 2 + 2, CANVAS_H / 3 + 1.5, ALLEGRO_ALIGN_CENTER, "VOCÊ FOI ABATIDO!");
 	al_draw_text(ctx->fonts.font_subtitulo, ctx->cores.vermelho,
 		CANVAS_W / 2, CANVAS_H / 3, ALLEGRO_ALIGN_CENTER, "VOCÊ FOI ABATIDO!");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 2 + 2, ALLEGRO_ALIGN_CENTER, "R -> Reiniciar");
+		CANVAS_W / 2 + 2, CANVAS_H / 2 + 1.5, ALLEGRO_ALIGN_CENTER, "R -> Reiniciar");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.vermelho,
 		CANVAS_W / 2, CANVAS_H / 2, ALLEGRO_ALIGN_CENTER, "R -> Reiniciar");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 1.8 + 2, ALLEGRO_ALIGN_CENTER, "Esc -> Tela de Menu");
+		CANVAS_W / 2 + 2, CANVAS_H / 1.8 + 1.5, ALLEGRO_ALIGN_CENTER, "Esc -> Tela de Menu");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.vermelho,
 		CANVAS_W / 2, CANVAS_H / 1.8, ALLEGRO_ALIGN_CENTER, "Esc -> Tela de Menu");
 }
@@ -112,22 +112,22 @@ void tela_concluido(GameContext* ctx)
 
 
 	al_draw_text(ctx->fonts.font_subtitulo, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 3 + 2, ALLEGRO_ALIGN_CENTER, "BATALHA VENCIDA!!!!");
+		CANVAS_W / 2 + 2, CANVAS_H / 3 + 1.5, ALLEGRO_ALIGN_CENTER, "BATALHA VENCIDA!!!!");
 	al_draw_text(ctx->fonts.font_subtitulo, ctx->cores.verde,
 		CANVAS_W / 2, CANVAS_H / 3, ALLEGRO_ALIGN_CENTER, "BATALHA VENCIDA!!!!");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 2 + 2, ALLEGRO_ALIGN_CENTER, "Space -> Próxima Fase");
+		CANVAS_W / 2 + 2, CANVAS_H / 2 + 1.5, ALLEGRO_ALIGN_CENTER, "Space -> Avançar");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.verde,
-		CANVAS_W / 2, CANVAS_H / 2, ALLEGRO_ALIGN_CENTER, "Space -> Próxima Fase");
+		CANVAS_W / 2, CANVAS_H / 2, ALLEGRO_ALIGN_CENTER, "Space -> Avançar");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 1.8 + 2, ALLEGRO_ALIGN_CENTER, "R -> Reiniciar");
+		CANVAS_W / 2 + 2, CANVAS_H / 1.8 + 1.5, ALLEGRO_ALIGN_CENTER, "R -> Reiniciar");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.verde,
 		CANVAS_W / 2, CANVAS_H / 1.8, ALLEGRO_ALIGN_CENTER, "R -> Reiniciar");
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		CANVAS_W / 2 + 2, CANVAS_H / 1.6 + 2, ALLEGRO_ALIGN_CENTER, "Esc -> Tela de Menu");
+		CANVAS_W / 2 + 2, CANVAS_H / 1.6 + 1.5, ALLEGRO_ALIGN_CENTER, "Esc -> Tela de Menu");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.verde,
 		CANVAS_W / 2, CANVAS_H / 1.6, ALLEGRO_ALIGN_CENTER, "Esc -> Tela de Menu");
 }
@@ -142,31 +142,31 @@ void tela_opcoes(GameContext* ctx)
 	al_draw_filled_rectangle(tela_opcoes_x, tela_opcoes_y, tela_opcoes_w, tela_opcoes_h, ctx->cores.cinza_opaco);
 
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto,
-		tela_opcoes_x + (tela_opcoes_w * 0.375) + 2, (tela_opcoes_y + 1.5) + 2, ALLEGRO_ALIGN_CENTER, "OPÇÕES");
+		tela_opcoes_x + (tela_opcoes_w * 0.375) + 2, (tela_opcoes_y + 1.5) + 1.5, ALLEGRO_ALIGN_CENTER, "OPÇÕES");
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.verde,
 		 tela_opcoes_x + (tela_opcoes_w * 0.375), tela_opcoes_y + 1.5, ALLEGRO_ALIGN_CENTER, "OPÇÕES");
 
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		tela_opcoes_x + (tela_opcoes_w * 0.05) + 2, (tela_opcoes_y + (tela_opcoes_h * 0.15)) + 2, ALLEGRO_ALIGN_CENTER, "Som:");
+		tela_opcoes_x + (tela_opcoes_w * 0.05) + 2, (tela_opcoes_y + (tela_opcoes_h * 0.15)) + 1.5, ALLEGRO_ALIGN_CENTER, "Som:");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.verde,
 		tela_opcoes_x + (tela_opcoes_w * 0.05), tela_opcoes_y + (tela_opcoes_h * 0.15), ALLEGRO_ALIGN_CENTER, "Som:");
 
 	load_mute_bitmap(ctx, tela_opcoes_x + (tela_opcoes_w * 0.1) - MUTE_W, tela_opcoes_y + (tela_opcoes_h * 0.2));
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		tela_opcoes_x + (tela_opcoes_w * 0.24) + 2, tela_opcoes_y + (tela_opcoes_h * 0.21) + 2, ALLEGRO_ALIGN_CENTER, "m -> mute/desmute");
+		tela_opcoes_x + (tela_opcoes_w * 0.24) + 2, tela_opcoes_y + (tela_opcoes_h * 0.21) + 1.5, ALLEGRO_ALIGN_CENTER, "m -> mute/desmute");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.verde,
 		tela_opcoes_x + (tela_opcoes_w * 0.24), tela_opcoes_y + (tela_opcoes_h * 0.21), ALLEGRO_ALIGN_CENTER, "m -> mute/desmute");
 
 
 	al_draw_textf(ctx->fonts.font_small, ctx->cores.preto,
-		tela_opcoes_x + (tela_opcoes_w * 0.1) + 2, tela_opcoes_y + (tela_opcoes_h * 0.3) + 2, ALLEGRO_ALIGN_CENTER, "Volume: %.0f", ctx->sons.volume_general * 100);
+		tela_opcoes_x + (tela_opcoes_w * 0.1) + 2, tela_opcoes_y + (tela_opcoes_h * 0.3) + 1.5, ALLEGRO_ALIGN_CENTER, "Volume: %.0f", ctx->sons.volume_general * 100);
 	al_draw_textf(ctx->fonts.font_small, ctx->cores.verde,
 		tela_opcoes_x + (tela_opcoes_w * 0.1), tela_opcoes_y + (tela_opcoes_h * 0.3), ALLEGRO_ALIGN_CENTER, "Volume: %.0f", ctx->sons.volume_general * 100);
 
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
-		tela_opcoes_x + (tela_opcoes_w * 0.1) + 2, (tela_opcoes_h - 20) + 2, ALLEGRO_ALIGN_CENTER, "Esc -> Voltar");
+		tela_opcoes_x + (tela_opcoes_w * 0.1) + 2, (tela_opcoes_h - 20) + 1.5, ALLEGRO_ALIGN_CENTER, "Esc -> Voltar");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.verde,
 		tela_opcoes_x + (tela_opcoes_w * 0.1), tela_opcoes_h - 20, ALLEGRO_ALIGN_CENTER, "Esc -> Voltar");
 }
@@ -179,31 +179,31 @@ void tela_tutorial_combate_campo(GameContext* ctx)
 		0, 0, CANVAS_W, CANVAS_H,
 		0);
 
-	al_draw_text(ctx->fonts.font_big, ctx->cores.preto, (CANVAS_W / 2) + 2, (CANVAS_H / 6) + 2, ALLEGRO_ALIGN_CENTER, "Mecânica: Combate no campo");
+	al_draw_text(ctx->fonts.font_big, ctx->cores.preto, (CANVAS_W / 2) + 2, (CANVAS_H / 6) + 1.5, ALLEGRO_ALIGN_CENTER, "Mecânica: Combate no campo");
 	al_draw_text(ctx->fonts.font_big, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 6, ALLEGRO_ALIGN_CENTER, "Mecânica: Combate no campo");
 
 
-	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2) + 2, (CANVAS_H / 3.5) + 2, ALLEGRO_ALIGN_CENTER, "Movimentação:");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2) + 2, (CANVAS_H / 3.5) + 1.5, ALLEGRO_ALIGN_CENTER, "Movimentação:");
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 3.5, ALLEGRO_ALIGN_CENTER, "Movimentação:");
 
 
 	al_draw_bitmap(sprites_soldado.soldado[BAIXO][0], (CANVAS_W / 2) - (SOLDADOS_W / 2), (CANVAS_H / 2) - (SOLDADOS_H / 2), 0);
 
-	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, (CANVAS_H / 2 - 50) + 2, ALLEGRO_ALIGN_CENTER, "W");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, (CANVAS_H / 2 - 50) + 1.5, ALLEGRO_ALIGN_CENTER, "W");
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 2 - 50, ALLEGRO_ALIGN_CENTER, "W");
 
-	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2 - 40) + 2, CANVAS_H / 2 + 2, ALLEGRO_ALIGN_CENTER, "A");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2 - 40) + 2, CANVAS_H / 2 + 1.5, ALLEGRO_ALIGN_CENTER, "A");
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2 - 40, CANVAS_H / 2, ALLEGRO_ALIGN_CENTER, "A");
 
-	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, (CANVAS_H / 2 + 30) + 2, ALLEGRO_ALIGN_CENTER, "S");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, (CANVAS_H / 2 + 30) + 1.5, ALLEGRO_ALIGN_CENTER, "S");
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, (CANVAS_H / 2 + 30), ALLEGRO_ALIGN_CENTER, "S");
 
-	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2 + 40), CANVAS_H / 2 + 2, ALLEGRO_ALIGN_CENTER, "D");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2 + 40), CANVAS_H / 2 + 1.5, ALLEGRO_ALIGN_CENTER, "D");
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, (CANVAS_W / 2 + 40), CANVAS_H / 2, ALLEGRO_ALIGN_CENTER, "D");
 
-	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, CANVAS_H / 1.5 + 2, ALLEGRO_ALIGN_CENTER, "mira: mover com o mouse");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, CANVAS_H / 1.5 + 1.5, ALLEGRO_ALIGN_CENTER, "mira: mover com o mouse");
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 1.5, ALLEGRO_ALIGN_CENTER, "mira: mover com o mouse");
 
-	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, CANVAS_H / 1.39  + 2, ALLEGRO_ALIGN_CENTER, "atirar: Botão direito do mouse");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, CANVAS_H / 1.39  + 1.5, ALLEGRO_ALIGN_CENTER, "atirar: Botão direito do mouse");
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 1.39, ALLEGRO_ALIGN_CENTER, "atirar: Botão direito do mouse");
 }

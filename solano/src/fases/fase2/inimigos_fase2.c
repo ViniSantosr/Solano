@@ -54,14 +54,10 @@ void inimigo_update(GameContext* ctx, long* frames, long* score)
 			nova_onda = between(1, 0);
 		break;
 	case FASE4:
-		if (*frames % 160 == 0)
-			nova_onda = between(1, 3);
+		if (*frames % 600 == 0)
+			nova_onda = between(4, 6);
 		break;
-	}
-
-
-	new_x = round_float(between_f(-60, CANVAS_W + 60), 1); // Posição aleatória dos inimigos no eixo X	
-	new_y = round_float(between_f(-40, -60), 1);
+	}	
 
 
 	for (int i = 0; i < INIMIGOS_N; i++)
@@ -70,7 +66,9 @@ void inimigo_update(GameContext* ctx, long* frames, long* score)
 		{
 			if (nova_onda > 0)
 			{
-				new_x += between_f(40, 80);
+				new_x = (float)between(-60, CANVAS_W + 60); 
+				new_y = round_float(between_f(-40, -60), 1);
+				new_x += between_f(40.0f, 80.0f);
 				if (new_x > CANVAS_W + 60)
 					new_x -= CANVAS_W + 120;
 
@@ -153,11 +151,7 @@ void inimigo_update(GameContext* ctx, long* frames, long* score)
 		// Se o inimigo morreu
 		if (inimigos[i].vida <= 0)
 		{
-			*score += 150;
-
-			/*fx_add(false, cx - 10, cy - 4);
-			fx_add(false, cx + 4, cy + 10);
-			fx_add(false, cx + 8, cy + 8);*/
+			*score += 150;			
 
 			inimigos[i].ativo = false;
 			continue;

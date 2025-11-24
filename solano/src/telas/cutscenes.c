@@ -186,6 +186,8 @@ CENA_DIALOGO cenas[] =
 ALLEGRO_COLOR cor_texto;
 PERSONAGEM personagem_atual;
 
+int max_x_texto;
+
 void cutscene(GameContext* ctx, int cena)
 {
 	al_set_audio_stream_playing(ctx->sons.music, false);
@@ -231,7 +233,7 @@ void cutscene(GameContext* ctx, int cena)
 		break;
 	case PRE_FASE4:
 	case POS_FASE4:
-		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase4_fundo.png");
 		must_init(ctx->background, "background - pre/pos_fase4");		
 		break;		
 	}
@@ -395,7 +397,7 @@ void cutscene(GameContext* ctx, int cena)
 					0, 0, CANVAS_W, CANVAS_H,
 					ctx->cores.preto
 				);
-				draw_text(ctx, buffer, max_linha, 50, 50);
+				draw_text(ctx, buffer, max_linha, 100 - (strlen(buffer) * 1.6), 50);
 				break;
 
 			case CENA_LIVRO:
@@ -404,7 +406,7 @@ void cutscene(GameContext* ctx, int cena)
 					al_map_rgb(200, 180, 140)
 				);
 				// Colocar fundo do livro
-				draw_text(ctx, buffer, max_linha, 50, 50);
+				draw_text(ctx, buffer, max_linha, 100 - (strlen(buffer) * 1.6), 50);
 				break;		
 
 			case PRE_FASE1:
@@ -413,7 +415,7 @@ void cutscene(GameContext* ctx, int cena)
 					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 					0, 0, CANVAS_W, CANVAS_H,
 					0);
-				draw_text(ctx, buffer, max_linha, 100, CANVAS_H / 2 - 100);
+				draw_text(ctx, buffer, max_linha, 195 - (strlen(buffer) * 1.6), CANVAS_H / 2 - 100);
 				// Colocar apenas o navio Brasileiro e deixar o texto emcima.
 				break;	
 
@@ -425,7 +427,7 @@ void cutscene(GameContext* ctx, int cena)
 					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 					0, 0, CANVAS_W, CANVAS_H,
 					0);
-				draw_text(ctx, buffer, max_linha, (CANVAS_W / 2) - 200, (CANVAS_H / 2) - 50 );
+				draw_text(ctx, buffer, max_linha, ((CANVAS_W / 2) - 100) - (strlen(buffer) * 1.8), (CANVAS_H / 2) - 50 );
 				al_draw_bitmap(sprites_soldado.soldado[CIMA][0], (CANVAS_W / 2) - (SOLDADOS_W / 2), (CANVAS_H / 2) + 20, 0);
 				break;
 
@@ -434,13 +436,13 @@ void cutscene(GameContext* ctx, int cena)
 					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 					0, 0, CANVAS_W, CANVAS_H,
 					0);
-				draw_text(ctx, buffer, max_linha, 100, CANVAS_H / 2 - 100);						
+				draw_text(ctx, buffer, max_linha, 195 - (strlen(buffer) * 1.6), CANVAS_H / 2 - 100);
 				break;
 			}
 
 			if ((frames / 45) % 2 == 0)
 			{
-				al_draw_text(ctx->fonts.font_small, ctx->cores.preto, pular_x + 1, pular_y + 1, ALLEGRO_ALIGN_CENTER, "Pressione ESPAÇO para avançar");
+				al_draw_text(ctx->fonts.font_small, ctx->cores.preto, pular_x + 2, pular_y + 1.5, ALLEGRO_ALIGN_CENTER, "Pressione ESPAÇO para avançar");
 				al_draw_text(ctx->fonts.font_small, ctx->cores.verde, pular_x, pular_y, ALLEGRO_ALIGN_CENTER, "Pressione ESPAÇO para avançar");
 			}
 
@@ -471,11 +473,32 @@ void draw_text(GameContext* ctx, char* buffer, int max_linha, float x, float y)
 
 	quebra_linhas(buffer, '.');
 
+	switch (ctx->cena_atual)
+	{
+	case CENA_INICIAL:
+	case CENA_LIVRO:
+		max_x_texto = 45;		
+		break;	
+
+	case POS_FASE2:
+	case POS_FASE3:
+	case PRE_FASE4:
+	case POS_FASE4:
+		max_x_texto = (CANVAS_W / 2) - 200;	
+		break;
+
+	default:
+		max_x_texto = 100;
+		break;
+	}	
+
+	if (x < max_x_texto) x = max_x_texto;
+
 	al_draw_multiline_text(
 		ctx->fonts.font_small,
 		ctx->cores.preto,
-		x + 1,
-		y + 1,
+		x + 2,
+		y + 1.5,
 		max_linha,    // mesma largura do wrap
 		al_get_font_line_height(ctx->fonts.font_small),
 		0,

@@ -64,7 +64,7 @@ void intro_fase(GameContext* ctx, int fase_atual)
 		break;
 
 	case _FASE4:	
-		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase4_fundo.png");
 		if (!ctx->background) {
 			ctx->estado_tela = TELA_MENU;
 			return;
@@ -205,11 +205,11 @@ void inicializar_intro(GameContext* ctx)
 	textos[_FASE2][1] = (TextosConfigsIntro){ "Cerco de Uruguaiana (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
 	textos[_FASE2][2] = (TextosConfigsIntro){ "OBJETIVO:  2.500 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
 
-	textos[_FASE3][0] = (TextosConfigsIntro){ "FASE 3", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
-	textos[_FASE3][1] = (TextosConfigsIntro){ "Batalha de Tuiuti (1866)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
-	textos[_FASE3][2] = (TextosConfigsIntro){ "OBJETIVO:  Sobreviva por 1 minuto", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+	textos[_FASE3][0] = (TextosConfigsIntro){ "FASE 3", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.verde };
+	textos[_FASE3][1] = (TextosConfigsIntro){ "Batalha de Tuiuti (1866)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.verde };
+	textos[_FASE3][2] = (TextosConfigsIntro){ "OBJETIVO:  Sobreviva por 1 minuto", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.verde };
 
-	textos[_FASE4][0] = (TextosConfigsIntro){ "FASE 4", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo };
-	textos[_FASE4][1] = (TextosConfigsIntro){ "Tomada de Assunção (1869)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo };
-	textos[_FASE4][2] = (TextosConfigsIntro){ "OBJETIVO:  Derrote o Solano Lopéz", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo };
+	textos[_FASE4][0] = (TextosConfigsIntro){ "FASE 4", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.vermelho };
+	textos[_FASE4][1] = (TextosConfigsIntro){ "Tomada de Assunção (1869)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.vermelho };
+	textos[_FASE4][2] = (TextosConfigsIntro){ "OBJETIVO:  Derrote o Solano Lopéz", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.vermelho };
 }

@@ -78,6 +78,12 @@
     <ClCompile Include="src\fases\fase3\hud_fase3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\telas\cutscenes.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase4\solano.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -85,6 +91,10 @@
     <None Include="assets\sounds\explode2.flac" />
     <None Include="assets\sounds\menu_trilha.ogg" />
     <None Include="assets\sounds\fase_battle_trilha.ogg" />
+    <None Include="build\Release\assets\sounds\explode1.flac" />
+    <None Include="build\Release\assets\sounds\explode2.flac" />
+    <None Include="build\Release\assets\sounds\fase_battle_trilha.ogg" />
+    <None Include="build\Release\assets\sounds\menu_trilha.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\images\spritesheets\tutorial_spritesheet.png">
@@ -112,6 +122,39 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\images\fase1_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\fase4_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\spritesheets\navios_spritesheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\spritesheets\soldados_spritesheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\spritesheets\spritesheet_util.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\spritesheets\tutorial_spritesheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\background_menu.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\fase1_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\fase2_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\fase3_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\fase4_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\rio_background.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -176,6 +219,12 @@
     <ClInclude Include="include\fases\fase3\hud_fase3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\telas\cutscenes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase4\solano.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\fonts\font_titulo.ttf" />
@@ -183,9 +232,10 @@
     <Font Include="assets\fonts\CinzelDecorative-Bold.ttf" />
     <Font Include="assets\fonts\Cinzel-ExtraBold.ttf" />
     <Font Include="assets\fonts\upheavtt.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="src\fases\fase5\fase5.txt" />
+    <Font Include="build\Release\assets\fonts\CinzelDecorative-Black.ttf" />
+    <Font Include="build\Release\assets\fonts\CinzelDecorative-Bold.ttf" />
+    <Font Include="build\Release\assets\fonts\Cinzel-ExtraBold.ttf" />
+    <Font Include="build\Release\assets\fonts\upheavtt.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\gun_shot.mp3" />
@@ -193,5 +243,16 @@
       <Filter>Resource Files</Filter>
     </Media>
     <Media Include="assets\sounds\fase_background.mp3" />
+    <Media Include="assets\sounds\text_bip.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="build\Release\assets\sounds\fase_background.mp3" />
+    <Media Include="build\Release\assets\sounds\gun_shot.mp3" />
+    <Media Include="build\Release\assets\sounds\intro_fase_trilha.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="build\Release\assets\sounds\text_bip.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

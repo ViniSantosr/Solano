@@ -38,9 +38,14 @@ void tiro_init()
 
 bool disparar(bool soldado, bool reto, float x, float  y, float alvo_x, float alvo_y, float vel)
 {		
-	al_set_sample_instance_speed(ctx.sons.gun_shot, soldado ? 1.5 : 0.5);
-	al_set_sample_instance_gain(ctx.sons.gun_shot, soldado ? 1.0 : 1.0);
-	al_play_sample_instance(ctx.sons.gun_shot);
+	al_play_sample(
+		ctx.sons.gun_shot,
+		soldado ? 0.3 : 0.1,
+		0,
+		soldado ? 1.5 : 2,
+		ALLEGRO_PLAYMODE_ONCE,
+		NULL
+	);
 
 	for (int i = 0; i < TIROS_N; i++)
 	{
@@ -108,7 +113,7 @@ void tiros_update()
 				continue;
 			}
 		}
-		else // alien
+		else // inimigo
 		{
 			tiros[i].x += tiros[i].dx;
 			tiros[i].y += tiros[i].dy;

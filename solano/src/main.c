@@ -134,21 +134,11 @@ void inicializar_game()
 	ctx.sons.music = al_load_audio_stream("assets/sounds/menu_trilha.ogg", 4, 2048);	
 	must_init(ctx.sons.music, "music");
 
-	// Gun
-	ALLEGRO_SAMPLE* sample = al_load_sample("assets/sounds/gun_shot.mp3");
-	must_init(sample, "gun_shot.mp3");
-
-	ctx.sons.gun_shot = al_create_sample_instance(sample);
+	ctx.sons.gun_shot = al_load_sample("assets/sounds/gun_shot.mp3");
 	must_init(ctx.sons.gun_shot, "gun_shot");
 
-	al_attach_sample_instance_to_mixer(ctx.sons.gun_shot, ctx.sons.mixer);
-	al_set_sample_instance_gain(ctx.sons.gun_shot, 0.1);     // volume
-	al_set_sample_instance_speed(ctx.sons.gun_shot, 1.0);    // pitch
-	al_set_sample_instance_pan(ctx.sons.gun_shot, 0.0);      // centro
-	al_set_sample_instance_playmode(ctx.sons.gun_shot, ALLEGRO_PLAYMODE_ONCE);
-
 	// Voice
-	sample = al_load_sample("assets/sounds/voice.wav");
+	ALLEGRO_SAMPLE* sample = al_load_sample("assets/sounds/voice.wav");
 	must_init(sample, "voice.wav");
 
 	ctx.sons.voice = al_create_sample_instance(sample);
@@ -246,7 +236,7 @@ void finalizar_game()
 	al_destroy_timer(ctx.timer);
 	al_destroy_event_queue(ctx.queue);	
 	al_destroy_bitmap(ctx.background);
-	al_destroy_sample_instance(ctx.sons.gun_shot);
+	al_destroy_sample(ctx.sons.gun_shot);
 	al_destroy_sample_instance(ctx.sons.voice);
 	al_destroy_sample_instance(ctx.sons.text_bip);
 	al_destroy_sample_instance(ctx.sons.typing);

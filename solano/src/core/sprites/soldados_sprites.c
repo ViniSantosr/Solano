@@ -84,21 +84,31 @@ void sprites_soldados_init()
 	sprites_soldado.inimigo_tiros[1] = sprite_grab(sprites_soldado._soldados_sheet, 154, 36, INIMIGO_TIRO_W, 15);
 	sprites_soldado.inimigo_tiros[2] = sprite_grab(sprites_soldado._soldados_sheet, 160, 36, INIMIGO_TIRO_W, SOLDADO_TIRO_H);	
 
-	/*
-	sprites_soldado.explosion[0] = sprite_grab(33, 10, 9, 9);
-	sprites_soldado.explosion[1] = sprite_grab(43, 9, 11, 11);
-	sprites_soldado.explosion[2] = sprite_grab(46, 21, 17, 18);
-	sprites_soldado.explosion[3] = sprite_grab(46, 40, 17, 17);
+	// ----- SOLANO ------
 
-	sprites_soldado.sparks[0] = sprite_grab(34, 0, 10, 8);
-	sprites_soldado.sparks[1] = sprite_grab(45, 0, 7, 8);
-	sprites_soldado.sparks[2] = sprite_grab(54, 0, 9, 8);
+	// 0: 144, 89
+	// 1: 144, 134 
+	sprites_soldado.solano[ESQUERDA][0] = sprite_grab(sprites_soldado._soldados_sheet, 144, 89, SOLDADOS_W, SOLDADOS_H);
+	sprites_soldado.solano[ESQUERDA][1] = sprite_grab(sprites_soldado._soldados_sheet, 144, 134, SOLDADOS_W, SOLDADOS_H);
 
-	sprites_soldado.powerup[0] = sprite_grab(0, 49, 9, 12);
-	sprites_soldado.powerup[1] = sprite_grab(10, 49, 9, 12);
-	sprites_soldado.powerup[2] = sprite_grab(20, 49, 9, 12);
-	sprites_soldado.powerup[3] = sprite_grab(30, 49, 9, 12);
-	*/
+
+	// 0: 180, 89
+	// 1: 180, 134
+	sprites_soldado.solano[CIMA][0] = sprite_grab(sprites_soldado._soldados_sheet, 180, 89, SOLDADOS_W, SOLDADOS_H);
+	sprites_soldado.solano[CIMA][1] = sprite_grab(sprites_soldado._soldados_sheet, 180, 134, SOLDADOS_W, SOLDADOS_H);
+
+
+	// 0: 219, 89
+	// 1: 219, 134
+	sprites_soldado.solano[DIREITA][0] = sprite_grab(sprites_soldado._soldados_sheet, 219, 89, SOLDADOS_W, SOLDADOS_H);
+	sprites_soldado.solano[DIREITA][1] = sprite_grab(sprites_soldado._soldados_sheet, 219, 134, SOLDADOS_W, SOLDADOS_H);
+
+	// 0: 256, 89
+	// 1: 256, 134
+	sprites_soldado.solano[BAIXO][0] = sprite_grab(sprites_soldado._soldados_sheet, 256, 89, SOLDADOS_W, SOLDADOS_H);
+	sprites_soldado.solano[BAIXO][1] = sprite_grab(sprites_soldado._soldados_sheet, 256, 134, SOLDADOS_W, SOLDADOS_H);
+		
+	sprites_soldado.vida_boss = sprite_grab(sprites_soldado._soldados_sheet, 200, 70, 7, 7);
 }
 
 void sprites_soldados_deinit()
@@ -134,23 +144,17 @@ void sprites_soldados_deinit()
 	al_destroy_bitmap(sprites_soldado.inimigo[DIREITA][0]);
 	al_destroy_bitmap(sprites_soldado.inimigo[DIREITA][1]);	
 
-	/*
-	al_destroy_bitmap(sprites_soldado.explosion[0]);
-	al_destroy_bitmap(sprites_soldado.explosion[1]);
-	al_destroy_bitmap(sprites_soldado.explosion[2]);
-	al_destroy_bitmap(sprites_soldado.explosion[3]);
+	al_destroy_bitmap(sprites_soldado.solano[CIMA][0]);
+	al_destroy_bitmap(sprites_soldado.solano[CIMA][1]);
 
-	al_destroy_bitmap(sprites_soldado.sparks[0]);
-	al_destroy_bitmap(sprites_soldado.sparks[1]);
-	al_destroy_bitmap(sprites_soldado.sparks[2]);
+	al_destroy_bitmap(sprites_soldado.solano[BAIXO][0]);
+	al_destroy_bitmap(sprites_soldado.solano[BAIXO][1]);
 
-	al_destroy_bitmap(sprites_soldado.powerup[0]);
-	al_destroy_bitmap(sprites_soldado.powerup[1]);
-	al_destroy_bitmap(sprites_soldado.powerup[2]);
-	al_destroy_bitmap(sprites_soldado.powerup[3]);
-	*/
+	al_destroy_bitmap(sprites_soldado.solano[ESQUERDA][0]);
+	al_destroy_bitmap(sprites_soldado.solano[ESQUERDA][1]);
 
-
-	/*al_destroy_bitmap(sprites_soldado._tutorial_sheet);*/
+	al_destroy_bitmap(sprites_soldado.solano[DIREITA][0]);
+	al_destroy_bitmap(sprites_soldado.solano[DIREITA][1]);
+	
 	al_destroy_bitmap(sprites_soldado._soldados_sheet);	
 }

@@ -33,7 +33,7 @@ typedef struct {
 
 typedef struct {
     ALLEGRO_MIXER* mixer;
-    ALLEGRO_SAMPLE_INSTANCE* gun_shot;
+    ALLEGRO_SAMPLE* gun_shot;
     ALLEGRO_SAMPLE_INSTANCE* voice;
     ALLEGRO_SAMPLE_INSTANCE* text_bip;
     ALLEGRO_SAMPLE_INSTANCE* typing;
