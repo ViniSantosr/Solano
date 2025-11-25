@@ -14,6 +14,8 @@
 ALLEGRO_SAMPLE* sample_shot;
 ALLEGRO_SAMPLE* sample_explode[2];
 
+FONTS fonts;
+
 void audio_init()//essa função inicializa o sistema de audio os carregando na memoria
 {
     al_install_audio();//inicializa o sistema de audio do Allegro
@@ -106,13 +108,13 @@ void fx_draw()//essa função é responsavel por desenhas o efeito na tela
         if (aliens[i].life <= 0 && aliens[i].y > 1) {
              if (f1_ctx.frames % 3) {
                  if (aliens[i].type == 0) {
-                        al_draw_text(ctx.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "200");
+                        al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "200");
                  }
                  if (aliens[i].type == 1) {
-                     al_draw_text(ctx.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "150");
+                     al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "150");
                  }
                  if (aliens[i].type == 2) {
-                     al_draw_text(ctx.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "800");
+                     al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "800");
                  }
              }
          }   

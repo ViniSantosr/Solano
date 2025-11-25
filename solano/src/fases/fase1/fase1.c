@@ -16,12 +16,13 @@
 
 #pragma region Headers Game
 //Headers que não fazem parte exclusivamente da fase 1
-#include "core/draw_tela.h"
-#include "configs/config_tela.h"
+#include "core/tela_utils.h"
 #include "core/teclado.h"
 #include "main.h"
 #include "core/efeitos/efeito_gerais.h"
 #include "fases/fase2/fase2.h"
+#include "telas/telas_gameplay.h"
+#include "telas/intro_fase.h"
 
 //Headers exclusivamente da fase 1
 #include "fases/fase1/tiros_fase1.h"
@@ -46,6 +47,7 @@ void tela_game_over_f1(ALLEGRO_FONT* font);
 void tela_concluido_f1(ALLEGRO_FONT* font);
 
 bool jogo_em_inicio_f1();			//Enquanto o jogo está nos frames iniciais
+FONTS fonts;
 
 void fase1(GameContext* ctx) // Função principal da fase 2
 {
@@ -167,17 +169,17 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 
 				if (f1_ctx.pause) // Se o jogo estiver em pausa
 				{
-					tela_pause(ctx->font);
+					tela_pause(&fonts);
 				}
 
 				if (f1_ctx.concluido) // Se a fase foi concluída
 				{
-					tela_concluido(ctx->font);
+					tela_concluido(&fonts);
 				}
 
 				if (f1_ctx.game_over) // Se o jogador perdeu
 				{
-					tela_game_over(ctx->font);
+					tela_game_over(&fonts);
 				}
 			}
 
@@ -226,7 +228,7 @@ void fase1_gameplay_draw(GameContext* ctx)
 
 void tela_inicial_f1(GameContext* ctx)
 {
-	TextosConfigs textos[3] =
+	TextosConfigsIntro textos[3] =
 	{
 		{"FASE 1", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo},
 		{"Piratas do Uruguai (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo},
@@ -238,8 +240,8 @@ void tela_inicial_f1(GameContext* ctx)
 		int sombra_x = textos[i].x + 2;
 		int sombra_y = textos[i].y + 1;
 
-		al_draw_text(ctx->font_subtitulo, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
-		al_draw_text(ctx->font_subtitulo, textos[i].cor, textos[i].x, textos[i].y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
+		al_draw_text(fonts.font_subtitulo, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
+		al_draw_text(fonts.font_subtitulo, textos[i].cor, textos[i].x, textos[i].y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
 	}
 }
 

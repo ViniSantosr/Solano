@@ -2,8 +2,7 @@
 #define NAVIO_FASE1_H
 
 #include <stdbool.h>       // Para usar bool se precisar futuramente
-#include "configs/config_tela.h"          // Para BUFFER_W e BUFFER_H
-#include "core/draw_tela.h"
+#include "core/tela_utils.h"
 
 #define SHIP_SPEED 3 //define a velocidade da nave baseada nos frames que ela percorerá por segundo
 #define SHIP_MAX_X (CANVAS_W - SHIP_W)//define a posição maxima que a nave pode alcançar, definida pela largura menos o tamanho da nave
