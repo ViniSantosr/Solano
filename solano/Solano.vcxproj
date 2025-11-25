@@ -204,11 +204,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Pictures\cena_inicial\loiroo.png" />
     <Image Include="assets\images\background_menu.bmp" />
     <Image Include="assets\images\fase1_fundo.png" />
     <Image Include="assets\images\fase2_fundo.png" />
     <Image Include="assets\images\fase3_fundo.png" />
     <Image Include="assets\images\fase4_fundo.png" />
+    <Image Include="assets\images\inicial_fundo.png" />
     <Image Include="assets\images\rio_background.png" />
     <Image Include="assets\images\spritesheets\navios_spritesheet.png" />
     <Image Include="assets\images\spritesheets\spritesheet_util.png" />

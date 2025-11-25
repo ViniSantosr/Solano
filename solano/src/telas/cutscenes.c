@@ -23,7 +23,7 @@
 #include "telas/cutscenes.h"
 
 void quebra_linhas(char* texto, char caracter);
-void draw_text(GameContext* ctx, char* buffer, int max_linha, float x, float y);
+void draw_text(GameContext* ctx, char* buffer, int max_linha, float x, float y, PERSONAGEM personagem);
 
 
 #pragma region TEXTOS
@@ -214,17 +214,31 @@ void cutscene(GameContext* ctx, int cena)
 	float pular_x = CANVAS_W - 150;
 	float pular_y = CANVAS_H - 25;
 
+	bool animacao = false;
+
+	int jovem_x = (CANVAS_W / 2) - (JOVEM_W / 2);
+	int jovem_y = -60;
+	int jovem_frame = 0;
+	int frame_move = 0;
+
+	int livro_x = (CANVAS_W / 2) - (LIVRO_W / 2);
+	int livro_y = (CANVAS_H / 2) - (JOVEM_H / 2);
+
 	switch (cena_atual)
-	{	
+	{
+	case CENA_LIVRO:
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/inicial_fundo.png");
+		must_init(ctx->background, "background - inicial_fundo.png");
+		break;
 	case PRE_FASE1:
-	case POS_FASE1:	 
+	case POS_FASE1:
 		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase1_fundo.png");
 		must_init(ctx->background, "background - pre/pos_fase1");
 		break;
 	case PRE_FASE2:
 	case POS_FASE2:
 		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
-		must_init(ctx->background, "background - pre/pos_fase2");		
+		must_init(ctx->background, "background - pre/pos_fase2");
 		break;
 	case PRE_FASE3:
 	case POS_FASE3:
@@ -234,8 +248,8 @@ void cutscene(GameContext* ctx, int cena)
 	case PRE_FASE4:
 	case POS_FASE4:
 		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase4_fundo.png");
-		must_init(ctx->background, "background - pre/pos_fase4");		
-		break;		
+		must_init(ctx->background, "background - pre/pos_fase4");
+		break;
 	}
 
 	ALLEGRO_EVENT event;
@@ -248,6 +262,20 @@ void cutscene(GameContext* ctx, int cena)
 		switch (event.type)
 		{
 		case ALLEGRO_EVENT_TIMER:
+
+			if (cena_atual == CENA_INICIAL)
+			{
+				if (collide(jovem_x, jovem_y, jovem_x + 24, jovem_y + 40, livro_x, livro_y, livro_x + 49, livro_y + 51))
+				{
+					animacao = false;
+				}
+				else
+				{
+					jovem_y += 1;
+					jovem_frame++;
+					animacao = true;					
+				}
+			}
 
 			if (!linha_completa) {  // Verifica se a linha foi completada
 				frame_counter++; // Aumenta o frame
@@ -268,7 +296,9 @@ void cutscene(GameContext* ctx, int cena)
 						linha_completa = true;
 					}
 				}
-			}			
+			}
+
+
 
 			frames++;
 			desenhar = true;
@@ -279,6 +309,11 @@ void cutscene(GameContext* ctx, int cena)
 			{
 			case ALLEGRO_KEY_SPACE:
 				tam = strlen(cenas[cena_atual].dialogos[linha_atual].texto);
+
+				if (animacao)
+				{
+					break;
+				}
 
 				if (!linha_completa) {
 					// Mostra tudo instantaneamente
@@ -295,14 +330,14 @@ void cutscene(GameContext* ctx, int cena)
 						frame_counter = 0;
 						linha_completa = false;
 					}
-					else {
-
+					else
+					{
 						switch (cena_atual)
 						{
-						case PRE_FASE1:							
-						case PRE_FASE2:						
-						case PRE_FASE3:							
-						case PRE_FASE4:									
+						case PRE_FASE1:
+						case PRE_FASE2:
+						case PRE_FASE3:
+						case PRE_FASE4:
 							ctx->estado_tela = INTRO_FASE;
 							exit_tela = true;
 							break;
@@ -314,13 +349,14 @@ void cutscene(GameContext* ctx, int cena)
 							exit_tela = true;
 							break;
 
-						default:							
+						default:
 							ctx->cena_atual++;
 							ctx->estado_tela = CUTSCENE;
 							exit_tela = true;
 							break;
-						}						
+						}
 					}
+
 				}
 				break;
 
@@ -341,7 +377,7 @@ void cutscene(GameContext* ctx, int cena)
 				0);
 
 			int max = sizeof(buffer) - 1;
-			int n = (letras_visiveis < max) ? letras_visiveis : max;			
+			int n = (letras_visiveis < max) ? letras_visiveis : max;
 
 			strncpy_s(buffer, sizeof(buffer), cenas[cena_atual].dialogos[linha_atual].texto, n);
 			buffer[n] = '\0';
@@ -363,9 +399,9 @@ void cutscene(GameContext* ctx, int cena)
 
 				if (play_bip)
 				{
-					al_play_sample_instance(ctx->sons.text_bip);					
+					al_play_sample_instance(ctx->sons.text_bip);
 					play_bip = false;
-				}										
+				}
 
 				break;
 			case NARRADOR:
@@ -381,7 +417,7 @@ void cutscene(GameContext* ctx, int cena)
 
 				break;
 			case CAPITAO:
-				cor_texto = ctx->cores.amarelo;				
+				cor_texto = ctx->cores.amarelo;
 
 				if (play_bip)
 				{
@@ -400,17 +436,40 @@ void cutscene(GameContext* ctx, int cena)
 					0, 0, CANVAS_W, CANVAS_H,
 					ctx->cores.preto
 				);
-				draw_text(ctx, buffer, max_linha, 100 - (strlen(buffer) * 1.6), 50);
+
+				if (animacao)
+				{
+					frame_move = (jovem_frame / 2) % 2;
+					al_draw_bitmap(sprites_soldado.jovem[frame_move], jovem_x, jovem_y, 0);				
+				}
+				else
+				{
+					al_draw_bitmap(sprites_soldado.jovem[0], jovem_x, jovem_y, 0);									
+				}
+
+				al_draw_bitmap(sprites_soldado.livro, livro_x, livro_y, 0);
+				draw_text(ctx, buffer, max_linha, 100 - (strlen(buffer) * 1.6), 50, personagem_atual);
+
 				break;
 
 			case CENA_LIVRO:
-				al_draw_filled_rectangle(
+				al_draw_scaled_bitmap(ctx->background,
+					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 					0, 0, CANVAS_W, CANVAS_H,
-					al_map_rgb(200, 180, 140)
-				);
+					0);
 				// Colocar fundo do livro
-				draw_text(ctx, buffer, max_linha, 100 - (strlen(buffer) * 1.6), 50);
-				break;		
+
+				switch (personagem_atual)
+				{
+				case NARRADOR:
+					draw_text(ctx, buffer, 325, 100 - (strlen(buffer) * 1.4), 60, personagem_atual);
+					break;
+
+				case LEITOR:
+					draw_text(ctx, buffer, 325, 425 - (strlen(buffer) * 1.4), 60, personagem_atual);
+					break;
+				}
+				break;
 
 			case PRE_FASE1:
 			case POS_FASE1:
@@ -418,9 +477,9 @@ void cutscene(GameContext* ctx, int cena)
 					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 					0, 0, CANVAS_W, CANVAS_H,
 					0);
-				draw_text(ctx, buffer, max_linha, 195 - (strlen(buffer) * 1.6), CANVAS_H / 2 - 100);
+				draw_text(ctx, buffer, max_linha, 195 - (strlen(buffer) * 1.6), CANVAS_H / 2 - 100, personagem_atual);
 				// Colocar apenas o navio Brasileiro e deixar o texto emcima.
-				break;	
+				break;
 
 			case POS_FASE2:
 			case POS_FASE3:
@@ -430,7 +489,7 @@ void cutscene(GameContext* ctx, int cena)
 					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 					0, 0, CANVAS_W, CANVAS_H,
 					0);
-				draw_text(ctx, buffer, max_linha, ((CANVAS_W / 2) - 100) - (strlen(buffer) * 1.8), (CANVAS_H / 2) - 50 );
+				draw_text(ctx, buffer, max_linha, ((CANVAS_W / 2) - 100) - (strlen(buffer) * 1.8), (CANVAS_H / 2) - 50, personagem_atual);
 				al_draw_bitmap(sprites_soldado.soldado[CIMA][0], (CANVAS_W / 2) - (SOLDADOS_W / 2), (CANVAS_H / 2) + 20, 0);
 				break;
 
@@ -439,7 +498,7 @@ void cutscene(GameContext* ctx, int cena)
 					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 					0, 0, CANVAS_W, CANVAS_H,
 					0);
-				draw_text(ctx, buffer, max_linha, 195 - (strlen(buffer) * 1.6), CANVAS_H / 2 - 100);
+				draw_text(ctx, buffer, max_linha, 195 - (strlen(buffer) * 1.6), CANVAS_H / 2 - 100, personagem_atual);
 				break;
 			}
 
@@ -460,7 +519,7 @@ void cutscene(GameContext* ctx, int cena)
 void quebra_linhas(char* texto, char caracter)
 {
 	int len = (int)strlen(texto);
-	
+
 
 
 	for (int i = 0; i < len - 1; i++)
@@ -473,7 +532,7 @@ void quebra_linhas(char* texto, char caracter)
 	}
 }
 
-void draw_text(GameContext* ctx, char* buffer, int max_linha, float x, float y)
+void draw_text(GameContext* ctx, char* buffer, int max_linha, float x, float y, PERSONAGEM personagem)
 {
 
 	quebra_linhas(buffer, '.');
@@ -481,21 +540,33 @@ void draw_text(GameContext* ctx, char* buffer, int max_linha, float x, float y)
 	switch (ctx->cena_atual)
 	{
 	case CENA_INICIAL:
+		max_x_texto = 45;
+		break;
+
 	case CENA_LIVRO:
-		max_x_texto = 45;		
-		break;	
+
+		switch (personagem)
+		{
+		case NARRADOR:
+			max_x_texto = 60;
+			break;
+		case LEITOR:
+			max_x_texto = 420;
+			break;
+		}
+		break;
 
 	case POS_FASE2:
 	case POS_FASE3:
 	case PRE_FASE4:
 	case POS_FASE4:
-		max_x_texto = (CANVAS_W / 2) - 200;	
+		max_x_texto = (CANVAS_W / 2) - 200;
 		break;
 
 	default:
 		max_x_texto = 100;
 		break;
-	}	
+	}
 
 	if (x < max_x_texto) x = max_x_texto;
 
