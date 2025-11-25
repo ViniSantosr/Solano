@@ -48,19 +48,20 @@ int main()
 			tela_menu(&ctx);
 			break;
 		case CUTSCENE:
+			
 			cutscene(&ctx, ctx.cena_atual);
 			break;
 		case INTRO_FASE:
 			intro_fase(&ctx, ctx.proxima_fase);
 			break;
 		case FASE1:
-			ctx.proxima_fase++;	
-			ctx.cena_atual++;
-			ctx.estado_tela = CUTSCENE;
-			/*fase1(&ctx);*/
+			//ctx.proxima_fase++;	
+			//ctx.cena_atual++;
+			//ctx.estado_tela = CUTSCENE;
+			fase1(&ctx);
 			break;
 		case FASE2:
-			fase2(&ctx);
+			//fase2(&ctx);
 			break;
 		case FASE3:
 			fase3(&ctx);

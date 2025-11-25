@@ -5,7 +5,7 @@
 #include "fases/fase1/tiros_fase1.h"        
 //#include "efeitos.c"
 #include "core/tela_utils.h"
-#include <allegro5/allegro_audio.h>0
+#include <allegro5/allegro_audio.h>
 
 void shots_init()// inicializa os tiros e coloca todas suas posições como ainda não utilizados
 {

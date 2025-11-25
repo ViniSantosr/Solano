@@ -75,7 +75,7 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 		{
 
 		case ALLEGRO_EVENT_TIMER:
-			if (!jogo_em_inicio()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
+			if (!jogo_em_inicio_f1()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
 			{
 				// Se o jogador perder
 				if (ship.lives <= 0) {
@@ -103,7 +103,7 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 			break;
 
 		case ALLEGRO_EVENT_KEY_DOWN:
-			if (!jogo_em_inicio()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
+			if (!jogo_em_inicio_f1()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
 			{
 				if (tecla[ALLEGRO_KEY_SPACE])
 				{
@@ -159,7 +159,7 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 				0, 0, CANVAS_W, CANVAS_H,
 				0);
 
-			if (jogo_em_inicio()) // Enquanto o jogo está nos frames iniciais
+			if (jogo_em_inicio_f1()) // Enquanto o jogo está nos frames iniciais
 			{
 				tela_inicial(ctx);
 			}
@@ -203,7 +203,7 @@ void fase1_init(ALLEGRO_DISPLAY* tela)
     aliens_init();
     f1_ctx.frames = 0;
     f1_ctx.score = 0;
-    f1_ctx.background = al_load_bitmap("assets/images/fase1_background.png");
+    f1_ctx.background = al_load_bitmap("assets/images/fase1_fundo.png");
     must_init(f1_ctx.background, "fase 1 background");
 }
 

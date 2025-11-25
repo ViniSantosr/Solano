@@ -1,6 +1,8 @@
 #ifndef TELA_UTILS_H
 #define TELA_UTILS_H
 
+#include "main.h"
+
 #pragma region Dimensions
 
 #define CANVAS_W		800		// Largura do canvas(desenho) / tela virtual
