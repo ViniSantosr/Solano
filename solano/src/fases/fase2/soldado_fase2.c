@@ -24,7 +24,7 @@
 
 SOLDADO soldado;
 bool movimentou;
-short frame_movimento;
+short frame_move_inimigo;
 
 float soldado_cx;
 float soldado_cy;
@@ -164,8 +164,8 @@ void soldado_draw()
 
 	if (movimentou)
 	{		
-		frame_movimento = (soldado.frame / 2) % 2;
-		al_draw_bitmap(sprites_soldado.soldado[soldado.sprite][frame_movimento], soldado.x, soldado.y, 0);
+		frame_move_inimigo = (soldado.frame / 2) % 2;
+		al_draw_bitmap(sprites_soldado.soldado[soldado.sprite][frame_move_inimigo], soldado.x, soldado.y, 0);
 
 	}
 	else

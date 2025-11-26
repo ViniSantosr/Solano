@@ -1,4 +1,4 @@
-ï»¿
+
 #pragma region Biblitotecas Externas
 // Bibliotecas do C
 #include <stdio.h>
@@ -16,7 +16,7 @@
 #pragma endregion
 
 #pragma region Headers Game
-// Headers que nÃ£o fazem parte exclusivamente da fase 2
+// Headers que não fazem parte exclusivamente da fase 2
 #include "core/tela_utils.h"
 #include "core/teclado.h"
 #include "core/sprites/soldados_sprites.h"
@@ -30,26 +30,26 @@
 #include "fases/fase2/hud_fase2.h"
 #include "core/funcoes_auxiliares.h"
 #include "main.h"
-#include "fases/fase4/boss.h"
+#include "fases/fase5/solano.h"
 #pragma endregion
 
-#include "fases/fase4/fase4.h"
+#include "fases/fase5/fase5.h"
 
-// DeclaraÃ§Ã£o das funÃ§Ãµes
-bool fase4_init(GameContext* ctx); // FunÃ§Ã£o de inicializaÃ§Ã£o da fase 2
+// Declaração das funções
+bool fase5_init(GameContext* ctx); // Função de inicialização da fase 2
 
-void fase4(GameContext* ctx)
+void fase5(GameContext* ctx)
 {
-	if (!fase4_init(ctx))
+	if (!fase5_init(ctx))
 	{
 		ctx->estado_tela = TELA_MENU;
 		return;
 	}
 
 	long frames = 0;
-	long score = 0;	
+	long score = 0;
 
-	// CondiÃ§Ãµes da fase
+	// Condições da fase
 	bool game_over = false;
 	bool pause = false;
 	bool tutorial = false;
@@ -58,14 +58,14 @@ void fase4(GameContext* ctx)
 	bool desenhar = false;
 
 	ALLEGRO_EVENT event;
-	while (!ctx->exit_program && !exit_tela)  // LÃ³gica do jogo
+	while (!ctx->exit_program && !exit_tela)  // Lógica do jogo
 	{
 		al_wait_for_event(ctx->queue, &event);
 
 		mouse_update(&event);
 		teclado_update(&event);
 
-		// Update (lÃ³gica/ movimentaÃ§ao do jogo)
+		// Update (lógica/ movimentaçao do jogo)
 		switch (event.type)
 		{
 
@@ -74,14 +74,14 @@ void fase4(GameContext* ctx)
 			// Se o jogador perder
 			if (soldado.vidas <= 0) {
 				game_over = true;
-			}			
+			}
 
-			// Se o jogo nÃ£o estiver em pausa ou acabado			
+			// Se o jogo não estiver em pausa ou acabado			
 			if (!concluido && !game_over && !pause) {
 				mouse_apply(ctx->tela);
 				tiros_update();
 				soldado_update();
-				boss_update(&concluido);				
+				solano_update(&concluido);
 				inimigo_update(ctx, &frames, &score);
 			}
 
@@ -95,7 +95,7 @@ void fase4(GameContext* ctx)
 
 		case ALLEGRO_EVENT_KEY_DOWN:
 
-			if (ctx->options) // Teclas para o tela de opÃ§Ãµes.
+			if (ctx->options) // Teclas para o tela de opções.
 			{
 				switch (event.keyboard.keycode)
 				{
@@ -181,7 +181,7 @@ void fase4(GameContext* ctx)
 
 			}
 
-			if (concluido) // A fase foi concluÃ­da 
+			if (concluido) // A fase foi concluída 
 			{
 				if (tecla[ALLEGRO_KEY_SPACE])
 				{
@@ -215,20 +215,20 @@ void fase4(GameContext* ctx)
 			al_draw_scaled_bitmap(ctx->background,
 				0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 				0, 0, CANVAS_W, CANVAS_H,
-				0);			
+				0);
 
-			
-			if (concluido) // Se a fase foi concluÃ­da
+
+			if (concluido) // Se a fase foi concluída
 			{
 				tela_concluido(ctx);
 			}
-			else 
+			else
 			{
 				tiros_draw();
-				soldado_draw();				
+				soldado_draw();
 				inimigo_draw();
-				boss_draw(ctx);
-				mouse_draw();				
+				solano_draw(ctx);
+				mouse_draw();
 			}
 
 			if (pause) // Se o jogo estiver em pausa
@@ -256,27 +256,27 @@ void fase4(GameContext* ctx)
 			tela_pos_draw(ctx->canvas, ctx->tela);
 			desenhar = false;
 		}
-	}	
+	}
 }
 
-bool fase4_init(GameContext* ctx)
-{	
+bool fase5_init(GameContext* ctx)
+{
 	tiro_init();
 	mouse_init(ctx->tela);
 	teclado_init();
 	soldado_init();
-	boss_init();
+	solano_init();
 	inimigo_init();
 
 	mira_x = CANVAS_W / 2;
 	mira_y = (CANVAS_H / 2) - SOLDADOS_H * 2;
 
-	ctx->background = switch_background(ctx, ctx->background, "assets/images/fase4_fundo.png");
+	ctx->background = switch_background(ctx, ctx->background, "assets/images/fase5_fundo.png");
 	if (!ctx->background)
 		return false;
-	
+
 
 	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/fase_battle_trilha.ogg");
-		
+
 	return true;
 }

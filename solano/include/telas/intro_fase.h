@@ -14,6 +14,7 @@ typedef enum {
 	_FASE2, 
 	_FASE3, 
 	_FASE4, 	
+	_FASE5, 	
 	_FASES_N
 } FASES_INTRO;
 

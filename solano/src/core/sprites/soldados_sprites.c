@@ -109,6 +109,16 @@ void sprites_soldados_init()
 	sprites_soldado.solano[BAIXO][1] = sprite_grab(sprites_soldado._soldados_sheet, 256, 134, SOLDADOS_W, SOLDADOS_H);
 		
 	sprites_soldado.vida_boss = sprite_grab(sprites_soldado._soldados_sheet, 200, 70, 7, 7);
+
+
+	// ----- EXTRAS ------
+	sprites_soldado.jovem[0] = sprite_grab(sprites_soldado._soldados_sheet, 42, 182, JOVEM_W, JOVEM_H);
+	sprites_soldado.jovem[1] = sprite_grab(sprites_soldado._soldados_sheet, 75, 182, JOVEM_W, JOVEM_H);
+
+	sprites_soldado.soldado_loiro = sprite_grab(sprites_soldado._soldados_sheet, 7, 182, 27, 40);
+	sprites_soldado.soldado_moreno = sprite_grab(sprites_soldado._soldados_sheet, 110, 182, 30, 40);
+
+	sprites_soldado.livro = sprite_grab(sprites_soldado._soldados_sheet, 176, 198, LIVRO_W, LIVRO_H);
 }
 
 void sprites_soldados_deinit()

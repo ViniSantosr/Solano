@@ -34,7 +34,10 @@ typedef enum {
     POS_FASE3,
 
     PRE_FASE4,
-    POS_FASE4,    
+    POS_FASE4,  
+
+    PRE_FASE5,
+    POS_FASE5   
 } CENAS;
 
 void cutscene(GameContext* ctx, int fase_atual);

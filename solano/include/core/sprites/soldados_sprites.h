@@ -23,6 +23,12 @@ extern const int INIMIGO_W[];
 #define MIRA_W 24
 #define MIRA_H 24
 
+#define JOVEM_W 24
+#define JOVEM_H 40
+
+#define LIVRO_W 49
+#define LIVRO_H 51
+
 #define INIMIGO_TIRO_W	5
 #define INIMIGO_TIRO_H	9
 
@@ -43,6 +49,11 @@ typedef struct SPRITES_SOLDADOS {
 
 	ALLEGRO_BITMAP* solano[4][2]; // [direção][frame]
 	ALLEGRO_BITMAP* vida_boss;
+
+	ALLEGRO_BITMAP* jovem[2];
+	ALLEGRO_BITMAP* soldado_loiro;
+	ALLEGRO_BITMAP* soldado_moreno;
+	ALLEGRO_BITMAP* livro;
 	
 	/*
 		ALLEGRO_BITMAP* explosion[EXPLOSION_FRAMES];
