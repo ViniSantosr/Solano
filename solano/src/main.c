@@ -55,10 +55,11 @@ int main()
 			intro_fase(&ctx, ctx.proxima_fase);
 			break;
 		case FASE1:
+			fase1(&ctx);
 			//ctx.proxima_fase++;	
 			//ctx.cena_atual++;
 			//ctx.estado_tela = CUTSCENE;
-			fase1(&ctx);
+
 			break;
 		case FASE2:
 			//fase2(&ctx);

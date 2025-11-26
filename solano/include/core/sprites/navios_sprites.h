@@ -3,8 +3,8 @@
 
 #pragma region Dimensions
 
-#define NAVIO_W	46
-#define NAVIO_H	128
+#define NAVIO_W	10
+#define NAVIO_H	10
 
 #pragma endregion
 

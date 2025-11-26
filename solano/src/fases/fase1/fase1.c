@@ -37,33 +37,42 @@
 //Declaração das funções de Game Context que serão utilizadas na Fase 1
 Fase1Context f1_ctx;
 //GameContext ctx;
+//
+//void fase1_init(ALLEGRO_DISPLAY* tela);					//Função de inicialização da fase 1
+//void fase1_gameplay_update(ALLEGRO_DISPLAY* tela);		//Função de atualizar os objetos na tela da fase 1
+//void fase1_gameplay_draw(GameContext* ctx);				//Função de desenhar os objetos na tela da fase 1
+//void tela_inicial_f1(GameContext* ctx);
+//void tela_pause_f1(ALLEGRO_FONT* font);
+//void tela_game_over_f1(ALLEGRO_FONT* font);
+//void tela_concluido_f1(ALLEGRO_FONT* font);
+//
+//bool jogo_em_inicio_f1();			//Enquanto o jogo está nos frames iniciais
+//FONTS fonts;
+// Declaração das funções
+bool fase1_init(GameContext* ctx); // Função de inicialização da fase 2
 
-void fase1_init(ALLEGRO_DISPLAY* tela);					//Função de inicialização da fase 1
-void fase1_gameplay_update(ALLEGRO_DISPLAY* tela);		//Função de atualizar os objetos na tela da fase 1
-void fase1_gameplay_draw(GameContext* ctx);				//Função de desenhar os objetos na tela da fase 1
-void tela_inicial_f1(GameContext* ctx);
-void tela_pause_f1(ALLEGRO_FONT* font);
-void tela_game_over_f1(ALLEGRO_FONT* font);
-void tela_concluido_f1(ALLEGRO_FONT* font);
-
-bool jogo_em_inicio_f1();			//Enquanto o jogo está nos frames iniciais
-FONTS fonts;
-
-void fase1(GameContext* ctx) // Função principal da fase 2
+void fase2(GameContext* ctx)
 {
-	fase1_init(ctx->tela);
+	if (!fase2_init(ctx))
+	{
+		ctx->estado_tela = TELA_MENU;
+		return;
+	}
 
-	// Variáveis de controle da fase
-	f1_ctx.game_over = false;
-	f1_ctx.pause = false;
-	f1_ctx.concluido = false;
-	f1_ctx.exit_tela = false;
-	f1_ctx.frames_iniciais = 240; // Número de frames iniciais para mostrar o objetivo da fase
+	long frames = 0;
+	long score = 0;
+
+	// Condições da fase
+	bool game_over = false;
+	bool pause = false;
+	bool tutorial = false;
+	bool concluido = false;
+	bool exit_tela = false;
 	bool desenhar = false;
 
-	ALLEGRO_EVENT event;
 
-	while (!ctx->exit_program && !f1_ctx.exit_tela)  // Lógica do jogo
+	ALLEGRO_EVENT event;
+	while (!ctx->exit_program && !exit_tela)  // Lógica do jogo
 	{
 		al_wait_for_event(ctx->queue, &event);
 
@@ -75,27 +84,28 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 		{
 
 		case ALLEGRO_EVENT_TIMER:
-			if (!jogo_em_inicio_f1()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
-			{
-				// Se o jogador perder
-				if (ship.lives <= 0) {
-					f1_ctx.game_over = true;
-				}
 
-				// Se o jogador vencer
-				if (f1_ctx.score >= 10000) {
-					f1_ctx.concluido = true;
-				}
-
-				// Se o jogo não estiver em pausa ou acabado			
-				if (!f1_ctx.concluido && !f1_ctx.game_over && !f1_ctx.pause) {
-					fase1_gameplay_update(ctx->tela);
-				}
+			// Se o jogador perder
+			if (soldado.vidas <= 0) {
+				game_over = true;
 			}
 
+			// Se o jogador vencer
+			if (score >= 2550) {
+				concluido = true;
+			}
+
+			// Se o jogo não estiver em pausa ou acabado			
+			if (!concluido && !game_over && !pause) {
+				mouse_apply(ctx->tela);
+				tiros_update();
+				soldado_update();
+				hud_update(ctx, &frames, &score);
+				inimigo_update(ctx, &frames, &score);
+			}
 
 			desenhar = true;
-			f1_ctx.frames++;
+			frames++;
 			break;
 
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -103,262 +113,190 @@ void fase1(GameContext* ctx) // Função principal da fase 2
 			break;
 
 		case ALLEGRO_EVENT_KEY_DOWN:
-			if (!jogo_em_inicio_f1()) // Só vai rodar o jogo depois dos frames iniciais (jogo_em_inicio() = false)
+
+			if (ctx->options) // Teclas para o tela de opções.
+			{
+				switch (event.keyboard.keycode)
+				{
+				case ALLEGRO_KEY_M:
+					ctx->play_music = ctx->play_music ? false : true;
+					al_set_audio_stream_playing(ctx->sons.music, ctx->play_music);
+					break;
+
+				case ALLEGRO_KEY_ESCAPE:
+					ctx->options = false;
+					pause = true;
+					break;
+
+				case ALLEGRO_KEY_DOWN:
+					al_play_sample_instance(ctx->sons.click);
+					if (ctx->sons.volume_general > 0.01)
+					{
+						ctx->sons.volume_general -= 0.01f;
+						al_set_mixer_gain(ctx->sons.mixer, ctx->sons.volume_general);
+					}
+					break;
+
+				case ALLEGRO_KEY_UP:
+					al_play_sample_instance(ctx->sons.click);
+					if (ctx->sons.volume_general < 0.99)
+					{
+						ctx->sons.volume_general += 0.01f;
+						al_set_mixer_gain(ctx->sons.mixer, ctx->sons.volume_general);
+					}
+					break;
+				}
+			}
+			else if (tutorial)
+			{
+				if (tecla[ALLEGRO_KEY_ESCAPE])
+				{
+					tutorial = false;
+					pause = true;
+				}
+			}
+			else if (pause)
+			{
+				switch (event.keyboard.keycode)
+				{
+				case ALLEGRO_KEY_ESCAPE:
+					if (!ctx->options)
+					{
+						pause = false;
+					}
+					break;
+
+				case ALLEGRO_KEY_Q:
+					exit_tela = true;
+					ctx->estado_tela = TELA_MENU;
+					break;
+
+				case ALLEGRO_KEY_E:
+					ctx->options = true;
+					break;
+
+				case ALLEGRO_KEY_T:
+					tutorial = true;
+					break;
+				}
+			}
+			else
+			{
+				switch (event.keyboard.keycode)
+				{
+				case ALLEGRO_KEY_ESCAPE:
+					pause = true;
+					break;
+				}
+			}
+
+			if (concluido || game_over)
+			{
+				if (tecla[ALLEGRO_KEY_ESCAPE])
+				{
+					exit_tela = true;
+					ctx->estado_tela = TELA_MENU;
+				}
+
+			}
+
+			if (concluido) // A fase foi concluída 
 			{
 				if (tecla[ALLEGRO_KEY_SPACE])
 				{
-					if (f1_ctx.concluido) // A fase foi concluída 
-					{
-						f1_ctx.exit_tela = true;
-						ctx->estado_tela = FASE2;
-					}
-
-					if (f1_ctx.game_over) // Se o jogador perdeu
-					{
-						// Reinicia a fase
-					}
-
-					if (f1_ctx.pause) // Se o jogo estiver em pausa
-					{
-						f1_ctx.pause = false; // Retoma o jogo
-					}
-				}
-
-
-				if (tecla[ALLEGRO_KEY_ESCAPE])
-				{
-					if (f1_ctx.pause) // Se o jogo já estiver em pausa
-					{
-						f1_ctx.exit_tela = true;
-						ctx->estado_tela = TELA_MENU;
-					}
-					else // Se o jogo não estiver em pausa
-					{
-						f1_ctx.pause = true; // Coloca o jogo em pausa
-					}
-
-					if (f1_ctx.concluido || f1_ctx.game_over)
-					{
-						f1_ctx.exit_tela = true;
-						ctx->estado_tela = TELA_MENU;
-					}
+					ctx->proxima_fase++;
+					ctx->cena_atual++;
+					ctx->estado_tela = CUTSCENE;
+					exit_tela = true;
 				}
 			}
+
+
+			if (pause || game_over || concluido)
+			{
+				if (tecla[ALLEGRO_KEY_R])
+				{
+					exit_tela = true;
+					ctx->estado_tela = FASE2;
+				}
+			}
+
+
 			break;
 		}
 
 		// Draw (desenhar na tela)
 		if (desenhar && al_is_event_queue_empty(ctx->queue))
-
 		{
 			tela_pre_draw(ctx->canvas);
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
-			al_draw_scaled_bitmap(f1_ctx.background,
-				0, 0, al_get_bitmap_width(f1_ctx.background), al_get_bitmap_height(f1_ctx.background),
+			al_draw_scaled_bitmap(ctx->background,
+				0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 				0, 0, CANVAS_W, CANVAS_H,
 				0);
 
-			if (jogo_em_inicio_f1()) // Enquanto o jogo está nos frames iniciais
+			if (concluido) // Se a fase foi concluída
 			{
-				tela_inicial(ctx);
+				tela_concluido(ctx);
 			}
 			else
 			{
-				fase1_gameplay_draw(ctx);
+				tiros_draw();
+				soldado_draw();
+				inimigo_draw();
+				mouse_draw();
+			}
 
-				if (f1_ctx.pause) // Se o jogo estiver em pausa
-				{
-					tela_pause(&fonts);
-				}
+			hud_draw(ctx);
 
-				if (f1_ctx.concluido) // Se a fase foi concluída
-				{
-					tela_concluido(&fonts);
-				}
+			if (pause) // Se o jogo estiver em pausa
+			{
+				tela_pause(ctx);
+			}
 
-				if (f1_ctx.game_over) // Se o jogador perdeu
-				{
-					tela_game_over(&fonts);
-				}
+			if (game_over) // Se o jogador perdeu
+			{
+				tela_game_over(ctx);
+			}
+
+			if (ctx->options)
+			{
+				tela_opcoes(ctx);
+			}
+
+			if (tutorial)
+			{
+				tela_tutorial_combate_campo(ctx);
 			}
 
 			tela_pos_draw(ctx->canvas, ctx->tela);
 			desenhar = false;
 		}
 	}
-
-	sprites_navios_deinit();//sprites_soldados_deinit();
 }
 
-void fase1_init(ALLEGRO_DISPLAY* tela)
+bool fase1_init(GameContext* ctx)
 {
-	sprites_navios_init();
-	iniciar_sprites();
-	iniciar_hud();
-	fx_init();
-    shots_init();
-    teclado_init();
-    ship_init();
-    aliens_init();
-    f1_ctx.frames = 0;
-    f1_ctx.score = 0;
-    f1_ctx.background = al_load_bitmap("assets/images/fase1_fundo.png");
-    must_init(f1_ctx.background, "fase 1 background");
+	hud_init();
+
+	tiro_init();
+	//mouse_init(ctx->tela);
+	teclado_init();
+	soldado_init();
+	inimigo_init();
+
+	//mira_x = CANVAS_W / 2;
+	//mira_y = (CANVAS_H / 2) - SOLDADOS_H * 2;
+
+	ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
+	if (!ctx->background)
+		return false;
+
+
+	ctx->sons.music = switch_music(ctx, ctx->sons.music, "assets/sounds/fase_battle_trilha.ogg");
+
+	return true;
 }
 
-void fase1_gameplay_update(ALLEGRO_DISPLAY* tela)
-{
-	//mouse_apply(tela);
-	shots_update();
-	ship_update();
-	atualizar_hud(); //atualizar_hud(&f1_ctx);
-	navios_update(); //navios_update(&f1_ctx);
-	fx_update();
-}
 
-void fase1_gameplay_draw(GameContext* ctx)
-{
-	shots_draw();
-	ship_draw();
-	navios_draw(&f1_ctx); //navios_draw(&f1_ctx);
-	desenhar_hud(); //desenhar_hud(ctx->font, &f1_ctx);
-	fx_draw();
-}
-
-void tela_inicial_f1(GameContext* ctx)
-{
-	TextosConfigsIntro textos[3] =
-	{
-		{"FASE 1", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.amarelo},
-		{"Piratas do Uruguai (1865)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.amarelo},
-		{"META:  10.000 pontos", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.amarelo}
-	};
-
-	for (int i = 0; i < 3; i++)
-	{
-		int sombra_x = textos[i].x + 2;
-		int sombra_y = textos[i].y + 1;
-
-		al_draw_text(fonts.font_subtitulo, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
-		al_draw_text(fonts.font_subtitulo, textos[i].cor, textos[i].x, textos[i].y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
-	}
-}
-
-void tela_pause_f1(ALLEGRO_FONT* font)
-{
-	// Desenha um retângulo preto semi-transparente sobre a tela
-	al_draw_filled_rectangle(
-		0, 0, CANVAS_W, CANVAS_H,
-		al_map_rgba(0, 0, 0, 150) // RGBA → A = transparência (0 = invisível, 255 = opaco)
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1, 0, 0),
-		CANVAS_W / 2, CANVAS_H / 3,
-		ALLEGRO_ALIGN_CENTER,
-		"JOGO PAUSADO"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1, 1, 1),
-		CANVAS_W / 3.5, CANVAS_H / 2,
-		ALLEGRO_ALIGN_CENTER,
-		"Space ->"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1.0, 0.5, 0),
-		CANVAS_W / 2, CANVAS_H / 2,
-		ALLEGRO_ALIGN_CENTER,
-		"Retomar"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1, 1, 1),
-		CANVAS_W / 3.5, CANVAS_H / 1.8,
-		ALLEGRO_ALIGN_CENTER,
-		"Esc   ->"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1.0, 0.5, 0),
-		CANVAS_W / 1.5, CANVAS_H / 1.8,
-		ALLEGRO_ALIGN_CENTER,
-		"Volta a tela de menu"
-	);
-}
-
-void tela_game_over_f1(ALLEGRO_FONT* font)
-{
-	al_draw_filled_rectangle(
-		0, 0, CANVAS_W, CANVAS_H,
-		al_map_rgb(0, 0, 0)
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1, 0.2, 0.2),
-		CANVAS_W / 2, CANVAS_H / 3,
-		ALLEGRO_ALIGN_CENTER,
-		"G A M E  O V E R"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1, 0.2, 0.2),
-		CANVAS_W / 2, CANVAS_H / 2,
-		ALLEGRO_ALIGN_CENTER,
-		"Space -> Reiniciar"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(1, 0.2, 0.2),
-		CANVAS_W / 2, CANVAS_H / 1.8,
-		ALLEGRO_ALIGN_CENTER,
-		"Esc -> Volta a tela de menu"
-	);
-}
-
-void tela_concluido_f1(ALLEGRO_FONT* font)
-{
-	al_draw_filled_rectangle(
-		0, 0, CANVAS_W, CANVAS_H,
-		al_map_rgb(0, 0, 0)
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(0, 1, 0),
-		CANVAS_W / 2, CANVAS_H / 3,
-		ALLEGRO_ALIGN_CENTER,
-		"FASE 1 CONCLUIDA!!!!"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(0, 1, 0),
-		CANVAS_W / 2, CANVAS_H / 2,
-		ALLEGRO_ALIGN_CENTER,
-		"Space -> Ir para a fase 2"
-	);
-
-	al_draw_text(
-		font,
-		al_map_rgb_f(0, 1, 0),
-		CANVAS_W / 2, CANVAS_H / 1.8,
-		ALLEGRO_ALIGN_CENTER,
-		"Esc -> Volta a tela de menu"
-	);
-}
-
-bool jogo_em_inicio_f1()
-{
-	return f1_ctx.frames < f1_ctx.frames_iniciais;
-}

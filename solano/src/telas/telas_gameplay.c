@@ -1,6 +1,7 @@
 
 #pragma region Biblitotecas Externas
-
+#include <stdlib.h>
+#include <stdio.h>
 
 // Bibliotecas do Allegro
 #include <allegro5/allegro5.h>
@@ -34,7 +35,7 @@ void tela_inicial(GameContext* ctx, TextosConfigs* textos, int quant)
 	{
 		int sombra_x = textos[i].x + 2;
 		int sombra_y = textos[i].y + 1;
-
+		printf("i=%d texto=%p\n", i, (void*)textos[i].texto);
 		al_draw_text(ctx->fonts.font_big, ctx->cores.preto, sombra_x, sombra_y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
 		al_draw_text(ctx->fonts.font_big, textos[i].cor, textos[i].x, textos[i].y, ALLEGRO_ALIGN_CENTER, textos[i].texto);
 	}

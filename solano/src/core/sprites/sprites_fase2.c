@@ -23,7 +23,7 @@ void iniciar_sprites()//aqui temos a função que inicializa todos os sprites
     sprites_n._sheet = al_load_bitmap("assets/images/spritesheets/tutorial_spritesheet.png");
     must_init(sprites_n._sheet, "spritesheet");
 
-    sprites_n.ship = sprite_grab(sprites._navios_sheet, 0, 0, SHIP_W, SHIP_H);
+    sprites_n.ship = sprite_grab(sprites._navios_sheet, 405, 5, SHIP_W, SHIP_H);
 
     sprites_n.ship_shot[0] = sprite_grab(sprites._navios_sheet, 13, 0, SHIP_SHOT_W, SHIP_SHOT_H);//apesar de já ter sido explicado anteriormente, aqui temos a função sprite_grab sendo usada para recortar o sprite
     sprites_n.ship_shot[1] = sprite_grab(sprites._navios_sheet, 16, 0, SHIP_SHOT_W, SHIP_SHOT_H);//e atribuindo ao struct na posição referente ao sprite recortado, bem simples de entender mas importante se recordar sempre!!

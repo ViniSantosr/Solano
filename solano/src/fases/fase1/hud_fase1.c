@@ -13,7 +13,7 @@ long score_display;
 void iniciar_hud()//inicia o hud 
 {
     font = al_create_builtin_font();//cria a fonte padrão e tenta inicializa-la
-    must_init(font, "font");
+    must_init(font, "test");
 
     score_display = 0;//seta o score como 0
 }
