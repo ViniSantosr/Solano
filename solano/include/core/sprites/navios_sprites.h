@@ -3,15 +3,19 @@
 
 #pragma region Dimensions
 
-#define NAVIO_W	10
-#define NAVIO_H	10
+#define NAVIO_W	32
+#define NAVIO_H	89
+
+#define	SHOT_W 5
+#define SHOT_H 5
 
 #pragma endregion
 
-typedef struct SPRITES_NAVIOS {	
+typedef struct SPRITES_NAVIOS {
 	ALLEGRO_BITMAP* _navios_sheet;
 
 	ALLEGRO_BITMAP* navio;
+	ALLEGRO_BITMAP* shots;
 	
 } SPRITES_NAVIOS;
 

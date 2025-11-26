@@ -3,11 +3,11 @@
 
 #include <allegro5/allegro.h>
 #include "fases/fase2/coisas_gerais_fase2.h"
-#define SHIP_W 12// Longa explicação: no allegro para que possamos usar os sprites, temos que receber um spritesheet e recortalo manualmente a partir de seu X e Y e Largura e Altura
-#define SHIP_H 13// por isso, definimos constantes de altura e largura de cada objeto do spritesheet, esse será um padrão para todos que tiverem um _H e _W
+#define SHIP_W 32// Longa explicação: no allegro para que possamos usar os sprites, temos que receber um spritesheet e recortalo manualmente a partir de seu X e Y e Largura e Altura
+#define SHIP_H 89// por isso, definimos constantes de altura e largura de cada objeto do spritesheet, esse será um padrão para todos que tiverem um _H e _W
 
-#define SHIP_SHOT_W 2
-#define SHIP_SHOT_H 9
+#define SHIP_SHOT_W 5
+#define SHIP_SHOT_H 5
 
 #define LIFE_W 6
 #define LIFE_H 6

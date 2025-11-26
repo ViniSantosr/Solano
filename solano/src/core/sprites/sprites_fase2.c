@@ -10,23 +10,23 @@
 
 SPRITES_NAVIOS sprites;
 
-
-ALLEGRO_BITMAP* cortar_sprites(int x, int y, int w, int h)// aqui temos o sprite grab, essa função recebe o X e Y, W e H das constantes e recorta o do spritesheet
-{
-    ALLEGRO_BITMAP* sprite = al_create_sub_bitmap(sprites_n._sheet, x, y, w, h);//função responsavel por recortar o sprite e atribuir a um mini bitmap
-    must_init(sprite, "Cortar Sprite");//inicializa o sprite recortado a fim de verificar se está tudo em ordem!
-    return sprite;//estando tudo ok, ele retorna o sprite recortado!
-}
+//
+//ALLEGRO_BITMAP* cortar_sprites(int x, int y, int w, int h)// aqui temos o sprite grab, essa função recebe o X e Y, W e H das constantes e recorta o do spritesheet
+//{
+//    ALLEGRO_BITMAP* sprite = al_create_sub_bitmap(sprites_n._sheet, x, y, w, h);//função responsavel por recortar o sprite e atribuir a um mini bitmap
+//    must_init(sprite, "Cortar Sprite");//inicializa o sprite recortado a fim de verificar se está tudo em ordem!
+//    return sprite;//estando tudo ok, ele retorna o sprite recortado!
+//}
 
 void iniciar_sprites()//aqui temos a função que inicializa todos os sprites
 {
-    sprites_n._sheet = al_load_bitmap("assets/images/spritesheets/tutorial_spritesheet.png");
+    sprites_n._sheet = al_load_bitmap("assets/images/spritesheets/navios_spritesheet.png");
     must_init(sprites_n._sheet, "spritesheet");
 
-    sprites_n.ship = sprite_grab(sprites._navios_sheet, 405, 5, SHIP_W, SHIP_H);
+    sprites_n.ship = sprite_grab(sprites._navios_sheet, 290, 5, SHIP_W, SHIP_H);
 
-    sprites_n.ship_shot[0] = sprite_grab(sprites._navios_sheet, 13, 0, SHIP_SHOT_W, SHIP_SHOT_H);//apesar de já ter sido explicado anteriormente, aqui temos a função sprite_grab sendo usada para recortar o sprite
-    sprites_n.ship_shot[1] = sprite_grab(sprites._navios_sheet, 16, 0, SHIP_SHOT_W, SHIP_SHOT_H);//e atribuindo ao struct na posição referente ao sprite recortado, bem simples de entender mas importante se recordar sempre!!
+    sprites_n.ship_shot[0] = sprite_grab(sprites._navios_sheet, 549, 597, SHIP_SHOT_W, SHIP_SHOT_H);//apesar de já ter sido explicado anteriormente, aqui temos a função sprite_grab sendo usada para recortar o sprite
+    sprites_n.ship_shot[1] = sprite_grab(sprites._navios_sheet, 270, 0, SHIP_SHOT_W, SHIP_SHOT_H);//e atribuindo ao struct na posição referente ao sprite recortado, bem simples de entender mas importante se recordar sempre!!
 
     sprites_n.life = sprite_grab(sprites._navios_sheet, 0, 14, LIFE_W, LIFE_H);
 

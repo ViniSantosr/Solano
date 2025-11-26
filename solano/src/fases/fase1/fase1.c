@@ -89,12 +89,14 @@ void fase1(GameContext* ctx)
 			if (!concluido && !game_over && !pause) {
 				//mouse_apply(ctx->tela);
 				shots_update();
-				navios_update();
+			    navios_update();
 				//hud_update(ctx, &frames, &score);  
 				atualizar_hud();
+				
+				ship_update();
 
-				inimigo_update(ctx, &frames, &score);
-				fx_update();
+				//inimigo_update(ctx, &frames, &score);
+				//fx_update();
 			}
 
 			desenhar = true;
@@ -237,11 +239,11 @@ void fase1(GameContext* ctx)
 			{
 				shots_draw();
 				ship_draw();
-				navios_draw();
+				//navios_draw();
 				//mouse_draw();
 			}
 
-			desenhar_hud();//desenhar_hud(ctx);
+			desenhar_hud(ctx);//desenhar_hud(ctx);
 
 			if (pause) // Se o jogo estiver em pausa
 			{
@@ -267,19 +269,23 @@ void fase1(GameContext* ctx)
 			desenhar = false;
 		}
 	}
+
+
+	sprites_navios_deinit();
 }
 
 bool fase1_init(GameContext* ctx)
 {
-	iniciar_hud();
+	
+	//iniciar_hud();
 	sprites_navios_init();
-	iniciar_sprites();
+	//iniciar_sprites();
 	shots_init();
 	//mouse_init(ctx->tela);
 	teclado_init();
 	ship_init();
 	aliens_init();
-	fx_init();
+	//fx_init();
 
 	//mira_x = CANVAS_W / 2;
 	//mira_y = (CANVAS_H / 2) - SOLDADOS_H * 2;

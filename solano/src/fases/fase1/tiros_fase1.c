@@ -6,6 +6,7 @@
 //#include "efeitos.c"
 #include "core/tela_utils.h"
 #include <allegro5/allegro_audio.h>
+#include "core/sprites/navios_sprites.h"
 
 void shots_init()// inicializa os tiros e coloca todas suas posições como ainda não utilizados
 {
@@ -147,7 +148,7 @@ void shots_draw()// função responsavel por desenhar os diversos tiros na tela
         int frame_display = (shots[i].frame / 2) % 2;
 
         if (shots[i].ship)
-            al_draw_bitmap(sprites_n.ship_shot[frame_display], shots[i].x, shots[i].y, 0);// se o tiro vier da nava ele desenha o sprite do tiro da nave
+            al_draw_bitmap(sprites_navios.shots, shots[i].x, shots[i].y, 0);// se o tiro vier da nava ele desenha o sprite do tiro da nave
         else // alien
         {
             ALLEGRO_COLOR tint =//não entendi direto, irei perguntar depois
@@ -155,7 +156,7 @@ void shots_draw()// função responsavel por desenhar os diversos tiros na tela
                 ? al_map_rgb_f(1, 1, 1)
                 : al_map_rgb_f(0.5, 0.5, 0.5)
                 ;
-            al_draw_tinted_bitmap(sprites_n.alien_shot, tint, shots[i].x, shots[i].y, 0);
+            //al_draw_tinted_bitmap(sprites_n.alien_shot, tint, shots[i].x, shots[i].y, 0);
         }
     }
 }

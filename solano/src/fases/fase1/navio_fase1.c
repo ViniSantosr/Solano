@@ -1,12 +1,13 @@
 #include <allegro5/allegro.h>   // Funções básicas do Allegro
 #include <stdbool.h>             // Para o tipo bool
 #include "fases/fase2/coisas_gerais_fase2.h"       // Para frames, score, teclado, collide, etc.
-#include "core/sprites/sprites_fase2.h"             // Para sprites.ship
+//#include "core/sprites/sprites_fase2.h"             // Para sprites.ship
 #include "fases/fase1/tiros_fase1.h"               // Para shots_add e shots_collide
 #include "core/Efeitos/efeito_gerais.h"             // Para fx_add
 #include "core/tela_utils.h"             // Para BUFFER_W, BUFFER_H
 #include "fases/fase1/navio_fase1.h"          // Se você tiver constantes como SHIP_W, SHIP_H, SHIP_SPEED, SHIP_MAX_X/Y
 #include "core/teclado.h"
+#include "core/sprites/navios_sprites.h"
 
 SPRITES_N sprites_n;// declara o struct de sprites para ser utilizado
 
@@ -56,10 +57,6 @@ void ship_update()// essa função será a responsavel por atualizar a posição da n
         {
             int x = ship.x + (SHIP_W / 2);
             int y = ship.y + (SHIP_H / 2);
-            fx_add(false, x, y);
-            fx_add(false, x + 4, y + 2);
-            fx_add(false, x - 2, y - 4);
-            fx_add(false, x + 1, y - 5);
 
             ship.lives--;
             ship.respawn_timer = 90;
@@ -86,5 +83,7 @@ void ship_draw()//função responsavel por desenhar a nave na tela
     if (((ship.invincible_timer / 2) % 3) == 1)// acabei me esquecendo o que faz
         return;
 
-    al_draw_bitmap(sprites_n.ship, ship.x, ship.y, 0);//se nenhum dos casos acima for verdadeiro então ele desenha a nave
+
+    al_draw_bitmap(sprites_navios.navio, ship.x, ship.y, 0);//se nenhum dos casos acima for verdadeiro então ele desenha a nave
+
 }

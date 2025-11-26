@@ -223,6 +223,7 @@
     <Image Include="assets\images\inicial_fundo.png" />
     <Image Include="assets\images\rio_background.png" />
     <Image Include="assets\images\spritesheets\navios_spritesheet.png" />
+    <Image Include="assets\images\spritesheets\navios_spritesheet2.png" />
     <Image Include="assets\images\spritesheets\spritesheet_util.png" />
     <Image Include="assets\images\spritesheets\tutorial_spritesheet.png" />
     <Image Include="assets\images\spritesheets\soldados_spritesheet.png" />

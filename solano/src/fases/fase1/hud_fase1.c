@@ -6,6 +6,8 @@
 #include "main.h"
 #include <fases/fase1/fase1.h>
 
+#include "core/sprites/soldados_sprites.h"
+
 Fase1Context f1_ctx;
 long score_display;
 
@@ -36,28 +38,30 @@ void atualizar_hud()//faz o update continuo do hud
     }
 }
 
-void desenhar_hud()//função responsavel por desenhar o hud na tela
+void desenhar_hud(GameContext* ctx)//função responsavel por desenhar o hud na tela
 {
-    al_draw_textf(
-        font,
-        al_map_rgb_f(1, 1, 1),
-        1, 1,
-        0,
-        "%06ld",
-        score_display
-    );
+	al_draw_textf(
+		ctx->fonts.font_medium,
+		ctx->cores.preto,
+		1 + 2, 1 + 2,
+		0,
+		"%06ld",
+		score_display
+	);
 
-    int spacing = LIFE_W + 1;
-    for (int i = 0; i < ship.lives; i++)
-        al_draw_bitmap(sprites_n.life, 1 + (i * spacing), 10, 0);
+	al_draw_textf(
+		ctx->fonts.font_medium,
+		ctx->cores.verde,
+		1, 1,
+		0,
+		"%06ld",
+		score_display
+	);
 
-    if (ship.lives < 0)
-        al_draw_text(
-            font,
-            al_map_rgb_f(1, 1, 1),
-            
-            CANVAS_W / 2, CANVAS_H / 2,
-            ALLEGRO_ALIGN_CENTER,
-            "G A M E  O V E R"
-        );
+	int spacing = VIDA_W + 1;
+	for (int i = 0; i < ship.lives; i++)
+	{
+		al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.preto, (1 + (i * spacing)) + 1, 24 + 1, 0);
+		al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.branco, 1 + (i * spacing), 24, 0);
+	}
 }
