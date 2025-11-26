@@ -23,6 +23,7 @@
 #include "fases/fase2/fase2.h"
 #include "telas/telas_gameplay.h"
 #include "telas/intro_fase.h"
+#include "core/funcoes_auxiliares.h"
 
 //Headers exclusivamente da fase 1
 #include "fases/fase1/tiros_fase1.h"
@@ -37,23 +38,12 @@
 //Declaração das funções de Game Context que serão utilizadas na Fase 1
 Fase1Context f1_ctx;
 //GameContext ctx;
-//
-//void fase1_init(ALLEGRO_DISPLAY* tela);					//Função de inicialização da fase 1
-//void fase1_gameplay_update(ALLEGRO_DISPLAY* tela);		//Função de atualizar os objetos na tela da fase 1
-//void fase1_gameplay_draw(GameContext* ctx);				//Função de desenhar os objetos na tela da fase 1
-//void tela_inicial_f1(GameContext* ctx);
-//void tela_pause_f1(ALLEGRO_FONT* font);
-//void tela_game_over_f1(ALLEGRO_FONT* font);
-//void tela_concluido_f1(ALLEGRO_FONT* font);
-//
-//bool jogo_em_inicio_f1();			//Enquanto o jogo está nos frames iniciais
-//FONTS fonts;
-// Declaração das funções
+
 bool fase1_init(GameContext* ctx); // Função de inicialização da fase 2
 
-void fase2(GameContext* ctx)
+void fase1(GameContext* ctx)
 {
-	if (!fase2_init(ctx))
+	if (!fase1_init(ctx))
 	{
 		ctx->estado_tela = TELA_MENU;
 		return;
@@ -76,7 +66,7 @@ void fase2(GameContext* ctx)
 	{
 		al_wait_for_event(ctx->queue, &event);
 
-		mouse_update(&event);
+		//mouse_update(&event);
 		teclado_update(&event);
 
 		// Update (lógica/ movimentaçao do jogo)
@@ -86,7 +76,7 @@ void fase2(GameContext* ctx)
 		case ALLEGRO_EVENT_TIMER:
 
 			// Se o jogador perder
-			if (soldado.vidas <= 0) {
+			if (ship.lives <= 0) {
 				game_over = true;
 			}
 
@@ -97,11 +87,14 @@ void fase2(GameContext* ctx)
 
 			// Se o jogo não estiver em pausa ou acabado			
 			if (!concluido && !game_over && !pause) {
-				mouse_apply(ctx->tela);
-				tiros_update();
-				soldado_update();
-				hud_update(ctx, &frames, &score);
+				//mouse_apply(ctx->tela);
+				shots_update();
+				navios_update();
+				//hud_update(ctx, &frames, &score);  
+				atualizar_hud();
+
 				inimigo_update(ctx, &frames, &score);
+				fx_update();
 			}
 
 			desenhar = true;
@@ -217,7 +210,7 @@ void fase2(GameContext* ctx)
 				if (tecla[ALLEGRO_KEY_R])
 				{
 					exit_tela = true;
-					ctx->estado_tela = FASE2;
+					ctx->estado_tela = FASE1;
 				}
 			}
 
@@ -242,13 +235,13 @@ void fase2(GameContext* ctx)
 			}
 			else
 			{
-				tiros_draw();
-				soldado_draw();
-				inimigo_draw();
-				mouse_draw();
+				shots_draw();
+				ship_draw();
+				navios_draw();
+				//mouse_draw();
 			}
 
-			hud_draw(ctx);
+			desenhar_hud();//desenhar_hud(ctx);
 
 			if (pause) // Se o jogo estiver em pausa
 			{
@@ -278,13 +271,15 @@ void fase2(GameContext* ctx)
 
 bool fase1_init(GameContext* ctx)
 {
-	hud_init();
-
-	tiro_init();
+	iniciar_hud();
+	sprites_navios_init();
+	iniciar_sprites();
+	shots_init();
 	//mouse_init(ctx->tela);
 	teclado_init();
-	soldado_init();
-	inimigo_init();
+	ship_init();
+	aliens_init();
+	fx_init();
 
 	//mira_x = CANVAS_W / 2;
 	//mira_y = (CANVAS_H / 2) - SOLDADOS_H * 2;
