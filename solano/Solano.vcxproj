@@ -204,7 +204,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Pictures\cena_inicial\loiroo.png" />
     <Image Include="assets\images\background_menu.bmp" />
     <Image Include="assets\images\fase1_fundo.png" />
     <Image Include="assets\images\fase2_fundo.png" />

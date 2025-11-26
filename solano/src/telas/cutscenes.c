@@ -174,13 +174,13 @@ CENA_DIALOGO cenas[] =
 	{ pos_fase1, sizeof(pos_fase1) / sizeof(pos_fase1[0]), 600 },
 
 	{ pre_fase2, sizeof(pre_fase2) / sizeof(pre_fase2[0]), 600 },
-	{ pos_fase2, sizeof(pos_fase2) / sizeof(pos_fase2[0]), 600 },
+	{ pos_fase2, sizeof(pos_fase2) / sizeof(pos_fase2[0]), 400 },
 
 	{ pre_fase3, sizeof(pre_fase3) / sizeof(pre_fase3[0]), 600 },
-	{ pos_fase3, sizeof(pos_fase3) / sizeof(pos_fase3[0]), 600 },
+	{ pos_fase3, sizeof(pos_fase3) / sizeof(pos_fase3[0]), 400 },
 
-	{ pre_fase4, sizeof(pre_fase4) / sizeof(pre_fase4[0]), 600 },
-	{ pos_fase4, sizeof(pos_fase4) / sizeof(pos_fase4[0]), 600 },
+	{ pre_fase4, sizeof(pre_fase4) / sizeof(pre_fase4[0]), 400 },
+	{ pos_fase4, sizeof(pos_fase4) / sizeof(pos_fase4[0]), 400 },
 };
 
 ALLEGRO_COLOR cor_texto;
@@ -491,6 +491,8 @@ void cutscene(GameContext* ctx, int cena)
 					0);
 				draw_text(ctx, buffer, max_linha, ((CANVAS_W / 2) - 100) - (strlen(buffer) * 1.8), (CANVAS_H / 2) - 50, personagem_atual);
 				al_draw_bitmap(sprites_soldado.soldado[CIMA][0], (CANVAS_W / 2) - (SOLDADOS_W / 2), (CANVAS_H / 2) + 20, 0);
+				al_draw_bitmap(sprites_soldado.soldado_loiro, (CANVAS_W / 2) + 30, (CANVAS_H / 2) - 150, 0);
+				al_draw_bitmap(sprites_soldado.soldado_moreno, (CANVAS_W / 2) - (SOLDADOS_W / 2), (CANVAS_H / 2) - 130, 0);
 				break;
 
 			default:

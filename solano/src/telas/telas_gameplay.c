@@ -165,6 +165,16 @@ void tela_opcoes(GameContext* ctx)
 	al_draw_textf(ctx->fonts.font_small, ctx->cores.verde,
 		tela_opcoes_x + (tela_opcoes_w * 0.1), tela_opcoes_y + (tela_opcoes_h * 0.3), ALLEGRO_ALIGN_CENTER, "Volume: %.0f", ctx->sons.volume_general * 100);
 
+	al_draw_textf(ctx->fonts.font_small, ctx->cores.preto,
+		tela_opcoes_x + (tela_opcoes_w * 0.25) + 2, tela_opcoes_y + (tela_opcoes_h * 0.36) + 1.5, ALLEGRO_ALIGN_CENTER, "Aumentar -> seta para cima", ctx->sons.volume_general * 100);
+	al_draw_textf(ctx->fonts.font_small, ctx->cores.verde,
+		tela_opcoes_x + (tela_opcoes_w * 0.25), tela_opcoes_y + (tela_opcoes_h * 0.36), ALLEGRO_ALIGN_CENTER, "Aumentar -> seta para cima", ctx->sons.volume_general * 100);
+
+	al_draw_textf(ctx->fonts.font_small, ctx->cores.preto,
+		tela_opcoes_x + (tela_opcoes_w * 0.255) + 2, tela_opcoes_y + (tela_opcoes_h * 0.4) + 1.5, ALLEGRO_ALIGN_CENTER, "diminuir -> seta para baixo", ctx->sons.volume_general * 100);
+	al_draw_textf(ctx->fonts.font_small, ctx->cores.verde,
+		tela_opcoes_x + (tela_opcoes_w * 0.255), tela_opcoes_y + (tela_opcoes_h * 0.4), ALLEGRO_ALIGN_CENTER, "diminuir -> seta para baixo", ctx->sons.volume_general * 100);
+
 	al_draw_text(ctx->fonts.font_small, ctx->cores.preto,
 		tela_opcoes_x + (tela_opcoes_w * 0.1) + 2, (tela_opcoes_h - 20) + 1.5, ALLEGRO_ALIGN_CENTER, "Esc -> Voltar");
 	al_draw_text(ctx->fonts.font_small, ctx->cores.verde,

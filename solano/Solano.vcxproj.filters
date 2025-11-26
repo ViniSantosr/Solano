@@ -157,9 +157,6 @@
     <Image Include="build\Release\assets\images\rio_background.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\..\..\Pictures\cena_inicial\loiroo.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="assets\images\inicial_fundo.png">
       <Filter>Resource Files</Filter>
     </Image>
