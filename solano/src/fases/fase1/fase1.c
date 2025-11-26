@@ -289,7 +289,7 @@ bool fase1_init(GameContext* ctx)
 	//mira_x = CANVAS_W / 2;
 	//mira_y = (CANVAS_H / 2) - SOLDADOS_H * 2;
 
-	ctx->background = switch_background(ctx, ctx->background, "assets/images/fase2_fundo.png");
+	ctx->background = switch_background(ctx, ctx->background, "assets/images/fase1_fundo.png");
 	if (!ctx->background)
 		return false;
 
