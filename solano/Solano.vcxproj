@@ -175,7 +175,9 @@
     <ClCompile Include="src\fases\fase3\fase3.c" />
     <ClCompile Include="src\fases\fase3\hud_fase3.c" />
     <ClCompile Include="src\fases\fase4\fase4.c" />
-    <ClCompile Include="src\fases\fase4\solano.c" />
+    <ClCompile Include="src\fases\fase4\boss.c" />
+    <ClCompile Include="src\fases\fase5\fase5.c" />
+    <ClCompile Include="src\fases\fase5\solano.c" />
     <ClCompile Include="src\telas\cutscenes.c" />
     <ClCompile Include="src\telas\intro_fase.c" />
     <ClCompile Include="src\telas\telas_gameplay.c" />
@@ -209,6 +211,7 @@
     <Image Include="assets\images\fase2_fundo.png" />
     <Image Include="assets\images\fase3_fundo.png" />
     <Image Include="assets\images\fase4_fundo.png" />
+    <Image Include="assets\images\fase5_fundo.png" />
     <Image Include="assets\images\inicial_fundo.png" />
     <Image Include="assets\images\rio_background.png" />
     <Image Include="assets\images\spritesheets\navios_spritesheet.png" />
@@ -233,7 +236,9 @@
     <ClInclude Include="include\fases\fase3\fase3.h" />
     <ClInclude Include="include\fases\fase3\hud_fase3.h" />
     <ClInclude Include="include\fases\fase4\fase4.h" />
-    <ClInclude Include="include\fases\fase4\solano.h" />
+    <ClInclude Include="include\fases\fase4\boss.h" />
+    <ClInclude Include="include\fases\fase5\fase5.h" />
+    <ClInclude Include="include\fases\fase5\solano.h" />
     <ClInclude Include="include\main.h" />
     <ClInclude Include="include\telas\cutscenes.h" />
     <ClInclude Include="include\telas\intro_fase.h" />

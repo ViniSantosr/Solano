@@ -162,6 +162,29 @@ DIALOGO pos_fase4[] =
 
 #pragma endregion
 
+#pragma region FASE5
+
+DIALOGO pre_fase5[] =
+{
+	{"Estamos chegando a Cerro Corá, bem no meio das matas e morros.", CAPITAO},
+	{"Dizem que Solano López está escondido aqui com o que sobrou do exército paraguaio.", CAPITAO},
+	{"Nosso objetivo agora é acabar de vez com a resistência paraguaia e capturar o líder deles.", CAPITAO},
+	{"Depois de tanta caminhada, fome e doença, todo mundo está no limite.", PRINCIPAL},
+	{"Mesmo assim, se vencermos aqui, a guerra praticamente termina. Cerro Corá pode ser o fim desse conflito longo e sangrento.", PRINCIPAL},
+	{"Então vamos mostrar nossa força e não deixar eles pararem a gente!", PRINCIPAL},
+	{"Então precisamos de atenção total. Qualquer erro, eles escapam de novo.", PRINCIPAL}
+};
+
+DIALOGO pos_fase5[] =
+{
+	{"Conseguimos!!! A resistência paraguaia foi derrotada aqui em Cerro Corá!", PRINCIPAL},
+	{"O acampamento deles foi tomado, e o grupo que seguia Solano López se desfez.", PRINCIPAL},
+	{"Com essa vitória, a guerra termina. O Paraguai não tem mais forças para continuar lutando.", CAPITAO},
+	{"Depois de tantos anos de luta, parece que, enfim, o silêncio volta para o campo de batalha.", CAPITAO}
+};
+
+#pragma endregion
+
 #pragma endregion
 
 
@@ -181,6 +204,9 @@ CENA_DIALOGO cenas[] =
 
 	{ pre_fase4, sizeof(pre_fase4) / sizeof(pre_fase4[0]), 400 },
 	{ pos_fase4, sizeof(pos_fase4) / sizeof(pos_fase4[0]), 400 },
+
+	{ pre_fase5, sizeof(pre_fase5) / sizeof(pre_fase5[0]), 400 },
+	{ pos_fase5, sizeof(pos_fase5) / sizeof(pos_fase5[0]), 400 }
 };
 
 ALLEGRO_COLOR cor_texto;
@@ -249,6 +275,12 @@ void cutscene(GameContext* ctx, int cena)
 	case POS_FASE4:
 		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase4_fundo.png");
 		must_init(ctx->background, "background - pre/pos_fase4");
+		break;
+
+	case PRE_FASE5:
+	case POS_FASE5:
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase5_fundo.png");
+		must_init(ctx->background, "background - pre/pos_fase5");
 		break;
 	}
 
@@ -338,11 +370,12 @@ void cutscene(GameContext* ctx, int cena)
 						case PRE_FASE2:
 						case PRE_FASE3:
 						case PRE_FASE4:
+						case PRE_FASE5:
 							ctx->estado_tela = INTRO_FASE;
 							exit_tela = true;
 							break;
 
-						case POS_FASE4:
+						case POS_FASE5:
 							ctx->estado_tela = TELA_MENU;
 							ctx->proxima_fase = 1;
 							ctx->cena_atual = 0;
@@ -485,6 +518,8 @@ void cutscene(GameContext* ctx, int cena)
 			case POS_FASE3:
 			case PRE_FASE4:
 			case POS_FASE4:
+			case PRE_FASE5:
+			case POS_FASE5:
 				al_draw_scaled_bitmap(ctx->background,
 					0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
 					0, 0, CANVAS_W, CANVAS_H,
@@ -562,6 +597,8 @@ void draw_text(GameContext* ctx, char* buffer, int max_linha, float x, float y, 
 	case POS_FASE3:
 	case PRE_FASE4:
 	case POS_FASE4:
+	case PRE_FASE5:
+	case POS_FASE5:
 		max_x_texto = (CANVAS_W / 2) - 200;
 		break;
 

@@ -70,6 +70,13 @@ void intro_fase(GameContext* ctx, int fase_atual)
 			return;
 		}
 		break;
+	case _FASE5:	
+		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase5_fundo.png");
+		if (!ctx->background) {
+			ctx->estado_tela = TELA_MENU;
+			return;
+		}
+		break;
 	}
 
 	bool exit_tela = false;
@@ -211,5 +218,9 @@ void inicializar_intro(GameContext* ctx)
 
 	textos[_FASE4][0] = (TextosConfigsIntro){ "FASE 4", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.vermelho };
 	textos[_FASE4][1] = (TextosConfigsIntro){ "Tomada de Assunção (1869)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.vermelho };
-	textos[_FASE4][2] = (TextosConfigsIntro){ "OBJETIVO:  Derrote o Solano Lopéz", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.vermelho };
+	textos[_FASE4][2] = (TextosConfigsIntro){ "OBJETIVO:  Derrote o Chefão", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.vermelho };
+
+	textos[_FASE5][0] = (TextosConfigsIntro){ "FASE 5", CANVAS_W / 2, CANVAS_H / 4, ctx->cores.verde };
+	textos[_FASE5][1] = (TextosConfigsIntro){ "Cerro Corá (1870)", CANVAS_W / 2, CANVAS_H / 2.5, ctx->cores.verde };
+	textos[_FASE5][2] = (TextosConfigsIntro){ "OBJETIVO:  Derrote o Solano López", CANVAS_W / 2, CANVAS_H / 2, ctx->cores.verde };
 }

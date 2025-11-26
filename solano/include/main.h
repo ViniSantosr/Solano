@@ -52,6 +52,7 @@ typedef enum {
     FASE2,
     FASE3,
     FASE4,   
+    FASE5,   
     INTRO_FASE,
     CUTSCENE
 } TELAS_PRINCIPAIS;

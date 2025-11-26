@@ -57,6 +57,10 @@ void inimigo_update(GameContext* ctx, long* frames, long* score)
 		if (*frames % 600 == 0)
 			nova_onda = between(4, 6);
 		break;
+	case FASE5:
+		if (*frames % 600 == 0)
+			nova_onda = between(4, 7);
+		break;
 	}	
 
 

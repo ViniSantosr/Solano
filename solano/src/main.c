@@ -20,6 +20,7 @@
 #include "fases/fase2/fase2.h"
 #include "fases/fase3/fase3.h"
 #include "fases/fase4/fase4.h"
+#include "fases/fase5/fase5.h"
 #include "telas/intro_fase.h"
 #include "core/funcoes_auxiliares.h"
 #include "core/sprites/sprites_util.h"
@@ -67,6 +68,9 @@ int main()
 			break;
 		case FASE4:
 			fase4(&ctx);
+			break;
+		case FASE5:
+			fase5(&ctx);
 			break;
 		}
 	}

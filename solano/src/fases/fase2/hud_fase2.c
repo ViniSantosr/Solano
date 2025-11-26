@@ -37,7 +37,7 @@ void hud_update(GameContext* ctx, long* frames, long* score)
 void hud_draw(GameContext* ctx)
 {
 
-	if (ctx->estado_tela == FASE4)
+	if (ctx->estado_tela == FASE4 || ctx->estado_tela == FASE5)
 	{
 		int spacing = VIDA_W + 1;
 		for (int i = 0; i < soldado.vidas; i++)
