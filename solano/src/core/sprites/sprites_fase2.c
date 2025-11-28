@@ -20,7 +20,7 @@ SPRITES_NAVIOS sprites;
 
 void iniciar_sprites()//aqui temos a função que inicializa todos os sprites
 {
-    sprites_n._sheet = al_load_bitmap("assets/images/spritesheets/navios_spritesheet.png");
+    sprites_n._sheet = al_load_bitmap("assets/images/spritesheets/navios_spritesheet2.png");
     must_init(sprites_n._sheet, "spritesheet");
 
     sprites_n.ship = sprite_grab(sprites._navios_sheet, 290, 5, SHIP_W, SHIP_H);
@@ -30,9 +30,9 @@ void iniciar_sprites()//aqui temos a função que inicializa todos os sprites
 
     sprites_n.life = sprite_grab(sprites._navios_sheet, 0, 14, LIFE_W, LIFE_H);
 
-    sprites_n.alien[0] = sprite_grab(sprites._navios_sheet, 19, 0, ALIEN_BUG_W, ALIEN_BUG_H);
-    sprites_n.alien[1] = sprite_grab(sprites._navios_sheet, 19, 10, ALIEN_ARROW_W, ALIEN_ARROW_H);
-    sprites_n.alien[2] = sprite_grab(sprites._navios_sheet, 0, 21, ALIEN_THICCBOI_W, ALIEN_THICCBOI_H);
+    //sprites_n.alien[0] = sprite_grab(sprites._navios_sheet, 344, 1, ALIEN_BUG_W, ALIEN_BUG_H);
+    //sprites_n.alien[1] = sprite_grab(sprites._navios_sheet, 19, 10, ALIEN_ARROW_W, ALIEN_ARROW_H);
+    //sprites_n.alien[2] = sprite_grab(sprites._navios_sheet, 0, 21, ALIEN_THICCBOI_W, ALIEN_THICCBOI_H);
 
     sprites_n.alien_shot = sprite_grab(sprites._navios_sheet, 13, 10, ALIEN_SHOT_W, ALIEN_SHOT_H);
 

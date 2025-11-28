@@ -11,8 +11,8 @@
 Fase1Context f1_ctx;
 
 
-const int ALIEN_W[] = { 14, 13, 45 };
-const int ALIEN_H[] = { 9, 10, 27 };
+//const int ALIEN_W[] = { 31, 13, 45 };
+//const int ALIEN_H[] = { 55, 10, 27 };
 
 
 void aliens_init()//inicializa os aliens colocando todas posições em não usados
@@ -184,17 +184,17 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
     }
 }//fim dessa função, possivelmente a maior de todo o codigo!
 
-void navios_draw()// essa função desenha os aliens na tela
-{
-    for (int i = 0; i < ALIENS_N; i++)
-    {
-        if (!aliens[i].used)//se não estiver em uso pula pro proximo indice 'i'
-            continue;
-        if (aliens[i].blink > 2)//se estiver piscando por dano, pula o desenho do alien
-            continue;
-
-        
-
-        al_draw_bitmap(sprites_n.alien[aliens[i].type], aliens[i].x, aliens[i].y, 0);//se passar pelas duas verificações então ele desenha o alien na tela
-    }
-}
+//void navios_draw()// essa função desenha os aliens na tela
+//{
+//    for (int i = 0; i < ALIENS_N; i++)
+//    {
+//        if (!aliens[i].used)//se não estiver em uso pula pro proximo indice 'i'
+//            continue;
+//        if (aliens[i].blink > 2)//se estiver piscando por dano, pula o desenho do alien
+//            continue;
+//
+//        
+//
+//        al_draw_bitmap(sprites_navios.alien[aliens[i].type], aliens[i].x, aliens[i].y, 0);//se passar pelas duas verificações então ele desenha o alien na tela
+//    }
+//}
