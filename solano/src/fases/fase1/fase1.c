@@ -277,7 +277,7 @@ void fase1(GameContext* ctx)
 
 bool fase1_init(GameContext* ctx)
 {
-	
+	//audio_init();
 	//iniciar_hud();
 	sprites_navios_init();
 	//iniciar_sprites();

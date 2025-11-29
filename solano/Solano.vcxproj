@@ -203,6 +203,7 @@
     <ClCompile Include="src\main.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\sounds\audio_shot.flac" />
     <None Include="assets\sounds\explode1.flac" />
     <None Include="assets\sounds\explode2.flac" />
     <None Include="assets\sounds\fase_battle_trilha.ogg" />

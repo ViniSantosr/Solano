@@ -37,11 +37,31 @@ typedef struct SPRITES_NAVIOS {
 	ALLEGRO_BITMAP* explosao[4];
 	ALLEGRO_BITMAP* fumaca[4];
 
+	ALLEGRO_BITMAP* alien_bug_frames[8];
+	ALLEGRO_BITMAP* alien_arrow_frames[8];
+	ALLEGRO_BITMAP* alien_thiccboi_frames[8];
+
 	
 } SPRITES_NAVIOS;
 
+typedef struct ship_animation {
+	int frame;           // frame atual
+	int frame_count;     // quantos frames existem
+	int frame_delay;     // quantos ticks esperar antes de trocar o frame
+	int frame_timer;     // contador interno
+	int frame_w;         // largura de um frame
+	int frame_h;   
+	int start_x;      // posição inicial X no spritesheet
+	int start_y;      // posição inicial Y no spritesheet
+}ship_animation;
+
 // Declaração externa da variável global
 extern SPRITES_NAVIOS sprites_navios;
+
+extern ship_animation alien_bug_anim;
+extern ship_animation alien_arrow_anim;
+extern ship_animation alien_thicc_anim;
+
 
 void sprites_navios_init();
 

@@ -10,6 +10,11 @@
 #include "core/sprites/navios_sprites.h"
 
 SPRITES_N sprites_n;// declara o struct de sprites para ser utilizado
+ship_animation ship_anim;
+
+// Origem do sprite no spritesheet
+int ship_anim_start_x = 0;    // <-- X inicial do ship no sheet
+int ship_anim_start_y = 0;    // <-- Y inicial do ship no sheet
 
 void ship_init()//inicialização da nave, aqui definimos a posição inicial, o numero de vidas, e o tempo de invencibilidade
 {
@@ -19,6 +24,24 @@ void ship_init()//inicialização da nave, aqui definimos a posição inicial, o num
     ship.lives = 3;
     ship.respawn_timer = 0;
     ship.invincible_timer = 120;
+
+    ship_anim.frame = 0;
+
+    // Quantos frames do ship existem na horizontal:
+    ship_anim.frame_count = 8;  
+
+    // Quantos ticks para trocar frame:
+    ship_anim.frame_delay = 15;
+    ship_anim.frame_timer = 0;
+
+    // Largura e altura de CADA FRAME (em pixels)
+    ship_anim.frame_w = 39;   //  tamanho real do ship
+    ship_anim.frame_h = 88;   //
+
+    //// Origem do sprite no spritesheet
+    ship_anim_start_x = 0;    //  X inicial do ship no sheet
+    ship_anim_start_y = 0;    //  Y inicial do ship no sheet
+
 }
 
 void ship_update()// essa função será a responsavel por atualizar a posição da nave, vida e tiros constantemente
@@ -68,6 +91,17 @@ void ship_update()// essa função será a responsavel por atualizar a posição da n
         if (shots_add(true, false, x, ship.y))
             ship.shot_timer = 5;
     }
+
+    ship_anim.frame_timer++;
+
+    if (ship_anim.frame_timer >= ship_anim.frame_delay) {
+        ship_anim.frame_timer = 0;
+
+        ship_anim.frame++;
+        if (ship_anim.frame >= ship_anim.frame_count)
+            ship_anim.frame = 0;
+    }
+
 }
 
 void ship_draw()//função responsavel por desenhar a nave na tela
@@ -79,7 +113,18 @@ void ship_draw()//função responsavel por desenhar a nave na tela
     if (((ship.invincible_timer / 2) % 3) == 1)// acabei me esquecendo o que faz
         return;
 
+    int sx = ship_anim_start_x + (ship_anim.frame * ship_anim.frame_w);
+    int sy = ship_anim_start_y;
 
-    al_draw_bitmap(sprites_navios.navio, ship.x, ship.y, 0);//se nenhum dos casos acima for verdadeiro então ele desenha a nave
+    al_draw_bitmap_region(
+        sprites_navios._navios_sheet,
+        sx, sy,
+        ship_anim.frame_w,
+        ship_anim.frame_h,
+        ship.x, ship.y,
+        0
+    );
+
+    //al_draw_bitmap(sprites_navios.navio, ship.x, ship.y, 0);//se nenhum dos casos acima for verdadeiro então ele desenha a nave
 
 }

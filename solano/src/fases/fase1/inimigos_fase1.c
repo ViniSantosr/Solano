@@ -14,6 +14,34 @@ Fase1Context f1_ctx;
 //const int ALIEN_W[] = { 31, 13, 45 };
 //const int ALIEN_H[] = { 55, 10, 27 };
 
+void alien_anim_init(animar_alien* anim,
+    int start_x, int start_y,
+    int w, int h,
+    int frame_count,
+    int frame_spacing)
+{
+    anim->frame = 0;
+    anim->frame_count = frame_count;
+    anim->frame_w = w;
+    anim->frame_h = h;
+    anim->frame_spacing = frame_spacing;
+    anim->start_x = start_x;
+    anim->start_y = start_y;
+    anim->frame_time = 6; // troca a cada 6 frames
+    anim->frame_timer = 0;
+}
+
+void alien_anim_update(animar_alien* anim)
+{
+    anim->frame_timer++;
+    if (anim->frame_timer >= anim->frame_time) {
+        anim->frame_timer = 0;
+        anim->frame++;
+        if (anim->frame >= anim->frame_count)
+            anim->frame = 0;
+    }
+}
+
 
 void aliens_init()//inicializa os aliens colocando todas posições em não usados
 {
@@ -36,7 +64,7 @@ void navios_update(GameContext* ctx, long* frames, long* score)//função responsa
         {
             if (new_quota > 0)//se o alien ainda não estiver em uso e houver espaço para novos aliens
             {
-                int base = between(160, 645);
+                int base = between(160, 625);
 
                 aliens[i].x = base + between(-80, 80); // variação suave
 
@@ -57,12 +85,24 @@ void navios_update(GameContext* ctx, long* frames, long* score)//função responsa
                 {
                 case ALIEN_TYPE_BUG:
                     aliens[i].life = 8;
+                    alien_anim_init(&aliens[i].anim,
+                        BUG_START_X, BUG_START_Y,
+                        BUG_W, BUG_H,
+                        BUG_FRAMES, BUG_SPACING);
                     break;
                 case ALIEN_TYPE_ARROW:
                     aliens[i].life = 6;
+                    alien_anim_init(&aliens[i].anim,
+                        ARROW_START_X, ARROW_START_Y,
+                        ARROW_W, ARROW_H,
+                        ARROW_FRAMES, ARROW_SPACING);
                     break;
                 case ALIEN_TYPE_THICCBOI:
                     aliens[i].life = 18;
+                    alien_anim_init(&aliens[i].anim,
+                        THICC_START_X, THICC_START_Y,
+                        THICC_W, THICC_H,
+                        THICC_FRAMES, THICC_SPACING);
                     break;
                 }
 
@@ -117,6 +157,8 @@ void navios_update(GameContext* ctx, long* frames, long* score)//função responsa
 
             break;
         }
+
+        alien_anim_update(&aliens[i].anim);
 
         if (aliens[i].y >= CANVAS_H)//se o alien passar do fim da tela, então ele poderá ser reutilizado para futuras quotas
         {
@@ -204,3 +246,5 @@ void navios_update(GameContext* ctx, long* frames, long* score)//função responsa
 //        al_draw_bitmap(sprites_navios.alien[aliens[i].type], aliens[i].x, aliens[i].y, 0);//se passar pelas duas verificações então ele desenha o alien na tela
 //    }
 //}
+
+
