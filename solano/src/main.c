@@ -66,16 +66,16 @@ int main()
 
 			break;
 		case FASE2:
-			//fase2(&ctx);
+			fase2(&ctx);
 			break;
 		case FASE3:
-			//fase3(&ctx);
+			fase3(&ctx);
 			break;
 		case FASE4:
-			//fase4(&ctx);
+			fase4(&ctx);
 			break;
 		case FASE5:
-			//fase5(&ctx);
+			fase5(&ctx);
 			break;
 		}
 	}
