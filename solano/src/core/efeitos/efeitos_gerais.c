@@ -81,42 +81,42 @@ void fx_update()//essa função atualiza o estado atual do frame efeito a cada exe
     }
 }
 
-void fx_draw()//essa função é responsavel por desenhas o efeito na tela
-{
-    for (int i = 0; i < FX_N; i++)
-    {
-        if (!fx[i].used)//se o efeito ainda não tiver sido usado ele pula para o próximo indice 'i'
-            continue;
-
-        int frame_display = fx[i].frame / 2;
-        ALLEGRO_BITMAP* bmp =
-            fx[i].spark//se spark for true o sprite usado será o de faísca, se não, o de explosão
-            ? sprites_n.sparks[frame_display]
-            : sprites_n.explosion[frame_display]
-            ;
-
-        int x = fx[i].x - (al_get_bitmap_width(bmp) / 2);//centraliza o efeito na posição X e abaixo na posição Y
-        int y = fx[i].y - (al_get_bitmap_height(bmp) / 2);
-        al_draw_bitmap(bmp, x, y, 0);//desenha o bitmap na tela
-        /*if(aliens->life[i] <= 0)
-            al_draw_text(ctx.font_subtitulo, ctx.cores.preto, fx[i].x, fx[i].y, ALLEGRO_ALIGN_CENTER, "TEXT EXEMPLE TEST");*/
-
-    }
-
-    for (int i = 0; i < ALIENS_N; i++)
-    {
-        if (aliens[i].life <= 0 && aliens[i].y > 1) {
-             if (f1_ctx.frames % 3) {
-                 if (aliens[i].type == 0) {
-                        al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "200");
-                 }
-                 if (aliens[i].type == 1) {
-                     al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "150");
-                 }
-                 if (aliens[i].type == 2) {
-                     al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "800");
-                 }
-             }
-         }   
-    }
-}
+//void fx_draw()//essa função é responsavel por desenhas o efeito na tela
+//{
+//    for (int i = 0; i < FX_N; i++)
+//    {
+//        if (!fx[i].used)//se o efeito ainda não tiver sido usado ele pula para o próximo indice 'i'
+//            continue;
+//
+//        int frame_display = fx[i].frame / 2;
+//        ALLEGRO_BITMAP* bmp =
+//            fx[i].spark//se spark for true o sprite usado será o de faísca, se não, o de explosão
+//            ? sprites_n.sparks[frame_display]
+//            : sprites_n.explosion[frame_display]
+//            ;
+//
+//        int x = fx[i].x - (al_get_bitmap_width(bmp) / 2);//centraliza o efeito na posição X e abaixo na posição Y
+//        int y = fx[i].y - (al_get_bitmap_height(bmp) / 2);
+//        al_draw_bitmap(bmp, x, y, 0);//desenha o bitmap na tela
+//        /*if(aliens->life[i] <= 0)
+//            al_draw_text(ctx.font_subtitulo, ctx.cores.preto, fx[i].x, fx[i].y, ALLEGRO_ALIGN_CENTER, "TEXT EXEMPLE TEST");*/
+//
+//    }
+//
+//    for (int i = 0; i < ALIENS_N; i++)
+//    {
+//        if (aliens[i].life <= 0 && aliens[i].y > 1) {
+//             if (f1_ctx.frames % 3) {
+//                 if (aliens[i].type == 0) {
+//                        al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "200");
+//                 }
+//                 if (aliens[i].type == 1) {
+//                     al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "150");
+//                 }
+//                 if (aliens[i].type == 2) {
+//                     al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "800");
+//                 }
+//             }
+//         }   
+//    }
+//}

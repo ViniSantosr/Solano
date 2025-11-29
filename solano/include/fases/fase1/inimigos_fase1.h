@@ -30,7 +30,7 @@ void aliens_init();
 void navios_update();
 void navios_draw();
 
-#define ALIENS_N 24//define a quantidade máxima de aliens na tela
+#define ALIENS_N 18//define a quantidade máxima de aliens na tela
 ALIEN aliens[ALIENS_N];
 
 #endif

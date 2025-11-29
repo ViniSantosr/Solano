@@ -85,7 +85,7 @@ void navios_draw()// essa função desenha os aliens na tela
 	}
 }
 
-void fx_draw()//essa função é responsavel por desenhas o efeito na tela
+void fx_draw(long* frames)//essa função é responsavel por desenhas o efeito na tela
 {
 	for (int i = 0; i < FX_N; i++)
 	{
@@ -107,20 +107,20 @@ void fx_draw()//essa função é responsavel por desenhas o efeito na tela
 
 	}
 
-	//for (int i = 0; i < ALIENS_N; i++)
-	//{
-	//	if (aliens[i].life <= 0 && aliens[i].y > 1) {
-	//		if (*frames % 3) {
-	//			if (aliens[i].type == 0) {
-	//				al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "200");
-	//			}
-	//			if (aliens[i].type == 1) {
-	//				al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "150");
-	//			}
-	//			if (aliens[i].type == 2) {
-	//				al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "800");
-	//			}
-	//		}
-	//	}
-	//}
+	for (int i = 0; i < ALIENS_N; i++)
+	{
+		if (aliens[i].life <= 0 && aliens[i].y > 1) {
+			if (*frames % 3) {
+				if (aliens[i].type == 0) {
+					al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "200");
+				}
+				if (aliens[i].type == 1) {
+					al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "150");
+				}
+				if (aliens[i].type == 2) {
+					al_draw_text(fonts.font_subtitulo, ctx.cores.preto, aliens[i].x, aliens[i].y, ALLEGRO_ALIGN_CENTER, "800");
+				}
+			}
+		}
+	}
 }

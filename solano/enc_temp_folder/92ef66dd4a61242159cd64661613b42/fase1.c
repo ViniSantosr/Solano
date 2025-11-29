@@ -240,7 +240,7 @@ void fase1(GameContext* ctx)
 				shots_draw();
 				ship_draw();
 				navios_draw();
-				fx_draw();
+				fx_draw(&frames);
 				//mouse_draw();
 			}
 

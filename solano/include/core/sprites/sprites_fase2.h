@@ -22,8 +22,7 @@ extern const int ALIEN_H[];
 //#define ALIEN_THICCBOI_W ALIEN_W[2]
 //#define ALIEN_THICCBOI_H ALIEN_H[2]
 
-#define ALIEN_SHOT_W 4
-#define ALIEN_SHOT_H 4
+
 
 #define FRAMES_EXPLOSAO 4
 #define FRAMES_RAIO    3
@@ -47,7 +46,6 @@ typedef struct SPRITES_N//nesse struct nós definimos todos os ponteiros sprites 
 
 extern SPRITES_N sprites_n;
 
-ALLEGRO_BITMAP* cortar_sprites(int x, int y, int w, int h);
 void iniciar_sprites();
 void destruir_sprites();
 

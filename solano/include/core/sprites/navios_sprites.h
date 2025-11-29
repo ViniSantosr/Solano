@@ -20,6 +20,8 @@ extern const int ALIEN_H[];
 #define ALIEN_THICCBOI_W ALIEN_W[2]
 #define ALIEN_THICCBOI_H ALIEN_H[2]
 
+#define ALIEN_SHOT_W 4
+#define ALIEN_SHOT_H 4
 
 #pragma endregion
 
@@ -30,6 +32,10 @@ typedef struct SPRITES_NAVIOS {
 	ALLEGRO_BITMAP* shots;
 
 	ALLEGRO_BITMAP* alien[3];
+	ALLEGRO_BITMAP* alien_shot;
+
+	ALLEGRO_BITMAP* explosao[4];
+	ALLEGRO_BITMAP* fumaca[4];
 
 	
 } SPRITES_NAVIOS;

@@ -39,15 +39,11 @@ void ship_update()// essa função será a responsavel por atualizar a posição da n
     //if (key[ALLEGRO_KEY_DOWN])
         //ship.y += SHIP_SPEED;
 
-    if (ship.x < 0)//impede que a nave saia da tela
-        ship.x = 0;
-    if (ship.y < 0)
-        ship.y = 0;
-
     if (ship.x > SHIP_MAX_X)//impede que a nave saia da tela
         ship.x = SHIP_MAX_X;
-    if (ship.y > SHIP_MAX_Y)
-        ship.y = SHIP_MAX_Y;
+
+    if (ship.x < SHIP_MIN_X)//impede que a nave saia da tela
+        ship.x = SHIP_MIN_X;
 
     if (ship.invincible_timer)//checa se a nave está invencivel, se estiver diminui o tempo de invencibilidade
         ship.invincible_timer--;

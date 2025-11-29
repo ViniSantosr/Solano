@@ -156,7 +156,7 @@ void shots_draw()// função responsavel por desenhar os diversos tiros na tela
                 ? al_map_rgb_f(1, 1, 1)
                 : al_map_rgb_f(0.5, 0.5, 0.5)
                 ;
-            //al_draw_tinted_bitmap(sprites_n.alien_shot, tint, shots[i].x, shots[i].y, 0);
+            al_draw_tinted_bitmap(sprites_navios.alien_shot, tint, shots[i].x, shots[i].y, 0);
         }
     }
 }

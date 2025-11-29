@@ -9,7 +9,7 @@
 #include <fases/fase1/fase1.h>
 
 Fase1Context f1_ctx;
-
+//GameContext ctx;
 
 //const int ALIEN_W[] = { 31, 13, 45 };
 //const int ALIEN_H[] = { 55, 10, 27 };
@@ -21,10 +21,10 @@ void aliens_init()//inicializa os aliens colocando todas posições em não usados
         aliens[i].used = false;
 }
 
-void navios_update()//função responsavel por atualizar o estado dos aliens
+void navios_update(GameContext* ctx, long* frames, long* score)//função responsavel por atualizar o estado dos aliens
 {
     int new_quota = //se entendi direito ele decide quantos aliens novos vão spawnar
-        (f1_ctx.frames % 120)
+        (*frames % 120)
         ? 0
         : between(2, 4)// de 2 a 4 aliens novos se spawnam a cada 120 frames
         ;
@@ -36,15 +36,15 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
         {
             if (new_quota > 0)//se o alien ainda não estiver em uso e houver espaço para novos aliens
             {
-                new_x += between(40, 80);//define nova posição dos aliens
-                if (new_x > (CANVAS_W - 60))
-                    new_x -= (CANVAS_W - 60);
+                int base = between(160, 645);
 
+                aliens[i].x = base + between(-80, 80); // variação suave
 
+                // garantir limites
+                if (aliens[i].x < 160) aliens[i].x = 160;
+                if (aliens[i].x > 1360) aliens[i].x = 1360;
 
-                aliens[i].x = new_x;
-
-                aliens[i].y = between(-40, -30);
+                aliens[i].y = between(-100, -70);
                 aliens[i].type = between(0, ALIEN_TYPE_N);
                 aliens[i].shot_timer = between(1, 99);
                 aliens[i].blink = 0;
@@ -56,13 +56,13 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
                 switch (aliens[i].type)//preenche a vida do alien dependendo do tipo de alien escolhido
                 {
                 case ALIEN_TYPE_BUG:
-                    aliens[i].life = 4;
+                    aliens[i].life = 8;
                     break;
                 case ALIEN_TYPE_ARROW:
-                    aliens[i].life = 2;
+                    aliens[i].life = 6;
                     break;
                 case ALIEN_TYPE_THICCBOI:
-                    aliens[i].life = 12;
+                    aliens[i].life = 18;
                     break;
                 }
 
@@ -74,12 +74,12 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
         switch (aliens[i].type)//essa parte da função é responsavel por mover os aliens de acordo com o seu tipo, dando a eles uma velocidade diferente entre si
         {
         case ALIEN_TYPE_BUG:
-            if (f1_ctx.frames % 2)
-                aliens[i].y++;
+            if (*frames % 2)
+                aliens[i].y++ ;
             if (aliens[i].volta) {
                 aliens[i].x++;
                 aliens[i].movimento++;
-                if (aliens[i].movimento > 25)
+                if (aliens[i].movimento > 25 || aliens[i].x == 160)
                     aliens[i].volta = false;
             }
             else {
@@ -90,13 +90,16 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
             }
             break;
 
+
+
         case ALIEN_TYPE_ARROW:
-            aliens[i].y++;
+           if (*frames % 4 == 0)
+                aliens[i].y++;
 
             if (aliens[i].volta) {
                 aliens[i].x++;
                 aliens[i].movimento++;
-                if (aliens[i].movimento > 15)
+                if (aliens[i].movimento > 15 || aliens[i].x == 160)
                     aliens[i].volta = false;
             }
             else {
@@ -109,7 +112,7 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
             break;
 
         case ALIEN_TYPE_THICCBOI:
-            if (!(f1_ctx.frames % 4))
+            if (*frames % 6 == 0)
                 aliens[i].y++;
 
             break;
@@ -141,10 +144,12 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
             {
             case ALIEN_TYPE_BUG:
                 f1_ctx.score += 200;
+                aliens[i].x = 500;
                 break;
 
             case ALIEN_TYPE_ARROW:
                 f1_ctx.score += 150;
+                aliens[i].x = 500;
                 break;
 
             case ALIEN_TYPE_THICCBOI:
@@ -152,6 +157,7 @@ void navios_update()//função responsavel por atualizar o estado dos aliens
                 fx_add(false, cx - 10, cy - 4);
                 fx_add(false, cx + 4, cy + 10);
                 fx_add(false, cx + 8, cy + 8);
+                
                 break;
             }
 

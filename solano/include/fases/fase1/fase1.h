@@ -13,6 +13,8 @@
 #include "main.h"
 #pragma endregion
 
+//extern long frames;
+
 typedef struct Fase1Context
 {
 	long frames;
