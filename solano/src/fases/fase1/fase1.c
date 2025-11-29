@@ -81,7 +81,7 @@ void fase1(GameContext* ctx)
 			}
 
 			// Se o jogador vencer
-			if (score >= 25500) {
+			if (f1_ctx.score >= 2550) {
 				concluido = true;
 			}
 
