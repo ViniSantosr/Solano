@@ -123,7 +123,7 @@ void tela_menu(GameContext* ctx)
 					switch (selected)
 					{
 					case NOVO_JOGO:
-						ctx->proxima_fase = 1;
+						ctx->proxima_fase = 5;
 						ctx->cena_atual = 2;
 						ctx->estado_tela = CUTSCENE;
 						exit_tela = true;

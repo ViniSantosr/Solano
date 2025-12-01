@@ -44,22 +44,22 @@ void inimigo_init()
 void inimigo_update(GameContext* ctx, long* frames, long* score)
 {	
 	switch (ctx->estado_tela)
-	{
-	case FASE3:
-		if (*frames % 160 == 0)
-			nova_onda = between(2, 4);
-		break;
+	{	
 	case FASE2:
 		if (*frames % 240 == 0)
 			nova_onda = between(1, 0);
 		break;
+	case FASE3:
+		if (*frames % 160 == 0)
+			nova_onda = between(2, 4);
+		break;
 	case FASE4:
 		if (*frames % 600 == 0)
-			nova_onda = between(4, 6);
+			nova_onda = between(2, 4);
 		break;
 	case FASE5:
-		if (*frames % 600 == 0)
-			nova_onda = between(4, 7);
+		if (*frames % 660 == 0)
+			nova_onda = between(4, 6);
 		break;
 	}	
 

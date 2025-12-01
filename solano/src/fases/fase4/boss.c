@@ -44,7 +44,7 @@ void boss_init()
 	boss.tiro_timer = 0;
 	boss.atirar_timer = between(120, 180);
 	boss.frame = 0;
-	boss.vidas = 5;
+	boss.vidas = 3;
 	boss.dano = 3;
 	boss.respawn_timer = 0;
 	boss.parado = 120;
