@@ -33,12 +33,16 @@ float cy = 0.0f;
 bool movimentou_inimigo;
 int frame_movimento;
 
+float tiro_vel;
+
 void inimigo_init()
 {
 	for (int i = 0; i < INIMIGOS_N; i++)
 	{
 		inimigos[i].ativo = false;
 	}
+
+	tiro_vel = 0.0f;
 }
 
 void inimigo_update(GameContext* ctx, long* frames, long* score)
@@ -46,20 +50,24 @@ void inimigo_update(GameContext* ctx, long* frames, long* score)
 	switch (ctx->estado_tela)
 	{	
 	case FASE2:
-		if (*frames % 240 == 0)
-			nova_onda = between(1, 0);
+		if (*frames % 120 == 0)
+			nova_onda = between(1, 3);
+		tiro_vel = 1.6;
 		break;
 	case FASE3:
 		if (*frames % 160 == 0)
 			nova_onda = between(2, 4);
+		tiro_vel = 1.6;
 		break;
 	case FASE4:
 		if (*frames % 600 == 0)
 			nova_onda = between(2, 4);
+		tiro_vel = 1.8;
 		break;
 	case FASE5:
 		if (*frames % 660 == 0)
 			nova_onda = between(4, 6);
+		tiro_vel = 1.8;
 		break;
 	}	
 
@@ -165,7 +173,7 @@ void inimigo_update(GameContext* ctx, long* frames, long* score)
 		inimigos[i].tiro_timer--;
 		if (inimigos[i].tiro_timer <= 0)
 		{
-			disparar(false, between(0, 2), cx, cy, soldado.x, soldado.y, 1.9);
+			disparar(false, between(0, 2), cx, cy, soldado.x, soldado.y, tiro_vel);
 			inimigos[i].tiro_timer = 80;
 		}
 	}

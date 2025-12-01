@@ -21,9 +21,8 @@ BotoesConfig botoes_configs[BOTOES_N] = // Array que armazena todos os botões e
 {
 	{ "->Novo Jogo",  CANVAS_W / 3.375, CANVAS_H / 1.9 },
 	{ "->Continuar",  CANVAS_W / 3.375, CANVAS_H / 1.745 },
-	{ "->Opções",     CANVAS_W / 3.55, CANVAS_H / 1.62 },
-	{ "->Créditos",   CANVAS_W / 3.4, CANVAS_H / 1.5 },
-	{ "->Sair",       CANVAS_W / 3.7, CANVAS_H / 1.35 }
+	{ "->Opções",     CANVAS_W / 3.55, CANVAS_H / 1.62 },	
+	{ "->Sair",       CANVAS_W / 3.7, CANVAS_H / 1.45 }
 };
 
 void inicializar_menu(GameContext* ctx);
@@ -123,8 +122,8 @@ void tela_menu(GameContext* ctx)
 					switch (selected)
 					{
 					case NOVO_JOGO:
-						ctx->proxima_fase = 5;
-						ctx->cena_atual = 2;
+						ctx->proxima_fase = 1;
+						ctx->cena_atual = 0;
 						ctx->estado_tela = CUTSCENE;
 						exit_tela = true;
 						break;

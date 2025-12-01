@@ -68,7 +68,7 @@ void hud_draw(GameContext* ctx)
 
 		int spacing = VIDA_W + 1;
 
-		if (ctx->estado_tela = FASE1)
+		if (ctx->estado_tela == FASE1)
 		{
 
 			for (int i = 0; i < navio.lives; i++)

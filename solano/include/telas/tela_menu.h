@@ -13,7 +13,6 @@ typedef enum {
 	NOVO_JOGO,
 	CONTINUAR,
 	OPCOES,
-	CREDITOS,
 	SAIR,
 	BOTOES_N
 } BOTOES;
