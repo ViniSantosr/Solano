@@ -1,7 +1,6 @@
 
 #pragma region Biblitotecas Externas
 #include <stdbool.h>
-#include <stdio.h>
 #include <locale.h>
 
 #include <allegro5/allegro5.h>
@@ -17,6 +16,7 @@
 #pragma region Headers Game
 #include "telas/tela_menu.h"
 #include "telas/cutscenes.h"
+#include "fases/fase1/fase1.h"
 #include "fases/fase2/fase2.h"
 #include "fases/fase3/fase3.h"
 #include "fases/fase4/fase4.h"
@@ -26,6 +26,7 @@
 #include "core/sprites/sprites_util.h"
 #include "core/tela_utils.h"
 #include "core/sprites/soldados_sprites.h"
+#include "core/sprites/navios_sprites.h"
 #pragma endregion
 
 #include "main.h"
@@ -54,11 +55,8 @@ int main()
 		case INTRO_FASE:
 			intro_fase(&ctx, ctx.proxima_fase);
 			break;
-		case FASE1:
-			ctx.proxima_fase++;	
-			ctx.cena_atual++;
-			ctx.estado_tela = CUTSCENE;
-			/*fase1(&ctx);*/
+		case FASE1:			
+			fase1(&ctx);
 			break;
 		case FASE2:
 			fase2(&ctx);
@@ -198,6 +196,7 @@ void inicializar_game()
 
 	sprites_soldados_init();
 	sprites_util_init();
+	sprites_navios_init();
 
 	al_register_event_source(ctx.queue, al_get_keyboard_event_source());
 	al_register_event_source(ctx.queue, al_get_mouse_event_source());

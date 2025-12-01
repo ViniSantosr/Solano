@@ -1,12 +1,12 @@
 
 #pragma region Biblitotecas Externas
-#include <stdio.h>
-#include <allegro5/allegro_image.h>
+
 #pragma endregion
 
 #pragma region Headers Game
 #include "core/sprites/soldados_sprites.h"
 #include "fases/fase2/soldado_fase2.h"
+#include "fases/fase1/navio_fase1.h"
 #include "fases/fase2/fase2.h"
 #include "main.h"
 #pragma endregion
@@ -67,11 +67,25 @@ void hud_draw(GameContext* ctx)
 		);
 
 		int spacing = VIDA_W + 1;
-		for (int i = 0; i < soldado.vidas; i++)
+
+		if (ctx->estado_tela = FASE1)
 		{
-			al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.preto, (1 + (i * spacing)) + 1, 24 + 1, 0);
-			al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.branco, 1 + (i * spacing), 24, 0);
+
+			for (int i = 0; i < navio.lives; i++)
+			{
+				al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.preto, (1 + (i * spacing)) + 1, 24 + 1, 0);
+				al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.branco, 1 + (i * spacing), 24, 0);
+			}
 		}
+		else
+		{
+			for (int i = 0; i < soldado.vidas; i++)
+			{
+				al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.preto, (1 + (i * spacing)) + 1, 24 + 1, 0);
+				al_draw_tinted_bitmap(sprites_soldado.vida, ctx->cores.branco, 1 + (i * spacing), 24, 0);
+			}
+		}
+
 	}
 
 }

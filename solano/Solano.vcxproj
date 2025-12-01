@@ -172,6 +172,9 @@
     <ClCompile Include="src\core\sprites\navios_sprites.c" />
     <ClCompile Include="src\core\sprites\sprites_util.c" />
     <ClCompile Include="src\fases\fase1\fase1.c" />
+    <ClCompile Include="src\fases\fase1\inimigos_fase1.c" />
+    <ClCompile Include="src\fases\fase1\navio_fase1.c" />
+    <ClCompile Include="src\fases\fase1\tiros_fase1.c" />
     <ClCompile Include="src\fases\fase3\fase3.c" />
     <ClCompile Include="src\fases\fase3\hud_fase3.c" />
     <ClCompile Include="src\fases\fase4\fase4.c" />
@@ -233,6 +236,10 @@
     <ClInclude Include="include\core\funcoes_auxiliares.h" />
     <ClInclude Include="include\core\sprites\navios_sprites.h" />
     <ClInclude Include="include\core\sprites\sprites_util.h" />
+    <ClInclude Include="include\fases\fase1\fase1.h" />
+    <ClInclude Include="include\fases\fase1\inimigos_fase1.h" />
+    <ClInclude Include="include\fases\fase1\navio_fase1.h" />
+    <ClInclude Include="include\fases\fase1\tiros_fase1.h" />
     <ClInclude Include="include\fases\fase3\fase3.h" />
     <ClInclude Include="include\fases\fase3\hud_fase3.h" />
     <ClInclude Include="include\fases\fase4\fase4.h" />

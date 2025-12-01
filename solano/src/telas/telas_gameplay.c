@@ -1,15 +1,9 @@
 
 #pragma region Biblitotecas Externas
-
-
 // Bibliotecas do Allegro
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_color.h>
 #pragma endregion
 
 #pragma region Headers
@@ -18,6 +12,7 @@
 #include "core/tela_utils.h"
 #include "core/sprites/sprites_util.h"
 #include "core/sprites/soldados_sprites.h"
+#include "core/sprites/navios_sprites.h"
 #pragma endregion
 
 #include "telas/telas_gameplay.h"
@@ -216,4 +211,30 @@ void tela_tutorial_combate_campo(GameContext* ctx)
 
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, CANVAS_H / 1.39  + 1.5, ALLEGRO_ALIGN_CENTER, "atirar: Botão direito do mouse");
 	al_draw_text(ctx->fonts.font_medium, ctx->cores.amarelo, CANVAS_W / 2, CANVAS_H / 1.39, ALLEGRO_ALIGN_CENTER, "atirar: Botão direito do mouse");
+}
+
+void tela_tutorial_combate_navio(GameContext* ctx)
+{
+
+	al_draw_scaled_bitmap(ctx->background,
+		0, 0, al_get_bitmap_width(ctx->background), al_get_bitmap_height(ctx->background),
+		0, 0, CANVAS_W, CANVAS_H,
+		0);
+
+	al_draw_text(ctx->fonts.font_big, ctx->cores.preto, (CANVAS_W / 2) + 2, (CANVAS_H / 6) + 1.5, ALLEGRO_ALIGN_CENTER, "Mecânica: Combate no navio");
+	al_draw_text(ctx->fonts.font_big, ctx->cores.azul_escuro, CANVAS_W / 2, CANVAS_H / 6, ALLEGRO_ALIGN_CENTER, "Mecânica: Combate no navio");
+
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2) + 2, (CANVAS_H / 3.5) + 1.5, ALLEGRO_ALIGN_CENTER, "Movimentação:");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.azul_escuro, CANVAS_W / 2, CANVAS_H / 3.5, ALLEGRO_ALIGN_CENTER, "Movimentação:");
+
+	al_draw_bitmap(sprites_navios.navio, (CANVAS_W / 2) - (NAVIOS_INIMIGO_W[1] / 2), (CANVAS_H / 2) - (NAVIOS_INIMIGO_H[1] / 2), 0);
+	
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2 - 40) + 2, CANVAS_H / 2 + 1.5, ALLEGRO_ALIGN_CENTER, "<-");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.azul_escuro, CANVAS_W / 2 - 40, CANVAS_H / 2, ALLEGRO_ALIGN_CENTER, "<-");
+
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, (CANVAS_W / 2 + 40), CANVAS_H / 2 + 1.5, ALLEGRO_ALIGN_CENTER, "->");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.azul_escuro, (CANVAS_W / 2 + 40), CANVAS_H / 2, ALLEGRO_ALIGN_CENTER, "->");
+
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.preto, CANVAS_W / 2, CANVAS_H / 1.39  + 1.5, ALLEGRO_ALIGN_CENTER, "atirar: TECLA X");
+	al_draw_text(ctx->fonts.font_medium, ctx->cores.azul_escuro, CANVAS_W / 2, CANVAS_H / 1.39, ALLEGRO_ALIGN_CENTER, "atirar: TECLA X");
 }

@@ -1,21 +1,14 @@
 
 #pragma region Biblitotecas Externas
-#include <stdio.h>
-#include <stdlib.h>
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
-#include <allegro5/allegro_ttf.h>
-#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
-#include <allegro5/allegro_image.h>
 #pragma endregion
 
 #pragma region Headers Game
 #include "core/tela_utils.h"
 #include "core/teclado.h"
 #include "core/funcoes_auxiliares.h"
-#include "core/sprites/sprites_util.h"
 #include "telas/telas_gameplay.h"
 #include "main.h"
 #pragma endregion
@@ -130,8 +123,8 @@ void tela_menu(GameContext* ctx)
 					switch (selected)
 					{
 					case NOVO_JOGO:
-						ctx->proxima_fase = 4;
-						ctx->cena_atual = 10;
+						ctx->proxima_fase = 1;
+						ctx->cena_atual = 2;
 						ctx->estado_tela = CUTSCENE;
 						exit_tela = true;
 						break;

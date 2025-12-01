@@ -38,6 +38,7 @@ void intro_fase(GameContext* ctx, int fase_atual)
 	switch (fase_atual)
 	{
 	case _FASE1:
+		has_tutorial = true;
 		ctx->background = switch_background(ctx, ctx->background, "assets/images/fase1_fundo.png");
 		if (!ctx->background) {
 			ctx->estado_tela = TELA_MENU;			
@@ -138,6 +139,10 @@ void intro_fase(GameContext* ctx, int fase_atual)
 					if (fase_atual == _FASE2)
 					{
 						tela_tutorial_combate_campo(ctx);
+					}
+					else if (fase_atual == _FASE1)
+					{
+						tela_tutorial_combate_navio(ctx);
 					}
 				}
 				else
