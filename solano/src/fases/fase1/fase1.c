@@ -246,7 +246,7 @@ void fase1(GameContext* ctx)
 
 			if (tutorial)
 			{
-				tela_tutorial_combate_campo(ctx);
+				tela_tutorial_combate_navio(ctx);
 			}
 
 			tela_pos_draw(ctx->canvas, ctx->tela);
