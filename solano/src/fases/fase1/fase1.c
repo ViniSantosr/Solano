@@ -169,14 +169,23 @@ void fase1(GameContext* ctx)
 				}
 			}
 
+			if (pause || game_over || concluido)
+			{
+				if (tecla[ALLEGRO_KEY_R])
+				{
+					exit_tela = true;
+					ctx->estado_tela = FASE1;
+				}
+			}
+
+
 			if (concluido || game_over)
 			{
 				if (tecla[ALLEGRO_KEY_ESCAPE])
 				{
 					exit_tela = true;
 					ctx->estado_tela = TELA_MENU;
-				}
-
+				}			
 			}
 
 			if (concluido) // A fase foi concluída 
@@ -188,18 +197,7 @@ void fase1(GameContext* ctx)
 					ctx->estado_tela = CUTSCENE;
 					exit_tela = true;
 				}
-			}
-
-
-			if (pause || game_over || concluido)
-			{
-				if (tecla[ALLEGRO_KEY_R])
-				{
-					exit_tela = true;
-					ctx->estado_tela = FASE1;
-				}
-			}
-
+			}			
 
 			break;
 		}
