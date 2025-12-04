@@ -202,10 +202,12 @@
     <None Include="assets\sounds\explode2.flac" />
     <None Include="assets\sounds\fase_battle_trilha.ogg" />
     <None Include="assets\sounds\menu_trilha.ogg" />
+    <None Include="assets\sounds\typing.flac" />
     <None Include="build\Release\assets\sounds\explode1.flac" />
     <None Include="build\Release\assets\sounds\explode2.flac" />
     <None Include="build\Release\assets\sounds\fase_battle_trilha.ogg" />
     <None Include="build\Release\assets\sounds\menu_trilha.ogg" />
+    <None Include="build\Release\assets\sounds\typing.flac" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +228,8 @@
     <Image Include="build\Release\assets\images\fase2_fundo.png" />
     <Image Include="build\Release\assets\images\fase3_fundo.png" />
     <Image Include="build\Release\assets\images\fase4_fundo.png" />
+    <Image Include="build\Release\assets\images\fase5_fundo.png" />
+    <Image Include="build\Release\assets\images\inicial_fundo.png" />
     <Image Include="build\Release\assets\images\rio_background.png" />
     <Image Include="build\Release\assets\images\spritesheets\navios_spritesheet.png" />
     <Image Include="build\Release\assets\images\spritesheets\soldados_spritesheet.png" />
@@ -274,14 +278,18 @@
     <Font Include="build\Release\assets\fonts\upheavtt.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="assets\sounds\click.wav" />
     <Media Include="assets\sounds\fase_background.mp3" />
     <Media Include="assets\sounds\gun_shot.mp3" />
     <Media Include="assets\sounds\intro_fase_trilha.wav" />
     <Media Include="assets\sounds\text_bip.wav" />
+    <Media Include="assets\sounds\voice.wav" />
+    <Media Include="build\Release\assets\sounds\click.wav" />
     <Media Include="build\Release\assets\sounds\fase_background.mp3" />
     <Media Include="build\Release\assets\sounds\gun_shot.mp3" />
     <Media Include="build\Release\assets\sounds\intro_fase_trilha.wav" />
     <Media Include="build\Release\assets\sounds\text_bip.wav" />
+    <Media Include="build\Release\assets\sounds\voice.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

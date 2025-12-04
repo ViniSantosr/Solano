@@ -1,7 +1,6 @@
 
 #pragma region Biblitotecas Externas
 #include <allegro5/allegro5.h>
-#include <allegro5/allegro_image.h>
 #pragma endregion
 
 #pragma region Headers Game

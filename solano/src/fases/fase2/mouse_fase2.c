@@ -1,12 +1,9 @@
 
 #pragma region Biblitotecas Externas
 #include <allegro5/allegro5.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_primitives.h>
 #pragma endregion
 
 #pragma region Headers Game
-#include "fases/fase2/soldado_fase2.h"
 #include "core/sprites/soldados_sprites.h"
 #include "core/tela_utils.h"
 #pragma endregion

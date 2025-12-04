@@ -15,7 +15,6 @@
 #include "core/funcoes_auxiliares.h"
 
 //Headers exclusivamente da fase 1
-#include "core/sprites/navios_sprites.h"
 #include "fases/fase1/tiros_fase1.h"
 #include "fases/fase1/navio_fase1.h"
 #include "fases/fase1/inimigos_fase1.h"
@@ -253,9 +252,6 @@ void fase1(GameContext* ctx)
 			desenhar = false;
 		}
 	}
-
-
-	sprites_navios_deinit();
 }
 
 bool fase1_init(GameContext* ctx)

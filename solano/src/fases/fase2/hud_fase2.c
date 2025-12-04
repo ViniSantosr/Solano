@@ -1,8 +1,4 @@
 
-#pragma region Biblitotecas Externas
-
-#pragma endregion
-
 #pragma region Headers Game
 #include "core/sprites/soldados_sprites.h"
 #include "fases/fase2/soldado_fase2.h"

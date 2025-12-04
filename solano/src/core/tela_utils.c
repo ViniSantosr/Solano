@@ -1,7 +1,6 @@
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_color.h>
-#include <allegro5/allegro_image.h>
 
 #include "core/tela_utils.h"
 

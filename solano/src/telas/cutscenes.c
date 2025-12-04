@@ -5,9 +5,6 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_color.h>
 #pragma endregion
 
 #pragma region Headers Game
@@ -15,11 +12,9 @@
 #include "core/funcoes_auxiliares.h"
 #include "core/teclado.h"
 #include "core/sprites/soldados_sprites.h"
-#include "telas/telas_gameplay.h"
 #include "fases/fase2/coisas_gerais_fase2.h"
 #pragma endregion
 
-#include <stdio.h>
 #include "telas/cutscenes.h"
 
 void quebra_linhas(char* texto, char caracter);

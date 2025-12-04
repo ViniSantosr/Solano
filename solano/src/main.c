@@ -248,6 +248,7 @@ void finalizar_game()
 	al_uninstall_audio();
 	sprites_util_deinit();
 	sprites_soldados_deinit();
+	sprites_navios_deinit();
 }
 
 void tela_init()

@@ -90,6 +90,15 @@
     <ClCompile Include="src\fases\fase5\solano.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\fases\fase1\inimigos_fase1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase1\navio_fase1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fases\fase1\tiros_fase1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -97,10 +106,12 @@
     <None Include="assets\sounds\explode2.flac" />
     <None Include="assets\sounds\menu_trilha.ogg" />
     <None Include="assets\sounds\fase_battle_trilha.ogg" />
+    <None Include="assets\sounds\typing.flac" />
     <None Include="build\Release\assets\sounds\explode1.flac" />
     <None Include="build\Release\assets\sounds\explode2.flac" />
     <None Include="build\Release\assets\sounds\fase_battle_trilha.ogg" />
     <None Include="build\Release\assets\sounds\menu_trilha.ogg" />
+    <None Include="build\Release\assets\sounds\typing.flac" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\images\spritesheets\tutorial_spritesheet.png">
@@ -133,6 +144,12 @@
     <Image Include="assets\images\fase4_fundo.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\images\inicial_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\images\fase5_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
     <Image Include="build\Release\assets\images\spritesheets\navios_spritesheet.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -160,13 +177,13 @@
     <Image Include="build\Release\assets\images\fase4_fundo.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="build\Release\assets\images\fase5_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="build\Release\assets\images\inicial_fundo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
     <Image Include="build\Release\assets\images\rio_background.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="assets\images\inicial_fundo.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="assets\images\fase5_fundo.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -243,6 +260,18 @@
     <ClInclude Include="include\fases\fase5\solano.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\fases\fase1\fase1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase1\inimigos_fase1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase1\navio_fase1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fases\fase1\tiros_fase1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\fonts\font_titulo.ttf" />
@@ -264,12 +293,24 @@
     <Media Include="assets\sounds\text_bip.wav">
       <Filter>Resource Files</Filter>
     </Media>
+    <Media Include="assets\sounds\click.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\sounds\voice.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="build\Release\assets\sounds\click.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
     <Media Include="build\Release\assets\sounds\fase_background.mp3" />
     <Media Include="build\Release\assets\sounds\gun_shot.mp3" />
     <Media Include="build\Release\assets\sounds\intro_fase_trilha.wav">
       <Filter>Resource Files</Filter>
     </Media>
     <Media Include="build\Release\assets\sounds\text_bip.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="build\Release\assets\sounds\voice.wav">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>

@@ -1,9 +1,6 @@
 
 #pragma region Bibliotecas Externas
-#include <math.h>
-#include <stdio.h>
 #include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_audio.h>
 #pragma endregion
 
 #pragma region Headers Game
@@ -13,9 +10,7 @@
 #include "core/tela_utils.h"
 
 #include "core/sprites/soldados_sprites.h"
-#include "core/teclado.h"
 
-#include "fases/fase2/mouse_fase2.h"
 #include "fases/fase2/tiros_fase2.h"
 #include "fases/fase2/soldado_fase2.h"
 #include "main.h"

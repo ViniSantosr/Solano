@@ -1,6 +1,5 @@
 
 #pragma region Biblitotecas Externas
-#include <stdio.h>
 #include <allegro5/allegro5.h>
 #include <math.h>
 

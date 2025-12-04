@@ -1,9 +1,6 @@
 
 #pragma region Bibliotecas Externas
-#include <math.h>
-#include <stdio.h>
 #include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_audio.h>
 #pragma endregion
 
 #pragma region Headers Game
