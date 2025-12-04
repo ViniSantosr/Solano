@@ -243,7 +243,7 @@ void boss_update(bool* concluido)
 		boss.tiro_timer--;
 		if (boss.tiro_timer <= 0)
 		{
-			disparar(false, 1, boss_cx, boss_cy, soldado.x, soldado.y, 1.9);
+			disparar(false, 1, boss_cx, boss_cy, soldado.x, soldado.y, 2.2);
 			boss.tiro_timer = 20;
 		}
 	}
