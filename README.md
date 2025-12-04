@@ -202,7 +202,7 @@ Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[screenshot]: images/one_sheet_paper.png
+[screenshot]: images/one_sheet_paper.jpg
 [VisualStudio]: https://custom-icon-badges.demolab.com/badge/Visual%20Studio%202022-5C2D91.svg?&logo=visualstudio&logoColor=white
 [VisualStudio-url]: https://visualstudio.microsoft.com/pt-br/
 [Allegro]: https://img.shields.io/badge/Allegro%205-0a0b0e?style=flat&logo=allegro
